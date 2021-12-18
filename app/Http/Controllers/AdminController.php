@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
+    //halaman dashboard
     public function index()
     {
         return view('dashboard');
