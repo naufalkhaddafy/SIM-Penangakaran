@@ -24,40 +24,66 @@
                 <a href="#" class="h1"><b>SGT</b>Bird Farm</a>
             </div>
             <div class="card-body">
-                <p class="login-box-msg">Khusus Pekerja</p>
+                <p class="login-box-msg">Khusus Admin</p>
 
-                <form action="#" method="post">
+                <form action="/register" method="post">
+                    @csrf
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Full name">
+                        <input type="text" name="namalengkap"
+                            class="form-control @error('namalengkap') is-invalid @enderror" placeholder="Full name"
+                            value="{{ old('namalengkap') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        @error('namalengkap')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input class="form-control @error('username') is-invalid @enderror" name="username"
+                            placeholder="Username" value="{{ old('username') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
+                        @error('username')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input class="form-control @error('nohp') is-invalid @enderror" name="nohp"
+                            placeholder="No.Hp +62" value="{{ old('nohp') }}">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-phone"></span>
+                            </div>
+                        </div>
+                        @error('nohp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Retype password">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
-                            </div>
-                        </div>
+                        @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="row">
                         <!-- /.col -->
@@ -72,7 +98,6 @@
         </div><!-- /.card -->
     </div>
     <!-- /.register-box -->
-
     <!-- jQuery -->
     <script src="{{ asset('template') }}/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
