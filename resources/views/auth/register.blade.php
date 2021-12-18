@@ -29,7 +29,7 @@
                 <form action="/register" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" name="namalengkap"
+                        <input type="text" id="namalengkap" name="namalengkap"
                             class="form-control @error('namalengkap') is-invalid @enderror" placeholder="Full name"
                             value="{{ old('namalengkap') }}">
                         <div class="input-group-append">
@@ -44,8 +44,9 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control @error('username') is-invalid @enderror" name="username"
-                            placeholder="Username" value="{{ old('username') }}">
+                        <input type="text" id="username" name="username"
+                            class="form-control @error('username') is-invalid @enderror" placeholder="Username"
+                            value="{{ old('username') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -58,8 +59,8 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input class="form-control @error('nohp') is-invalid @enderror" name="nohp"
-                            placeholder="No.Hp +62" value="{{ old('nohp') }}">
+                        <input type="text" id="nohp" class="form-control @error('nohp') is-invalid @enderror"
+                            name="nohp" placeholder="No.Hp +62" value="+62">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-phone"></span>
@@ -72,7 +73,7 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="password"
+                        <input type="password" name="password" id="password"
                             class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -84,6 +85,9 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="level" name="level" id="level" value="admin" style="display:none">
                     </div>
                     <div class="row">
                         <!-- /.col -->

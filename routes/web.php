@@ -19,9 +19,11 @@ Route::get('/', function () {
     return view('auth/login');
 })->name('login');
 
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/register', [LoginController::class, 'register'])->name('register');
-Route::post('/register', [LoginController::class, 'createuser'])->name('createuser');
+Route::get('/login', [LoginController::class, 'viewlogin'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::get('/register', [LoginController::class, 'viewregister'])->name('register');
+Route::post('/register', [LoginController::class, 'createuser']);
 
 
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
