@@ -8,8 +8,8 @@
         </a>
     </li>
     <li class="nav-header">EXAMPLES</li>
-    <li class="nav-item {{ request()->is('dashboard') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ request()->is('dashboar') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
             <ion-icon name="home-outline"></ion-icon>
             <p>
                 tes
@@ -18,7 +18,7 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboar') ? 'active' : '' }}">
+                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Dashboard </p>
                 </a>

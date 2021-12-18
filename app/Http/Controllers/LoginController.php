@@ -52,12 +52,12 @@ class LoginController extends Controller
         ]);
         if(Auth::attempt($validatelogin)){
             $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/dashboard')->with('login','Login Berhasil');
         }
 
         return back()->withErrors([
-            'username' =>'Username salah',
-            'password' => 'Password salah',
+            //'username'=>'Periksa kembali',
+            'password' => 'Periksa Kembali',
         ]);
     }
 

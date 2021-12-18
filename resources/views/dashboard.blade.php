@@ -4,6 +4,14 @@
 @section('content')
 
     <div class="container-fluid">
+        @if (session('login'))
+
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <h6><i class="icon fas fa-check"></i>{{ session('login') }}</h6>
+                <h5>Selamat Datang {{ Auth::user()->namalengkap }}</h5>
+            </div>
+        @endif
         <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-3 col-6">
