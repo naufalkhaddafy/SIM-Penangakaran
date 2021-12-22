@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SGT Bird Farm</title>
+    <title>@yield('title') | SGT Bird Farm</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -36,10 +36,10 @@
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
+        {{-- <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="{{ asset('template') }}/dist/img/AdminLTELogo.png" alt="AdminLTELogo"
                 height="60" width="60">
-        </div>
+        </div> --}}
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -62,7 +62,7 @@
                 <!-- Navbar Search -->
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item d-none d-sm-inline-block">
-                    <form id="logout-form" action="/logout" method="POST">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="btn btn-light">
                             <span class="glyphicon glyphicon-log-out"></span> Logout

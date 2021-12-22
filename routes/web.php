@@ -21,9 +21,11 @@ Route::get('/', function () {
 });
 
 Route::get('/login', [LoginController::class, 'viewlogin'])->name('login');
-Route::post('/login', [LoginController::class, 'login']);
-Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'viewregister'])->name('register');
-Route::post('/register', [RegisterController::class, 'createuser']);
+Route::post('/register', [RegisterController::class, 'createuser'])->name('register');
 Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-Route::get('/user', [AdminController::class, 'user'])->name('dashboard');
+Route::get('/pengguna', [AdminController::class, 'user'])->name('pengguna');
+Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');
+Route::get('pengguna/delete/{id}', [AdminController::class, 'delete']);

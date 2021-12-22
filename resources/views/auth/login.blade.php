@@ -26,7 +26,7 @@
             </div>
             <div class="card-body">
                 <p class="h5 login-box-msg"><b>Please Login</b></p>
-                <form action="/login" method="post">
+                <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" value="{{ old('username') }}" id="username"

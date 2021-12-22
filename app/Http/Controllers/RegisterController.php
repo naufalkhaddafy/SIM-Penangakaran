@@ -9,7 +9,7 @@ class RegisterController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        //$this->middleware('guest');
     }
     //halaman register
     public function viewregister()
@@ -21,17 +21,18 @@ class RegisterController extends Controller
         $validateuser=$request->validate([
             'namalengkap' =>'required',
             'username' =>'required|unique:users',
-            'nohp' =>'required|unique:users|min:12|max:14',
+            //'nohp' =>'unique:users|min:12|max:14',
+            'nohp' =>'unique:users',
             'password' =>'required|min:5',
             'level' =>'required',
         ],[
             'namalengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
             'username.unique' => 'Username telah terdaftar',
-            'nohp.required' => 'No. Hp Harus di Isi',
+            //'nohp.required' => 'No. Hp Harus di Isi',
             'nohp.unique' => 'No. Hp telah terdaftar',
-            'nohp.min' => 'Masukan No. Hp yang sesuai',
-            'nohp.max' => 'Masukan No. Hp yang sesuai',
+            //'nohp.min' => 'Masukan No. Hp yang sesuai',
+            //'nohp.max' => 'Masukan No. Hp yang sesuai',
             'password.required' =>'Password harus di Isi',
             'password.min' =>'Password minimal 5 Digit',
         ]);

@@ -1,6 +1,6 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <li class="nav-item">
-        <a href="/dashboard" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
+        <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
             <ion-icon name="home"></ion-icon>
             <p>
                 Dashboad
@@ -26,10 +26,18 @@
         </ul>
     </li>
     <li class="nav-item">
-        <a href="/user" class="nav-link {{ request()->is('user') ? 'active' : '' }}">
+        <a href="{{ route('pengguna') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
             <ion-icon name="person-sharp"></ion-icon>
             <p>
                 Pengguna
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="#" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+            <ion-icon name="person-sharp"></ion-icon>
+            <p>
+                Kandang
             </p>
         </a>
     </li>

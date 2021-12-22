@@ -26,7 +26,7 @@
             <div class="card-body">
                 <p class="login-box-msg">Khusus Admin</p>
 
-                <form action="/register" method="post">
+                <form action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="text" id="namalengkap" name="namalengkap"
@@ -60,7 +60,7 @@
                     </div>
                     <div class="input-group mb-3">
                         <input type="text" id="nohp" class="form-control @error('nohp') is-invalid @enderror"
-                            name="nohp" placeholder="No.Hp +62" value="+62">
+                            name="nohp" placeholder="No.Hp +62">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-phone"></span>
