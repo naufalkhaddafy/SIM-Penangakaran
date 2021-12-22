@@ -29,3 +29,13 @@ Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 Route::get('/pengguna', [AdminController::class, 'user'])->name('pengguna');
 Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');
 Route::get('pengguna/delete/{id}', [AdminController::class, 'delete']);
+Route::get('/penangkaran', [AdminController::class, 'viewpenangkaran'])->name('penangkaran');
+Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
+Route::get('/penangkaran/{Penangkaran::kode_penangkaran}', [AdminController::class, 'detailpenangkaran']);
+Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
+Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
+
+// Route::get('/kandang', [AdminController::class, 'viewkandang'])->name('penangkaran');
+// Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
+
+// Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');

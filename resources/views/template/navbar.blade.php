@@ -26,6 +26,14 @@
         </ul>
     </li>
     <li class="nav-item">
+        <a href="{{ route('penangkaran') }}" class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
+            <ion-icon name="home-outline"></ion-icon>
+            <p>
+                Penangkaran
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ route('pengguna') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
             <ion-icon name="person-sharp"></ion-icon>
             <p>
@@ -34,10 +42,10 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+        <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
             <ion-icon name="person-sharp"></ion-icon>
             <p>
-                Kandang
+                Kategori
             </p>
         </a>
     </li>

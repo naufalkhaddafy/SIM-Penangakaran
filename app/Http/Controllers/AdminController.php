@@ -2,24 +2,38 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
+use App\Models\Penangkaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\Category;
+
 class AdminController extends Controller
 {
 
     public function __construct()
     {
+        $this->Penangkaran = new Penangkaran();
         $this->User = new User();
         $this->middleware('auth');
     }
     //halaman dashboard
     public function index()
     {
-        $data = User::get('id');
-        $collection = count($data);
-        return view('dashboard')->with('collection', $collection);
+        // $data = User::get('id');
+        // $lokasi = Penangkaran::get('id');
+        // $collection = count($data);
+        // $collection2 = count($lokasi);
+        $data=[
+            'users' => $this->User->allData(),
+            'penangkarans' => $this->Penangkaran->readlokasi(),
+        ];
+
+        return view('dashboard', $data);
     }
+    //view pengguna
     public function user()
     {
         $data = [
@@ -27,6 +41,7 @@ class AdminController extends Controller
         ];
         return view('pengguna',$data);
     }
+    // nambah user
     public function createuser(Request $request)
     {
         $validateuser=$request->validate([
@@ -51,10 +66,62 @@ class AdminController extends Controller
         User::create($validateuser);
         return redirect('pengguna')->with('create','Berhasil menambahkan pengguna');
     }
-
-    public function delete($id){
+    // hapus pengguna
+    public function delete($id)
+    {
 
         $this->User->hapus_pengguna($id);
         return redirect()->route('pengguna')->with('delete', 'Data Berhasil di hapus');
     }
+    // viewpenangkaran
+    public function viewpenangkaran()
+    {
+        $data = [
+
+            'penangkarans' => $this->Penangkaran->readlokasi(),
+        ];
+
+        return view('penangkaran', $data);
+    }
+    // create penangkaran
+    public function createpenangkaran()
+    {
+        $validatelokasi = Request()->validate([
+            'kode_penangkaran' =>'required|unique:penangkarans',
+            'lokasi_penangkaran' =>'required|unique:penangkarans',
+
+        ],[
+            'kode_penangkaran.required' => 'kode Harus di Isi',
+            'kode_penangkaran.unique' => 'Kode sudah ada',
+            'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
+            'lokasi_penangkaran.unique' => 'Lokasi telah ada',
+        ]);
+        $this->Penangkaran->tambahlokasipenangkaran($validatelokasi);
+
+        return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan');
+    }
+
+    public function detailpenangkaran()
+    {
+        $data = [
+            'penangkarans' =>$this->Penangkaran->readlokasi(),
+        ];
+        $kode = Penangkaran::get('kode_penangkaran');
+        return view('kandang', [$data,$kode]);
+    }
+    public function readkategori()
+    {
+        $data = [
+            'categories' =>$this->Category->readkategori(),
+        ];
+        return view('category',$data);
+    }
+    public function createkategori($data)
+    {
+        $data=[
+            'categories'=>$this->Category->createkategori($data),
+        ];
+        return view('category',$data);
+    }
+
 }
