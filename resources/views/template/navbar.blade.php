@@ -1,9 +1,9 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <li class="nav-item">
         <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }}">
-            <ion-icon name="home"></ion-icon>
+            <ion-icon name="grid"></ion-icon>
             <p>
-                Dashboad
+                Dashboard
             </p>
         </a>
     </li>
@@ -27,7 +27,7 @@
     </li>
     <li class="nav-item">
         <a href="{{ route('penangkaran') }}" class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
-            <ion-icon name="home-outline"></ion-icon>
+            <ion-icon name="home"></ion-icon>
             <p>
                 Penangkaran
             </p>
@@ -43,10 +43,11 @@
     </li>
     <li class="nav-item">
         <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
-            <ion-icon name="person-sharp"></ion-icon>
+            <ion-icon name="attach-sharp"></ion-icon>
             <p>
-                Kategori
+                Kategori Kandang
             </p>
         </a>
     </li>
+    <li class="nav-header">Laporan</li>
 </ul>

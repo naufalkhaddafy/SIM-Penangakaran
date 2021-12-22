@@ -24,7 +24,7 @@
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
                                     data-target="#modal-lg">
-                                    <ion-icon name="person-add"></ion-icon><b>Tambah</b>
+                                    <ion-icon name="person-add"></ion-icon> <b>Tambah</b>
                                 </button>
                                 <div class="modal fade" id="modal-lg">
                                     <div class="modal-dialog modal-lg">

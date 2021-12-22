@@ -24,7 +24,7 @@
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
                                     data-target="#modal-lg">
-                                    <ion-icon name="person-add"></ion-icon><b>Tambah</b>
+                                    <ion-icon name="attach"></ion-icon> <b>Tambah</b>
                                 </button>
                                 <div class="modal fade" id="modal-lg">
                                     <div class="modal-dialog modal-lg">
@@ -46,7 +46,7 @@
                                                             value="{{ old('kode_kategori') }}">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
-                                                                <span class="fas fa-user"></span>
+                                                                <ion-icon name="code-slash"></ion-icon>
                                                             </div>
                                                         </div>
                                                         @error('kode_kategori')
@@ -61,7 +61,7 @@
                                                             placeholder="Kategori" value="{{ old('kategori') }}">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
-                                                                <span class="fas fa-user"></span>
+                                                                <ion-icon name="attach"></ion-icon>
                                                             </div>
                                                         </div>
                                                         @error('kategori')
@@ -101,17 +101,18 @@
                                 @foreach ($categories as $data)
                                     <tr>
                                         <td>{{ $no++ }}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{ $data->kode_kategori }}</td>
+                                        <td>{{ $data->kategori }}</td>
 
-                                        <td><a href="#" class="btn btn-success">
+                                        <td style="text-align:center">
+                                            <a href="#" class="btn btn-success">
                                                 <ion-icon name="eye-outline"></ion-icon>
                                             </a>
                                             <a href="#" class="btn btn-warning">
                                                 <ion-icon name="open-outline"></ion-icon>
                                             </a>
                                             <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
-                                                data-target="">
+                                                data-target="{{ url('#delete' . $data->id) }}">
                                                 <ion-icon name="trash-outline"></ion-icon>
                                             </button>
                                         </td>
@@ -119,7 +120,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- @foreach ($users as $data)
+                        @foreach ($categories as $data)
                             <div class="modal fade" id="delete{{ $data->id }}">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -131,12 +132,12 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Apakah anda ingin menghapus {{ $data->namalengkap }}</p>
+                                            <p>Apakah anda ingin menghapus {{ $data->kategori }}</p>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-default"
                                                 data-dismiss="modal">Tidak</button>
-                                            <a href='{{ url('/pengguna/delete/' . $data->id) }}' type="button"
+                                            <a href='{{ url('/kategori/delete/' . $data->id) }}' type="button"
                                                 class="btn btn-danger">Delete</a>
                                         </div>
                                     </div>
@@ -144,7 +145,7 @@
                                 </div>
                                 <!-- /.modal-dialog -->
                             </div>
-                        @endforeach --}}
+                        @endforeach
                     </div>
                 </div>
             </div>

@@ -14,4 +14,8 @@ class Kandang extends Model
     {
         return $this->belongsTo(Penangkaran::class);
     }
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

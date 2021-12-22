@@ -17,6 +17,7 @@ class AdminController extends Controller
     {
         $this->Penangkaran = new Penangkaran();
         $this->User = new User();
+        $this->Category = new Category();
         $this->middleware('auth');
     }
     //halaman dashboard
@@ -67,7 +68,7 @@ class AdminController extends Controller
         return redirect('pengguna')->with('create','Berhasil menambahkan pengguna');
     }
     // hapus pengguna
-    public function delete($id)
+    public function deletepengguna($id)
     {
 
         $this->User->hapus_pengguna($id);
@@ -109,19 +110,35 @@ class AdminController extends Controller
         $kode = Penangkaran::get('kode_penangkaran');
         return view('kandang', [$data,$kode]);
     }
+    //view kategori
     public function readkategori()
     {
         $data = [
-            'categories' =>$this->Category->readkategori(),
+            'categories' => $this->Category->readkategori(),
         ];
         return view('category',$data);
     }
-    public function createkategori($data)
+    //create kategori
+    public function createkategori()
     {
-        $data=[
-            'categories'=>$this->Category->createkategori($data),
-        ];
-        return view('category',$data);
+        $validatekategori = Request()->validate([
+            'kode_kategori' =>'required|unique:categories',
+            'kategori' =>'required|unique:categories',
+
+        ],[
+            'kode_kategori.required' => 'kode Harus di Isi',
+            'kode_kategori.unique' => 'Kode sudah ada',
+            'kategori.required' => 'Lokasi Harus di Isi',
+            'kategori.unique' => 'Lokasi telah ada',
+        ]);
+        $this->Category->createkategori($validatekategori);
+
+        return redirect()->route('kategori')->with('create', 'Berhasil Menambahkan');
+    }
+    public function deletekategori($id)
+    {
+        $this->Category->deletekategori($id);
+        return redirect()->route('kategori')->with('delete', 'Kategori Berhasil di hapus');
     }
 
 }

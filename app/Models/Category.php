@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Category extends Model
 {
     use HasFactory;
+
     protected $guarded = ['id'];
 
     public function Kandangs()
@@ -23,5 +24,9 @@ class Category extends Model
     public function readkategori()
     {
         return DB::table('categories')->get();
+    }
+    public function deletekategori($id)
+    {
+        return DB::table('categories')->where('id', $id)->delete();
     }
 }
