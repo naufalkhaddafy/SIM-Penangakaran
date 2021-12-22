@@ -23,10 +23,6 @@ class AdminController extends Controller
     //halaman dashboard
     public function index()
     {
-        // $data = User::get('id');
-        // $lokasi = Penangkaran::get('id');
-        // $collection = count($data);
-        // $collection2 = count($lokasi);
         $data=[
             'users' => $this->User->allData(),
             'penangkarans' => $this->Penangkaran->readlokasi(),
@@ -101,7 +97,7 @@ class AdminController extends Controller
 
         return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan');
     }
-
+    // detail penangkaran
     public function detailpenangkaran()
     {
         $data = [
@@ -135,6 +131,7 @@ class AdminController extends Controller
 
         return redirect()->route('kategori')->with('create', 'Berhasil Menambahkan');
     }
+    //delete kategori
     public function deletekategori($id)
     {
         $this->Category->deletekategori($id);

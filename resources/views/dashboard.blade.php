@@ -17,20 +17,20 @@
             <div class="col-lg-3 col-6">
                 <!-- small box -->
                 <tbody>
-                    {{-- @foreach ($penangkarans->id as $data) --}}
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3></h3>
-                            <p>Penangkaran</p>
+                            <h3>
+                                {{ count($penangkarans) }}
+                            </h3>
+                            <p>Jumlah Penangkaran</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-home"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('penangkaran') }}" class="small-box-footer">More info <i
+                                class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                    {{-- @endforeach --}}
                 </tbody>
-
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-6">
@@ -53,6 +53,7 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <h3>
+                            {{ count($users) }}
                         </h3>
                         <p>Jumlah Pengguna</p>
                     </div>
