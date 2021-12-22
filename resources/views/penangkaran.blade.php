@@ -89,11 +89,11 @@
                             <div class="card">
                                 <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
-                                    <h5 class="card-title"> Penangkaran {{ $no++ }}</h5>
+                                    <h5 class="card-title"><b>Penangkaran {{ $no++ }}</b></h5>
                                     <p class="card-text">Kode Penangkaran
+                                        <br><b>{{ $data->kode_penangkaran }}</b> <br> Lokasi Penangkaran <br>
+                                        <b> {{ $data->lokasi_penangkaran }}</b>
                                     </p>
-                                    <p class="card-text">Kode{{ $data->kode_penangkaran }}
-                                        {{ $data->lokasi_penangkaran }}</p>
                                     <a href="/penangkaran/{{ $data->kode_penangkaran }}" class="btn btn-primary">Go
                                         somewhere</a>
                                 </div>
