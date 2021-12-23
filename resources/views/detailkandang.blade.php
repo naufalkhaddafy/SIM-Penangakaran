@@ -1,5 +1,5 @@
 @extends('template.template')
-@section('title', 'Kandang')
+@section('title', 'Detail Penangkaran')
 
 @section('content')
     <div class="container-fluid">
@@ -26,6 +26,7 @@
                                     data-target="#modal-lg">
                                     <ion-icon name="attach"></ion-icon> <b>Tambah</b>
                                 </button>
+
                                 <div class="modal fade" id="modal-lg">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -70,19 +71,10 @@
                                                         @enderror
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="penangkaran_id" name="penangkaran_id"
+                                                        <input type="text" style="display:none" id="penangkaran_id"
+                                                            name="penangkaran_id"
                                                             class="form-control @error('penangkaran_id') is-invalid @enderror"
-                                                            placeholder="Penangkaran" value="{{ old('penangkaran_id') }}">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text">
-                                                                <ion-icon name="attach"></ion-icon>
-                                                            </div>
-                                                        </div>
-                                                        @error('penangkaran_id')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
+                                                            placeholder="Penangkaran" value="{{ $penangkarans->id }}">
                                                     </div>
                                                     <div class="modal-footer justify-content-between">
                                                         <button type="button" class="btn btn-default"
@@ -98,12 +90,17 @@
                                 </div>
                             </td>
                         </h3>
+
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
+                        <div style="text-align:center">
+                            <h2><b>{{ $penangkarans->lokasi_penangkaran }}</b></h2>
+                        </div>
+                        <br>
                         <div class="row">
                             <?php $no = 1; ?>
-                            @foreach ($kandangs as $data)
+                            @foreach ($penangkarans->kandangs as $data)
                                 <div class="col-md-6 ">
                                     <div class="card">
                                         {{-- <img src="..." class="card-img-top" alt="..."> --}}
@@ -111,7 +108,7 @@
                                             <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
                                             <p class="card-text">Kondisi Kandang<br>
                                                 <b>{{ $data->category->kategori }}</b><br>
-                                                <b> {{ $data->penangkaran->lokasi_penangkaran }}</b>
+                                                <b></b>
                                             </p>
                                             <a href="/penangkaran" class="btn btn-primary">Go
                                                 somewhere</a>

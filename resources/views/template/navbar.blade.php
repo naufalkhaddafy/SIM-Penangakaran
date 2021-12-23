@@ -34,6 +34,14 @@
             </p>
         </a>
     </li>
+    <li class="nav-item">
+        <a href="{{ route('kandang') }}" class="nav-link {{ request()->is('kandang') ? 'active' : '' }}">
+            <ion-icon name="home"></ion-icon>
+            <p>
+                Kandang
+            </p>
+        </a>
+    </li>
     <li class="nav-header">USER</li>
     <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">

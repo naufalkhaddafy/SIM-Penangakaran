@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login SGT Bird Farm</title>
+    <title>Login | SGT Bird Farm</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -26,6 +26,19 @@
             </div>
             <div class="card-body">
                 <p class="h5 login-box-msg"><b>Please Login</b></p>
+                @if (session('gagal'))
+                    <div class="card card-danger">
+                        <div class="card-header">
+                            <h6 class="card-title">{{ session('gagal') }}</h6>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
+                                        class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                @endif
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">

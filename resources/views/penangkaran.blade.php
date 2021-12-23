@@ -87,59 +87,21 @@
                     @foreach ($penangkarans as $data)
                         <div class="col-md-6 ">
                             <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
+                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                 <div class="card-body">
                                     <h5 class="card-title"><b>Penangkaran {{ $no++ }}</b></h5>
                                     <p class="card-text">Kode Penangkaran
                                         <br><b>{{ $data->kode_penangkaran }}</b> <br> Lokasi Penangkaran <br>
                                         <b> {{ $data->lokasi_penangkaran }}</b>
                                     </p>
-                                    <a href="/penangkaran/{{ $data->kode_penangkaran }}" class="btn btn-primary">Go
+                                    <a href="/penangkaran/{{ $data->id }}" class="btn btn-primary">Go
                                         somewhere</a>
                                 </div>
                             </div>
-                            {{-- <div class="card">
-                                <img src="" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="card-title">
-                                        <h4>Penangkaran {{ $no++ }}</h4>
-                                    </div>
-                                    {{ $data->kode_penangkaran }}
-                                    {{ $data->lokasi_penangkaran }}
-                                </div>
-
-                                <div class="card-footer">
-                                    <a href="/penangkaran/{{ $data->kode_penangkaran }}" class="card-link">Lihat</a>
-                                </div>
-                            </div> --}}
                         </div>
                     @endforeach
                 </div>
             </div>
-            {{-- <?php $no = 1; ?>
-            @foreach ($penangkarans as $data)
-                <div class="row">
-
-                    <div class="col-md-4 col-sm-12 mb-3">
-                        <div class="card">
-                            <img src="" class="card-img-top" alt="...">
-
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h4>Penangkaran {{ $no++ }}</h4>
-                                </div>
-                                {{ $data->kode_penangkaran }}
-                                {{ $data->lokasi_penangkaran }}
-                            </div>
-
-                            <div class="card-footer">
-                                <a href="/penangkaran/{{ $data->kode_penangkaran }}" class="card-link">Lihat</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach --}}
-
         </div>
     </div>
 @endsection

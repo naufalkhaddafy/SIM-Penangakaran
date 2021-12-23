@@ -13,17 +13,13 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-    public function Kandangs()
+    public function kandangs()
     {
         return $this->hasMany(Kandang::class);
     }
     public function createkategori($data)
     {
         return DB::table('categories')->insert($data);
-    }
-    public function readkategori()
-    {
-        return DB::table('categories')->get();
     }
     public function deletekategori($id)
     {

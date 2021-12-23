@@ -12,15 +12,12 @@ class Penangkaran extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function Kandangs()
+    public function kandangs()
     {
         return $this->hasMany(Kandang::class);
     }
     public function tambahlokasipenangkaran($data)
     {
         return DB::table('penangkarans')->insert($data);
-    }
-    public function readlokasi(){
-        return DB::table('penangkarans')->get();
     }
 }

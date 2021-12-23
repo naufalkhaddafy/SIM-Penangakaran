@@ -7,8 +7,8 @@ use App\Models\User;
 use App\Models\Penangkaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\Kandang;
 
 class AdminController extends Controller
 {
@@ -18,14 +18,16 @@ class AdminController extends Controller
         $this->Penangkaran = new Penangkaran();
         $this->User = new User();
         $this->Category = new Category();
+        $this->Kandang = new Kandang();
         $this->middleware('auth');
     }
     //halaman dashboard
     public function index()
     {
         $data=[
-            'users' => $this->User->allData(),
-            'penangkarans' => $this->Penangkaran->readlokasi(),
+            'users' => User::all(),
+            'penangkarans' => Penangkaran::all(),
+            'kandangs' =>Kandang::all(),
         ];
 
         return view('dashboard', $data);
@@ -34,7 +36,7 @@ class AdminController extends Controller
     public function user()
     {
         $data = [
-            'users' => $this->User->allData(),
+            'users' => User::all(),
         ];
         return view('pengguna',$data);
     }
@@ -74,8 +76,7 @@ class AdminController extends Controller
     public function viewpenangkaran()
     {
         $data = [
-
-            'penangkarans' => $this->Penangkaran->readlokasi(),
+            'penangkarans' =>Penangkaran::all(),
         ];
 
         return view('penangkaran', $data);
@@ -97,20 +98,12 @@ class AdminController extends Controller
 
         return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan');
     }
-    // detail penangkaran
-    public function detailpenangkaran()
-    {
-        $data = [
-            'penangkarans' =>$this->Penangkaran->readlokasi(),
-        ];
-        $kode = Penangkaran::get('kode_penangkaran');
-        return view('kandang', [$data,$kode]);
-    }
+
     //view kategori
     public function readkategori()
     {
         $data = [
-            'categories' => $this->Category->readkategori(),
+            'categories' =>Category::all(),
         ];
         return view('category',$data);
     }
@@ -137,5 +130,40 @@ class AdminController extends Controller
         $this->Category->deletekategori($id);
         return redirect()->route('kategori')->with('delete', 'Kategori Berhasil di hapus');
     }
+    //view kandang
+    public function readkandang()
+    {
 
+        return view('kandang',[
+            'kandangs'=> Kandang::all(),
+        ]);
+    }
+    //create kandang
+    public function createkandang(){
+        $validatekandang = Request()->validate([
+            'namakandang' =>'required|unique:kandangs',
+            'category_id' =>'required',
+            'penangkaran_id' =>'required'
+            // 'kategori' =>'required|unique:categories',
+
+        ],[
+            'namakandang.required' => 'kode Harus di Isi',
+            'namakandang.unique' => 'Kode sudah ada',
+
+            // 'kategori.required' => 'Lokasi Harus di Isi',
+            // 'kategori.unique' => 'Lokasi telah ada',
+        ]);
+        $this->Kandang->createkandang($validatekandang);
+
+        return redirect()->route('detailkandang')->with('create', 'Berhasil Menambahkan');
+    }
+    // detail penangkaran
+    public function detailpenangkaran($id)
+    {
+        $data = [
+            'penangkarans' => Penangkaran::find($id),
+        ];
+        //$kode = Penangkaran::get('kode_penangkaran');
+        return view('detailkandang', $data);
+    }
 }

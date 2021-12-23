@@ -49,11 +49,10 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                             class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
                 </li>
             </ul>
 
@@ -61,7 +60,7 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
                 <!-- Notifications Dropdown Menu -->
-                <li class="nav-item d-none d-sm-inline-block">
+                <li class="nav-item">
                     {{-- <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
                         data-target="#logout">
                         <ion-icon name="exit-outline"></ion-icon> Logout
@@ -72,17 +71,13 @@
                     </button>
 
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
+
+                {{-- <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
                         role="button">
                         <i class="fas fa-th-large"></i>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -154,6 +149,7 @@
             <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
+
                 @yield('content')
                 <div class="modal fade" id="modal-sm">
                     <div class="modal-dialog modal-sm">
@@ -171,7 +167,7 @@
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-success">
+                                    <button type="submit" class="btn btn-danger">
                                         <ion-icon name="exit-outline"></ion-icon> Logout
                                     </button>
                                 </form>

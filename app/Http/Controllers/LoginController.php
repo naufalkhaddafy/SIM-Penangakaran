@@ -17,7 +17,6 @@ class LoginController extends Controller
     {
         return view('auth/login');
     }
-
     public function login(Request $request)
     {
         $validatelogin=$request->validate([
@@ -31,11 +30,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('dashboard')->with('login','Login Berhasil');
         }
-        return back()->withErrors([
-            //'username'=>'Periksa kembali',
-            'password' => 'Periksa Kembali',
-
-        ]);
+        return back()->with('gagal',' Gagal Periksa Kembali');
 
     }
 

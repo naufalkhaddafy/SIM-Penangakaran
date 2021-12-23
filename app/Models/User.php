@@ -42,10 +42,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function allData()
-    {
-        return DB::table('users')->get();
-    }
     public function hapus_pengguna($id)
     {
         return DB::table('users')->where('id', $id)->delete();
