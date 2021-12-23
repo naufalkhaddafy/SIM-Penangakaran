@@ -132,7 +132,7 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <p>Apakah anda ingin menghapus {{ $data->kategori }}</p>
+                                            <p>Apakah anda ingin menghapus kategori {{ $data->kategori }}</p>
                                         </div>
                                         <div class="modal-footer justify-content-between">
                                             <button type="button" class="btn btn-default"
@@ -141,9 +141,7 @@
                                                 class="btn btn-danger">Delete</a>
                                         </div>
                                     </div>
-                                    <!-- /.modal-content -->
                                 </div>
-                                <!-- /.modal-dialog -->
                             </div>
                         @endforeach
                     </div>
@@ -151,6 +149,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

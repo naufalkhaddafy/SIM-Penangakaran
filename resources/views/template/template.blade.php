@@ -62,12 +62,15 @@
                 <!-- Navbar Search -->
                 <!-- Notifications Dropdown Menu -->
                 <li class="nav-item d-none d-sm-inline-block">
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-light">
-                            <span class="glyphicon glyphicon-log-out"></span> Logout
-                        </button>
-                    </form>
+                    {{-- <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
+                        data-target="#logout">
+                        <ion-icon name="exit-outline"></ion-icon> Logout
+                    </button> --}}
+                    <button type="button" class="btn btn-block btn-outline-dark" data-toggle="modal"
+                        data-target="#modal-sm">
+                        <ion-icon name="exit-outline"></ion-icon> Logout
+                    </button>
+
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -80,7 +83,6 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
-
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -153,6 +155,32 @@
             <!-- Main content -->
             <section class="content">
                 @yield('content')
+                <div class="modal fade" id="modal-sm">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Logout</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p> Apakah anda ingin keluar ??</p>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success">
+                                        <ion-icon name="exit-outline"></ion-icon> Logout
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
             </section>
             <!-- /.content -->
         </div>
