@@ -20,4 +20,8 @@ class Penangkaran extends Model
     {
         return DB::table('penangkarans')->insert($data);
     }
+    public function deletepenangkaran($id)
+    {
+        return DB::table('penangkarans')->where('id', $id)->delete();
+    }
 }

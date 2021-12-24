@@ -19,27 +19,42 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', function () {
     return view('page');
 });
-
+//auth
 Route::get('/login', [LoginController::class, 'viewlogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'viewregister'])->name('register');
 Route::post('/register', [RegisterController::class, 'createuser'])->name('register');
-Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-Route::get('/pengguna', [AdminController::class, 'user'])->name('pengguna');
-Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');
 Route::get('pengguna/delete/{id}', [AdminController::class, 'deletepengguna']);
-Route::get('/penangkaran', [AdminController::class, 'viewpenangkaran'])->name('penangkaran');
-Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
-Route::get('/penangkaran/{id}/{Penangkaran::lokasi_penangkaran}', [AdminController::class, 'detailpenangkaran'])->name('detailkandang');
-Route::post('/penangkaran/createdetailkandang', [AdminController::class, 'createdetailkandang'])->name('detailkandang');
-Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
-Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
-Route::get('kategori/delete/{id}', [AdminController::class, 'deletekategori']);
+
+// read
+Route::get('/dashboard', [AdminController::class, 'readdashboard'])->name('dashboard');
+Route::get('/pengguna', [AdminController::class, 'readuser'])->name('pengguna');
+Route::get('/penangkaran', [AdminController::class, 'readpenangkaran'])->name('penangkaran');
+Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [AdminController::class, 'detailpenangkaran'])->name('detailkandang');
 Route::get('/kandang',[AdminController::class,'readkandang'])->name('kandang');
+// delete
+Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
+Route::get('/penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
+Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
+//create
+Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');
+Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
+Route::post('/penangkaran/createdetailkandang', [AdminController::class, 'createdetailkandang'])->name('detailkandang');
 Route::post('/kandang',[AdminController::class,'createkandang'])->name('kandang');
+Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
 
-// Route::get('/kandang', [AdminController::class, 'viewkandang'])->name('penangkaran');
-// Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
 
-// Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
+
+
+
+
+
+// Route::get('penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
+
+
+
+
+
+
+

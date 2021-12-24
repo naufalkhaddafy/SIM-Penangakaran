@@ -1,7 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
-* {
-    font-family: "Poppins", sans-serif;
-}
 
 .card-body .card {
     position: relative;
@@ -13,21 +10,12 @@
     border-radius: 15px;
     margin: 30px;
     transition: 0.5s;
-    background: #014a5c79;
+    background: #06313b7c;
 }
 
 .card-body .card:nth-child(1) .box .content a {
     background: #2196f3;
 }
-
-.card-body .card:nth-child(2) .box .content a {
-    background: #e91e63;
-}
-
-.card-body .card:nth-child(3) .box .content a {
-    background: #23c186;
-}
-
 .card-body .card .box {
     position: absolute;
     top: 20px;
@@ -58,6 +46,7 @@
 }
 
 .card-body .card .box .content {
+    font-family: "Poppins", sans-serif;
     min-width: 100px;
     padding: 20px;
     text-align: center;
@@ -67,7 +56,7 @@
     position: absolute;
     top: -10px;
     right: 30px;
-    font-size: 6rem;
+    font-size: 4rem;
     color: rgba(255, 255, 255, 0.1);
 }
 

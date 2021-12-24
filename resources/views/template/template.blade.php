@@ -18,23 +18,18 @@
         href="{{ asset('template') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="{{ asset('template') }}/plugins/jqvmap/jqvmap.min.css">
+    {{-- <!-- JQVMap -->
+    <link rel="stylesheet" href="{{ asset('template') }}/plugins/jqvmap/jqvmap.min.css"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template') }}/dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{ asset('template') }}/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('template') }}/plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('template') }}/plugins/summernote/summernote-bs4.min.css">
-    <!-- fullCalendar -->
-    <link rel="stylesheet" href="{{ asset('template') }}/plugins/fullcalendar/main.css">
     {{-- tables --}}
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
         href="{{ asset('template') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    {{-- bootstap css
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 </head>
 
 <body class="  hold-transition sidebar-mini layout-fixed">
@@ -186,10 +181,9 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-            All rights reserved.
+            <strong> Made With <ion-icon name="heart-outline"></ion-icon> by <a href="#"></a>WAWAN GIMANG</strong>
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0-rc
+                <b>SGT Bird Farm</b>
             </div>
         </footer>
 
@@ -209,6 +203,12 @@
     <script src="{{ asset('template') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('template') }}/plugins/moment/moment.min.js"></script>
     <script src="{{ asset('template') }}/dist/js/adminlte.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script> --}}
     {{-- data table --}}
     <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('template') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

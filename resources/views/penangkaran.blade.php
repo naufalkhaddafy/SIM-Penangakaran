@@ -90,23 +90,14 @@
                     @foreach ($penangkarans as $data)
                         <div class="col-md-4">
                             <link rel="stylesheet" href="{{ asset('card') }}/card1.css" />
-                            {{-- <div class="card">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title"><b>Penangkaran {{ $no++ }}</b></h5>
-                                    <p class="card-text">Kode Penangkaran
-                                        <br><b>{{ $data->kode_penangkaran }}</b> <br> Lokasi Penangkaran <br>
-                                        <b> {{ $data->lokasi_penangkaran }}</b>
-                                    </p>
-                                    <a href="/penangkaran/{{ $data->id }}/{{ $data->lokasi_penangkaran }}"
-                                        class="btn btn-primary">Go
-                                        somewhere</a>
-                                </div>
-                            </div> --}}
                             <div>
                                 <div class="card">
                                     <div class="box">
                                         <div class="content">
+                                            <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
+                                                data-target="{{ url('#delete' . $data->id) }}">
+                                                <ion-icon name="trash-outline"></ion-icon>
+                                            </button>
                                             <h2>0{{ $no++ }}</h2>
                                             <h3>Penangkaran </h3>
                                             <p>
@@ -115,10 +106,34 @@
                                             </p>
                                             <a href="/penangkaran/{{ $data->id }}/{{ $data->lokasi_penangkaran }}">Info
                                                 Detail</a>
+                                            <br>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="modal fade" id="delete{{ $data->id }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Alert</h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Apakah anda ingin menghapus {{ $data->lokasi_penangkaran }}</p>
+                                    </div>
+                                    <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                                        <a href='{{ url('/penangkaran/delete/' . $data->id) }}' type="button"
+                                            class="btn btn-danger">Delete</a>
+                                    </div>
+                                </div>
+                                <!-- /.modal-content -->
+                            </div>
+                            <!-- /.modal-dialog -->
                         </div>
                     @endforeach
                 </div>
