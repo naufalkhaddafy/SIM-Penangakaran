@@ -35,7 +35,7 @@ Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [AdminController::class, 'd
 Route::get('/kandang',[AdminController::class,'readkandang'])->name('kandang');
 // delete
 Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
-Route::get('/penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
+Route::get('/penangkaran/{id}', [AdminController::class, 'deletepenangkaran']);
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
 //create
 Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');

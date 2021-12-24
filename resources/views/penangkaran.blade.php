@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                                        <a href='{{ url('/penangkaran/delete/' . $data->id) }}' type="button"
+                                        <a href='{{ url('/penangkaran/ ' . $data->id) }}' type="button"
                                             class="btn btn-danger">Delete</a>
                                     </div>
                                 </div>
