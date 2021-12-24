@@ -94,9 +94,9 @@
                                 <div class="card">
                                     <div class="box">
                                         <div class="content">
-                                            <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
+                                            <button type="button" class="btn btn-outline-danger" data-toggle="modal"
                                                 data-target="{{ url('#delete' . $data->id) }}">
-                                                <ion-icon name="trash-outline"></ion-icon>
+                                                &times;
                                             </button>
                                             <h2>0{{ $no++ }}</h2>
                                             <h3>Penangkaran </h3>

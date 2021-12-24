@@ -51,10 +51,16 @@
     padding: 20px;
     text-align: center;
 }
-
+.card-body .card .box .content button {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    padding-top: -10px;
+    text-align: left;
+}
 .card-body .card .box .content h2 {
     position: absolute;
-    top: -10px;
+    top: -5px;
     right: 30px;
     font-size: 4rem;
     color: rgba(255, 255, 255, 0.1);
@@ -66,6 +72,7 @@
     z-index: 1;
     transition: 0.5s;
     margin-bottom: 15px;
+    /* text-align: center; */
 }
 
 .card-body .card .box .content p {
@@ -74,6 +81,7 @@
     color: rgba(255, 255, 255, 0.9);
     z-index: 1;
     transition: 0.5s;
+    /* text-align: center; */
 }
 
 .card-body .card .box .content a {
@@ -87,9 +95,11 @@
     margin-top: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transition: 0.5s;
+    /* text-align: center; */
 }
 .card-body .card .box .content a:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
     background: #fff;
     color: #000;
+    /* text-align: center; */
 }
