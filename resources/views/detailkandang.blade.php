@@ -38,12 +38,13 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('kandang') }}" method="post">
+                                                <form action="{{ route('detailkandang') }}" method="post">
                                                     @csrf
                                                     <div class="input-group mb-3">
                                                         <input type="text" id="namakandang" name="namakandang"
                                                             class="form-control @error('namakandang') is-invalid @enderror"
-                                                            placeholder="Nama Kandang" value="{{ old('namakandang') }}">
+                                                            placeholder="Nama Kandang" value="{{ old('namakandang') }}"
+                                                            required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <ion-icon name="code-slash"></ion-icon>
@@ -56,14 +57,16 @@
                                                         @enderror
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="category_id" name="category_id"
+                                                        <select name="category_id" id="inputState"
                                                             class="form-control @error('category_id') is-invalid @enderror"
-                                                            placeholder="Kategori" value="{{ old('category_id') }}">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text">
-                                                                <ion-icon name="attach"></ion-icon>
-                                                            </div>
-                                                        </div>
+                                                            required>
+                                                            <option value="" selected>Kondisi Kandang</option>
+                                                            @foreach ($categories as $data)
+                                                                <option value="{{ $data->id }}">
+                                                                    {{ $data->kategori }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
                                                         @error('category_id')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -71,8 +74,7 @@
                                                         @enderror
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <input type="text" style="display:none" id="penangkaran_id"
-                                                            name="penangkaran_id"
+                                                        <input type="hidden" id="penangkaran_id" name="penangkaran_id"
                                                             class="form-control @error('penangkaran_id') is-invalid @enderror"
                                                             placeholder="Penangkaran" value="{{ $penangkarans->id }}">
                                                     </div>
@@ -101,7 +103,7 @@
                         <div class="row">
                             <?php $no = 1; ?>
                             @foreach ($penangkarans->kandangs as $data)
-                                <div class="col-md-6 ">
+                                <div class="col-md-4">
                                     <div class="card">
                                         {{-- <img src="..." class="card-img-top" alt="..."> --}}
                                         <div class="card-body">

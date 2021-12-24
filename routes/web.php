@@ -31,7 +31,8 @@ Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna
 Route::get('pengguna/delete/{id}', [AdminController::class, 'deletepengguna']);
 Route::get('/penangkaran', [AdminController::class, 'viewpenangkaran'])->name('penangkaran');
 Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
-Route::get('/penangkaran/{id}', [AdminController::class, 'detailpenangkaran']);
+Route::get('/penangkaran/{id}/{Penangkaran::lokasi_penangkaran}', [AdminController::class, 'detailpenangkaran'])->name('detailkandang');
+Route::post('/penangkaran/createdetailkandang', [AdminController::class, 'createdetailkandang'])->name('detailkandang');
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
 Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
 Route::get('kategori/delete/{id}', [AdminController::class, 'deletekategori']);

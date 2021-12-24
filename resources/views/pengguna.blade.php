@@ -42,7 +42,8 @@
                                                     <div class="input-group mb-3">
                                                         <input type="text" id="namalengkap" name="namalengkap"
                                                             class="form-control @error('namalengkap') is-invalid @enderror"
-                                                            placeholder="Full name" value="{{ old('namalengkap') }}">
+                                                            placeholder="Full name" value="{{ old('namalengkap') }}"
+                                                            required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <span class="fas fa-user"></span>
@@ -57,7 +58,7 @@
                                                     <div class="input-group mb-3">
                                                         <input type="text" id="username" name="username"
                                                             class="form-control @error('username') is-invalid @enderror"
-                                                            placeholder="Username" value="{{ old('username') }}">
+                                                            placeholder="Username" value="{{ old('username') }}" required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <span class="fas fa-user"></span>
@@ -87,7 +88,7 @@
                                                     <div class="input-group mb-3">
                                                         <input type="password" name="password" id="password"
                                                             class="form-control @error('password') is-invalid @enderror"
-                                                            placeholder="Password">
+                                                            placeholder="Password" required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <span class="fas fa-lock"></span>
@@ -98,10 +99,6 @@
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <input type="level" name="level" id="level" value="admin"
-                                                            style="display:none">
                                                     </div>
                                                     <div class="form-group mb-3">
                                                         <label for="level" class="col-sm-2 control-label">Level</label>

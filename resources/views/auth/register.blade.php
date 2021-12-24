@@ -87,7 +87,7 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="level" name="level" id="level" value="admin" style="display:none">
+                        <input type="hidden" name="level" id="level" value="admin">
                     </div>
                     <div class="row">
                         <!-- /.col -->

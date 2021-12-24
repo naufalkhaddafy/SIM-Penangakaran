@@ -117,8 +117,8 @@ class AdminController extends Controller
         ],[
             'kode_kategori.required' => 'kode Harus di Isi',
             'kode_kategori.unique' => 'Kode sudah ada',
-            'kategori.required' => 'Lokasi Harus di Isi',
-            'kategori.unique' => 'Lokasi telah ada',
+            'kategori.required' => 'Kategori Harus di Isi',
+            'kategori.unique' => 'Kategori telah ada',
         ]);
         $this->Category->createkategori($validatekategori);
 
@@ -136,8 +136,10 @@ class AdminController extends Controller
 
         return view('kandang',[
             'kandangs'=> Kandang::all(),
+            'categories' => Category::all(),    
         ]);
     }
+
     //create kandang
     public function createkandang(){
         $validatekandang = Request()->validate([
@@ -155,15 +157,38 @@ class AdminController extends Controller
         ]);
         $this->Kandang->createkandang($validatekandang);
 
-        return redirect()->route('detailkandang')->with('create', 'Berhasil Menambahkan');
+        return view('kandang')->with('create', 'Berhasil Menambahkan');
     }
     // detail penangkaran
     public function detailpenangkaran($id)
     {
+        if (!Penangkaran::find($id)) {
+            abort(404);
+        }
         $data = [
             'penangkarans' => Penangkaran::find($id),
+            'categories' => Category::all(),
         ];
         //$kode = Penangkaran::get('kode_penangkaran');
         return view('detailkandang', $data);
+    }
+    public function createdetailkandang(){
+        $validatekandang = Request()->validate([
+            'namakandang' =>'required',
+            'category_id' =>'required',
+            'penangkaran_id' =>'required'
+            // 'kategori' =>'required|unique:categories',
+
+        ],[
+            'namakandang.required' => 'Nama Harus di Isi',
+            'category_id.required' => 'Kategori Harus di Isi',
+            // 'namakandang.unique' => 'Nama sudah ada',
+
+            // 'kategori.required' => 'Lokasi Harus di Isi',
+            // 'kategori.unique' => 'Lokasi telah ada',
+        ]);
+        $this->Kandang->createkandang($validatekandang);
+        return redirect()->back()->with('create', 'Berhasil Menambahkan');;
+        //return redirect()->route('detailkandang')->with('create', 'Berhasil Menambahkan');
     }
 }

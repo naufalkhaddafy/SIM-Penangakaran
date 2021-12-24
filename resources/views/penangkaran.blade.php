@@ -2,6 +2,7 @@
 @section('title', 'Penangkaran')
 
 @section('content')
+
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
@@ -38,7 +39,8 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" id="kode_penangkara" name="kode_penangkaran"
                                                     class="form-control @error('kode_penangkaran') is-invalid @enderror"
-                                                    placeholder="Kode Penangkaran" value="{{ old('kode_penangkaran') }}">
+                                                    placeholder="Kode Penangkaran" value="{{ old('kode_penangkaran') }}"
+                                                    required>
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">
                                                         <ion-icon name="code-slash"></ion-icon>
@@ -54,7 +56,7 @@
                                                 <input type="text" id="lokasipenangkaran" name="lokasi_penangkaran"
                                                     class="form-control @error('lokasi_penangkaran') is-invalid @enderror"
                                                     placeholder="Lokasi Penangkaran"
-                                                    value="{{ old('lokasi_penangkaran') }}">
+                                                    value="{{ old('lokasi_penangkaran') }}" required>
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">
                                                         <ion-icon name="home"></ion-icon>
@@ -81,21 +83,40 @@
                     </td>
                 </h3>
             </div>
+
             <div class="card-body">
                 <div class="row">
                     <?php $no = 1; ?>
                     @foreach ($penangkarans as $data)
-                        <div class="col-md-6 ">
-                            <div class="card">
-                                {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                        <div class="col-md-4">
+                            <link rel="stylesheet" href="{{ asset('card') }}/card1.css" />
+                            {{-- <div class="card">
+                                <img src="..." class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title"><b>Penangkaran {{ $no++ }}</b></h5>
                                     <p class="card-text">Kode Penangkaran
                                         <br><b>{{ $data->kode_penangkaran }}</b> <br> Lokasi Penangkaran <br>
                                         <b> {{ $data->lokasi_penangkaran }}</b>
                                     </p>
-                                    <a href="/penangkaran/{{ $data->id }}" class="btn btn-primary">Go
+                                    <a href="/penangkaran/{{ $data->id }}/{{ $data->lokasi_penangkaran }}"
+                                        class="btn btn-primary">Go
                                         somewhere</a>
+                                </div>
+                            </div> --}}
+                            <div>
+                                <div class="card">
+                                    <div class="box">
+                                        <div class="content">
+                                            <h2>0{{ $no++ }}</h2>
+                                            <h3>Penangkaran </h3>
+                                            <p>
+                                                <b>{{ $data->kode_penangkaran }}</b><br>
+                                                {{ $data->lokasi_penangkaran }}
+                                            </p>
+                                            <a href="/penangkaran/{{ $data->id }}/{{ $data->lokasi_penangkaran }}">Info
+                                                Detail</a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
