@@ -31,11 +31,11 @@ Route::get('pengguna/delete/{id}', [AdminController::class, 'deletepengguna']);
 Route::get('/dashboard', [AdminController::class, 'readdashboard'])->name('dashboard');
 Route::get('/pengguna', [AdminController::class, 'readuser'])->name('pengguna');
 Route::get('/penangkaran', [AdminController::class, 'readpenangkaran'])->name('penangkaran');
-Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [AdminController::class, 'detailpenangkaran'])->name('detailkandang');
+Route::get('/penangkaran/{id}', [AdminController::class, 'detailpenangkaran'])->name('detailkandang');
 Route::get('/kandang',[AdminController::class,'readkandang'])->name('kandang');
 // delete
 Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
-Route::get('/penangkaran/{id}', [AdminController::class, 'deletepenangkaran']);
+Route::get('/penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
 //create
 Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');

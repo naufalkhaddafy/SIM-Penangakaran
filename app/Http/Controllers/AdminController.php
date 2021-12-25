@@ -132,8 +132,9 @@ class AdminController extends Controller
     // delete penangkaran
     public function deletepenangkaran($id)
     {
-        // $this->User->hapus_pengguna($id);
-        // return redirect()->route('pengguna')->with('delete', 'Data Berhasil di hapus');
+        if (!Penangkaran::find($id)) {
+            abort(404);
+        }
         if($this->Penangkaran->deletepenangkaran($id))
         {
             $this->Kandang->where('penangkaran_id', $id)->delete();

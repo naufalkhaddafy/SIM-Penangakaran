@@ -181,7 +181,7 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong> Made With <ion-icon name="heart-outline"></ion-icon> by <a href="#"></a>WAWAN GIMANG</strong>
+            <strong> Made With <ion-icon name="heart-outline"></ion-icon> by <a href="#"></a>we never know</strong>
             <div class="float-right d-none d-sm-inline-block">
                 <b>SGT Bird Farm</b>
             </div>

@@ -104,7 +104,7 @@
                                                 <b>{{ $data->kode_penangkaran }}</b><br>
                                                 {{ $data->lokasi_penangkaran }}
                                             </p>
-                                            <a href="/penangkaran/{{ $data->id }}/{{ $data->lokasi_penangkaran }}">Info
+                                            <a href="/penangkaran/{{ $data->id }}">Info
                                                 Detail</a>
                                             <br>
                                         </div>
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="modal-footer justify-content-between">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                                        <a href='{{ url('/penangkaran/ ' . $data->id) }}' type="button"
+                                        <a href='{{ url('/penangkaran/delete/' . $data->id) }}' type="button"
                                             class="btn btn-danger">Delete</a>
                                     </div>
                                 </div>
