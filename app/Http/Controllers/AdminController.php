@@ -212,4 +212,10 @@ class AdminController extends Controller
         return view('kandang')->with('create', 'Berhasil Menambahkan');
     }
 
+    public function deletekandang($id)
+    {
+        Kandang::find($id)->delete();
+        return redirect()->back()->with('delete','Berhasil menghapus data kandang');
+    }
+
 }

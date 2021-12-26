@@ -24,7 +24,7 @@
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
                                     data-target="#modal-lg">
-                                    <ion-icon name="attach"></ion-icon> <b>Tambah</b>
+                                    <ion-icon name="home"></ion-icon> <b>Tambah</b>
                                 </button>
 
                                 <div class="modal fade" id="modal-lg">
@@ -105,16 +105,51 @@
                             @foreach ($penangkarans->kandangs as $data)
                                 <div class="col-md-4">
                                     <div class="card">
-                                        {{-- <img src="..." class="card-img-top" alt="..."> --}}
-                                        <div class="card-body">
-                                            <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
-                                            <p class="card-text">Kondisi Kandang<br>
-                                                <b>{{ $data->category->kategori }}</b><br>
-                                                <b></b>
-                                            </p>
-                                            <a href="/penangkaran" class="btn btn-primary">Go
-                                                somewhere</a>
+                                        <a class="text-dark" href="#">
+                                            {{-- <button type="button" class="close" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button> --}}
+                                            <button type="button" class="close" data-toggle="modal"
+                                                data-target="{{ url('#delete' . $data->id) }}">
+                                                &times;
+                                            </button>
+                                            <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                                class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
+                                                <p class="card-text">Kondisi Kandang<br>
+                                                    <b class="text-success">{{ $data->category->kategori }}</b><br>
+                                                    <b></b>
+                                                </p>
+                                                <br>
+                                                <a href="/penangkaran" class="btn btn-primary">Go
+                                                    somewhere</a>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="modal fade" id="delete{{ $data->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Alert</h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Apakah anda ingin menghapus {{ $data->namakandang }}</p>
+                                                </div>
+                                                <div class="modal-footer justify-content-between">
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Tidak</button>
+                                                    <a href='{{ url('/kandang/delete/' . $data->id) }}' type="button"
+                                                        class="btn btn-danger">Delete</a>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
                                         </div>
+                                        <!-- /.modal-dialog -->
                                     </div>
                                 </div>
                             @endforeach

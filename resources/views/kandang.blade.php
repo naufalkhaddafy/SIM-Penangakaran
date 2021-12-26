@@ -128,7 +128,8 @@
                             @foreach ($kandangs as $data)
                                 <div class="col-md-4 ">
                                     <div class="card">
-                                        {{-- <img src="..." class="card-img-top" alt="..."> --}}
+                                        <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                            class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
                                             <p class="card-text">Kondisi Kandang<br>
