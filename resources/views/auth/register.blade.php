@@ -89,6 +89,9 @@
                     <div class="input-group mb-3">
                         <input type="hidden" name="level" id="level" value="admin">
                     </div>
+                    <div class="input-group mb-3">
+                        <input type="hidden" name="penangkaran_id" id="penangkaran_id" value="Bos">
+                    </div>
                     <div class="row">
                         <!-- /.col -->
                         <div class="col-12">

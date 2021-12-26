@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('nohp')->unique()->nullable();
             $table->string('level');
+            $table->foreignId('penangkaran_id')->nullable();
             $table->string('password');
 
         });

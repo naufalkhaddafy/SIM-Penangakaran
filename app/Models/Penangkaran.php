@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Kandang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
@@ -16,12 +17,8 @@ class Penangkaran extends Model
     {
         return $this->hasMany(Kandang::class);
     }
-    public function tambahlokasipenangkaran($data)
+    public function users()
     {
-        return DB::table('penangkarans')->insert($data);
-    }
-    public function deletepenangkaran($id)
-    {
-        return DB::table('penangkarans')->where('id', $id)->delete();
+        return $this->hasMany(User::class);
     }
 }

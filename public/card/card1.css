@@ -53,21 +53,21 @@
 }
 .card-body .card .box .content button {
     position: absolute;
-    top: 10px;
-    left: 30px;
+    top: 15px;
+    left: 25px;
     padding-top: -10px;
     text-align: left;
 }
 .card-body .card .box .content h2 {
     position: absolute;
-    top: -5px;
-    right: 30px;
+    top: 3px;
+    right: 20px;
     font-size: 4rem;
     color: rgba(255, 255, 255, 0.1);
 }
 
 .card-body .card .box .content h3 {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
     color: #fff;
     z-index: 1;
     transition: 0.5s;

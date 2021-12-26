@@ -25,6 +25,7 @@ class RegisterController extends Controller
             'nohp' =>'unique:users',
             'password' =>'required|min:5',
             'level' =>'required',
+            'penangkaran_id',
         ],[
             'namalengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',

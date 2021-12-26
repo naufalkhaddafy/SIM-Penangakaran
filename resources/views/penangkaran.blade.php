@@ -88,7 +88,7 @@
                 <div class="row">
                     <?php $no = 1; ?>
                     @foreach ($penangkarans as $data)
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-6">
                             <link rel="stylesheet" href="{{ asset('card') }}/card1.css" />
                             <div>
                                 <div class="card">

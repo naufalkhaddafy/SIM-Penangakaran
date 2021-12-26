@@ -37,8 +37,12 @@ class AdminController extends Controller
     {
         $data = [
             'users' => User::all(),
+            'penangkarans' => Penangkaran::all(),
+            'kandangs' => Kandang::all(),
         ];
         return view('pengguna',$data);
+
+
     }
     // nambah user
     public function createuser(Request $request)
@@ -50,6 +54,7 @@ class AdminController extends Controller
             'nohp' =>'unique:users',
             'password' =>'required|min:5',
             'level' =>'required',
+            'penangkaran_id' =>'required',
         ],[
             'namalengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
@@ -60,6 +65,8 @@ class AdminController extends Controller
             //'nohp.max' => 'Masukan No. Hp yang sesuai',
             'password.required' =>'Password harus di Isi',
             'password.min' =>'Password minimal 5 Digit',
+            'penangkaran_id.required' =>'Harus diisi',
+
         ]);
         $validateuser['password']=Hash::make($validateuser['password']);
         User::create($validateuser);
@@ -68,7 +75,7 @@ class AdminController extends Controller
     // hapus pengguna
     public function deletepengguna($id)
     {
-        $this->User->hapus_pengguna($id);
+        User::find($id)->delete();
         return redirect()->route('pengguna')->with('delete', 'Data Berhasil di hapus');
     }
     // viewpenangkaran
@@ -93,7 +100,7 @@ class AdminController extends Controller
             'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
             'lokasi_penangkaran.unique' => 'Lokasi telah ada',
         ]);
-        $this->Penangkaran->tambahlokasipenangkaran($validatelokasi);
+        $this->Penangkaran->insert($validatelokasi);
 
         return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan');
     }
@@ -126,7 +133,7 @@ class AdminController extends Controller
             // 'kategori.required' => 'Lokasi Harus di Isi',
             // 'kategori.unique' => 'Lokasi telah ada',
         ]);
-        $this->Kandang->createkandang($validatekandang);
+        $this->Kandang->insert($validatekandang);
         return redirect()->back()->with('create', 'Berhasil Menambahkan');;
     }
     // delete penangkaran
@@ -135,7 +142,7 @@ class AdminController extends Controller
         if (!Penangkaran::find($id)) {
             abort(404);
         }
-        if($this->Penangkaran->deletepenangkaran($id))
+        if(Penangkaran::find($id)->delete())
         {
             $this->Kandang->where('penangkaran_id', $id)->delete();
         }
@@ -164,37 +171,38 @@ class AdminController extends Controller
             'kategori.required' => 'Kategori Harus di Isi',
             'kategori.unique' => 'Kategori telah ada',
         ]);
-        $this->Category->createkategori($validatekategori);
+        $this->Category->insert($validatekategori);
 
         return redirect()->route('kategori')->with('create', 'Berhasil Menambahkan');
     }
     //delete kategori
     public function deletekategori($id)
     {
-        $this->Category->deletekategori($id);
+        Category::find($id)->delete();
         return redirect()->route('kategori')->with('delete', 'Kategori Berhasil di hapus');
     }
     //view kandang
     public function readkandang()
     {
-
-        return view('kandang',[
+        $data=([
             'kandangs'=> Kandang::all(),
             'categories' => Category::all(),
+            'penangkarans' => Penangkaran::all(),
         ]);
+        return view('kandang',$data);
     }
 
     //create kandang
     public function createkandang(){
         $validatekandang = Request()->validate([
-            'namakandang' =>'required|unique:kandangs',
+            'namakandang' =>'required',
             'category_id' =>'required',
             'penangkaran_id' =>'required'
             // 'kategori' =>'required|unique:categories',
 
         ],[
             'namakandang.required' => 'kode Harus di Isi',
-            'namakandang.unique' => 'Kode sudah ada',
+            //'namakandang.unique' => 'Kode sudah ada',
 
             // 'kategori.required' => 'Lokasi Harus di Isi',
             // 'kategori.unique' => 'Lokasi telah ada',

@@ -17,12 +17,4 @@ class Category extends Model
     {
         return $this->hasMany(Kandang::class);
     }
-    public function createkategori($data)
-    {
-        return DB::table('categories')->insert($data);
-    }
-    public function deletekategori($id)
-    {
-        return DB::table('categories')->where('id', $id)->delete();
-    }
 }

@@ -21,8 +21,4 @@ class Kandang extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    public function createkandang($data)
-    {
-        return DB::table('kandangs')->insert($data);
-    }
 }

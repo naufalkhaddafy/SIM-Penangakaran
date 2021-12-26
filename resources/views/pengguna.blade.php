@@ -103,12 +103,32 @@
                                                     <div class="form-group mb-3">
                                                         <label for="level" class="col-sm-2 control-label">Level</label>
                                                         <div class="col-sm-12">
-                                                            <select name="level" id="inputState" class="form-control">
-                                                                <option selected>Pilih Status Pengguna</option>
+                                                            <select name="level" id="inputState" class="form-control"
+                                                                required>
+                                                                <option value="" selected>Pilih Status Pengguna</option>
                                                                 <option value="admin">Admin</option>
                                                                 <option value="user">User</option>
                                                             </select>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group mb-3">
+                                                        <label for="lokasikerja" class="col-sm-2 control-label">Lokasi
+                                                            Kerja</label>
+                                                        <select name="penangkaran_id" id="inputState"
+                                                            class="form-control @error('penangkaran_id') is-invalid @enderror"
+                                                            required>
+                                                            <option value="" selected>Lokasi Kerja</option>
+                                                            @foreach ($penangkarans as $data)
+                                                                <option value="{{ $data->id }}">
+                                                                    {{ $data->lokasi_penangkaran }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('penangkaran_id')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                     </div>
                                                     <div class="modal-footer justify-content-between">
                                                         <button type="button" class="btn btn-default"
@@ -135,7 +155,7 @@
                                     <th>Username</th>
                                     <th>No.HP</th>
                                     <th>Level</th>
-                                    <th>Bekerja di</th>
+                                    <th>Lokasi Kerja</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -148,7 +168,18 @@
                                         <td>{{ $data->username }}</td>
                                         <td> {{ $data->nohp }}</td>
                                         <td>{{ $data->level }}</td>
-                                        <td>tes</td>
+                                        <td>
+                                            <select name="penangkaran_id" id="inputState"
+                                                class="form-control @error('penangkaran_id') is-invalid @enderror" required>
+                                                <option value="" selected>
+                                                    {{ optional($data->penangkaran)->lokasi_penangkaran }}</option>
+                                                @foreach ($penangkarans as $data)
+                                                    <option value="{{ $data->id }}">
+                                                        {{ $data->lokasi_penangkaran }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </td>
                                         <td><a href="#" class="btn btn-success">
                                                 <ion-icon name="eye-outline"></ion-icon>
                                             </a>
@@ -195,4 +226,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection
