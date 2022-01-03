@@ -149,7 +149,14 @@ class AdminController extends Controller
 
         return redirect()->route('penangkaran')->with('delete', 'Data Berhasil di hapus');
     }
-
+    // kategori produksi
+    public function readkategoriproduksi()
+    {
+        $data = [
+            'categories' =>Category::all(),
+        ];
+        return view('kategoriproduksi',$data);
+    }
     //view kategori
     public function readkategori()
     {

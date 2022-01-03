@@ -90,6 +90,7 @@
                     @foreach ($penangkarans as $data)
                         <div class="col-lg-4 col-md-6">
                             <link rel="stylesheet" href="{{ asset('card') }}/card1.css" />
+                            {{-- <a id="id" href=""> --}}
                             <div>
                                 <div class="card">
                                     <div class="box">
@@ -106,11 +107,11 @@
                                             </p>
                                             <a href="/penangkaran/{{ $data->id }}">Info
                                                 Detail</a>
-                                            <br>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {{-- </a> --}}
                         </div>
                         <div class="modal fade" id="delete{{ $data->id }}">
                             <div class="modal-dialog">

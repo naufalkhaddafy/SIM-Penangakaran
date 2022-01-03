@@ -173,11 +173,11 @@
                                                 class="form-control @error('penangkaran_id') is-invalid @enderror" required>
                                                 <option value="" selected>
                                                     {{ optional($data->penangkaran)->lokasi_penangkaran }}</option>
-                                                @foreach ($penangkarans as $data)
+                                                {{-- @foreach ($penangkarans as $data)
                                                     <option value="{{ $data->id }}">
                                                         {{ $data->lokasi_penangkaran }}
                                                     </option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </td>
                                         <td><a href="#" class="btn btn-success">
@@ -226,6 +226,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

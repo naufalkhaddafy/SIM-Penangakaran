@@ -19,6 +19,14 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{ route('kandang') }}" class="nav-link {{ request()->is('kandang') ? 'active' : '' }}">
+            <ion-icon name="home"></ion-icon>
+            <p>
+                Kandang
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ route('pengguna') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
             <ion-icon name="person-sharp"></ion-icon>
             <p>
@@ -26,21 +34,40 @@
             </p>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
             <ion-icon name="attach-sharp"></ion-icon>
             <p>
                 Kategori Kandang
             </p>
         </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ route('kandang') }}" class="nav-link {{ request()->is('kandang') ? 'active' : '' }}">
-            <ion-icon name="home"></ion-icon>
+    </li> --}}
+    <li class="nav-item {{ request()->is('kategori', 'kategoriproduksi') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->is('kategori', 'kategoriproduksi') ? 'active' : '' }}">
+            <ion-icon name="attach-sharp"></ion-icon>
             <p>
-                Kandang
+                Kategori
+                <i class="right fas fa-angle-left"></i>
             </p>
         </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('kategori') }}"
+                    class=" nav-link {{ request()->is('kategori') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kategori Kandang</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('kategoriproduksi') }}"
+                    class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kategori Produksi</p>
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="nav-header">USER</li>
     <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
