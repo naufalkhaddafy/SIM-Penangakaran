@@ -17,6 +17,7 @@ class LoginController extends Controller
     {
         return view('auth/login');
     }
+    //Login User
     public function login(Request $request)
     {
         $validatelogin=$request->validate([
@@ -32,6 +33,14 @@ class LoginController extends Controller
         }
         return back()->with('gagal',' Gagal Periksa Kembali');
 
+    }
+    // Logut user
+    public function a(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 
     public function logout(Request $request)

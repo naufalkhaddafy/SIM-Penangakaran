@@ -153,6 +153,7 @@ class AdminController extends Controller
     public function readkategoriproduksi()
     {
         $data = [
+            
             'categories' =>Category::all(),
         ];
         return view('kategoriproduksi',$data);
