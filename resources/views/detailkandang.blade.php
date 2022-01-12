@@ -38,7 +38,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('detailkandang') }}" method="post">
+                                                <form action="{{ route('kandang') }}" method="post">
                                                     @csrf
                                                     <div class="input-group mb-3">
                                                         <input type="text" id="namakandang" name="namakandang"

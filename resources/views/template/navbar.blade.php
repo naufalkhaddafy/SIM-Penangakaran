@@ -27,6 +27,15 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="{{ route('reportproduksi') }}"
+            class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
+            <ion-icon name="bar-chart"></ion-icon>
+            <p>
+                Produksi
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ route('pengguna') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
             <ion-icon name="person-sharp"></ion-icon>
             <p>
@@ -34,6 +43,7 @@
             </p>
         </a>
     </li>
+
     {{-- <li class="nav-item">
         <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
             <ion-icon name="attach-sharp"></ion-icon>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Category;
 use App\Models\Kandang;
+use App\Models\Produksi;
 
 class AdminController extends Controller
 {
@@ -104,6 +105,18 @@ class AdminController extends Controller
 
         return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan');
     }
+    public function detailkandang($id)
+    {
+        if (!Penangkaran::find($id)) {
+            abort(404);
+        }
+        $data = [
+            'penangkarans' => Penangkaran::find($id),
+            'categories' => Category::all(),
+        ];
+        //$kode = Penangkaran::get('kode_penangkaran');
+        return view('readkandang', $data);
+    }
     // detail penangkaran
     public function detailpenangkaran($id)
     {
@@ -116,25 +129,6 @@ class AdminController extends Controller
         ];
         //$kode = Penangkaran::get('kode_penangkaran');
         return view('detailkandang', $data);
-    }
-    // create kandang in penangkaran
-    public function createdetailkandang(){
-        $validatekandang = Request()->validate([
-            'namakandang' =>'required',
-            'category_id' =>'required',
-            'penangkaran_id' =>'required'
-            // 'kategori' =>'required|unique:categories',
-
-        ],[
-            'namakandang.required' => 'Nama Harus di Isi',
-            'category_id.required' => 'Kategori Harus di Isi',
-            // 'namakandang.unique' => 'Nama sudah ada',
-
-            // 'kategori.required' => 'Lokasi Harus di Isi',
-            // 'kategori.unique' => 'Lokasi telah ada',
-        ]);
-        $this->Kandang->insert($validatekandang);
-        return redirect()->back()->with('create', 'Berhasil Menambahkan');;
     }
     // delete penangkaran
     public function deletepenangkaran($id)
@@ -153,7 +147,7 @@ class AdminController extends Controller
     public function readkategoriproduksi()
     {
         $data = [
-            
+
             'categories' =>Category::all(),
         ];
         return view('kategoriproduksi',$data);
@@ -215,9 +209,9 @@ class AdminController extends Controller
             // 'kategori.required' => 'Lokasi Harus di Isi',
             // 'kategori.unique' => 'Lokasi telah ada',
         ]);
-        $this->Kandang->createkandang($validatekandang);
-
-        return view('kandang')->with('create', 'Berhasil Menambahkan');
+        $this->Kandang->insert($validatekandang);
+        //$this->Kandang->createkandang($validatekandang);
+        return redirect()->back()->with('create', 'Berhasil Menambahkan');
     }
 
     public function deletekandang($id)
@@ -225,5 +219,11 @@ class AdminController extends Controller
         Kandang::find($id)->delete();
         return redirect()->back()->with('delete','Berhasil menghapus data kandang');
     }
-
+    public function readreportproduksi(){
+        $data=([
+            'penangkarans' =>Penangkaran::all(),
+            'produksis'=>Produksi::all(),
+        ]);
+        return view('produksi',$data);
+    }
 }

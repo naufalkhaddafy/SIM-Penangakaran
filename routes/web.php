@@ -32,9 +32,11 @@ Route::get('/dashboard', [AdminController::class, 'readdashboard'])->name('dashb
 Route::get('/pengguna', [AdminController::class, 'readuser'])->name('pengguna');
 Route::get('/penangkaran', [AdminController::class, 'readpenangkaran'])->name('penangkaran');
 Route::get('/penangkaran/{id}', [AdminController::class, 'detailpenangkaran'])->name('detailkandang');
+Route::get('/readkandang/{id}', [AdminController::class, 'detailkandang'])->name('readkandang');
 Route::get('/kandang',[AdminController::class,'readkandang'])->name('kandang');
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
 Route::get('/kategoriproduksi',[AdminController::class,'readkategoriproduksi'])->name('kategoriproduksi');
+Route::get('/reportproduksi',[AdminController::class,'readreportproduksi'])->name('reportproduksi');
 // delete
 Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
 Route::get('/penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
@@ -42,7 +44,6 @@ Route::get('/kandang/delete/{id}',[AdminController::class,'deletekandang']);
 //create
 Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');
 Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
-Route::post('/penangkaran/createdetailkandang', [AdminController::class, 'createdetailkandang'])->name('detailkandang');
 Route::post('/kandang',[AdminController::class,'createkandang'])->name('kandang');
 Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
 

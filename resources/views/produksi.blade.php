@@ -1,6 +1,5 @@
 @extends('template.template')
-@section('title', 'Kandang')
-
+@section('title', 'Hasil Produksi')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -43,27 +42,31 @@
                         </h3>
                     </div>
                     <div class="readData"></div>
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Tanggal Bertelur</th>
+                                    <th>Tanggal Masuk Inkubator</th>
+                                    <th>Tanggal Menetas</th>
+                                    <th>Kondisi</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
-@push('js')
-    <script>
-        $(document).ready(function() {
-
-            $('#cek').on('click', function(e) {
-                e.preventDefault();
-                var penangkaran = $('#penangkaran').find(":selected").val();
-                if (penangkaran == 0) {
-                    alert("Pilih Penangkaran");
-                } else {
-                    $.get("{{ url('/readkandang') }}/" + penangkaran, function(data, status) {
-                        $('.readData').html(data);
-                    });
-                }
-
-            });
-        });
-    </script>
-@endpush
