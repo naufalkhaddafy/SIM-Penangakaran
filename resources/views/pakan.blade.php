@@ -1,6 +1,5 @@
 @extends('template.template')
-@section('title', 'Kategori Produksi')
-
+@section('title', 'Supply Pakan')
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -91,65 +90,28 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kode Kategori</th>
-                                    <th>Kategori</th>
+                                    <th>Kode Tempat</th>
+                                    <th>Nama Pakan</th>
+                                    <th>Expired</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
-                                @foreach ($categories as $data)
-                                    <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ $data->kode_kategori }}</td>
-                                        <td>{{ $data->kategori }}</td>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
 
-                                        <td style="text-align:center">
-                                            <a href="#" class="btn btn-success">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </a>
-                                            <a href="#" class="btn btn-warning">
-                                                <ion-icon name="open-outline"></ion-icon>
-                                            </a>
-                                            <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
-                                                data-target="{{ url('#delete' . $data->id) }}">
-                                                <ion-icon name="trash-outline"></ion-icon>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                @endforeach
                             </tbody>
                         </table>
-                        @foreach ($categories as $data)
-                            <div class="modal fade" id="delete{{ $data->id }}">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Alert</h4>
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <p>Apakah anda ingin menghapus kategori {{ $data->kategori }}</p>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-default"
-                                                data-dismiss="modal">Tidak</button>
-                                            <a href='{{ url('/kategori/delete/' . $data->id) }}' type="button"
-                                                class="btn btn-danger">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection
 @push('js')
     <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -176,7 +138,7 @@
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
-                "ordering": true,
+                "ordering": false,
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,

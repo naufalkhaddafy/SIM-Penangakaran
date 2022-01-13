@@ -8,11 +8,9 @@
         </a>
     </li>
     <li class="nav-header">ADMIN</li>
-
-
     <li class="nav-item">
         <a href="{{ route('penangkaran') }}" class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
-            <ion-icon name="home"></ion-icon>
+            <ion-icon name="location-sharp"></ion-icon>
             <p>
                 Penangkaran
             </p>
@@ -23,6 +21,14 @@
             <ion-icon name="home"></ion-icon>
             <p>
                 Kandang
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('pakan') }}" class="nav-link {{ request()->is('pakan') ? 'active' : '' }}">
+            <ion-icon name="nutrition"></ion-icon>
+            <p>
+                Pakan
             </p>
         </a>
     </li>
@@ -43,15 +49,6 @@
             </p>
         </a>
     </li>
-
-    {{-- <li class="nav-item">
-        <a href="{{ route('kategori') }}" class="nav-link {{ request()->is('kategori') ? 'active' : '' }}">
-            <ion-icon name="attach-sharp"></ion-icon>
-            <p>
-                Kategori Kandang
-            </p>
-        </a>
-    </li> --}}
     <li class="nav-item {{ request()->is('kategori', 'kategoriproduksi') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('kategori', 'kategoriproduksi') ? 'active' : '' }}">
             <ion-icon name="attach-sharp"></ion-icon>
@@ -79,12 +76,12 @@
             </li>
         </ul>
     </li>
-    <li class="nav-header">USER</li>
+    <li class="nav-header">Pekerja</li>
     <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
-            <ion-icon name="home-outline"></ion-icon>
+            <ion-icon name="home"></ion-icon>
             <p>
-                tes
+                Kandang
                 <i class="right fas fa-angle-left"></i>
             </p>
         </a>
@@ -92,37 +89,33 @@
             <li class="nav-item">
                 <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard </p>
+                    <p>Kandang</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Kebersihan</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Produksi</p>
                 </a>
             </li>
         </ul>
     </li>
-    {{-- @foreach ($penangkarans as $data)
-        <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
-                <ion-icon name="home-outline"></ion-icon>
-                <p>
-                    {{ $data->kode_penangkaran }}
-                    <i class="right fas fa-angle-left"></i>
-                </p>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Dashboard </p>
-                    </a>
-                </li>
-            </ul>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kandang</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-    @endforeach --}}
-
+    <li class="nav-item">
+        <a href="#" class="nav-link {{ request()->is('') ? 'active' : '' }}">
+            <ion-icon name="home"></ion-icon>
+            <p>
+                Inkubator
+            </p>
+        </a>
+    </li>
 </ul>

@@ -226,4 +226,7 @@ class AdminController extends Controller
         ]);
         return view('produksi',$data);
     }
+    public function readpakan(){
+        return view('pakan');
+    }
 }
