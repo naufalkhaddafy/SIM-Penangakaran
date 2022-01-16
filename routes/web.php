@@ -42,11 +42,13 @@ Route::get('/pakan',[AdminController::class,'readpakan'])->name('pakan');
 Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
 Route::get('/penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
 Route::get('/kandang/delete/{id}',[AdminController::class,'deletekandang']);
+Route::get('/pakan/delete/{id}', [AdminController::class, 'deletepakan']);
 //create
 Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna');
 Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
 Route::post('/kandang',[AdminController::class,'createkandang'])->name('kandang');
 Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
+Route::post('/pakan',[AdminController::class,'createpakan'])->name('pakan');
 //update
 Route::post('/pengguna/update/{id}', [AdminController::class, 'updateuser'])->name('update-pengguna');
 

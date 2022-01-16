@@ -23,47 +23,61 @@
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
                                     data-target="#modal-lg">
-                                    <ion-icon name="attach"></ion-icon> <b>Tambah</b>
+                                    <ion-icon name="nutrition"></ion-icon><b>Tambah</b>
                                 </button>
                                 <div class="modal fade" id="modal-lg">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title">Tambah Pengguna</h4>
+                                                <h4 class="modal-title">Tambah Pakan</h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{ route('kategori') }}" method="post">
+                                                <form action="{{ route('pakan') }}" method="post">
                                                     @csrf
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="kode_kategori" name="kode_kategori"
+                                                        <input type="text" id="kode_tempat" name="kode_tempat"
                                                             class="form-control @error('kode_kategori') is-invalid @enderror"
-                                                            placeholder="Kode Kategori"
-                                                            value="{{ old('kode_kategori') }}">
+                                                            placeholder="Kode Tempat" value="{{ old('kode_tempat') }}">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <ion-icon name="code-slash"></ion-icon>
                                                             </div>
                                                         </div>
-                                                        @error('kode_kategori')
+                                                        @error('kode_tempat')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="kategori" name="kategori"
-                                                            class="form-control @error('kategori') is-invalid @enderror"
-                                                            placeholder="Kategori" value="{{ old('kategori') }}">
+                                                        <input type="text" id="nama_pakan" name="nama_pakan"
+                                                            class="form-control @error('nama_pakan') is-invalid @enderror"
+                                                            placeholder="Nama Pakan " value="{{ old('nama_pakan') }}">
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <ion-icon name="attach"></ion-icon>
                                                             </div>
                                                         </div>
-                                                        @error('kategori')
+                                                        @error('nama_pakan')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="input-group mb-3">
+                                                        <input type="date" id="expired" name="expired"
+                                                            class="form-control @error('expired') is-invalid @enderror"
+                                                            placeholder="Expired" value="{{ old('expired') }}">
+                                                        <div class="input-group-append">
+                                                            <div class="input-group-text">
+                                                                <ion-icon name="calendar"></ion-icon>
+                                                            </div>
+                                                        </div>
+                                                        @error('Expired')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -97,14 +111,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-
+                                <?php $no = 1; ?>
+                                @foreach ($pakans as $data)
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $data->kode_tempat }}</td>
+                                        <td>{{ $data->nama_pakan }}</td>
+                                        <td><?= date('d F Y', strtotime($data->expired)) ?></td>
+                                        <td style="text-align:center">
+                                            <button type="button" class="btn btn-default bg-warning" data-toggle="modal"
+                                                data-target="{{ url('#modal-update' . $data->id) }}">
+                                                <ion-icon name="open-outline"></ion-icon>
+                                            </button>
+                                            <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
+                                                data-target="{{ url('#delete' . $data->id) }}">
+                                                <ion-icon name="trash-outline"></ion-icon>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -112,6 +137,30 @@
             </div>
         </div>
     </div>
+    {{-- Modal Delete --}}
+    @foreach ($pakans as $data)
+        <div class="modal fade" id="delete{{ $data->id }}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Alert</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Apakah anda ingin menghapus {{ $data->nama_pakan }}</p>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+                        <a href='{{ url('/pakan/delete/' . $data->id) }}' type="button" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    @endforeach
 @endsection
 @push('js')
     <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>

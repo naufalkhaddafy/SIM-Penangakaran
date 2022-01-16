@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\Pakan;
 use App\Models\Kandang;
 use App\Models\Category;
 use App\Models\Produksi;
@@ -267,12 +268,13 @@ class AdminController extends Controller
         //$this->Kandang->createkandang($validatekandang);
         return redirect()->back()->with('create', 'Berhasil Menambahkan');
     }
-
+    //delete kandang
     public function deletekandang($id)
     {
         Kandang::find($id)->delete();
         return redirect()->back()->with('delete','Berhasil menghapus data kandang');
     }
+
     public function readreportproduksi(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
@@ -280,7 +282,31 @@ class AdminController extends Controller
         ]);
         return view('produksi',$data);
     }
+    //view pakan
     public function readpakan(){
-        return view('pakan');
+        $data=([
+            'pakans'=>Pakan::all(),
+        ]);
+        return view('pakan',$data);
+    }
+    //create pakan
+    public function createpakan(){
+        $validatepakan = Request()->validate([
+            'kode_tempat' =>'required',
+            'nama_pakan' =>'required',
+            'expired' =>'required',
+            // 'kategori' =>'required|unique:categories',
+
+        ],[
+            'kode_tempat.required' => 'kode Harus di Isi',
+            'nama_pakan.required' => 'Harus diisi',
+            'expired.required' => 'Harus diisi',
+        ]);
+        Pakan::insert($validatepakan);
+        return redirect()->back()->with('create', 'Berhasil Menambahkan');
+    }
+    public function deletepakan($id){
+        Pakan::find($id)->delete();
+        return redirect()->back()->with('delete','Berhasil Menghapus Data Pakan');
     }
 }
