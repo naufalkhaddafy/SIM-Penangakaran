@@ -23,65 +23,10 @@
                         <h3 class="card-title">
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
-                                    data-target="#modal-lg">
+                                    data-target="#modal-tambah">
                                     <ion-icon name="attach"></ion-icon> <b>Tambah</b>
                                 </button>
-                                <div class="modal fade" id="modal-lg">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Tambah Pengguna</h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="{{ route('kategori') }}" method="post">
-                                                    @csrf
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" id="kode_kategori" name="kode_kategori"
-                                                            class="form-control @error('kode_kategori') is-invalid @enderror"
-                                                            placeholder="Kode Kategori"
-                                                            value="{{ old('kode_kategori') }}">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text">
-                                                                <ion-icon name="code-slash"></ion-icon>
-                                                            </div>
-                                                        </div>
-                                                        @error('kode_kategori')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" id="kategori" name="kategori"
-                                                            class="form-control @error('kategori') is-invalid @enderror"
-                                                            placeholder="Kategori" value="{{ old('kategori') }}">
-                                                        <div class="input-group-append">
-                                                            <div class="input-group-text">
-                                                                <ion-icon name="attach"></ion-icon>
-                                                            </div>
-                                                        </div>
-                                                        @error('kategori')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                    <div class="modal-footer justify-content-between">
-                                                        <button type="button" class="btn btn-default"
-                                                            data-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-success">Tambah</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <!-- /.modal-content -->
-                                    </div>
-                                    <!-- /.modal-dialog -->
-                                </div>
+
                             </td>
                         </h3>
                     </div>
@@ -103,14 +48,11 @@
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $data->kode_kategori }}</td>
                                         <td>{{ $data->kategori }}</td>
-
                                         <td style="text-align:center">
-                                            <a href="#" class="btn btn-success">
-                                                <ion-icon name="eye-outline"></ion-icon>
-                                            </a>
-                                            <a href="#" class="btn btn-warning">
+                                            <button type="button" class="btn btn-default bg-warning" data-toggle="modal"
+                                                data-target="{{ url('#modal-update' . $data->id) }}">
                                                 <ion-icon name="open-outline"></ion-icon>
-                                            </a>
+                                            </button>
                                             <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
                                                 data-target="{{ url('#delete' . $data->id) }}">
                                                 <ion-icon name="trash-outline"></ion-icon>
@@ -149,7 +91,112 @@
             </div>
         </div>
     </div>
-
+    {{-- Modal Tambah --}}
+    <div class="modal fade" id="modal-tambah">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Tambah Kategori</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('kategori') }}" method="post">
+                        @csrf
+                        <div class="input-group mb-3">
+                            <input type="text" id="kode_kategori" name="kode_kategori"
+                                class="form-control @error('kode_kategori') is-invalid @enderror"
+                                placeholder="Kode Kategori" value="{{ $kode }}" readonly>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <ion-icon name="code-slash"></ion-icon>
+                                </div>
+                            </div>
+                            @error('kode_kategori')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" id="kategori" name="kategori"
+                                class="form-control @error('kategori') is-invalid @enderror" placeholder="Kategori"
+                                value="{{ old('kategori') }}">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <ion-icon name="attach"></ion-icon>
+                                </div>
+                            </div>
+                            @error('kategori')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-success">Tambah</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Modal Edit --}}
+    @foreach ($categories as $data)
+        <div class="modal fade" id="modal-update{{ $data->id }}">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Kategori</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ route('kategori') }}" method="post">
+                            @csrf
+                            <div class="input-group mb-3">
+                                <input type="text" id="kode_kategori" name="kode_kategori"
+                                    class="form-control @error('kode_kategori') is-invalid @enderror"
+                                    placeholder="Kode Kategori" value="{{ $data->kode_kategori }}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <ion-icon name="code-slash"></ion-icon>
+                                    </div>
+                                </div>
+                                @error('kode_kategori')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="input-group mb-3">
+                                <input type="text" id="kategori" name="kategori"
+                                    class="form-control @error('kategori') is-invalid @enderror" placeholder="Kategori"
+                                    value="{{ $data->kategori }}">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <ion-icon name="attach"></ion-icon>
+                                    </div>
+                                </div>
+                                @error('kategori')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Tambah</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection
 @push('js')
     <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>

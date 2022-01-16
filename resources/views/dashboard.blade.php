@@ -25,7 +25,7 @@
                             <p>Jumlah Penangkaran</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-home"></i>
+                            <i class="ion ion-location"></i>
                         </div>
                         <a href="{{ route('penangkaran') }}" class="small-box-footer">More info <i
                                 class="fas fa-arrow-circle-right"></i></a>

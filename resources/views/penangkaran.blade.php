@@ -39,8 +39,8 @@
                                             <div class="input-group mb-3">
                                                 <input type="text" id="kode_penangkara" name="kode_penangkaran"
                                                     class="form-control @error('kode_penangkaran') is-invalid @enderror"
-                                                    placeholder="Kode Penangkaran" value="{{ old('kode_penangkaran') }}"
-                                                    required>
+                                                    placeholder="Kode Penangkaran" value="{{ $kode }}" required
+                                                    readonly>
                                                 <div class="input-group-append">
                                                     <div class="input-group-text">
                                                         <ion-icon name="code-slash"></ion-icon>

@@ -47,8 +47,8 @@ Route::post('/pengguna', [AdminController::class, 'createuser'])->name('pengguna
 Route::post('/penangkaran', [AdminController::class, 'createpenangkaran'])->name('penangkaran');
 Route::post('/kandang',[AdminController::class,'createkandang'])->name('kandang');
 Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
-
-
+//update
+Route::post('/pengguna/update/{id}', [AdminController::class, 'updateuser'])->name('update-pengguna');
 
 
 

@@ -118,7 +118,8 @@
                                             <div class="card-body">
                                                 <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
                                                 <p class="card-text">Kondisi Kandang<br>
-                                                    <b class="text-success">{{ $data->category->kategori }}</b><br>
+                                                    <b
+                                                        class="text-success">{{ optional($data->category)->kategori }}</b><br>
                                                     <b></b>
                                                 </p>
                                                 <br>

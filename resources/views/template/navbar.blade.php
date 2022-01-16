@@ -37,7 +37,7 @@
             class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
             <ion-icon name="bar-chart"></ion-icon>
             <p>
-                Produksi
+                Hasil Produksi
             </p>
         </a>
     </li>

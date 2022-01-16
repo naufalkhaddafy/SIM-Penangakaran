@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\Kandang;
+use App\Models\Category;
+use App\Models\Produksi;
 use App\Models\Penangkaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Category;
-use App\Models\Kandang;
-use App\Models\Produksi;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -41,14 +42,12 @@ class AdminController extends Controller
             'penangkarans' => Penangkaran::all(),
             'kandangs' => Kandang::all(),
         ];
-        return view('pengguna',$data);
-
-
+        return view('pengguna.pengguna',$data);
     }
     // nambah user
     public function createuser(Request $request)
     {
-        $validateuser=$request->validate([
+        $validateuser= $request->validate([
             'namalengkap' =>'required',
             'username' =>'required|unique:users',
             //'nohp' =>'unique:users|min:12|max:14',
@@ -67,8 +66,28 @@ class AdminController extends Controller
             'password.required' =>'Password harus di Isi',
             'password.min' =>'Password minimal 5 Digit',
             'penangkaran_id.required' =>'Harus diisi',
-
         ]);
+        // if($validateuser->fails()) {
+
+        //     return response()->json([
+        //         'status'=> 400,
+        //         'errors' =>$validateuser->messages(),
+        //     ]);
+        // }else{
+        //     // $validateuser['password']=Hash::make($validateuser['password']);
+
+        //     // User::create($validateuser);
+        //     // $this->User = $this->input('namalengkap');
+        //     // $this->User = $this->input('username');
+        //     // $this->User = $this->input('nohp');
+        //     // $this->User = $this->input('password');
+        //     // $this->User = $this->input('penangkaran_id');
+        //     // $this->User = $this->input('level');
+        //     // $this->User->save();
+        //     return response()->json([
+        //         'status'=> 200,
+        //     ])->with('create','Berhasil menambahkan pengguna');
+        // }
         $validateuser['password']=Hash::make($validateuser['password']);
         User::create($validateuser);
         return redirect('pengguna')->with('create','Berhasil menambahkan pengguna');
@@ -79,14 +98,40 @@ class AdminController extends Controller
         User::find($id)->delete();
         return redirect()->route('pengguna')->with('delete', 'Data Berhasil di hapus');
     }
+    //update
+    public function updateuser($id){
+
+        $validateuser= Request()->validate([
+            'namalengkap' =>'required',
+            'username' =>'required',
+            'level' =>'required',
+            'penangkaran_id' =>'nullable',
+            'nohp'=>'nullable',
+        ],[
+            'namalengkap.required' => 'Nama Harus di Isi',
+            'username.required' => 'Username Harus di Isi',
+            //'penangkaran_id.required' =>'Harus diisi',
+        ]);
+        User::find($id)->update($validateuser);
+        return redirect()->back()->with('update','Data Berhasil di update');
+    }
     // viewpenangkaran
     public function readpenangkaran()
     {
         $data = [
             'penangkarans' =>Penangkaran::all(),
         ];
+        $cek=Penangkaran::count();
+        if($cek==null){
+            $urut= 1;
+            $kode='PNK-0'. $urut;
+        }else{
+            $ambil=Penangkaran::all()->last();
+            $urut=(int)substr($ambil->kode_penangkaran,-1) + 1;
+            $kode='PNK-0'. $urut;
+        }
 
-        return view('penangkaran', $data);
+        return view('penangkaran', $data,compact('kode'));
     }
     // create penangkaran
     public function createpenangkaran()
@@ -158,7 +203,16 @@ class AdminController extends Controller
         $data = [
             'categories' =>Category::all(),
         ];
-        return view('category',$data);
+        $cek=Category::count();
+        if($cek==null){
+            $urut= 1;
+            $kode='KTG-0'. $urut;
+        }else{
+            $ambil=Category::all()->last();
+            $urut=(int)substr($ambil->kode_kategori,-1) + 1;
+            $kode='KTG-0'. $urut;
+        }
+        return view('category',$data,compact('kode'));
     }
     //create kategori
     public function createkategori()
@@ -173,8 +227,8 @@ class AdminController extends Controller
             'kategori.required' => 'Kategori Harus di Isi',
             'kategori.unique' => 'Kategori telah ada',
         ]);
-        $this->Category->insert($validatekategori);
 
+        $this->Category->insert($validatekategori);
         return redirect()->route('kategori')->with('create', 'Berhasil Menambahkan');
     }
     //delete kategori

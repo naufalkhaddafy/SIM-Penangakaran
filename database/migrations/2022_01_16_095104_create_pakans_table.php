@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateKandangsTable extends Migration
+class CreatePakansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateKandangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('kandangs', function (Blueprint $table) {
+        Schema::create('pakans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penangkaran_id');
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
-            $table->string('namakandang');
+            $table->string('kode_tempat')->unique();
+            $table->string('nama_pakan');
+            $table->date('expired');
         });
     }
 
@@ -28,6 +28,6 @@ class CreateKandangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kandangs');
+        Schema::dropIfExists('pakans');
     }
 }
