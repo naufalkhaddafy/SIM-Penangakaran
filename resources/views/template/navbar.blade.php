@@ -32,7 +32,7 @@
             </p>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a href="{{ route('reportproduksi') }}"
             class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
             <ion-icon name="bar-chart"></ion-icon>
@@ -40,6 +40,56 @@
                 Hasil Produksi
             </p>
         </a>
+    </li> --}}
+    <li class="nav-item {{ request()->is('reportproduksi') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
+            <ion-icon name="attach-sharp"></ion-icon>
+            <p>
+                Hasil Produksi
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="{{ route('reportproduksi') }}"
+                    class=" nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Inkubator</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pembesaran</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mati</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Dijual</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Terjual</p>
+                </a>
+            </li>
+        </ul>
     </li>
     <li class="nav-item">
         <a href="{{ route('pengguna') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
