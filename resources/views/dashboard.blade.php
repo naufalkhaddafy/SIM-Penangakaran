@@ -5,7 +5,6 @@
 
     <div class="container-fluid">
         @if (session('login'))
-
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h6><i class="icon fas fa-check"></i>{{ session('login') }}</h6>

@@ -263,11 +263,13 @@
                         </div>
                         </form>
                     </div>
+
                 </div>
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
         </div>
+
     @endforeach
     {{-- Modal Update --}}
     @foreach ($users as $data)
