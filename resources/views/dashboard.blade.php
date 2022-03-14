@@ -2,7 +2,6 @@
 @section('title', 'Dashboard')
 
 @section('content')
-
     <div class="container-fluid">
         @if (session('login'))
             <div class="alert alert-success alert-dismissible">
@@ -80,6 +79,12 @@
                 </div>
             </div>
             <!-- ./col -->
+        </div>
+        <br>
+        <div style="text-align:center">
+            <h3><b>HALAMAN PEKERJA</b></h3>
+            <h3> NAMA USER </h3>
+            <h4> Tanggal </h4>
         </div>
     </div>
 @endsection
