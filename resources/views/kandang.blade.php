@@ -25,7 +25,7 @@
                                 <div class="col-md-6" style="margin:1px;">
                                     <select name="penangkaran_id" id="penangkaran"
                                         class="form-control @error('penangkaran_id') is-invalid @enderror" required>
-                                        <option value="" selected><b>Pilih Penangkaran</b></option>
+                                        <option value="" selected>Pilih Penangkaran</option>
                                         @foreach ($penangkarans as $data)
                                             <option value="{{ $data->id }}">
                                                 {{ $data->lokasi_penangkaran }}
