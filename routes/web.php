@@ -33,7 +33,7 @@ Route::get('/dashboard', [AdminController::class, 'readdashboard'])->name('dashb
 Route::get('/pengguna', [UserController::class, 'readuser'])->name('pengguna');
 Route::get('/penangkaran', [PenangkaranController::class, 'readpenangkaran'])->name('penangkaran');
 Route::get('/penangkaran/{id}', [PenangkaranController::class, 'detailpenangkaran'])->name('detailkandang');
-Route::get('/readkandang/{id}', [AdminController::class, 'detailkandang'])->name('readkandang');
+Route::get('/readkandang/{id}', [PenangkaranController::class, 'detailkandang'])->name('readkandang');
 Route::get('/kandang',[AdminController::class,'readkandang'])->name('kandang');
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
 Route::get('/kategoriproduksi',[AdminController::class,'readkategoriproduksi'])->name('kategoriproduksi');

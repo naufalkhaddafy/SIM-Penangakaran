@@ -47,6 +47,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kode Ring</th>
                                     <th>Tanggal Bertelur</th>
                                     <th>Tanggal Masuk Inkubator</th>
                                     <th>Tanggal Menetas</th>
@@ -56,6 +57,7 @@
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

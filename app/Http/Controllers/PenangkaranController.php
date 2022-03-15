@@ -50,7 +50,7 @@ class PenangkaranController extends Controller
         ]);
         $this->Penangkaran->insert($validatelokasi);
 
-        return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan');
+        return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
     }
     public function detailkandang($id)
     {
@@ -87,7 +87,6 @@ class PenangkaranController extends Controller
         {
             $this->Kandang->where('penangkaran_id', $id)->delete();
         }
-
         return redirect()->route('penangkaran')->with('delete', 'Data Berhasil di hapus');
     }
 }

@@ -43,7 +43,7 @@
     </li> --}}
     <li class="nav-item {{ request()->is('reportproduksi') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
-            <ion-icon name="attach-sharp"></ion-icon>
+            <ion-icon name="bar-chart"></ion-icon>
             <p>
                 Hasil Produksi
                 <i class="right fas fa-angle-left"></i>
