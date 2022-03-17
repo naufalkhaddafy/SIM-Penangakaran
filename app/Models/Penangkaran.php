@@ -6,11 +6,13 @@ use App\Models\User;
 use App\Models\Kandang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\softDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Penangkaran extends Model
 {
     use HasFactory;
+    use softDeletes;
     protected $guarded = ['id'];
 
     public function kandangs()

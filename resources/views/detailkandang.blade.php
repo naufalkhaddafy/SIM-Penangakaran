@@ -57,15 +57,13 @@
                                                         @enderror
                                                     </div>
                                                     <div class="input-group mb-3">
-                                                        <select name="category_id" id="inputState"
-                                                            class="form-control @error('category_id') is-invalid @enderror"
+                                                        <select name="kategori" id="kategori"
+                                                            class="form-control @error('kategori') is-invalid @enderror"
                                                             required>
                                                             <option value="" selected>Kondisi Kandang</option>
-                                                            @foreach ($categories as $data)
-                                                                <option value="{{ $data->id }}">
-                                                                    {{ $data->kategori }}
-                                                                </option>
-                                                            @endforeach
+                                                            <option value="Produktif"> Produktif</option>
+                                                            <option value="Tidak Produktif"> Tidak Produktif</option>
+                                                            <option value="Ganti Bulu"> Ganti Bulu</option>
                                                         </select>
                                                         @error('category_id')
                                                             <span class="invalid-feedback" role="alert">
@@ -118,8 +116,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
                                                 <p class="card-text">Kondisi Kandang<br>
-                                                    <b
-                                                        class="text-success">{{ optional($data->category)->kategori }}</b><br>
+                                                    <b class="text-success">{{ $data->kategori }}</b><br>
                                                     <b></b>
                                                 </p>
                                                 <br>

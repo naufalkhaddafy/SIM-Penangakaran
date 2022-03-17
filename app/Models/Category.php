@@ -13,8 +13,8 @@ class Category extends Model
 
     protected $guarded = ['id'];
 
-    public function kandangs()
-    {
-        return $this->hasMany(Kandang::class);
-    }
+    // public function kandangs()
+    // {
+    //     return $this->hasMany(Kandang::class);
+    // }
 }

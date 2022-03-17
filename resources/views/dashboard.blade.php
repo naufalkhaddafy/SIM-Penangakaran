@@ -100,7 +100,7 @@
                                 <th>Nama Pakan</th>
                                 <th>Kode Tempat</th>
                                 <th>Expired</th>
-                                <th>Update</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>

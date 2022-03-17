@@ -15,9 +15,11 @@ class CreateKandangsTable extends Migration
     {
         Schema::create('kandangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penangkaran_id');
-            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('penangkaran_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('kategori')->nullable();
             $table->string('namakandang');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

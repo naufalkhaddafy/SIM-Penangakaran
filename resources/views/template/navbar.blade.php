@@ -41,8 +41,8 @@
             </p>
         </a>
     </li> --}}
-    <li class="nav-item {{ request()->is('reportproduksi') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('report-inkubator', 'report-hidup') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->is('report-inkubator', 'report-hidup') ? 'active' : '' }}">
             <ion-icon name="bar-chart"></ion-icon>
             <p>
                 Hasil Produksi
@@ -51,8 +51,8 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('reportproduksi') }}"
-                    class=" nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
+                <a href="{{ route('reportinkubator') }}"
+                    class=" nav-link {{ request()->is('report-inkubator') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inkubator</p>
                 </a>
@@ -60,9 +60,10 @@
         </ul>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                <a href="{{ route('reporthidup') }}"
+                    class=" nav-link {{ request()->is('report-hidup') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Pembesaran</p>
+                    <p>Hidup</p>
                 </a>
             </li>
         </ul>

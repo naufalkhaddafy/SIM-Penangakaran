@@ -48,7 +48,7 @@ class PenangkaranController extends Controller
             'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
             'lokasi_penangkaran.unique' => 'Lokasi telah ada',
         ]);
-        $this->Penangkaran->insert($validatelokasi);
+        Penangkaran::create($validatelokasi);
 
         return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
     }
@@ -83,10 +83,11 @@ class PenangkaranController extends Controller
         if (!Penangkaran::find($id)) {
             abort(404);
         }
-        if(Penangkaran::find($id)->delete())
-        {
-            $this->Kandang->where('penangkaran_id', $id)->delete();
-        }
+        // if(Penangkaran::find($id)->delete())
+        // {
+        //     $this->Kandang->where('penangkaran_id', $id)->delete();
+        // }
+        Penangkaran::find($id)->forceDelete();
         return redirect()->route('penangkaran')->with('delete', 'Data Berhasil di hapus');
     }
 }

@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Models\Pakan;
 use App\Models\Kandang;
 use App\Models\Category;
-use App\Models\Produksi;
 use App\Models\Penangkaran;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -86,50 +85,7 @@ class AdminController extends Controller
         Category::find($id)->delete();
         return redirect()->route('kategori')->with('delete', 'Kategori Berhasil di hapus');
     }
-    //view kandang
-    public function readkandang()
-    {
-        $data=([
-            'kandangs'=> Kandang::all(),
-            'categories' => Category::all(),
-            'penangkarans' => Penangkaran::all(),
-        ]);
-        return view('kandang',$data);
-    }
 
-    //create kandang
-    public function createkandang(){
-        $validatekandang = Request()->validate([
-            'namakandang' =>'required',
-            'category_id' =>'required',
-            'penangkaran_id' =>'required'
-            // 'kategori' =>'required|unique:categories',
-
-        ],[
-            'namakandang.required' => 'kode Harus di Isi',
-            //'namakandang.unique' => 'Kode sudah ada',
-
-            // 'kategori.required' => 'Lokasi Harus di Isi',
-            // 'kategori.unique' => 'Lokasi telah ada',
-        ]);
-        $this->Kandang->insert($validatekandang);
-        //$this->Kandang->createkandang($validatekandang);
-        return redirect()->back()->with('create', 'Berhasil Menambahkan');
-    }
-    //delete kandang
-    public function deletekandang($id)
-    {
-        Kandang::find($id)->delete();
-        return redirect()->back()->with('delete','Berhasil menghapus data kandang');
-    }
-
-    public function readreportproduksi(){
-        $data=([
-            'penangkarans' =>Penangkaran::all(),
-            'produksis'=>Produksi::all(),
-        ]);
-        return view('produksi.inkubator',$data);
-    }
     //view pakan
     public function readpakan(){
         $data=([
