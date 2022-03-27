@@ -61,7 +61,6 @@ class PenangkaranController extends Controller
             'penangkarans' => Penangkaran::find($id),
             'categories' => Category::all(),
         ];
-        //$kode = Penangkaran::get('kode_penangkaran');
         return view('readkandang', $data);
     }
     // detail penangkaran
@@ -74,7 +73,6 @@ class PenangkaranController extends Controller
             'penangkarans' => Penangkaran::find($id),
             'categories' => Category::all(),
         ];
-        //$kode = Penangkaran::get('kode_penangkaran');
         return view('detailkandang', $data);
     }
     // delete penangkaran

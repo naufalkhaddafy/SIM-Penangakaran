@@ -105,7 +105,8 @@
                                                 <b>{{ $data->kode_penangkaran }}</b><br>
                                                 {{ $data->lokasi_penangkaran }}
                                             </p>
-                                            <a href="{{ url('/penangkaran/' . $data->id) }}">Info
+                                            <a
+                                                href="{{ url('/penangkaran/' . $data->id . '/' . $data->lokasi_penangkaran) }}">Info
                                                 Detail</a>
                                         </div>
                                     </div>

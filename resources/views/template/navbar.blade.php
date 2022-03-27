@@ -100,7 +100,7 @@
             </p>
         </a>
     </li>
-    <li class="nav-item {{ request()->is('kategori', 'kategoriproduksi') ? 'menu-open' : '' }}">
+    {{-- <li class="nav-item {{ request()->is('kategori', 'kategoriproduksi') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('kategori', 'kategoriproduksi') ? 'active' : '' }}">
             <ion-icon name="attach-sharp"></ion-icon>
             <p>
@@ -126,7 +126,7 @@
                 </a>
             </li>
         </ul>
-    </li>
+    </li> --}}
     <li class="nav-header">Pekerja</li>
     <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
@@ -144,29 +144,39 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Kebersihan</p>
-                </a>
-            </li>
-        </ul>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Produksi</p>
-                </a>
-            </li>
-        </ul>
     </li>
-    <li class="nav-item">
-        <a href="#" class="nav-link {{ request()->is('') ? 'active' : '' }}">
-            <ion-icon name="home"></ion-icon>
+    if
+    <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+            <ion-icon name="bar-chart"></ion-icon>
             <p>
-                Inkubator
+                Produksi
+                <i class="right fas fa-angle-left"></i>
             </p>
         </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Inkubator</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Hidup</p>
+                </a>
+            </li>
+        </ul>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mati</p>
+                </a>
+            </li>
+        </ul>
     </li>
 </ul>

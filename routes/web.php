@@ -7,18 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\KandangController;
-
 use App\Http\Controllers\ReportProduksiController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('page');
@@ -29,13 +18,13 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'viewregister'])->name('register');
 Route::post('/register', [RegisterController::class, 'createuser'])->name('register');
-Route::get('pengguna/delete/{id}', [UserController::class, 'deletepengguna']);
+Route::get('/pengguna/delete/{id}', [UserController::class, 'deletepengguna']);
 
 // read
 Route::get('/dashboard', [AdminController::class, 'readdashboard'])->name('dashboard');
 Route::get('/pengguna', [UserController::class, 'readuser'])->name('pengguna');
 Route::get('/penangkaran', [PenangkaranController::class, 'readpenangkaran'])->name('penangkaran');
-Route::get('/penangkaran/{id}', [PenangkaranController::class, 'detailpenangkaran'])->name('detailkandang');
+Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'detailpenangkaran'])->name('detailkandang');
 Route::get('/readkandang/{id}', [PenangkaranController::class, 'detailkandang'])->name('readkandang');
 Route::get('/kandang',[KandangController::class,'readkandang'])->name('kandang');
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');

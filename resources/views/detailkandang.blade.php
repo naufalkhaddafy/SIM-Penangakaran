@@ -95,7 +95,11 @@
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div style="text-align:center">
-                            <h2><b>{{ $penangkarans->lokasi_penangkaran }}</b></h2>
+                            <h2>Lokasi Penangkaran</h2>
+                            <a href="#">
+                                <h2><b>{{ $penangkarans->lokasi_penangkaran }}</b></h2>
+                            </a>
+                            <h2>Jumlah Kandang : {{ count($penangkarans->kandangs) }}</h2>
                         </div>
                         <br>
                         <div class="row">
@@ -119,7 +123,6 @@
                                                     <b class="text-success">{{ $data->kategori }}</b><br>
                                                     <b></b>
                                                 </p>
-                                                <br>
                                                 <a href="/penangkaran" class="btn btn-primary">Go
                                                     somewhere</a>
                                             </div>

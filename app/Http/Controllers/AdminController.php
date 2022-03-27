@@ -8,6 +8,7 @@ use App\Models\Pakan;
 use App\Models\Kandang;
 use App\Models\Category;
 use App\Models\Penangkaran;
+use App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -30,6 +31,7 @@ class AdminController extends Controller
             'users' => User::all(),
             'penangkarans' => Penangkaran::all(),
             'kandangs' =>Kandang::all(),
+            date_default_timezone_set('Asia/Jakarta')
         ];
 
         return view('dashboard', $data);

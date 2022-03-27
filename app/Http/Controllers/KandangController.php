@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class KandangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     //view kandang
     public function readkandang()
     {

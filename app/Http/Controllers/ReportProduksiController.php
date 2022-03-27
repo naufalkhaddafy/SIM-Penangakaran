@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 class ReportProduksiController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function report_inkubator(){
         $data=([
             'penangkarans' =>Penangkaran::all(),

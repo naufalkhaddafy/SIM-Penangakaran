@@ -84,9 +84,12 @@
             <br>
             <div style="text-align:center">
                 <h3><b>HALAMAN PEKERJA</b></h3>
-                <h3> NAMA USER </h3>
-                <h4> Tanggal </h4>
-                <h4> Lokasi Penangkaran </h4>
+                <h3><b>Selamat Datang</b></h3>
+                <h3> {{ Auth::user()->namalengkap }} </h3>
+                <h4> <b>Tanggal</b> </h4>
+                <h4>{{ date('l, d l Y') }} </h4>
+                <h4> <b>{{ Auth::user()->penangkaran->lokasi_penangkaran }}</b> </h4>
+
             </div>
             <br>
             <div class="card">
@@ -106,7 +109,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    Some Product
+                                    Pakan
                                 </td>
                                 <td>$13 USD</td>
                                 <td> Tanggal</td>
@@ -136,17 +139,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            Some Product
-                                        </td>
-                                        <td>$13 USD</td>
-                                        <td>
-                                            <a href="#" class="text-muted">
-                                                <i class="fas fa-search"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @foreach (Auth::user()->penangkaran->kandangs as $data)
+                                        <tr>
+                                            <td>
+                                                {{ $data->namakandang }}
+                                            </td>
+                                            <td>$13 USD</td>
+                                            <td>
+                                                <a href="#" class="text-muted">
+                                                    <i class="fas fa-search"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
