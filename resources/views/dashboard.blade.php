@@ -87,7 +87,7 @@
                 <h3><b>Selamat Datang</b></h3>
                 <h3> {{ Auth::user()->namalengkap }} </h3>
                 <h4> <b>Tanggal</b> </h4>
-                <h4>{{ date('l, d l Y') }} </h4>
+                <h4>{{ date('l, d F Y') }} </h4>
                 <h4> <b>{{ Auth::user()->penangkaran->lokasi_penangkaran }}</b> </h4>
 
             </div>

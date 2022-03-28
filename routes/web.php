@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\ReportProduksiController;
+use App\Http\Controllers\ProduksiController;
 
 Route::get('/', function () {
     return view('page');
@@ -29,9 +30,14 @@ Route::get('/readkandang/{id}', [PenangkaranController::class, 'detailkandang'])
 Route::get('/kandang',[KandangController::class,'readkandang'])->name('kandang');
 Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
 Route::get('/kategoriproduksi',[AdminController::class,'readkategoriproduksi'])->name('kategoriproduksi');
-Route::get('/report-inkubator',[ReportProduksiController::class,'report_inkubator'])->name('reportinkubator');
-Route::get('/report-hidup',[ReportProduksiController::class,'report_hidup'])->name('reporthidup');
+Route::get('/report-inkubator',[ReportProduksiController::class,'report_inkubator'])->name('report-inkubator');
+Route::get('/report-hidup',[ReportProduksiController::class,'report_hidup'])->name('report-hidup');
+Route::get('/produksi-inkubator',[ProduksiController::class,'produksi_inkubator'])->name('produksi-inkubator');
+Route::get('/produksi-hidup',[ProduksiController::class,'produksi_hidup'])->name('produksi-hidup');
+Route::get('/produksi-mati',[ProduksiController::class,'produksi_mati'])->name('produksi-mati');
+Route::get('/detail-kandang',[KandangController::class,'detail_kandang'])->name('detail-kandang');
 Route::get('/pakan',[AdminController::class,'readpakan'])->name('pakan');
+
 // delete
 Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
 Route::get('/penangkaran/delete/{id}', [PenangkaranController::class, 'deletepenangkaran']);

@@ -57,4 +57,11 @@ class KandangController extends Controller
         ]);
         return view('produksi.inkubator',$data);
     }
+    public function detail_kandang(){
+        $data=([
+            'penangkarans' =>Penangkaran::all(),
+            'produksis'=>Produksi::all(),
+        ]);
+        return view('u_kandang',$data);
+    }
 }

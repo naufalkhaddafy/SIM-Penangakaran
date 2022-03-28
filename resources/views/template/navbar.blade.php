@@ -32,15 +32,6 @@
             </p>
         </a>
     </li>
-    {{-- <li class="nav-item">
-        <a href="{{ route('reportproduksi') }}"
-            class="nav-link {{ request()->is('reportproduksi') ? 'active' : '' }}">
-            <ion-icon name="bar-chart"></ion-icon>
-            <p>
-                Hasil Produksi
-            </p>
-        </a>
-    </li> --}}
     <li class="nav-item {{ request()->is('report-inkubator', 'report-hidup') ? 'menu-open' : '' }}">
         <a href="#" class="nav-link {{ request()->is('report-inkubator', 'report-hidup') ? 'active' : '' }}">
             <ion-icon name="bar-chart"></ion-icon>
@@ -51,7 +42,7 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('reportinkubator') }}"
+                <a href="{{ route('report-inkubator') }}"
                     class=" nav-link {{ request()->is('report-inkubator') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inkubator</p>
@@ -60,7 +51,7 @@
         </ul>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="{{ route('reporthidup') }}"
+                <a href="{{ route('report-hidup') }}"
                     class=" nav-link {{ request()->is('report-hidup') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Hidup</p>
@@ -127,9 +118,11 @@
             </li>
         </ul>
     </li> --}}
+    {{-- @if (Auth::user()->level == 'pekerja')
+    @endif --}}
     <li class="nav-header">Pekerja</li>
-    <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+    <li class="nav-item {{ request()->is('detail-kandang') ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
             <ion-icon name="home"></ion-icon>
             <p>
                 Kandang
@@ -138,16 +131,18 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                <a href="{{ route('detail-kandang') }}"
+                    class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kandang</p>
                 </a>
             </li>
         </ul>
     </li>
-    if
-    <li class="nav-item {{ request()->is('dashboar') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+    <li
+        class="nav-item {{ request()->is('produksi-inkubator', 'produksi-hidup', 'produksi-mati') ? 'menu-open' : '' }}">
+        <a href="#"
+            class="nav-link {{ request()->is('produksi-inkubator', 'produksi-hidup', 'produksi-mati') ? 'active' : '' }}">
             <ion-icon name="bar-chart"></ion-icon>
             <p>
                 Produksi
@@ -156,7 +151,8 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                <a href="{{ route('produksi-inkubator') }}"
+                    class="nav-link {{ request()->is('produksi-inkubator') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inkubator</p>
                 </a>
@@ -164,7 +160,8 @@
         </ul>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                <a href="{{ route('produksi-hidup') }}"
+                    class="nav-link {{ request()->is('produksi-hidup') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Hidup</p>
                 </a>
@@ -172,7 +169,8 @@
         </ul>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="#" class="nav-link {{ request()->is('dashboa') ? 'active' : '' }}">
+                <a href="{{ route('produksi-mati') }}"
+                    class="nav-link {{ request()->is('produksi-mati') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Mati</p>
                 </a>
