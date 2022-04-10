@@ -101,7 +101,7 @@
                             alt="User Image">
                     </div> --}}
                     <div class="info">
-                        <a href="#" class="d-block">{{ Auth::user()->namalengkap }}</a>
+                        <a href="#" class="d-block">{{ Auth::user()->nama_lengkap }}</a>
                     </div>
                 </div>
 

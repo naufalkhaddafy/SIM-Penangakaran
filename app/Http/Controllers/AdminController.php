@@ -101,6 +101,7 @@ class AdminController extends Controller
             'kode_tempat' =>'required',
             'nama_pakan' =>'required',
             'expired' =>'required',
+            //'tgl_kadaluwarsa' =>'required',
             // 'kategori' =>'required|unique:categories',
 
         ],[

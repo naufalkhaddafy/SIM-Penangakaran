@@ -44,7 +44,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('report-inkubator') }}"
+                    <a href="{{ route('reportinkubator') }}"
                         class=" nav-link {{ request()->is('report-inkubator') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Inkubator</p>
@@ -53,7 +53,7 @@
             </ul>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('report-hidup') }}"
+                    <a href="{{ route('reporthidup') }}"
                         class=" nav-link {{ request()->is('report-hidup') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Hidup</p>
@@ -132,7 +132,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('detail-kandang') }}"
+                    <a href="{{ route('detail.kandang') }}"
                         class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Kandang</p>
@@ -152,7 +152,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('produksi-inkubator') }}"
+                    <a href="{{ route('produksi.inkubator') }}"
                         class="nav-link {{ request()->is('produksi-inkubator') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Inkubator</p>
@@ -161,7 +161,7 @@
             </ul>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('produksi-hidup') }}"
+                    <a href="{{ route('produksi.hidup') }}"
                         class="nav-link {{ request()->is('produksi-hidup') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Hidup</p>
@@ -170,7 +170,7 @@
             </ul>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('produksi-mati') }}"
+                    <a href="{{ route('produksi.mati') }}"
                         class="nav-link {{ request()->is('produksi-mati') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mati</p>

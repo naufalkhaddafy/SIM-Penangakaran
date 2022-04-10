@@ -15,12 +15,13 @@ class CreateProduksisTable extends Migration
     {
         Schema::create('produksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('jadwal_id')->constrained('jadwals')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('kandang_id')->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('tgl_bertelur');
+            $table->string('status_telur')->default('pertama');
             $table->date('tgl_masuk_inkubator')->nullable();
             $table->date('tgl_menetas')->nullable();
-            $table->string('status_penetasan')->nullable();
-            $table->string('kondisi_penetasa')->nullable();
-            $table->string('status_hasil')->nullable();
+            $table->date('kode_ring')->nullable();
+            $table->string('status_produksi')->default('inkubator');
             $table->timestamps();
             $table->softDeletes();
         });

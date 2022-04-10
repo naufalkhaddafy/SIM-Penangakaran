@@ -42,7 +42,6 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <a class="text-dark" href="#">
-
                                             <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
                                                 class="card-img-top" alt="...">
                                             <div class="card-body">
@@ -52,7 +51,8 @@
                                                     <b class="text-success">{{ $data->kategori }}</b><br>
                                                     <b></b>
                                                 </p>
-                                                <a href="/penangkaran" class="btn btn-primary">Go
+                                                <a href="{{ url('kandang' . '/' . $data->id . '/' . $data->namakandang) }}"
+                                                    class="btn btn-primary">Go
                                                     somewhere</a>
                                             </div>
                                         </a>

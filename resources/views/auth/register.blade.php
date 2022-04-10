@@ -29,15 +29,15 @@
                 <form action="{{ route('register') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" id="namalengkap" name="namalengkap"
-                            class="form-control @error('namalengkap') is-invalid @enderror" placeholder="Full name"
-                            value="{{ old('namalengkap') }}">
+                        <input type="text" id="nama_lengkap" name="nama_lengkap"
+                            class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
+                            value="{{ old('nama_lengkap') }}">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
                             </div>
                         </div>
-                        @error('namalengkap')
+                        @error('nama_lengkap')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -87,7 +87,7 @@
                         @enderror
                     </div>
                     <div class="input-group mb-3">
-                        <input type="hidden" name="level" id="level" value="admin">
+                        <input type="hidden" name="role" id="role" value="pemilik">
                     </div>
                     <div class="input-group mb-3">
                         <input type="hidden" name="penangkaran_id" id="penangkaran_id" value="Bos">

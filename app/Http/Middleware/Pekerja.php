@@ -16,7 +16,7 @@ class Pekerja
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->level == 'pekerja') {
+        if (auth()->user()->role == 'pekerja') {
             return $next($request);
         }
         return $next($request);

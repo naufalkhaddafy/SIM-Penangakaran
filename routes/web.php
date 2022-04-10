@@ -25,11 +25,11 @@ Route::get('/pengguna/delete/{id}', [UserController::class, 'deletepengguna']);
 Route::get('/dashboard', [AdminController::class, 'readdashboard'])->name('dashboard');
 Route::get('/pengguna', [UserController::class, 'readuser'])->name('pengguna');
 Route::get('/penangkaran', [PenangkaranController::class, 'readpenangkaran'])->name('penangkaran');
-Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'detailpenangkaran'])->name('detailkandang');
-Route::get('/readkandang/{id}', [PenangkaranController::class, 'detailkandang'])->name('readkandang');
+Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'detailpenangkaran'])->name('detail.kandang');
+Route::get('/readkandang/{id}', [PenangkaranController::class, 'detailkandang'])->name('read.kandang');
 Route::get('/kandang',[KandangController::class,'readkandang'])->name('kandang');
-Route::get('/kategori',[AdminController::class,'readkategori'])->name('kategori');
-Route::get('/kategoriproduksi',[AdminController::class,'readkategoriproduksi'])->name('kategoriproduksi');
+Route::get('/kandang/{id}/{namakandang}',[KandangController::class,'detail_kandangs'])->name('detail.kandangs');
+Route::get('/kategoriproduksi',[AdminController::class,'readkategoriproduksi'])->name('kategori.produksi');
 Route::get('/report-inkubator',[ReportProduksiController::class,'report_inkubator'])->name('report-inkubator');
 Route::get('/report-hidup',[ReportProduksiController::class,'report_hidup'])->name('report-hidup');
 Route::get('/produksi-inkubator',[ProduksiController::class,'produksi_inkubator'])->name('produksi-inkubator');
@@ -50,7 +50,7 @@ Route::post('/kandang',[KandangController::class,'createkandang'])->name('kandan
 Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
 Route::post('/pakan',[AdminController::class,'createpakan'])->name('pakan');
 //update
-Route::post('/pengguna/update/{id}', [UserController::class, 'updateuser'])->name('update-pengguna');
+Route::post('/pengguna/update/{id}', [UserController::class, 'updateuser'])->name('update.pengguna');
 
 
 

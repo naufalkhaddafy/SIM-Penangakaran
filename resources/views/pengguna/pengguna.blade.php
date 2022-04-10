@@ -44,7 +44,7 @@
                                     <th>Nama Lengkap</th>
                                     <th>Username</th>
                                     <th>No.HP</th>
-                                    <th>Level</th>
+                                    <th>Role</th>
                                     <th>Lokasi Kerja</th>
                                     <th>Action</th>
                                 </tr>
@@ -54,10 +54,10 @@
                                 @foreach ($users as $data)
                                     <tr>
                                         <td>{{ $no++ }}</td>
-                                        <td>{{ $data->namalengkap }}</td>
+                                        <td>{{ $data->nama_lengkap }}</td>
                                         <td>{{ $data->username }}</td>
                                         <td> {{ $data->nohp }}</td>
-                                        <td>{{ $data->level }}</td>
+                                        <td>{{ $data->role }}</td>
                                         <td>
                                             {{ optional($data->penangkaran)->lokasi_penangkaran }}
                                         </td>
@@ -98,15 +98,15 @@
                     <form action="{{ route('pengguna') }}" method="post" id="form-create">
                         @csrf
                         <div class="input-group mb-3">
-                            <input type="text" id="namalengkap" name="namalengkap"
-                                class="form-control @error('namalengkap') is-invalid @enderror" placeholder="Full name"
-                                value="{{ old('namalengkap') }}" required>
+                            <input type="text" id="nama_lengkap" name="nama_lengkap"
+                                class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
+                                value="{{ old('nama_lengkap') }}" required>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-user"></span>
                                 </div>
                             </div>
-                            @error('namalengkap')
+                            @error('nama_lengkap')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -157,14 +157,14 @@
                             @enderror
                         </div>
                         <div class="form-group mb-3">
-                            <label for="level" class="col-sm-2 control-label">Level</label>
+                            <label for="role" class="col-sm-2 control-label">role</label>
                             <div class="col-sm-12">
-                                <select name="level" id="level" class="form-control" required>
+                                <select name="role" id="role" class="form-control" required>
                                     <option value="" selected>Pilih Status Pengguna</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="user">User</option>
+                                    <option value="pemilk">Pemilik</option>
+                                    <option value="pekerja">Pekerja</option>
                                 </select>
-                                @error('level')
+                                @error('role')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -218,8 +218,8 @@
                                     <span class="fas fa-user"></span><b> Nama</b>
                                 </div>
                             </div>
-                            <input type="text" id="namalengkap" name="namalengkap" class="form-control"
-                                placeholder="Full name" value="{{ $data->namalengkap }}" disabled>
+                            <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control"
+                                placeholder="Full name" value="{{ $data->nama_lengkap }}" disabled>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-append">
@@ -246,8 +246,8 @@
                                     <span class="fas fa-lock"></span><b>Status</b>
                                 </div>
                             </div>
-                            <input type="level" name="level" id="level" class="form-control" placeholder="Password"
-                                disabled value="{{ $data->level }}">
+                            <input type="role" name="role" id="role" class="form-control" placeholder="Password" disabled
+                                value="{{ $data->role }}">
 
                         </div>
                         <div class="input-group mb-3">
@@ -269,7 +269,6 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
     @endforeach
     {{-- Modal Update --}}
     @foreach ($users as $data)
@@ -286,15 +285,15 @@
                         <form action="{{ url('pengguna/update/' . $data->id) }}" method="post">
                             @csrf
                             <div class="input-group mb-3">
-                                <input type="text" id="namalengkap" name="namalengkap"
-                                    class="form-control @error('namalengkap') is-invalid @enderror" placeholder="Full name"
-                                    value="{{ $data->namalengkap }}" required>
+                                <input type="text" id="nama_lengkap" name="nama_lengkap"
+                                    class="form-control @error('nama_lengkap') is-invalid @enderror"
+                                    placeholder="Full name" value="{{ $data->nama_lengkap }}" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>
                                     </div>
                                 </div>
-                                @error('namalengkap')
+                                @error('nama_lengkap')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -344,15 +343,15 @@
                                 @enderror
                             </div>
                             <div class="form-group mb-3">
-                                <label for="level" class="col-sm-2 control-label">Level</label>
+                                <label for="role" class="col-sm-2 control-label">role</label>
                                 <div class="col-sm-12">
-                                    <select name="level" id="level"
+                                    <select name="role" id="role"
                                         class="form-control @error('penangkaran_id') is-invalid @enderror" required>
-                                        <option value="{{ $data->level }}" selected>{{ $data->level }}</option>
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
+                                        <option value="{{ $data->role }}" selected>{{ $data->role }}</option>
+                                        <option value="pemilik">Pemilik</option>
+                                        <option value="pekerja">pekerja</option>
                                     </select>
-                                    @error('level')
+                                    @error('role')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -403,7 +402,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Apakah anda ingin menghapus {{ $data->namalengkap }}</p>
+                        <p>Apakah anda ingin menghapus {{ $data->nama_lengkap }}</p>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
@@ -451,7 +450,8 @@
     </script>
     <script>
         $(document).ready(function() {
-            @if ($errors->any()) {
+            @if ($errors->any())
+                {
                 $('#modal-tambah').modal('show');
                 }
             @endif

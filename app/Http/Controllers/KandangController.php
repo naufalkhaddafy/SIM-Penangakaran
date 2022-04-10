@@ -27,14 +27,14 @@ class KandangController extends Controller
     //create kandang
     public function createkandang(){
         $validatekandang = Request()->validate([
-            'namakandang' =>'required',
+            'nama_kandang' =>'required',
             'kategori' =>'required',
             'penangkaran_id' =>'required'
             // 'kategori' =>'required|unique:categories',
 
         ],[
-            'namakandang.required' => 'kode Harus di Isi',
-            //'namakandang.unique' => 'Kode sudah ada',
+            'nama_kandang.required' => 'kode Harus di Isi',
+            //'nama_kandang.unique' => 'Kode sudah ada',
 
             // 'kategori.required' => 'Lokasi Harus di Isi',
             // 'kategori.unique' => 'Lokasi telah ada',
@@ -60,8 +60,14 @@ class KandangController extends Controller
     public function detail_kandang(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
-            'produksis'=>Produksi::all(),
+            'kandangs'=>Kandang::all(),
         ]);
         return view('u_kandang',$data);
+    }
+    public function detail_kandangs($id){
+        $data=([
+            'Kandangs' =>Kandang::find($id),
+        ]);
+        return view('kandang.kandang',$data);
     }
 }

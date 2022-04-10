@@ -32,15 +32,15 @@ class UserController extends Controller
     public function createuser(Request $request)
     {
         $validateuser= $request->validate([
-            'namalengkap' =>'required',
+            'nama_lengkap' =>'required',
             'username' =>'required|unique:users',
             //'nohp' =>'unique:users|min:12|max:14',
             'nohp' =>'unique:users',
             'password' =>'required|min:5',
-            'level' =>'required',
+            'role' =>'required',
             'penangkaran_id' =>'required',
         ],[
-            'namalengkap.required' => 'Nama Harus di Isi',
+            'nama_lengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
             'username.unique' => 'Username telah terdaftar',
             //'nohp.required' => 'No. Hp Harus di Isi',
@@ -61,7 +61,7 @@ class UserController extends Controller
         //     // $validateuser['password']=Hash::make($validateuser['password']);
 
         //     // User::create($validateuser);
-        //     // $this->User = $this->input('namalengkap');
+        //     // $this->User = $this->input('nama_lengkap');
         //     // $this->User = $this->input('username');
         //     // $this->User = $this->input('nohp');
         //     // $this->User = $this->input('password');
@@ -86,13 +86,13 @@ class UserController extends Controller
     public function updateuser($id){
 
         $validateuser= Request()->validate([
-            'namalengkap' =>'required',
+            'nama_lengkap' =>'required',
             'username' =>'required',
-            'level' =>'required',
+            'role' =>'required',
             'penangkaran_id' =>'nullable',
             'nohp'=>'nullable',
         ],[
-            'namalengkap.required' => 'Nama Harus di Isi',
+            'nama_lengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
             //'penangkaran_id.required' =>'Harus diisi',
         ]);

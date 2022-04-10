@@ -15,9 +15,9 @@ class CreateKandangsTable extends Migration
     {
         Schema::create('kandangs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('penangkaran_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->string('kategori')->nullable();
-            $table->string('namakandang');
+            $table->foreignId('penangkaran_id')->nullable()->constrained('penangkarans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('nama_kandang');
+            $table->enum('kategori',['Produktif','Tidak Produktif','Ganti Bulu'])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

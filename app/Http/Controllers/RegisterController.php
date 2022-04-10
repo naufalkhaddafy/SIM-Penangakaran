@@ -19,15 +19,15 @@ class RegisterController extends Controller
     public function createuser(Request $request)
     {
         $validateuser=$request->validate([
-            'namalengkap' =>'required',
+            'nama_lengkap' =>'required',
             'username' =>'required|unique:users',
             //'nohp' =>'unique:users|min:12|max:14',
             'nohp' =>'unique:users',
             'password' =>'required|min:5',
-            'level' =>'required',
+            'role' =>'required',
             'penangkaran_id',
         ],[
-            'namalengkap.required' => 'Nama Harus di Isi',
+            'nama_lengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
             'username.unique' => 'Username telah terdaftar',
             //'nohp.required' => 'No. Hp Harus di Isi',

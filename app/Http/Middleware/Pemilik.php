@@ -16,7 +16,7 @@ class Pemilik
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->level == 'pemilik') {
+        if (auth()->user()->role == 'pemilik') {
             return $next($request);
         }
         return $next($request);

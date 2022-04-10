@@ -41,16 +41,16 @@
                                                 <form action="{{ route('kandang') }}" method="post">
                                                     @csrf
                                                     <div class="input-group mb-3">
-                                                        <input type="text" id="namakandang" name="namakandang"
-                                                            class="form-control @error('namakandang') is-invalid @enderror"
-                                                            placeholder="Nama Kandang" value="{{ old('namakandang') }}"
+                                                        <input type="text" id="nama_kandang" name="nama_kandang"
+                                                            class="form-control @error('nama_kandang') is-invalid @enderror"
+                                                            placeholder="Nama Kandang" value="{{ old('nama_kandang') }}"
                                                             required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <ion-icon name="code-slash"></ion-icon>
                                                             </div>
                                                         </div>
-                                                        @error('namakandang')
+                                                        @error('nama_kandang')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
@@ -118,7 +118,7 @@
                                             <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
                                                 class="card-img-top" alt="...">
                                             <div class="card-body">
-                                                <h5 class="card-title"><b>{{ $data->namakandang }}</b></h5>
+                                                <h5 class="card-title"><b>{{ $data->nama_kandang }}</b></h5>
                                                 <p class="card-text">Kondisi Kandang<br>
                                                     <b class="text-success">{{ $data->kategori }}</b><br>
                                                     <b></b>
@@ -139,7 +139,7 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Apakah anda ingin menghapus {{ $data->namakandang }}</p>
+                                                    <p>Apakah anda ingin menghapus {{ $data->nama_kandang }}</p>
                                                 </div>
                                                 <div class="modal-footer justify-content-between">
                                                     <button type="button" class="btn btn-default"

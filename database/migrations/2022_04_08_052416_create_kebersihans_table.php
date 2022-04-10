@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jadwals', function (Blueprint $table) {
+        Schema::create('kebersihans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('produksi_id')->constrained('produksis')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('tgl_akan_bertelur');
-            $table->date('tgl_akan_menetas');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignId('kandang_id')->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('tgl_pembersihan');
+            $table->date('jadwal_pembersihan');
+
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwals');
+        Schema::dropIfExists('kebersihans');
     }
 };
