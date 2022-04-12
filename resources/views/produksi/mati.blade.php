@@ -32,14 +32,12 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal Bertelur</th>
-                                    <th>Tanggal Masuk Inkubator</th>
-                                    <th>Tanggal Menetas</th>
+                                    <th>Keterangan</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

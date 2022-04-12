@@ -117,13 +117,17 @@
                                             </button>
                                             <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
                                                 class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title"><b>{{ $data->nama_kandang }}</b></h5>
-                                                <p class="card-text">Kondisi Kandang<br>
+                                            <div class="card-body" style="text-align:center">
+                                                <h4>
+                                                    <b>Kadang {{ $data->nama_kandang }}</b>
+                                                </h4>
+                                                <h5 class="card-text">Kondisi Kandang<br>
                                                     <b class="text-success">{{ $data->kategori }}</b><br>
                                                     <b></b>
-                                                </p>
-                                                <a href="/penangkaran" class="btn btn-primary">Go
+                                                </h5>
+                                                <br>
+                                                <a href="{{ url('kandang' . '/' . $data->id . '/' . $data->nama_kandang) }}"
+                                                    class="btn btn-primary">Go
                                                     somewhere</a>
                                             </div>
                                         </a>

@@ -17,7 +17,7 @@ class CreateKandangsTable extends Migration
             $table->id();
             $table->foreignId('penangkaran_id')->nullable()->constrained('penangkarans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('nama_kandang');
-            $table->enum('kategori',['Produktif','Tidak Produktif','Ganti Bulu'])->nullable();
+            $table->enum('kategori',['Produktif','Tidak Produktif','Ganti Bulu']);
             $table->timestamps();
             $table->softDeletes();
         });

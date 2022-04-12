@@ -23,4 +23,9 @@ class Penangkaran extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function pakans()
+    {
+        return $this->hasMany(Pakan::class);
+    }
 }

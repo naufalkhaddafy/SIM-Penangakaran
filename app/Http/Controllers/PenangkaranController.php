@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Kandang;
-use App\Models\Category;
 use App\Models\Penangkaran;
 use Illuminate\Http\Request;
 
@@ -13,12 +12,11 @@ class PenangkaranController extends Controller
     {
         $this->Penangkaran = new Penangkaran();
         $this->User = new User();
-        $this->Category = new Category();
         $this->Kandang = new Kandang();
         $this->middleware('auth');
     }
     // viewpenangkaran
-    public function readpenangkaran()
+    public function ReadPenangkaran()
     {
         $data = [
             'penangkarans' =>Penangkaran::all(),
@@ -36,7 +34,7 @@ class PenangkaranController extends Controller
         return view('penangkaran', $data,compact('kode'));
     }
     // create penangkaran
-    public function createpenangkaran()
+    public function CreatePenangkaran()
     {
         $validatelokasi = Request()->validate([
             'kode_penangkaran' =>'required|unique:penangkarans',
@@ -52,31 +50,29 @@ class PenangkaranController extends Controller
 
         return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
     }
-    public function detailkandang($id)
+    public function DetailKandang($id)
     {
         if (!Penangkaran::find($id)) {
             abort(404);
         }
         $data = [
             'penangkarans' => Penangkaran::find($id),
-            'categories' => Category::all(),
         ];
         return view('readkandang', $data);
     }
     // detail penangkaran
-    public function detailpenangkaran($id)
+    public function DetailPenangkaran($id)
     {
         if (!Penangkaran::find($id)) {
             abort(404);
         }
         $data = [
             'penangkarans' => Penangkaran::find($id),
-            'categories' => Category::all(),
         ];
         return view('detailkandang', $data);
     }
     // delete penangkaran
-    public function deletepenangkaran($id)
+    public function DeletePenangkaran($id)
     {
         if (!Penangkaran::find($id)) {
             abort(404);

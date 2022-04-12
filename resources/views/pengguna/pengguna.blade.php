@@ -175,7 +175,7 @@
                             <label for="lokasikerja" class="col-sm-2 control-label">Lokasi
                                 Kerja</label>
                             <select name="penangkaran_id" id="penangkaran"
-                                class="form-control @error('penangkaran_id') is-invalid @enderror" required>
+                                class="form-control @error('penangkaran_id') is-invalid @enderror">
                                 <option value="" selected>Lokasi Kerja</option>
                                 @foreach ($penangkarans as $data)
                                     <option value="{{ $data->id }}">

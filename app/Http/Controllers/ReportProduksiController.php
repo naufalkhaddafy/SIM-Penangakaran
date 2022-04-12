@@ -12,14 +12,14 @@ class ReportProduksiController extends Controller
     {
         $this->middleware('auth');
     }
-    public function report_inkubator(){
+    public function ReportInkubator(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'produksis'=>Produksi::all(),
         ]);
         return view('laporanproduksi.inkubator',$data);
     }
-    public function report_hidup(){
+    public function ReportHidup(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'produksis'=>Produksi::all(),

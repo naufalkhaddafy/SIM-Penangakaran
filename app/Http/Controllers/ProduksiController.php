@@ -12,25 +12,25 @@ class ProduksiController extends Controller
     {
         $this->middleware('auth');
     }
-    public function produksi_inkubator(){
+    public function ProduksiInkubator(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'produksis'=>Produksi::all(),
         ]);
         return view('produksi.inkubator',$data);
     }
-    public function produksi_hidup(){
+    public function ProduksiHidup(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'produksis'=>Produksi::all(),
         ]);
         return view('produksi.hidup',$data);
     }
-    public function produksi_mati(){
+    public function ProduksiMati(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'produksis'=>Produksi::all(),
         ]);
-        return view('produksi.hidup',$data);
+        return view('produksi.mati',$data);
     }
 }

@@ -11,13 +11,17 @@ class Produksi extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    protected $casts = [
-        'status_produksi'=>ProduksiStatus::class,
-        'status_telur' =>TelurStatus::class,
-    ];
+    // protected $casts = [
+    //     'status_produksi'=>ProduksiStatus::class,
+    //     'status_telur' =>TelurStatus::class,
+    // ];
 
     public function kandang()
     {
         return $this->belongTo(Kandang::class);
+    }
+    public function jadwal()
+    {
+        return $this->hasOne(Jadwal::class);
     }
 }

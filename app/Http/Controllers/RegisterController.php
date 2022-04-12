@@ -12,11 +12,11 @@ class RegisterController extends Controller
         //$this->middleware('guest');
     }
     //halaman register
-    public function viewregister()
+    public function ViewRegister()
     {
         return view('auth/register');
     }
-    public function createuser(Request $request)
+    public function CreateUser(Request $request)
     {
         $validateuser=$request->validate([
             'nama_lengkap' =>'required',

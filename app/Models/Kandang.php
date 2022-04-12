@@ -22,12 +22,13 @@ class Kandang extends Model
     {
         return $this->belongsTo(Penangkaran::class);
     }
-    // public function category()
-    // {
-    //     return $this->belongsTo(Category::class);
-    // }
+
     public function produksis()
     {
-        return $this->hasMany(Kandang::class);
+        return $this->hasMany(Produksi::class);
+    }
+    public function kebersihans()
+    {
+        return $this->hasMany(Kebersihan::class);
     }
 }

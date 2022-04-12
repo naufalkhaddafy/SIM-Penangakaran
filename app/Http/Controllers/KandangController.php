@@ -14,18 +14,17 @@ class KandangController extends Controller
         $this->middleware('auth');
     }
     //view kandang
-    public function readkandang()
+    public function ReadKandang()
     {
         $data=([
             'kandangs'=> Kandang::all(),
-            'categories' => Category::all(),
             'penangkarans' => Penangkaran::all(),
         ]);
         return view('kandang',$data);
     }
 
     //create kandang
-    public function createkandang(){
+    public function CreateKandang(){
         $validatekandang = Request()->validate([
             'nama_kandang' =>'required',
             'kategori' =>'required',
@@ -44,7 +43,7 @@ class KandangController extends Controller
         return redirect()->back()->with('create', 'Berhasil Menambahkan');
     }
     //delete kandang
-    public function deletekandang($id)
+    public function DeleteKandang($id)
     {
         Kandang::find($id)->forceDelete();
         return redirect()->back()->with('delete','Berhasil menghapus data kandang');
@@ -57,14 +56,14 @@ class KandangController extends Controller
         ]);
         return view('produksi.inkubator',$data);
     }
-    public function detail_kandang(){
+    public function DetailKandang(){
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'kandangs'=>Kandang::all(),
         ]);
         return view('u_kandang',$data);
     }
-    public function detail_kandangs($id){
+    public function DetailKandangs($id){
         $data=([
             'Kandangs' =>Kandang::find($id),
         ]);

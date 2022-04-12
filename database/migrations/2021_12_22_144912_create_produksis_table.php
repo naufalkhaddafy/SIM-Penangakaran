@@ -17,11 +17,11 @@ class CreateProduksisTable extends Migration
             $table->id();
             $table->foreignId('kandang_id')->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('tgl_bertelur');
-            $table->string('status_telur')->default('pertama');
+            $table->enum('status_telur',['pertama','kedua']);
             $table->date('tgl_masuk_inkubator')->nullable();
             $table->date('tgl_menetas')->nullable();
             $table->date('kode_ring')->nullable();
-            $table->string('status_produksi')->default('inkubator');
+            $table->enum('status_produksi',['Inkubator', 'Hidup','Mati','Dijual','Terjual','Indukan']);
             $table->timestamps();
             $table->softDeletes();
         });

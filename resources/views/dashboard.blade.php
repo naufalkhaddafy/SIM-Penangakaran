@@ -99,7 +99,7 @@
                                                     <tr>
                                                         <th>Nama Pakan</th>
                                                         <th>Kode Tempat</th>
-                                                        <th>Expired</th>
+                                                        <th>Kadaluwarsa</th>
                                                         <th>Status</th>
                                                     </tr>
                                                 </thead>
@@ -124,7 +124,11 @@
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-header border-0">
-                                                    <h5 style="text-align:center"><b>Produksi</b></h5>
+                                                    <h5 style="text-align:center"><b>Informasi Kandang</b></h5>
+                                                </div>
+                                                {{-- produktif --}}
+                                                <div style="text-align:center" class="bg-success p-md-2">
+                                                    <h5><b>Produktif</b></h5>
                                                 </div>
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
@@ -132,16 +136,82 @@
                                                             <tr>
                                                                 <th>Kandang</th>
                                                                 <th>Akan Bertelur</th>
-                                                                <th>More</th>
+                                                                <th>Status</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach (Auth::user()->penangkaran->kandangs as $data)
+                                                            @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Produktif') ?? [] as $data)
                                                                 <tr>
                                                                     <td>
                                                                         {{ $data->nama_kandang }}
                                                                     </td>
-                                                                    <td>$13 USD</td>
+                                                                    <td>{{ $data->tgl_akan_bertelur }}
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="text-muted">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                                {{-- tidak produktif --}}
+                                                <div style="text-align:center" class="bg-warning p-md-2">
+                                                    <h5><b>Tidak Produktif</b></h5>
+                                                </div>
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-striped table-valign-middle">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Kandang</th>
+                                                                <th>Masuk Kandang</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Tidak Produktif') ?? [] as $data)
+                                                                <tr>
+                                                                    <td>
+                                                                        {{ $data->nama_kandang }}
+                                                                    </td>
+                                                                    <td>date
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href="#" class="text-muted">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                {{-- ganti bulu --}}
+                                                <div style="text-align:center" class="bg-info p-md-2">
+                                                    <h5><b>Ganti Bulu</b></h5>
+                                                </div>
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-striped table-valign-middle">
+
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Kandang</th>
+                                                                <th>Terakhir Bertelur</th>
+                                                                <th>Status</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Ganti Bulu') ?? [] as $data)
+                                                                <tr>
+                                                                    <td>
+                                                                        {{ $data->nama_kandang }}
+                                                                    </td>
+                                                                    <td>date
+                                                                    </td>
                                                                     <td>
                                                                         <a href="#" class="text-muted">
                                                                             <i class="fas fa-search"></i>
@@ -153,11 +223,12 @@
                                                     </table>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-header border-0">
-                                                    <h5 style="text-align:center"><b>Kebersihan</b></h5>
+                                                    <h5 style="text-align:center"><b>Kebersihan Kandang</b></h5>
                                                 </div>
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
@@ -165,21 +236,24 @@
                                                             <tr>
                                                                 <th>Kandang</th>
                                                                 <th>Pembersihan</th>
-                                                                <th>More</th>
+                                                                <th>Status</th>
                                                             </tr>
+
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    Some Product
-                                                                </td>
-                                                                <td>$13 USD</td>
-                                                                <td>
-                                                                    <a href="#" class="text-muted">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </td>
-                                                            </tr>
+                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                                <tr>
+                                                                    <td>
+                                                                        {{ $data->nama_kandang }}
+                                                                    </td>
+                                                                    <td>{{ $data->jadwal_pembersihan }}</td>
+                                                                    <td>
+                                                                        <a href="#" class="text-muted">
+                                                                            <i class="fas fa-search"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>

@@ -8,7 +8,7 @@
             </p>
         </a>
     </li>
-    @if (Auth::user()- >level == 'pemilik')
+    @if (Auth::user()->role == 'pemilik')
         <li class="nav-header">ADMIN</li>
         <li class="nav-item">
             <a href="{{ route('penangkaran') }}" class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
@@ -44,7 +44,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('reportinkubator') }}"
+                    <a href="{{ route('report.inkubator') }}"
                         class=" nav-link {{ request()->is('report-inkubator') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Inkubator</p>
@@ -53,7 +53,7 @@
             </ul>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="{{ route('reporthidup') }}"
+                    <a href="{{ route('report.hidup') }}"
                         class=" nav-link {{ request()->is('report-hidup') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Hidup</p>
@@ -120,7 +120,7 @@
             </li>
         </ul>
     </li> --}}
-    @elseif(Auth::user()->level == 'pekerja')
+    @elseif (Auth::user()->role == 'pekerja')
         <li class="nav-header">Pekerja</li>
         <li class="nav-item {{ request()->is('detail-kandang') ? 'menu-open' : '' }}">
             <a href="#" class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">

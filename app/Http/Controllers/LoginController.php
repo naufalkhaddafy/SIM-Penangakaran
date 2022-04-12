@@ -13,12 +13,12 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     //halaman login
-    public function viewlogin()
+    public function ViewLogin()
     {
         return view('auth/login');
     }
     //Login User
-    public function login(Request $request)
+    public function Login(Request $request)
     {
         $validatelogin=$request->validate([
             'username' =>'required',
@@ -34,20 +34,13 @@ class LoginController extends Controller
         return back()->with('gagal',' Gagal Periksa Kembali');
 
     }
-    // Logut user
-    public function a(Request $request)
+    // Logout user
+    public function Logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
-    }
-
-    public function logout(Request $request)
-    {
         Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect('/login');
     }
 }

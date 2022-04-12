@@ -31,14 +31,18 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Status Telur</th>
                                     <th>Tanggal Bertelur</th>
                                     <th>Tanggal Masuk Inkubator</th>
                                     <th>Tanggal Menetas</th>
-                                    <th>Action</th>
+                                    <th>Keterangan</th>
+                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td></td>
+                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

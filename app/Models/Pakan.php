@@ -9,4 +9,15 @@ class Pakan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function penangkaran()
+    {
+        return $this->belongsTo(Penangkaran::class);
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

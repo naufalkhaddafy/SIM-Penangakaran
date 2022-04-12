@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Kandang;
 use App\Models\Penangkaran;
-use App\Models\Category;
+
 
 class UserController extends Controller
 {
@@ -14,12 +14,11 @@ class UserController extends Controller
     {
         $this->Penangkaran = new Penangkaran();
         $this->User = new User();
-        $this->Category = new Category();
         $this->Kandang = new Kandang();
         $this->middleware('auth');
     }
     //
-    public function readuser()
+    public function ReadUser()
     {
         $data = [
             'users' => User::all(),
@@ -29,7 +28,7 @@ class UserController extends Controller
         return view('pengguna.pengguna',$data);
     }
     // nambah user
-    public function createuser(Request $request)
+    public function CreateUser(Request $request)
     {
         $validateuser= $request->validate([
             'nama_lengkap' =>'required',
@@ -38,7 +37,7 @@ class UserController extends Controller
             'nohp' =>'unique:users',
             'password' =>'required|min:5',
             'role' =>'required',
-            'penangkaran_id' =>'required',
+            'penangkaran_id' =>'nullable',
         ],[
             'nama_lengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
@@ -51,39 +50,19 @@ class UserController extends Controller
             'password.min' =>'Password minimal 5 Digit',
             'penangkaran_id.required' =>'Harus diisi',
         ]);
-        // if($validateuser->fails()) {
 
-        //     return response()->json([
-        //         'status'=> 400,
-        //         'errors' =>$validateuser->messages(),
-        //     ]);
-        // }else{
-        //     // $validateuser['password']=Hash::make($validateuser['password']);
-
-        //     // User::create($validateuser);
-        //     // $this->User = $this->input('nama_lengkap');
-        //     // $this->User = $this->input('username');
-        //     // $this->User = $this->input('nohp');
-        //     // $this->User = $this->input('password');
-        //     // $this->User = $this->input('penangkaran_id');
-        //     // $this->User = $this->input('level');
-        //     // $this->User->save();
-        //     return response()->json([
-        //         'status'=> 200,
-        //     ])->with('create','Berhasil menambahkan pengguna');
-        // }
         $validateuser['password']=Hash::make($validateuser['password']);
         User::create($validateuser);
         return redirect('pengguna')->with('create','Berhasil menambahkan pengguna');
     }
     // hapus pengguna
-    public function deletepengguna($id)
+    public function DeleteUser($id)
     {
         User::find($id)->delete();
         return redirect()->route('pengguna')->with('delete', 'Data Berhasil di hapus');
     }
     //update
-    public function updateuser($id){
+    public function UpdateUser($id){
 
         $validateuser= Request()->validate([
             'nama_lengkap' =>'required',
