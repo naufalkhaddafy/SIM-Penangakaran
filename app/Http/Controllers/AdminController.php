@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Pakan;
 use App\Models\Kandang;
 use App\Models\Penangkaran;
+use App\Models\Produksi;
 use App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;

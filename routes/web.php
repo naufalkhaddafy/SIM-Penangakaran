@@ -49,6 +49,7 @@ Route::post('/penangkaran', [PenangkaranController::class, 'CreatePenangkaran'])
 Route::post('/kandang',[KandangController::class,'CreateKandang'])->name('kandang');
 Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
 Route::post('/pakan',[AdminController::class,'CreatePakan'])->name('pakan');
+Route::post('/produksi-telur/{id}/{nama_kandang}',[ProduksiController::class,'CreateProduksiTelur'])->name('produksi-telur');
 //update
 Route::post('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
 

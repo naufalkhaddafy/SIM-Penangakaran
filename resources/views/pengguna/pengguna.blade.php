@@ -158,18 +158,18 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="role" class="col-sm-2 control-label">role</label>
-                            <div class="col-sm-12">
-                                <select name="role" id="role" class="form-control" required>
-                                    <option value="" selected>Pilih Status Pengguna</option>
-                                    <option value="pemilk">Pemilik</option>
-                                    <option value="pekerja">Pekerja</option>
-                                </select>
-                                @error('role')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+
+                            <select name="role" id="role" class="form-control" required>
+                                <option value="" selected>Pilih Status Pengguna</option>
+                                <option value="pemilk">Pemilik</option>
+                                <option value="pekerja">Pekerja</option>
+                            </select>
+                            @error('role')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                         </div>
                         <div class="form-group mb-3">
                             <label for="lokasikerja" class="col-sm-2 control-label">Lokasi

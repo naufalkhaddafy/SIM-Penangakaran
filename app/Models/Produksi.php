@@ -18,7 +18,7 @@ class Produksi extends Model
 
     public function kandang()
     {
-        return $this->belongTo(Kandang::class);
+        return $this->belongsTo(Kandang::class);
     }
     public function jadwal()
     {

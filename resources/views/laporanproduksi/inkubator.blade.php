@@ -54,13 +54,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                @foreach (Auth::user()->penangkaran->kandang->produksis ?? [] as $data)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{ $data->tgl_bertelur }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
