@@ -30,25 +30,30 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Kandang</th>
                                     <th>Status Telur</th>
                                     <th>Tanggal Bertelur</th>
                                     <th>Tanggal Masuk Inkubator</th>
-                                    <th>Tanggal Menetas</th>
+                                    <th>Tanggal Akan Menetas</th>
                                     <th>Keterangan</th>
                                     <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (Auth::user()->penangkaran->kandangs as $data)
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
+                                <?php $no = 1; ?>
+                                @foreach (Auth::user()->penangkaran->kandangs as $auth)
+                                    @foreach ($auth->produksis->where('status_produksi', 'Inkubator') as $data)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>Kandang {{ $data->kandang->nama_kandang }}</td>
+                                            <td>{{ $data->status_telur }}</td>
+                                            <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
+                                            <td>{{ date('d F Y', strtotime($data->tgl_masuk_inkubator)) }}</td>
+                                            <td>{{ date('d F Y', strtotime($data->jadwal->tgl_akan_menetas)) }}</td>
+                                            <td>{{ $data->status_produksi }}</td>
+                                            <td></td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

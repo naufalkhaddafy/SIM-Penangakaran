@@ -88,7 +88,7 @@
                                         <h4> <b>Tanggal</b> </h4>
                                         <h4>{{ date('l, d F Y') }} </h4>
                                         <h4> <b>{{ optional(Auth::user()->penangkaran)->lokasi_penangkaran }}</b> </h4>
-                                        {{ Auth::user()->penangkaran->kandangs }}
+                                        {{-- {{ Auth::user() }} --}}
                                     </div>
                                     <br>
                                     <div class="card">
@@ -137,21 +137,29 @@
                                                         <thead>
                                                             <tr align="center">
                                                                 <th>Kandang</th>
-                                                                <th>Akan Bertelur</th>
                                                                 <th>Status Telur</th>
+                                                                <th>Akan Bertelur</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody align="center">
                                                             @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Produktif') ?? [] as $data)
+                                                                @foreach ($data->produksis as $d)
+                                                                @endforeach
                                                                 <tr>
                                                                     <td>
                                                                         {{ $data->nama_kandang }}
                                                                     </td>
-                                                                    <td>date
+                                                                    <td class="m-3 p-2 badge bg-success">
+                                                                        @if ($d->status_telur == 'pertama')
+                                                                            Kedua
+                                                                        @elseif($d->status_telur == 'kedua')
+                                                                            Pertama
+                                                                        @endif
                                                                     </td>
-                                                                    <td class="p-md-1 badge bg-success">
-                                                                        Action</td>
+                                                                    <td>
+                                                                        {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur)) }}
+                                                                    </td>
                                                                     <td>
                                                                         <button type="button"
                                                                             class="btn btn-default  btn-outline-success"
@@ -172,14 +180,14 @@
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
 
-                                                        <thead>
+                                                        <thead align="center">
                                                             <tr>
                                                                 <th>Kandang</th>
                                                                 <th>Masuk Kandang</th>
                                                                 <th>Status</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody align="center">
                                                             @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Tidak Produktif') ?? [] as $data)
                                                                 <tr>
                                                                     <td>
@@ -204,14 +212,14 @@
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
 
-                                                        <thead>
+                                                        <thead align="center">
                                                             <tr>
                                                                 <th>Kandang</th>
                                                                 <th>Terakhir Bertelur</th>
                                                                 <th>Status</th>
                                                             </tr>
                                                         </thead>
-                                                        <tbody>
+                                                        <tbody align="center">
                                                             @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Ganti Bulu') ?? [] as $data)
                                                                 <tr>
                                                                     <td>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Pakan;
 use App\Models\Kandang;
 use App\Models\Penangkaran;
+use App\Models\Jadwal;
 use App\Models\Produksi;
 use App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
@@ -18,9 +19,6 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->Penangkaran = new Penangkaran();
-        $this->User = new User();
-        $this->Kandang = new Kandang();
         $this->middleware('auth');
     }
     //halaman dashboard
@@ -30,6 +28,8 @@ class AdminController extends Controller
             'users' => User::all(),
             'penangkarans' => Penangkaran::all(),
             'kandangs' =>Kandang::all(),
+            'jadwals' =>Jadwal::all(),
+            'produksis' =>Produksi::all(),
             date_default_timezone_set('Asia/Jakarta')
         ];
 
