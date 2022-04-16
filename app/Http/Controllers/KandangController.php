@@ -46,6 +46,7 @@ class KandangController extends Controller
     public function DeleteKandang($id)
     {
         Kandang::find($id)->forceDelete();
+
         return redirect()->back()->with('delete','Berhasil menghapus data kandang');
     }
 

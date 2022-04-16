@@ -77,10 +77,6 @@ class PenangkaranController extends Controller
         if (!Penangkaran::find($id)) {
             abort(404);
         }
-        // if(Penangkaran::find($id)->delete())
-        // {
-        //     $this->Kandang->where('penangkaran_id', $id)->delete();
-        // }
         Penangkaran::find($id)->forceDelete();
         return redirect()->route('penangkaran')->with('delete', 'Data Berhasil di hapus');
     }

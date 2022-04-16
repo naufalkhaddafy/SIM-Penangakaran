@@ -85,10 +85,12 @@
                                         {{-- <h3><b>HALAMAN PEKERJA</b></h3> --}}
                                         <h3><b>Selamat Datang</b></h3>
                                         <h3> {{ Auth::user()->nama_lengkap }} </h3>
-                                        <h4> <b>Tanggal</b> </h4>
+                                        <h3> <b>Tanggal</b> </h3>
                                         <h4>{{ date('l, d F Y') }} </h4>
-                                        <h4> <b>{{ optional(Auth::user()->penangkaran)->lokasi_penangkaran }}</b> </h4>
-                                        {{-- {{ Auth::user() }} --}}
+                                        <h3> <b>Lokasi Penangkaran</b>
+                                            <h4> {{ optional(Auth::user()->penangkaran)->lokasi_penangkaran ?? 'Lokasi Penangkaran Belum Tersedia' }}
+                                            </h4>
+                                            {{-- {{ Auth::user() }} --}}
                                     </div>
                                     <br>
                                     <div class="card">
@@ -130,7 +132,7 @@
                                                 </div>
                                                 {{-- produktif --}}
                                                 <div style="text-align:center" class="bg-lime p-md-2">
-                                                    <h5><b>Produktif</b></h5>
+                                                    <h6><b>Produktif</b></h6>
                                                 </div>
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
@@ -139,43 +141,53 @@
                                                                 <th>Kandang</th>
                                                                 <th>Status Telur</th>
                                                                 <th>Akan Bertelur</th>
+                                                                <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody align="center">
-                                                            @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Produktif') ?? [] as $data)
-                                                                @foreach ($data->produksis as $d)
-                                                                @endforeach
-                                                                <tr>
-                                                                    <td>
-                                                                        {{ $data->nama_kandang }}
-                                                                    </td>
-                                                                    <td class="m-3 p-2 badge bg-success">
-                                                                        @if ($d->status_telur == 'pertama')
-                                                                            Kedua
-                                                                        @elseif($d->status_telur == 'kedua')
-                                                                            Pertama
-                                                                        @endif
-                                                                    </td>
-                                                                    <td>
-                                                                        {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur)) }}
-                                                                    </td>
-                                                                    <td>
-                                                                        <button type="button"
-                                                                            class="btn btn-default  btn-outline-success"
-                                                                            data-toggle="modal"
-                                                                            data-target="{{ url('#modal-create' . $data->id) }}">
-                                                                            <ion-icon name="add"></ion-icon>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
+                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                                @if ($data->kategori == 'Produktif')
+                                                                    <tr>
+                                                                        <td>
+                                                                            {{ $data->nama_kandang }}
+                                                                        </td>
+                                                                        <td class="m-3 p-2 badge bg-success">
+                                                                            @foreach ($data->produksis as $d)
+                                                                                @if ($loop->last)
+                                                                                    @if ($d->status_telur == 'pertama')
+                                                                                        Kedua
+                                                                                    @elseif($d->status_telur == 'kedua')
+                                                                                        Pertama
+                                                                                    @endif
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </td>
+                                                                        <td>
+                                                                            @foreach ($data->produksis as $d)
+                                                                                @if ($loop->last)
+                                                                                    {{ date('d F Y', strtotime($d->jadwal->latest()->first()->tgl_akan_bertelur)) }}
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </td>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <button type="button"
+                                                                                class="btn btn-default  btn-outline-success"
+                                                                                data-toggle="modal"
+                                                                                data-target="{{ url('#modal-create' . $data->id) }}">
+                                                                                <ion-icon name="add"></ion-icon>
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 {{-- tidak produktif --}}
                                                 <div style="text-align:center" class="bg-warning p-md-2">
-                                                    <h5><b>Tidak Produktif</b></h5>
+                                                    <h6><b>Tidak Produktif</b></h6>
                                                 </div>
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
@@ -188,26 +200,28 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody align="center">
-                                                            @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Tidak Produktif') ?? [] as $data)
-                                                                <tr>
-                                                                    <td>
-                                                                        {{ $data->nama_kandang }}
-                                                                    </td>
-                                                                    <td>date
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="#" class="text-muted">
-                                                                            <i class="fas fa-search"></i>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
+                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                                @if ($data->kategori == 'Tidak Produktif')
+                                                                    <tr>
+                                                                        <td>
+                                                                            {{ $data->nama_kandang }}
+                                                                        </td>
+                                                                        <td>date
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#" class="text-muted">
+                                                                                <i class="fas fa-search"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 {{-- ganti bulu --}}
                                                 <div style="text-align:center" class="bg-lightblue p-md-2">
-                                                    <h5><b>Ganti Bulu</b></h5>
+                                                    <h6><b>Ganti Bulu</b></h6>
                                                 </div>
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
@@ -220,19 +234,21 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody align="center">
-                                                            @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Ganti Bulu') ?? [] as $data)
-                                                                <tr>
-                                                                    <td>
-                                                                        {{ $data->nama_kandang }}
-                                                                    </td>
-                                                                    <td>date
-                                                                    </td>
-                                                                    <td>
-                                                                        <a href="#" class="text-muted">
-                                                                            <i class="fas fa-search"></i>
-                                                                        </a>
-                                                                    </td>
-                                                                </tr>
+                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                                @if ($data->kategori == 'Ganti Bulu')
+                                                                    <tr>
+                                                                        <td>
+                                                                            {{ $data->nama_kandang }}
+                                                                        </td>
+                                                                        <td>date
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#" class="text-muted">
+                                                                                <i class="fas fa-search"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
                                                             @endforeach
                                                         </tbody>
                                                     </table>
@@ -280,67 +296,70 @@
                     </div>
                 </div>
                 {{-- Modal create --}}
-                @foreach (Auth::user()->penangkaran->kandangs->where('kategori', 'Produktif') ?? [] as $data)
-                    <div class="modal fade" id="modal-create{{ $data->id }}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Tambah Telur Baru</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form
-                                        action="{{ url('/produksi-telur' . '/' . $data->id . '/' . $data->nama_kandang) }}"
-                                        method="POST">
-                                        @csrf
+                @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                    @if ($data->kategori == 'Produktif')
+                        <div class="modal fade" id="modal-create{{ $data->id }}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Tambah Telur Baru</h4>
+                                        <button type="button" class="close" data-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form
+                                            action="{{ url('/produksi-telur' . '/' . $data->id . '/' . $data->nama_kandang) }}"
+                                            method="POST">
+                                            @csrf
 
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="TanggalBertelur">Tanggal Bertelur Hari ini
-                                                    Kandang
-                                                    {{ $data->nama_kandang }}</label>
-                                                <input type="input"
-                                                    class="form-control  @error('tgl_bertelur') is-invalid @enderror"
-                                                    id="tgl_bertelur" name="tgl_bertelur" value="{{ date('Y-m-d') }}"
-                                                    readonly>
-                                                @error('tgl_bertelur')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                                <input type="hidden" class="form-control" id="tgl_masuk_inkubator"
-                                                    name="tgl_masuk_inkubator" value="{{ date('Y-m-d') }}">
-                                                <input type="hidden" class="form-control" id="kandang_id"
-                                                    name="kandang_id" value="{{ $data->id }}">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="TanggalBertelur">Tanggal Bertelur Hari ini
+                                                        Kandang
+                                                        {{ $data->nama_kandang }}</label>
+                                                    <input type="input"
+                                                        class="form-control  @error('tgl_bertelur') is-invalid @enderror"
+                                                        id="tgl_bertelur" name="tgl_bertelur" value="{{ date('Y-m-d') }}"
+                                                        readonly>
+                                                    @error('tgl_bertelur')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                    <input type="hidden" class="form-control" id="tgl_masuk_inkubator"
+                                                        name="tgl_masuk_inkubator" value="{{ date('Y-m-d') }}">
+                                                    <input type="hidden" class="form-control" id="kandang_id"
+                                                        name="kandang_id" value="{{ $data->id }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="StatusTelur">Status Telur</label>
+                                                    <select name="status_telur" id="status_telur"
+                                                        class="form-control @error('statur_telur') is-invalid @enderror"
+                                                        required>
+                                                        <option value="" selected>Status Telur</option>
+                                                        <option value="pertama">Pertama</option>
+                                                        <option value="kedua">Kedua</option>
+                                                    </select>
+                                                    @error('status_telur')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="StatusTelur">Status Telur</label>
-                                                <select name="status_telur" id="status_telur"
-                                                    class="form-control @error('statur_telur') is-invalid @enderror"
-                                                    required>
-                                                    <option value="" selected>Status Telur</option>
-                                                    <option value="pertama">Pertama</option>
-                                                    <option value="kedua">Kedua</option>
-                                                </select>
-                                                @error('status_telur')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-default"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-default"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
                 @endforeach
             @endif
         </div>

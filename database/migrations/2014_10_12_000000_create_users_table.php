@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('nohp')->unique()->nullable();
             $table->string('role');
-            $table->foreignId('penangkaran_id')->nullable()->constrained('penangkarans')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('penangkaran_id')->nullable()->constrained('penangkarans')->nullOnDelete()->cascadeOnUpdate();
             $table->string('password');
             $table->timestamps();
 

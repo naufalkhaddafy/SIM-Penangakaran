@@ -27,7 +27,7 @@
                     <div class="readData"></div>
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
-                            <thead>
+                            <thead align="center">
                                 <tr>
                                     <th>No</th>
                                     <th>Kandang</th>
@@ -39,9 +39,9 @@
                                     <th>Update</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody align="center">
                                 <?php $no = 1; ?>
-                                @foreach (Auth::user()->penangkaran->kandangs as $auth)
+                                @foreach (Auth::user()->penangkaran->kandangs ?? [] as $auth)
                                     @foreach ($auth->produksis->where('status_produksi', 'Inkubator') as $data)
                                         <tr>
                                             <td>{{ $no++ }}</td>
@@ -50,8 +50,13 @@
                                             <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
                                             <td>{{ date('d F Y', strtotime($data->tgl_masuk_inkubator)) }}</td>
                                             <td>{{ date('d F Y', strtotime($data->jadwal->tgl_akan_menetas)) }}</td>
-                                            <td>{{ $data->status_produksi }}</td>
-                                            <td></td>
+                                            <td>menetas/tidak</td>
+                                            <td><button type="button" class="btn btn-default  btn-outline-success"
+                                                    data-toggle="modal"
+                                                    data-target="{{ url('#modal-create' . $data->id) }}">
+                                                    <ion-icon name="add"></ion-icon>
+                                                </button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endforeach

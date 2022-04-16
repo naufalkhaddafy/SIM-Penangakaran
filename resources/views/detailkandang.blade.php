@@ -43,8 +43,8 @@
                                                     <div class="input-group mb-3">
                                                         <input type="text" id="nama_kandang" name="nama_kandang"
                                                             class="form-control @error('nama_kandang') is-invalid @enderror"
-                                                            placeholder="Nama Kandang" value="{{ old('nama_kandang') }}"
-                                                            required>
+                                                            placeholder="Nama Kandang"
+                                                            value="CR-{{ old('nama_kandang') }}" required>
                                                         <div class="input-group-append">
                                                             <div class="input-group-text">
                                                                 <ion-icon name="code-slash"></ion-icon>
@@ -152,9 +152,9 @@
                                                         class="btn btn-danger">Delete</a>
                                                 </div>
                                             </div>
-                                            <!-- /.modal-content -->
+
                                         </div>
-                                        <!-- /.modal-dialog -->
+
                                     </div>
                                 </div>
                             @endforeach

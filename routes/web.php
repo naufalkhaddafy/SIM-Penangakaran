@@ -40,7 +40,7 @@ Route::get('/pakan',[AdminController::class,'ReadPakan'])->name('pakan');
 
 // delete
 Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
-Route::get('/penangkaran/delete/{id}', [PenangkaranController::class, 'DeletePenangkaran']);
+Route::get('/penangkaran/delete/{id}', [PenangkaranController::class, 'deletepenangkaran']);
 Route::get('/kandang/delete/{id}',[KandangController::class,'DeleteKandang']);
 Route::get('/pakan/delete/{id}', [AdminController::class, 'DeletePakan']);
 //create
