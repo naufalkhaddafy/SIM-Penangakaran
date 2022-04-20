@@ -166,7 +166,7 @@
                                                                         <td>
                                                                             @foreach ($data->produksis as $d)
                                                                                 @if ($loop->last)
-                                                                                    {{ date('d F Y', strtotime($d->jadwal->latest()->first()->tgl_akan_bertelur)) }}
+                                                                                    {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur)) }}
                                                                                 @endif
                                                                             @endforeach
                                                                         </td>

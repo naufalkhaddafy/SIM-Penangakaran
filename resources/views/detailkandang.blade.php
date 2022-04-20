@@ -119,7 +119,7 @@
                                                 class="card-img-top" alt="...">
                                             <div class="card-body" style="text-align:center">
                                                 <h4>
-                                                    <b>Kadang {{ $data->nama_kandang }}</b>
+                                                    <b>Kandang {{ $data->nama_kandang }}</b>
                                                 </h4>
                                                 <h5 class="card-text">Kondisi Kandang<br>
                                                     <b class="text-success">{{ $data->kategori }}</b><br>
