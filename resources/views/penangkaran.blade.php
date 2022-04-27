@@ -6,17 +6,6 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-header">
-                @if (session('create'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
-                    </div>
-                @elseif(session('delete'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h6><i class="icon fas fa-check"></i>{{ session('delete') }}</h6>
-                    </div>
-                @endif
                 <h3 class="card-title">
                     <td>
                         <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"

@@ -1,6 +1,7 @@
 @extends('template.template')
-@section('title', 'Kandang')
-
+@section('title')
+    Kandang {{ $kandangs->nama_kandang }}
+@endsection
 @section('content')
     <div class="container-fluid">
         <div class="row">

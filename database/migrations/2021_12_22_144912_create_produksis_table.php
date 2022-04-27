@@ -22,7 +22,7 @@ class CreateProduksisTable extends Migration
             $table->date('tgl_menetas')->nullable();
             $table->string('kode_ring')->nullable();
             $table->enum('jenis_kelamin',['Jantan','Betina'])->nullable();
-            $table->enum('status_produksi',['Inkubator', 'Hidup','Mati','Dijual','Terjual','Indukan']);
+            $table->enum('status_produksi',['Inkubator', 'Hidup','Mati','Terjual','Indukan']);
             $table->string('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();

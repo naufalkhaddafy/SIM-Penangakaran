@@ -146,7 +146,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody align="center">
-                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                            @foreach ($produktif ?? [] as $data)
                                                                 @if ($data->kategori == 'Produktif')
                                                                     <tr>
                                                                         <td>
@@ -166,7 +166,8 @@
                                                                         <td>
                                                                             @foreach ($data->produksis as $d)
                                                                                 @if ($loop->last)
-                                                                                    {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur)) }}
+                                                                                    {{ date('d', strtotime($d->jadwal->tgl_akan_bertelur_start)) }}-
+                                                                                    {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur_end)) }}
                                                                                 @endif
                                                                             @endforeach
                                                                         </td>
@@ -206,7 +207,8 @@
                                                                         <td>
                                                                             {{ $data->nama_kandang }}
                                                                         </td>
-                                                                        <td>date
+                                                                        <td>
+                                                                            date
                                                                         </td>
                                                                         <td>
                                                                             <a href="#" class="text-muted">
@@ -240,7 +242,10 @@
                                                                         <td>
                                                                             {{ $data->nama_kandang }}
                                                                         </td>
-                                                                        <td>date
+                                                                        <td>
+                                                                            @foreach ($data->kebersihans as $d)
+                                                                                {{ date('d F Y', strtotime($d->kebersihan->jadwal_pembersihan)) }}
+                                                                            @endforeach
                                                                         </td>
                                                                         <td>
                                                                             <a href="#" class="text-muted">
@@ -276,11 +281,15 @@
                                                                     <td>
                                                                         {{ $data->nama_kandang }}
                                                                     </td>
-                                                                    <td>{{ $data->jadwal_pembersihan }}</td>
                                                                     <td>
-                                                                        <a href="#" class="text-muted">
-                                                                            <i class="fas fa-search"></i>
-                                                                        </a>
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button"
+                                                                            class="btn btn-default  btn-outline-success"
+                                                                            data-toggle="modal"
+                                                                            data-target="{{ url('#modal-createkebersihan' . $data->id) }}">
+                                                                            <ion-icon name="add"></ion-icon>
+                                                                        </button>
                                                                     </td>
                                                                 </tr>
                                                             @endforeach
@@ -295,7 +304,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- Modal create --}}
+                {{-- Modal create Produksi --}}
                 @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
                     @if ($data->kategori == 'Produktif')
                         <div class="modal fade" id="modal-create{{ $data->id }}">
@@ -309,9 +318,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form
-                                            action="{{ url('/produksi-telur' . '/' . $data->id . '/' . $data->nama_kandang) }}"
-                                            method="POST">
+                                        <form action="{{ url('/produksi-telur' . '/' . $data->id) }}" method="POST">
                                             @csrf
 
                                             <div class="card-body">
@@ -335,6 +342,10 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="StatusTelur">Status Telur</label>
+                                                    {{-- <input type="input"
+                                                        class="form-control  @error('status_telur') is-invalid @enderror"
+                                                        id="status_telur" name="status_telur"
+                                                        value="{{ $d->status_telur }}" required> --}}
                                                     <select name="status_telur" id="status_telur"
                                                         class="form-control @error('statur_telur') is-invalid @enderror"
                                                         required>
@@ -348,6 +359,17 @@
                                                         </span>
                                                     @enderror
                                                 </div>
+                                                <label for="TempatInkubator">Kode Tempat Inkubator
+                                                </label>
+                                                <input type="input"
+                                                    class="form-control  @error('tgl_bertelur') is-invalid @enderror"
+                                                    id="kode_tempat_inkubator" name="kode_tempat_inkubator"
+                                                    placeholder="Harus diisi !!" required>
+                                                @error('kode_tempat_inkubator')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                             <div class="modal-footer justify-content-between">
                                                 <button type="button" class="btn btn-default"
@@ -360,6 +382,47 @@
                             </div>
                         </div>
                     @endif
+                @endforeach
+                {{-- Modal Create Kebersihan --}}
+                @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                    <div class="modal fade" id="modal-createkebersihan{{ $data->id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Tambah Kandang Telah Dibersihkan</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ url('/kebersihan/create') }}" method="POST">
+                                        @csrf
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <label for="TanggalBertelur"> Hari ini
+                                                    {{ $data->nama_kandang }} Telah Dibersihkan </label>
+                                                <input type="input"
+                                                    class="form-control  @error('tgl_pembersihan') is-invalid @enderror"
+                                                    id="tgl_pembersihan" name="tgl_pembersihan"
+                                                    value="{{ date('Y-m-d') }}" readonly>
+                                                @error('tgl_pembersihan')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Simpan</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             @endif
         </div>

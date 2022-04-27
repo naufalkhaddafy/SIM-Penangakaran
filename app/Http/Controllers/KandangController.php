@@ -5,6 +5,7 @@ use App\Models\Kandang;
 use App\Models\Category;
 use App\Models\Penangkaran;
 use App\Models\Produksi;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class KandangController extends Controller
@@ -39,8 +40,8 @@ class KandangController extends Controller
             // 'kategori.unique' => 'Lokasi telah ada',
         ]);
         Kandang::create($validatekandang);
-        //$this->Kandang->createkandang($validatekandang);
-        return redirect()->back()->with('create', 'Berhasil Menambahkan');
+
+        return redirect()->back()->with('create', 'Berhasil Menambahkan ');
     }
     //delete kandang
     public function DeleteKandang($id)
@@ -61,12 +62,13 @@ class KandangController extends Controller
         $data=([
             'penangkarans' =>Penangkaran::all(),
             'kandangs'=>Kandang::all(),
+            'users'=>User::all(),
         ]);
         return view('u_kandang',$data);
     }
     public function DetailKandangs($id){
         $data=([
-            'Kandangs' =>Kandang::find($id),
+            'kandangs' =>Kandang::find($id),
         ]);
         return view('kandang.kandang',$data);
     }

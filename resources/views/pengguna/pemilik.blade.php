@@ -1,5 +1,5 @@
 @extends('template.template')
-@section('title', 'Pengguna')
+@section('title', 'Data Status Pemilik')
 
 @section('content')
     <div class="container-fluid">
@@ -7,25 +7,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        @if (session('create'))
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                                <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
-                            </div>
-                        @elseif(session('delete'))
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                                <h6><i class="icon fas fa-check"></i>{{ session('delete') }}</h6>
-                            </div>
-                        @elseif(session('update'))
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                                <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
-                            </div>
-                        @endif
+
                         <h3 class="card-title">
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
@@ -44,23 +26,18 @@
                                     <th>Nama Lengkap</th>
                                     <th>Username</th>
                                     <th>No.HP</th>
-                                    <th>Role</th>
-                                    <th>Lokasi Kerja</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
-                                @foreach ($users as $data)
+                                @foreach ($users->where('role', 'pemilik') as $data)
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $data->nama_lengkap }}</td>
                                         <td>{{ $data->username }}</td>
                                         <td> {{ $data->nohp }}</td>
-                                        <td>{{ $data->role }}</td>
-                                        <td>
-                                            {{ optional($data->penangkaran)->lokasi_penangkaran }}
-                                        </td>
+
                                         <td style="text-align:center">
                                             <button type="button" class="btn btn-default bg-info" data-toggle="modal"
                                                 data-target="{{ url('#modal-read' . $data->id) }}">
@@ -215,11 +192,10 @@
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-user"></span><b> Nama</b>
+                                    <span class="fas fa-user"></span><b>Nama </b>
                                 </div>
                             </div>
-                            <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-control"
-                                placeholder="Full name" value="{{ $data->nama_lengkap }}" disabled>
+                            <input type="text" class=" form-control" value="{{ $data->nama_lengkap }}" disabled>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-append">
@@ -227,38 +203,34 @@
                                     <span class="fas fa-user"></span><b>Username</b>
                                 </div>
                             </div>
-                            <input type="text" id="username" name="username" class="form-control" placeholder="Username"
-                                value="{{ $data->username }}" disabled>
+                            <input type="text" class="form-control" value="{{ $data->username }}" disabled>
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-phone"></span><b> No.HP</b>
+                                    <span class="fas fa-phone"></span><b> No.HP </b>
                                 </div>
                             </div>
-                            <input type="text" id="nohp" class="form-control " name="nohp" placeholder="No.Hp +62"
-                                value="{{ $data->nohp }}" disabled>
+                            <input type="text" class="form-control " value="{{ $data->nohp }}" disabled>
                         </div>
 
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-lock"></span><b>Status</b>
+                                    <span class="fas fa-lock"></span><b>Status </b>
                                 </div>
                             </div>
-                            <input type="role" name="role" id="role" class="form-control" placeholder="Password" disabled
-                                value="{{ $data->role }}">
+                            <input type="text" class="form-control" disabled value="{{ $data->role }}">
 
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <ion-icon name="location-sharp"></ion-icon><b>Berkerja di</b>
+                                    <ion-icon name="location-sharp"></ion-icon><b>Berkerja di </b>
                                 </div>
                             </div>
-                            <input type="lokasikerja" name="penangkaran_id" id="penangkaran_id" class="form-control"
-                                placeholder="Password" disabled
-                                value="{{ optional($data->penangkaran)->lokasi_penangkaran }}">
+                            <input type="text" class="form-control" disabled
+                                value="{{ optional($data->penangkaran)->lokasi_penangkaran ?? 'Belum Tersedia' }}">
 
                         </div>
                         </form>
@@ -286,8 +258,8 @@
                             @csrf
                             <div class="input-group mb-3">
                                 <input type="text" id="nama_lengkap" name="nama_lengkap"
-                                    class="form-control @error('nama_lengkap') is-invalid @enderror"
-                                    placeholder="Full name" value="{{ $data->nama_lengkap }}" required>
+                                    class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
+                                    value="{{ $data->nama_lengkap }}" required>
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-user"></span>

@@ -10,6 +10,7 @@ use App\Models\Penangkaran;
 use App\Models\Jadwal;
 use App\Models\Produksi;
 use App\Http\Controllers\Auth;
+use App\Models\Kebersihan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -30,10 +31,12 @@ class AdminController extends Controller
             'kandangs' =>Kandang::all(),
             'jadwals' =>Jadwal::all(),
             'produksis' =>Produksi::all(),
+            'kebersihan' =>Kebersihan::all(),
             date_default_timezone_set('Asia/Jakarta')
         ];
+        $produktif=auth()->user()->penangkaran->kandangs ??[];
 
-        return view('dashboard', $data);
+        return view('dashboard', $data,compact('produktif'));
     }
 
 

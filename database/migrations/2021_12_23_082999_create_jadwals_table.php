@@ -16,8 +16,11 @@ return new class extends Migration
         Schema::create('jadwals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('produksi_id')->constrained('produksis')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('tgl_akan_bertelur');
-            $table->date('tgl_akan_menetas');
+            $table->date('tgl_akan_bertelur_start');
+            $table->date('tgl_akan_bertelur_end');
+            $table->date('tgl_akan_menetas_start');
+            $table->date('tgl_akan_menetas_end');
+            $table->string('kode_tempat_inkubator')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

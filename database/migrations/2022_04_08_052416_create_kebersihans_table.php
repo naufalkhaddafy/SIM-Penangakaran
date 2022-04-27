@@ -18,7 +18,8 @@ return new class extends Migration
             $table->foreignId('kandang_id')->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
             $table->date('tgl_pembersihan');
             $table->date('jadwal_pembersihan');
-
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

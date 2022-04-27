@@ -18,14 +18,23 @@ class UserController extends Controller
         $this->middleware('auth');
     }
     //
-    public function ReadUser()
+    public function ReadUserPemilik()
     {
         $data = [
             'users' => User::all(),
             'penangkarans' => Penangkaran::all(),
             'kandangs' => Kandang::all(),
         ];
-        return view('pengguna.pengguna',$data);
+        return view('pengguna.pemilik',$data);
+    }
+    public function ReadUserPekerja()
+    {
+        $data = [
+            'users' => User::all(),
+            'penangkarans' => Penangkaran::all(),
+            'kandangs' => Kandang::all(),
+        ];
+        return view('pengguna.pekerja',$data);
     }
     // nambah user
     public function CreateUser(Request $request)
@@ -53,7 +62,7 @@ class UserController extends Controller
 
         $validateuser['password']=Hash::make($validateuser['password']);
         User::create($validateuser);
-        return redirect('pengguna')->with('create','Berhasil menambahkan pengguna');
+        return redirect()->back()->with('create','Berhasil menambahkan pengguna');
     }
     // hapus pengguna
     public function DeleteUser($id)

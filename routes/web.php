@@ -9,6 +9,7 @@ use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\KandangController;
 use App\Http\Controllers\ReportProduksiController;
 use App\Http\Controllers\ProduksiController;
+use App\Http\Controllers\KebersihanController;
 
 Route::get('/', function () {
     return view('page');
@@ -19,49 +20,46 @@ Route::post('/login', [LoginController::class, 'Login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'ViewRegister'])->name('register');
 Route::post('/register', [RegisterController::class, 'CreateUser'])->name('register');
+
+// dashboard
+Route::get('/dashboard', [AdminController::class, 'ReadDashboard'])->name('dashboard');
+
+// Pengguna
+Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('pengguna');
+Route::get('/pengguna-pemilik', [UserController::class, 'ReadUserPemilik'])->name('pengguna.pemilik');
+Route::get('/pengguna-pekerja', [UserController::class, 'ReadUserPekerja'])->name('pengguna.pekerja');
+Route::post('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
 Route::get('/pengguna/delete/{id}', [UserController::class, 'DeleteUser']);
 
-// read
-Route::get('/dashboard', [AdminController::class, 'ReadDashboard'])->name('dashboard');
-Route::get('/pengguna', [UserController::class, 'ReadUser'])->name('pengguna');
+// Penangkaran
+Route::post('/penangkaran', [PenangkaranController::class, 'CreatePenangkaran'])->name('penangkaran');
 Route::get('/penangkaran', [PenangkaranController::class, 'ReadPenangkaran'])->name('penangkaran');
 Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'DetailPenangkaran'])->name('detail.kandang');
+Route::get('/penangkaran/delete/{id}', [PenangkaranController::class, 'DeletePenangkaran']);
+
+// Kandang
+Route::post('/kandang',[KandangController::class,'CreateKandang'])->name('kandang');
 Route::get('/readkandang/{id}', [PenangkaranController::class, 'DetailKandang'])->name('read.kandang');
 Route::get('/kandang',[KandangController::class,'ReadKandang'])->name('kandang');
 Route::get('/kandang/{id}/{namakandang}',[KandangController::class,'DetailKandangs'])->name('detail.kandangs');
-Route::get('/kategoriproduksi',[AdminController::class,'ReadKategoriproduksi'])->name('kategori.produksi');
-Route::get('/report-inkubator',[ReportProduksiController::class,'ReportInkubator'])->name('report.inkubator');
-Route::get('/report-hidup',[ReportProduksiController::class,'ReportHidup'])->name('report.hidup');
+Route::get('/detail-kandang',[KandangController::class,'DetailKandang'])->name('detail.kandang');
+Route::get('/kandang/delete/{id}',[KandangController::class,'DeleteKandang']);
+
+// Pakan
+Route::post('/pakan',[AdminController::class,'CreatePakan'])->name('pakan');
+Route::get('/pakan',[AdminController::class,'ReadPakan'])->name('pakan');
+Route::get('/pakan/delete/{id}', [AdminController::class, 'DeletePakan']);
+//Kebersihan
+Route::post('/kebersihan/create',[KebersihanController::class,'CreateKebersihan'])->name('create.kebersihan');
+// Produksi
+Route::post('/produksi-telur/{id}',[ProduksiController::class,'CreateProduksiTelur'])->name('produksi.telur');
+Route::post('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
+Route::post('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
 Route::get('/produksi-inkubator',[ProduksiController::class,'ProduksiInkubator'])->name('produksi.inkubator');
 Route::get('/produksi-hidup',[ProduksiController::class,'ProduksiHidup'])->name('produksi.hidup');
 Route::get('/produksi-mati',[ProduksiController::class,'ProduksiMati'])->name('produksi.mati');
-Route::get('/detail-kandang',[KandangController::class,'DetailKandang'])->name('detail.kandang');
-Route::get('/pakan',[AdminController::class,'ReadPakan'])->name('pakan');
-
-// delete
-Route::get('/kategori/delete/{id}', [AdminController::class, 'deletekategori']);
-Route::get('/penangkaran/delete/{id}', [PenangkaranController::class, 'deletepenangkaran']);
-Route::get('/kandang/delete/{id}',[KandangController::class,'DeleteKandang']);
-Route::get('/pakan/delete/{id}', [AdminController::class, 'DeletePakan']);
-//create
-Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('pengguna');
-Route::post('/penangkaran', [PenangkaranController::class, 'CreatePenangkaran'])->name('penangkaran');
-Route::post('/kandang',[KandangController::class,'CreateKandang'])->name('kandang');
-Route::post('/kategori',[AdminController::class,'createkategori'])->name('kategori');
-Route::post('/pakan',[AdminController::class,'CreatePakan'])->name('pakan');
-Route::post('/produksi-telur/{id}/{nama_kandang}',[ProduksiController::class,'CreateProduksiTelur'])->name('produksi-telur');
-//update
-Route::post('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
 
 
-
-
-
-// Route::get('penangkaran/delete/{id}', [AdminController::class, 'deletepenangkaran']);
-
-
-
-
-
-
-
+// Report Produksi
+Route::get('/report-inkubator',[ReportProduksiController::class,'ReportInkubator'])->name('report.inkubator');
+Route::get('/report-hidup',[ReportProduksiController::class,'ReportHidup'])->name('report.hidup');

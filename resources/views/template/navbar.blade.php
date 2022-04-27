@@ -72,7 +72,7 @@
                 <li class="nav-item">
                     <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Dijual</p>
+                        <p>Terjual</p>
                     </a>
                 </li>
             </ul>
@@ -80,16 +80,43 @@
                 <li class="nav-item">
                     <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>Terjual</p>
+                        <p>Indukan</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item {{ request()->is('pengguna-pemilik', 'pengguna-pekerja') ? 'menu-open' : '' }}">
+            <a href="#" class="nav-link {{ request()->is('pengguna-pemilik', 'pengguna-pekerja') ? 'active' : '' }}">
+                <ion-icon name="person-sharp"></ion-icon>
+                <p>
+                    Pengguna
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('pengguna.pemilik') }}"
+                        class=" nav-link {{ request()->is('pengguna-pemilik') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pemilik</p>
+                    </a>
+                </li>
+            </ul>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="{{ route('pengguna.pekerja') }}"
+                        class=" nav-link {{ request()->is('pengguna-pekerja') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Pekerja</p>
                     </a>
                 </li>
             </ul>
         </li>
         <li class="nav-item">
-            <a href="{{ route('pengguna') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
-                <ion-icon name="person-sharp"></ion-icon>
+            <a href="#" class="nav-link {{ request()->is('#') ? 'active' : '' }}">
+                <ion-icon name="book"></ion-icon>
                 <p>
-                    Pengguna
+                    Informasi Perawatan
                 </p>
             </a>
         </li>
@@ -122,23 +149,14 @@
     </li> --}}
     @elseif (Auth::user()->role == 'pekerja')
         <li class="nav-header">Pekerja</li>
-        <li class="nav-item {{ request()->is('detail-kandang') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
+        <li class="nav-item">
+            <a href="{{ route('detail.kandang') }}"
+                class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
                 <ion-icon name="home"></ion-icon>
                 <p>
                     Kandang
-                    <i class="right fas fa-angle-left"></i>
                 </p>
             </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('detail.kandang') }}"
-                        class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Kandang</p>
-                    </a>
-                </li>
-            </ul>
         </li>
         <li
             class="nav-item {{ request()->is('produksi-inkubator', 'produksi-hidup', 'produksi-mati') ? 'menu-open' : '' }}">
@@ -177,6 +195,14 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li class="nav-item">
+            <a href="#" class="nav-link {{ request()->is('#') ? 'active' : '' }}">
+                <ion-icon name="book"></ion-icon>
+                <p>
+                    Informasi Perawatan
+                </p>
+            </a>
         </li>
     @endif
 </ul>

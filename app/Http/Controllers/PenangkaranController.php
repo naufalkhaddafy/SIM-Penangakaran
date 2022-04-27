@@ -68,6 +68,7 @@ class PenangkaranController extends Controller
         }
         $data = [
             'penangkarans' => Penangkaran::find($id),
+            'users' => User::all(),
         ];
         return view('detailkandang', $data);
     }

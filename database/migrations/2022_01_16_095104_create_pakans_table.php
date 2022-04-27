@@ -15,7 +15,6 @@ class CreatePakansTable extends Migration
     {
         Schema::create('pakans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('penangkaran_id')->constrained('penangkarans')->cascadeOnDelete()->cascadeOnUpdate();
             $table->string('kode_tempat')->unique();
             $table->string('nama_pakan');

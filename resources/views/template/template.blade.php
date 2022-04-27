@@ -150,7 +150,25 @@
             <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
-
+                @if (session('create'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                        <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
+                    </div>
+                @elseif(session('delete'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                        <h6><i class="icon fas fa-check"></i>{{ session('delete') }}</h6>
+                    </div>
+                @elseif(session('update'))
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert"
+                            aria-hidden="true">&times;</button>
+                        <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
+                    </div>
+                @endif
                 @yield('content')
                 <div class="modal fade" id="modal-sm">
                     <div class="modal-dialog modal-sm">
