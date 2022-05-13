@@ -17,6 +17,27 @@ class UserController extends Controller
         $this->Kandang = new Kandang();
         $this->middleware('auth');
     }
+    public function ModalRead($id)
+    {
+        $data = User::find($id);
+        return view('pengguna.modal.read', compact('data'));
+    }
+    public function ModalCreate()
+    {
+        $penangkaran= Penangkaran::all();
+
+        return view('pengguna.modal.create',compact('penangkaran'));
+    }
+    public function ReadTable()
+    {
+        $data = [
+            'users' => User::all(),
+            'penangkarans' => Penangkaran::all(),
+            'kandangs' => Kandang::all(),
+        ];
+
+        return view('pengguna.table',$data);
+    }
     //
     public function ReadUserPemilik()
     {
@@ -39,6 +60,7 @@ class UserController extends Controller
     // nambah user
     public function CreateUser(Request $request)
     {
+       
         $validateuser= $request->validate([
             'nama_lengkap' =>'required',
             'username' =>'required|unique:users',
@@ -59,10 +81,11 @@ class UserController extends Controller
             'password.min' =>'Password minimal 5 Digit',
             'penangkaran_id.required' =>'Harus diisi',
         ]);
-
+        
         $validateuser['password']=Hash::make($validateuser['password']);
         User::create($validateuser);
-        return redirect()->back()->with('create','Berhasil menambahkan pengguna');
+        return 'user created';
+        // return redirect()->back()->with('create','Berhasil menambahkan pengguna');
     }
     // hapus pengguna
     public function DeleteUser($id)
@@ -70,6 +93,7 @@ class UserController extends Controller
         User::find($id)->delete();
         return redirect()->route('pengguna')->with('delete', 'Data Berhasil di hapus');
     }
+
     //update
     public function UpdateUser($id){
 

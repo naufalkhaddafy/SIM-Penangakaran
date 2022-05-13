@@ -27,7 +27,8 @@
     <link rel="stylesheet"
         href="{{ asset('template') }}/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-    {{-- editable --}}
+    {{-- Sweetalert --}}
+    <link rel="stylesheet" href="{{ asset('template') }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 </head>
 
 <body class="  hold-transition sidebar-mini layout-fixed">
@@ -223,10 +224,12 @@
     <script src="{{ asset('template') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('template') }}/plugins/moment/moment.min.js"></script>
     <script src="{{ asset('template') }}/dist/js/adminlte.js"></script>
-    @stack('js')
     {{-- icon --}}
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('template') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
+    @stack('js')
 </body>
 
 </html>

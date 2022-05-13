@@ -5,7 +5,7 @@ use App\Models\Produksi;
 use App\Models\Penangkaran;
 use Illuminate\Http\Request;
 
-class ReportProduksiController extends Controller
+class HasilProduksiController extends Controller
 {
     //
     public function __construct()
@@ -24,6 +24,7 @@ class ReportProduksiController extends Controller
             'penangkarans' =>Penangkaran::all(),
             'produksis'=>Produksi::all(),
         ]);
-        return view('laporanproduksi.hidup',$data);
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('laporanproduksi.hidup',$data ,compact('tgl_today'));
     }
 }

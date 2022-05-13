@@ -48,23 +48,43 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Kode Ring</th>
-                                    <th>Tanggal Bertelur</th>
-                                    <th>Tanggal Masuk Inkubator</th>
+                                    <th>Asal Telur</th>
                                     <th>Tanggal Menetas</th>
-                                    <th>Kondisi</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Usia</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <?php $no = 1; ?>
+
+                                @foreach ($produksis->where('status_produksi', 'Hidup') as $data)
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $data->kode_ring ?? 'belum tersedia' }} </td>
+                                        <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
+                                            {{ $data->status_telur }} </td>
+                                        <td>{{ date('d F Y', strtotime($data->tgl_menetas)) }}</td>
+                                        <td>{{ $data->jenis_kelamin }}</td>
+                                        <td> {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInMonths($tgl_today) }}
+                                            Bulan
+                                            {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default  btn-outline-success"
+                                                data-toggle="modal" data-target="{{ url('#modal-read' . $data->id) }}">
+                                                <ion-icon name="search"></ion-icon>
+                                            </button>
+                                            <button type="button" class="btn btn-default  btn-outline-success"
+                                                data-toggle="modal" data-target="{{ url('#modal-update' . $data->id) }}">
+                                                <ion-icon name="open-outline"></ion-icon>
+                                            </button>
+
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+
                             </tbody>
                         </table>
                     </div>

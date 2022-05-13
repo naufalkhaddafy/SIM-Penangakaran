@@ -25,7 +25,7 @@
                                 <div class="icon">
                                     <i class="ion ion-location"></i>
                                 </div>
-                                <a href="{{ route('penangkaran') }}" class="small-box-footer">More info <i
+                                <a href="{{ route('penangkaran') }}" class="small-box-footer">Info Detail<i
                                         class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -40,7 +40,7 @@
                             <div class="icon">
                                 <i class="ion ion-home"></i>
                             </div>
-                            <a href="{{ route('kandang') }}" class="small-box-footer">More info <i
+                            <a href="{{ route('kandang') }}" class="small-box-footer">Info Detail <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -48,27 +48,28 @@
                         <div class="small-box bg-warning">
                             <div class="inner">
                                 <h3>
-                                    {{ count($users) }}
+                                    {{ count($users->where('role', 'pekerja')) }}
                                 </h3>
-                                <p>Jumlah Pengguna</p>
+                                <p>Jumlah Pekerja</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-person-add"></i>
                             </div>
-                            <a href="{{ route('pengguna') }}" class="small-box-footer">Info Detail <i
+                            <a href="{{ route('pengguna.pekerja') }}" class="small-box-footer">Info Detail <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-6">
                         <div class="small-box bg-danger">
                             <div class="inner">
-                                <h3>65</h3>
-                                <p>Unique Visitors</p>
+                                <h3>{{ count($produksis->where('status_produksi', 'Hidup')) }}</h3>
+                                <p>Hasil Produksi Hidup</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-pie-graph"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ route('report.hidup') }}" class="small-box-footer">Info Detail <i
+                                    class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -141,7 +142,7 @@
                                                                 <th>Kandang</th>
                                                                 <th>Status Telur</th>
                                                                 <th>Akan Bertelur</th>
-                                                                <th>Status</th>
+
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
@@ -153,15 +154,11 @@
                                                                             {{ $data->nama_kandang }}
                                                                         </td>
                                                                         <td class="m-3 p-2 badge bg-success">
-                                                                            @foreach ($data->produksis as $d)
-                                                                                @if ($loop->last)
-                                                                                    @if ($d->status_telur == 'pertama')
-                                                                                        Kedua
-                                                                                    @elseif($d->status_telur == 'kedua')
-                                                                                        Pertama
-                                                                                    @endif
-                                                                                @endif
-                                                                            @endforeach
+                                                                            @if (optional($data->produksis->last())->status_telur == 'pertama')
+                                                                                Kedua
+                                                                            @elseif(optional($data->produksis->last())->status_telur == 'kedua')
+                                                                                Pertama
+                                                                            @endif
                                                                         </td>
                                                                         <td>
                                                                             @foreach ($data->produksis as $d)
@@ -171,7 +168,7 @@
                                                                                 @endif
                                                                             @endforeach
                                                                         </td>
-                                                                        <td></td>
+
                                                                         <td>
                                                                             <button type="button"
                                                                                 class="btn btn-default  btn-outline-success"
@@ -267,22 +264,31 @@
                                                 </div>
                                                 <div class="card-body table-responsive p-0">
                                                     <table class="table table-striped table-valign-middle">
-                                                        <thead>
+                                                        <thead align="center">
                                                             <tr>
                                                                 <th>Kandang</th>
-                                                                <th>Pembersihan</th>
+                                                                <th>Jadwal Pembersihan</th>
                                                                 <th>Status</th>
+                                                                <th>Action</th>
                                                             </tr>
 
                                                         </thead>
-                                                        <tbody>
-                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                        <tbody align="center">
+                                                            @foreach (auth()->user()->penangkaran->kandangs ?? [] as $data)
                                                                 <tr>
                                                                     <td>
                                                                         {{ $data->nama_kandang }}
                                                                     </td>
-                                                                    <td>
-                                                                    </td>
+
+                                                                    @if ($data->kebersihans->last() == null)
+                                                                        <td>Belum ada</td>
+                                                                    @elseif(!$data->kebersihans->last() == null)
+                                                                        <td class="text-danger">
+                                                                            {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
+                                                                        </td>
+                                                                    @endif
+
+                                                                    <td></td>
                                                                     <td>
                                                                         <button type="button"
                                                                             class="btn btn-default  btn-outline-success"
@@ -405,11 +411,8 @@
                                                     class="form-control  @error('tgl_pembersihan') is-invalid @enderror"
                                                     id="tgl_pembersihan" name="tgl_pembersihan"
                                                     value="{{ date('Y-m-d') }}" readonly>
-                                                @error('tgl_pembersihan')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
+                                                <input type="hidden" class="form-control" id="kandang_id"
+                                                    name="kandang_id" value="{{ $data->id }}" readonly>
                                             </div>
 
                                         </div>

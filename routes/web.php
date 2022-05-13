@@ -7,15 +7,18 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\KandangController;
-use App\Http\Controllers\ReportProduksiController;
+use App\Http\Controllers\HasilProduksiController;
 use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\KebersihanController;
+
+
+Route::resource('users','UserController');
 
 Route::get('/', function () {
     return view('page');
 });
 //auth
-Route::get('/login', [LoginController::class, 'ViewLogin'])->name('login');
+Route::get('/login', [LoginController::class, 'ReadLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'Login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/register', [RegisterController::class, 'ViewRegister'])->name('register');
@@ -25,11 +28,14 @@ Route::post('/register', [RegisterController::class, 'CreateUser'])->name('regis
 Route::get('/dashboard', [AdminController::class, 'ReadDashboard'])->name('dashboard');
 
 // Pengguna
+Route::get('/modal-read/{id}', [UserController::class, 'ModalRead']);
+Route::get('/modal-create', [UserController::class, 'ModalCreate']);
+Route::get('/table', [UserController::class, 'ReadTable']);
 Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('pengguna');
 Route::get('/pengguna-pemilik', [UserController::class, 'ReadUserPemilik'])->name('pengguna.pemilik');
 Route::get('/pengguna-pekerja', [UserController::class, 'ReadUserPekerja'])->name('pengguna.pekerja');
-Route::post('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
-Route::get('/pengguna/delete/{id}', [UserController::class, 'DeleteUser']);
+Route::patch('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
+Route::delete('/pengguna/delete/{id}', [UserController::class, 'DeleteUser'])->name('delete.pengguna');
 
 // Penangkaran
 Route::post('/penangkaran', [PenangkaranController::class, 'CreatePenangkaran'])->name('penangkaran');
@@ -59,7 +65,6 @@ Route::get('/produksi-inkubator',[ProduksiController::class,'ProduksiInkubator']
 Route::get('/produksi-hidup',[ProduksiController::class,'ProduksiHidup'])->name('produksi.hidup');
 Route::get('/produksi-mati',[ProduksiController::class,'ProduksiMati'])->name('produksi.mati');
 
-
 // Report Produksi
-Route::get('/report-inkubator',[ReportProduksiController::class,'ReportInkubator'])->name('report.inkubator');
-Route::get('/report-hidup',[ReportProduksiController::class,'ReportHidup'])->name('report.hidup');
+Route::get('/report-inkubator',[HasilProduksiController::class,'ReportInkubator'])->name('report.inkubator');
+Route::get('/report-hidup',[HasilHasilProduksiController::class,'ReportHidup'])->name('report.hidup');

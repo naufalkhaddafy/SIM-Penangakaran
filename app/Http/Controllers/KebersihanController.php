@@ -26,8 +26,9 @@ class KebersihanController extends Controller
     public function CreateKebersihan()
     {
         $datakebersihan=[
+            'kandang_id' =>Request()->kandang_id,
             'tgl_pembersihan' =>Request()->tgl_pembersihan,
-            $jadwal_pembersihan=date('Y-m-d', strtotime('+14 days', strtotime(Request()->tgl_pembersihan))),
+            $jadwal_pembersihan=date('Y-m-d', strtotime('+2 days', strtotime(Request()->tgl_pembersihan))),
             'jadwal_pembersihan' =>$jadwal_pembersihan,
         ];
         Kebersihan::Create($datakebersihan);

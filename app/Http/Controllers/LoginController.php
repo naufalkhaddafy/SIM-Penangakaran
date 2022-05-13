@@ -13,7 +13,7 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     //halaman login
-    public function ViewLogin()
+    public function ReadLogin()
     {
         return view('auth/login');
     }
@@ -35,7 +35,7 @@ class LoginController extends Controller
 
     }
     // Logout user
-    public function Logout(Request $request)
+    public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
