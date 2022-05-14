@@ -1,3 +1,4 @@
+<div id="error"></div>
 <div class="input-group mb-3">
     <input type="text" id="nama_lengkap" name="nama_lengkap"
         class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
@@ -107,6 +108,23 @@
             success: function(data) {
                 $('.close').click();
                 readTable()
+            },
+            error: function(data) {
+                var response = data.responseJSON;
+                var error = response.errors;
+                var error_message = '';
+                $.each(error, function(key, value) {
+                    if (value != null) {
+                        error_message += '<li>' + value + '</li>';
+                    }
+                });
+                $('#error').html(
+                    '<div class="alert alert-danger alert-dismissible">' +
+                    '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+                    '<h5><i class="icon fas fa-ban"></i> Perhatian!</h5>' +
+                    '<ul>' + error_message + '</ul>' +
+                    '</div>'
+                );
             }
         });
     }

@@ -23,33 +23,6 @@
         </div>
     </div>
 
-    {{-- Modal Delete --}}
-    {{-- @foreach ($users as $data)
-        <form action="{{ route('delete.pengguna', $data->id) }}" method="POST">
-            <div class="modal fade" id="delete{{ $data->id }}">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Alert</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Apakah anda ingin menghapus {{ $data->nama_lengkap }}</p>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            @method('DELETE')
-                            @csrf
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    @endforeach --}}
-    {{-- Dynamic Modal --}}
     <div class="modal fade " id="showModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -64,6 +37,7 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" id="btnSubmit" class="btn btn-info"></button>
+                    <button type="submit" id="btnDelete" class="btn btn-danger"></button>
                 </div>
             </div>
         </div>
@@ -73,46 +47,56 @@
     <script>
         $(document).ready(function() {
             readTable()
-
         });
 
         function readTable() {
-            const url = '/table'
-            $.get(url, function(data) {
+            $.get("{{ url('/table-pekerja') }}", function(data) {
                 $('#readTable').html(data);
             });
         }
 
         function showRead(id) {
-            const url = '/modal-read/' + id
-            $.get(url, function(data) {
+            $.get("{{ url('/modal-read') }}/" + id, function(data) {
                 $('#modalLabel').text('Data Pengguna')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').hide();
                 $('#btnSubmit').hide();
+                $('#btnDelete').hide();
             });
         }
 
         function showCreate() {
-            const url = '/modal-create'
-            $.get(url, function(data) {
+
+            $.get("{{ url('/modal-create') }}", function(data) {
                 $('#modalLabel').text('Tambah Pekerja')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
                 $('#btnSubmit').show().text('Tambah').attr('onclick', 'tambah()');
+                $('#btnDelete').hide();
             });
         }
 
         function showUpdate(id) {
-            const url = '/modal-update/' + id
-            $.get(url, function(data) {
+            $.get("{{ url('/modal-update') }}/" + id, function(data) {
                 $('#modalLabel').text('Update Pekerja')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
                 $('#btnSubmit').show().text('Update').attr('onclick', 'update()');
+                $('#btnDelete').hide();
+            });
+        }
+
+        function showDelete(id) {
+            $.get("{{ url('/modal-delete') }}/" + id, function(data) {
+                $('#modalLabel').text('Delete Pekerja')
+                $('#showModalBody').html(data);
+                $('#showModal').modal('show');
+                $('#btnClose').show();
+                $('#btnSubmit').hide();
+                $('#btnDelete').show().text('Delete').attr('onclick', 'destroy()');
             });
         }
     </script>

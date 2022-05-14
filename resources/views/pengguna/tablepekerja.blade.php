@@ -30,8 +30,7 @@
                     <button type="button" class="btn btn-default bg-warning" onclick="showUpdate({{ $data->id }})">
                         <ion-icon name="open-outline"></ion-icon>
                     </button>
-                    <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
-                        data-target="{{ url('#delete' . $data->id) }}">
+                    <button type="button" class="btn btn-default bg-danger" onclick="showDelete({{ $data->id }})">
                         <ion-icon name="trash-outline"></ion-icon>
                     </button>
                 </td>
@@ -39,6 +38,7 @@
         @endforeach
     </tbody>
 </table>
+
 <script>
     $(function() {
         $("#example1").DataTable({
