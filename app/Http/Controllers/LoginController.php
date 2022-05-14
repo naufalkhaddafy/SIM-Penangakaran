@@ -31,7 +31,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->intended('dashboard')->with('login','Login Berhasil');
         }
-        return back()->with('gagal',' Gagal Periksa Kembali');
+        return back()->with('gagal','Periksa Kembali Username dan Password');
 
     }
     // Logout user

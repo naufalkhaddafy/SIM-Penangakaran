@@ -18,7 +18,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <div id="readTable"></div>
+                        <div id="readData"></div>
                     </div>
                 </div>
             </div>
@@ -48,12 +48,12 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            readTable()
+            readData()
         });
 
-        function readTable() {
+        function readData() {
             $.get("{{ url('/table-pemilik') }}", function(data) {
-                $('#readTable').html(data);
+                $('#readData').html(data);
             });
         }
 
@@ -97,7 +97,7 @@
                 $('#showModal').modal('show');
                 $('#btnClose').show();
                 $('#btnSubmit').hide();
-                $('#btnDelete').show().text('Delete').attr('onclick', 'delete()');
+                $('#btnDelete').show().text('Delete').attr('onclick', 'destroy()');
             });
         }
     </script>

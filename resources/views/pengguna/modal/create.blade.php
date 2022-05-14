@@ -74,7 +74,17 @@
             // dataType: 'json',
             success: function(data) {
                 $('.close').click();
-                readTable()
+                readData()
+                var Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Berhasil Menambahkan Data Pengguna'
+                })
             },
             error: function(data) {
 

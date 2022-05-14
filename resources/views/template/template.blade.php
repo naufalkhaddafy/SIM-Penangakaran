@@ -18,8 +18,7 @@
         href="{{ asset('template') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    {{-- <!-- JQVMap -->
-    <link rel="stylesheet" href="{{ asset('template') }}/plugins/jqvmap/jqvmap.min.css"> --}}
+
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('template') }}/dist/css/adminlte.min.css">
     {{-- tables --}}
@@ -29,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
     {{-- Sweetalert --}}
     <link rel="stylesheet" href="{{ asset('template') }}/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
 </head>
 
 <body class="  hold-transition sidebar-mini layout-fixed">
@@ -170,6 +170,7 @@
                         <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
                     </div>
                 @endif
+
                 @yield('content')
                 <div class="modal fade" id="modal-sm">
                     <div class="modal-dialog modal-sm">
@@ -222,13 +223,14 @@
     <script src="{{ asset('template') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('template') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/moment/moment.min.js"></script>
+    <!-- AdminLTE App -->
     <script src="{{ asset('template') }}/dist/js/adminlte.js"></script>
     {{-- icon --}}
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- SweetAlert2 -->
     <script src="{{ asset('template') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
+
     @stack('js')
     <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('template') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

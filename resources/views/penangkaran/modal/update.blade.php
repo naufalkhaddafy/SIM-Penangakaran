@@ -1,35 +1,32 @@
-<div id="error"></div>
 <div class="input-group mb-3">
-    <input type="text" id="nama_kandang" name="nama_kandang" class="form-control" value="{{ $data->nama_kandang }}"
-        required>
-    <div class=" input-group-append">
+    <input type="text" id="kode_penangkaran" name="kode_penangkaran"
+        class="form-control @error('kode_penangkaran') is-invalid @enderror" placeholder="Kode Penangkaran"
+        value="{{ $data->kode_penangkaran }}" required readonly>
+    <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="code-slash"></ion-icon>
         </div>
     </div>
 </div>
 <div class="input-group mb-3">
-    <select name="kategori" id="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
-        <option value="{{ $data->kategori }}" selected>{{ $data->kategori }}</option>
-        <option value="Produktif"> Produktif</option>
-        <option value="Tidak Produktif"> Tidak Produktif</option>
-        <option value="Ganti Bulu"> Ganti Bulu</option>
-    </select>
-</div>
-<div class="input-group mb-3">
-    <input type="hidden" id="penangkaran_id" name="penangkaran_id" class="form-control" placeholder="Penangkaran"
-        value="{{ $data->penangkaran_id }}">
+    <input type="text" id="lokasi_penangkaran" name="lokasi_penangkaran"
+        class="form-control @error('lokasi_penangkaran') is-invalid @enderror" placeholder="Lokasi Penangkaran"
+        value="{{ $data->lokasi_penangkaran }}" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="home"></ion-icon>
+        </div>
+    </div>
 </div>
 <script>
     function update() {
         $.ajax({
-            url: '{{ route('update.kandang', $data->id) }}',
+            url: '{{ route('update.penangkaran', $data->id) }}',
             type: 'PATCH',
             data: {
                 "_token": "{{ csrf_token() }}",
-                nama_kandang: $('#nama_kandang').val(),
-                kategori: $('#kategori').val(),
-                penangkaran_id: $('#penangkaran_id').val(),
+                kode_penangkaran: $('#kode_penangkaran').val(),
+                lokasi_penangkaran: $('#lokasi_penangkaran').val(),
             },
             // dataType: 'json',
             success: function(data) {
@@ -43,7 +40,7 @@
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Merubah Data Kandang'
+                    title: 'Berhasil Merubah Data Penangkaran'
                 })
             },
             error: function(data) {

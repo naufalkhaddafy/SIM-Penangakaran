@@ -11,7 +11,8 @@
     @if (Auth::user()->role == 'pemilik')
         <li class="nav-header">ADMIN</li>
         <li class="nav-item">
-            <a href="{{ route('penangkaran') }}" class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
+            <a href="{{ route('read.penangkaran') }}"
+                class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
                 <ion-icon name="location-sharp"></ion-icon>
                 <p>
                     Penangkaran

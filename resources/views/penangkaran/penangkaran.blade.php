@@ -1,30 +1,27 @@
 @extends('template.template')
-@section('title', 'Data Status Pekerja')
+@section('title', 'Penangkaran')
 
 @section('content')
+
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <td>
-                                <button type="button" class="btn btn-block btn-outline-success" onclick="showCreate()">
-                                    <ion-icon name="person-add"></ion-icon> <b>Tambah</b>
-                                </button>
-                            </td>
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div id="readData"></div>
-                    </div>
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <td>
+                        <button type="button" class="btn btn-block btn-outline-success" onclick="showCreate()">
+                            <ion-icon name="home"></ion-icon> <b>Tambah</b>
+                        </button>
+                    </td>
+                </h3>
+            </div>
+            <div class="card-body">
+                <div id="readData">
                 </div>
             </div>
         </div>
     </div>
-
     <div class="modal fade " id="showModal">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modalLabel"></h4>
@@ -50,7 +47,7 @@
         });
 
         function readData() {
-            $.get("{{ url('/table-pekerja') }}", function(data) {
+            $.get("{{ url('/show-penangkaran') }}", function(data) {
                 $('#readData').html(data);
             });
         }
@@ -68,8 +65,8 @@
 
         function showCreate() {
 
-            $.get("{{ url('/modal-create') }}", function(data) {
-                $('#modalLabel').text('Tambah Pekerja')
+            $.get("{{ url('/modal-create-penangkaran') }}", function(data) {
+                $('#modalLabel').text('Tambah Penangkaran')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
@@ -79,8 +76,8 @@
         }
 
         function showUpdate(id) {
-            $.get("{{ url('/modal-update') }}/" + id, function(data) {
-                $('#modalLabel').text('Update Pekerja')
+            $.get("{{ url('/modal-update-penangkaran') }}/" + id, function(data) {
+                $('#modalLabel').text('Update Penangkaran')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
@@ -90,8 +87,8 @@
         }
 
         function showDelete(id) {
-            $.get("{{ url('/modal-delete') }}/" + id, function(data) {
-                $('#modalLabel').text('Delete Pekerja')
+            $.get("{{ url('/modal-delete-penangkaran') }}/" + id, function(data) {
+                $('#modalLabel').text('Delete Penangkaran')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();

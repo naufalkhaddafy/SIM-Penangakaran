@@ -1,9 +1,9 @@
-<p>Apakah anda ingin menghapus {{ $data->nama_lengkap }}</p>
+<p>Apakah anda ingin menghapus {{ $data->lokasi_penangkaran }}</p>
 
 <script>
     function destroy() {
         $.ajax({
-            url: '{{ route('delete.pengguna', $data->id) }}',
+            url: '{{ route('delete.penangkaran', $data->id) }}',
             type: 'DELETE',
             data: {
                 '_token': "{{ csrf_token() }}"
@@ -19,7 +19,7 @@
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Menghapus Data Pengguna'
+                    title: 'Berhasil Menghapus Data Penangkaran'
                 })
             }
         });

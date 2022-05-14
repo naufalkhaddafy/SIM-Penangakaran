@@ -27,7 +27,7 @@
                             <h2>Jumlah Pekerja : {{ count($penangkarans->users) }}</h2>
                         </div>
                         <br>
-                        <div id="readKandang"></div>
+                        <div id="readData"></div>
                     </div>
                 </div>
             </div>
@@ -57,12 +57,12 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            readTable()
+            readData()
         });
 
-        function readTable() {
+        function readData() {
             $.get("{{ url('/show-kandang/') . '/' . $penangkarans->id }}", function(data) {
-                $('#readKandang').html(data);
+                $('#readData').html(data);
             });
         }
 

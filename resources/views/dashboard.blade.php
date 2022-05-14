@@ -25,7 +25,7 @@
                                 <div class="icon">
                                     <i class="ion ion-location"></i>
                                 </div>
-                                <a href="{{ route('penangkaran') }}" class="small-box-footer">Info Detail<i
+                                <a href="{{ route('read.penangkaran') }}" class="small-box-footer">Info Detail<i
                                         class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>

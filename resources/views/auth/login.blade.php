@@ -27,15 +27,8 @@
             <div class="card-body">
                 <p class="h5 login-box-msg"><b>Please Login</b></p>
                 @if (session('gagal'))
-                    <div class="card card-danger">
-                        <div class="card-header">
-                            <h6 class="card-title">{{ session('gagal') }}</h6>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                        class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="alert alert-danger" role="alert">
+                        {{ session('gagal') }}
                     </div>
                     <br>
                 @endif

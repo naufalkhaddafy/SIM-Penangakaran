@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,20 +25,20 @@ class UserController extends Controller
     }
     public function ModalCreate()
     {
-        $penangkaran= Penangkaran::all();
-        return view('pengguna.modal.create',compact('penangkaran'));
+        $penangkaran = Penangkaran::all();
+        return view('pengguna.modal.create', compact('penangkaran'));
     }
     public function ModalUpdate($id)
     {
         $data = User::find($id);
-        $penangkarans= Penangkaran::all();
-        return view('pengguna.modal.update', compact('data','penangkarans'));
+        $penangkarans = Penangkaran::all();
+        return view('pengguna.modal.update', compact('data', 'penangkarans'));
     }
     public function ModalDelete($id)
     {
         $data = User::find($id);
-        $penangkarans= Penangkaran::all();
-        return view('pengguna.modal.delete', compact('data','penangkarans'));
+        $penangkarans = Penangkaran::all();
+        return view('pengguna.modal.delete', compact('data', 'penangkarans'));
     }
     public function ReadTablePemilik()
     {
@@ -46,7 +47,7 @@ class UserController extends Controller
             'penangkarans' => Penangkaran::all(),
             'kandangs' => Kandang::all(),
         ];
-        return view('pengguna.tablepemilik',$data);
+        return view('pengguna.tablepemilik', $data);
     }
     public function ReadTablePekerja()
     {
@@ -55,7 +56,7 @@ class UserController extends Controller
             'penangkarans' => Penangkaran::all(),
             'kandangs' => Kandang::all(),
         ];
-        return view('pengguna.tablepekerja',$data);
+        return view('pengguna.tablepekerja', $data);
     }
     //
     public function ReadUserPemilik()
@@ -65,7 +66,7 @@ class UserController extends Controller
             'penangkarans' => Penangkaran::all(),
             'kandangs' => Kandang::all(),
         ];
-        return view('pengguna.pemilik',$data);
+        return view('pengguna.pemilik', $data);
     }
     public function ReadUserPekerja()
     {
@@ -74,20 +75,20 @@ class UserController extends Controller
             'penangkarans' => Penangkaran::all(),
             'kandangs' => Kandang::all(),
         ];
-        return view('pengguna.pekerja',$data);
+        return view('pengguna.pekerja', $data);
     }
     // nambah user
     public function CreateUser(Request $request)
     {
-        $validateuser= $request->validate([
-            'nama_lengkap' =>'required',
-            'username' =>'required|unique:users',
+        $validateuser = $request->validate([
+            'nama_lengkap' => 'required',
+            'username' => 'required|unique:users',
             //'nohp' =>'unique:users|min:12|max:14',
-            'nohp' =>'required|unique:users',
-            'password' =>'required|min:5',
-            'role' =>'required',
-            'penangkaran_id' =>'nullable',
-        ],[
+            'nohp' => 'required|unique:users',
+            'password' => 'required|min:5',
+            'role' => 'required',
+            'penangkaran_id' => 'nullable',
+        ], [
             'nama_lengkap.required' => 'Nama Harus di Isi',
             'username.required' => 'Username Harus di Isi',
             'username.unique' => 'Username telah terdaftar',
@@ -97,12 +98,12 @@ class UserController extends Controller
             'nohp.unique' => 'No. Hp telah terdaftar',
             //'nohp.min' => 'Masukan No. Hp yang sesuai',
             //'nohp.max' => 'Masukan No. Hp yang sesuai',
-            'password.required' =>'Password harus di Isi',
-            'password.min' =>'Password minimal 5 Digit',
-            'penangkaran_id.required' =>'Harus diisi',
+            'password.required' => 'Password harus di Isi',
+            'password.min' => 'Password minimal 5 Digit',
+            'penangkaran_id.required' => 'Harus diisi',
         ]);
-        
-        $validateuser['password']=Hash::make($validateuser['password']);
+
+        $validateuser['password'] = Hash::make($validateuser['password']);
         User::create($validateuser);
         return 'user created';
         // return redirect()->back()->with('create','Berhasil menambahkan pengguna');
@@ -115,40 +116,40 @@ class UserController extends Controller
     }
 
     //update
-    public function UpdateUser($id){
+    public function UpdateUser($id)
+    {
         $nohp = User::find($id)->nohp;
         if ($nohp == Request()->nohp) {
-            $validateuser= Request()->validate([
-            'nama_lengkap' =>'required',
-            'role' =>'required',
-            'penangkaran_id' => 'nullable',
-            //'nohp' =>'required|unique',
+            $validateuser = Request()->validate([
+                'nama_lengkap' => 'required',
+                'role' => 'required',
+                'penangkaran_id' => 'nullable',
+                //'nohp' =>'required|unique',
 
-        ],[
-            'nama_lengkap.required' => 'Nama Harus di Isi',
-            'nohp.required' => 'No. Hp Harus di Isi',
-            //'nohp.unique' => 'No. Hp telah terdaftar',
-            // 'username.required' => 'Username Harus di Isi',
-            //'penangkaran_id.required' =>'Harus diisi',
-        ]);
-        User::find($id)->update($validateuser);
-        }else{
-            $validateuser= Request()->validate([
-            'nama_lengkap' =>'required',
-            'role' =>'required',
-            'penangkaran_id' => 'nullable',
-            'nohp' =>'required|unique:users',
-        ],[
-            'nama_lengkap.required' => 'Nama Harus di Isi',
-            'nohp.required' => 'No. Hp Harus di Isi',
-            'nohp.unique' => 'No. Hp telah terdaftar',
-            // 'username.required' => 'Username Harus di Isi',
-            //'penangkaran_id.required' =>'Harus diisi',
-        ]);
-        User::find($id)->update($validateuser);
+            ], [
+                'nama_lengkap.required' => 'Nama Harus di Isi',
+                'nohp.required' => 'No. Hp Harus di Isi',
+                //'nohp.unique' => 'No. Hp telah terdaftar',
+                // 'username.required' => 'Username Harus di Isi',
+                //'penangkaran_id.required' =>'Harus diisi',
+            ]);
+        } else {
+            $validateuser = Request()->validate([
+                'nama_lengkap' => 'required',
+                'role' => 'required',
+                'penangkaran_id' => 'nullable',
+                'nohp' => 'required|unique:users',
+            ], [
+                'nama_lengkap.required' => 'Nama Harus di Isi',
+                'nohp.required' => 'No. Hp Harus di Isi',
+                'nohp.unique' => 'No. Hp telah terdaftar',
+                // 'username.required' => 'Username Harus di Isi',
+                //'penangkaran_id.required' =>'Harus diisi',
+            ]);
         }
-        
-        
+        User::find($id)->update($validateuser);
+
+
         // return redirect()->back()->with('update','Data Berhasil di update');
     }
 }
