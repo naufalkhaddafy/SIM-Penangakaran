@@ -1,9 +1,8 @@
-<p>Apakah anda ingin menghapus {{ $data->nama_lengkap }}</p>
-
+<p>Apakah anda ingin menghapus Kandang {{ $data->nama_kandang }}</p>
 <script>
     function destroy() {
         $.ajax({
-            url: '{{ route('delete.pengguna', $data->id) }}',
+            url: '{{ route('delete.kandang', $data->id) }}',
             type: 'DELETE',
             data: {
                 '_token': "{{ csrf_token() }}"

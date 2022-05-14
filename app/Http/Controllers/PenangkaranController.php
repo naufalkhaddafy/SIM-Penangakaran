@@ -70,7 +70,7 @@ class PenangkaranController extends Controller
             'penangkarans' => Penangkaran::find($id),
             'users' => User::all(),
         ];
-        return view('detailkandang', $data);
+        return view('kandang.kandang', $data);
     }
     // delete penangkaran
     public function DeletePenangkaran($id)

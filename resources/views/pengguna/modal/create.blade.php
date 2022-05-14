@@ -60,7 +60,7 @@
 <script>
     function tambah() {
         $.ajax({
-            url: '/pengguna',
+            url: '{{ route('create.pengguna') }}',
             type: 'POST',
             data: {
                 "_token": "{{ csrf_token() }}",

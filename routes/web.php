@@ -34,25 +34,35 @@ Route::get('/modal-update/{id}', [UserController::class, 'ModalUpdate']);
 Route::get('/modal-delete/{id}', [UserController::class, 'ModalDelete']);
 Route::get('/table-pemilik', [UserController::class, 'ReadTablePemilik']);
 Route::get('/table-pekerja', [UserController::class, 'ReadTablePekerja']);
-Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('pengguna');
 Route::get('/pengguna-pemilik', [UserController::class, 'ReadUserPemilik'])->name('pengguna.pemilik');
 Route::get('/pengguna-pekerja', [UserController::class, 'ReadUserPekerja'])->name('pengguna.pekerja');
+Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('create.pengguna');
 Route::patch('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
 Route::delete('/pengguna/delete/{id}', [UserController::class, 'DeleteUser'])->name('delete.pengguna');
 
 // Penangkaran
 Route::post('/penangkaran', [PenangkaranController::class, 'CreatePenangkaran'])->name('penangkaran');
 Route::get('/penangkaran', [PenangkaranController::class, 'ReadPenangkaran'])->name('penangkaran');
-Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'DetailPenangkaran'])->name('detail.kandang');
 Route::get('/penangkaran/delete/{id}', [PenangkaranController::class, 'DeletePenangkaran']);
 
+
 // Kandang
-Route::post('/kandang',[KandangController::class,'CreateKandang'])->name('kandang');
-Route::get('/readkandang/{id}', [PenangkaranController::class, 'DetailKandang'])->name('read.kandang');
+Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'DetailPenangkaran'])->name('detail.kandang');
+Route::get('/modal-read-kandang/{id}', [KandangController::class, 'ModalRead']);
+Route::get('/modal-create-kandang/{id}', [KandangController::class, 'ModalCreate']);
+Route::get('/modal-update-kandang/{id}', [KandangController::class, 'ModalUpdate']);
+Route::get('/modal-delete-kandang/{id}', [KandangController::class, 'ModalDelete']);
+Route::get('/show-kandang/{id}', [KandangController::class, 'ShowKandang']);
+Route::post('/kandang',[KandangController::class,'CreateKandang'])->name('create.kandang');
+Route::patch('/kandang/update/{id}', [KandangController::class, 'UpdateKandang'])->name('update.kandang');
+Route::delete('/kandang/delete/{id}',[KandangController::class,'DeleteKandang'])->name('delete.kandang');
+
+Route::get('/readkandang/{id}', [PenangkaranController::class, 'DetailKandang'])->name('riwayat.kandang');
+
 Route::get('/kandang',[KandangController::class,'ReadKandang'])->name('kandang');
 Route::get('/kandang/{id}/{namakandang}',[KandangController::class,'DetailKandangs'])->name('detail.kandangs');
 Route::get('/detail-kandang',[KandangController::class,'DetailKandang'])->name('detail.kandang');
-Route::get('/kandang/delete/{id}',[KandangController::class,'DeleteKandang']);
+
 
 // Pakan
 Route::post('/pakan',[AdminController::class,'CreatePakan'])->name('pakan');

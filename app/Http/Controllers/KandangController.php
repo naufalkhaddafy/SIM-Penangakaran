@@ -14,6 +14,37 @@ class KandangController extends Controller
     {
         $this->middleware('auth');
     }
+    public function ModalRead($id)
+    {
+        $data = Kandang::find($id);
+        return view('kandang.modal.read', compact('data'));
+    }
+    public function ModalCreate($id)
+    {
+        $penangkarans= Penangkaran::find($id);
+        return view('kandang.modal.create',compact('penangkarans'));
+    }
+    public function ModalUpdate($id)
+    {
+        $data=Kandang::find($id);
+        $penangkarans= Penangkaran::all();
+        return view('kandang.modal.update', compact('data','penangkarans'));
+    }
+    public function ModalDelete($id)
+    {
+        $data = Kandang::find($id);
+        $penangkarans= Penangkaran::all();
+        return view('kandang.modal.delete', compact('data','penangkarans'));
+    }
+    public function ShowKandang($id)
+    {
+        $data = [
+            'users' => User::all(),
+            'penangkarans' => Penangkaran::find($id),
+            'kandangs' => Kandang::all(),
+        ];
+        return view('kandang.show',$data);
+    }
     //view kandang
     public function ReadKandang()
     {
@@ -33,22 +64,30 @@ class KandangController extends Controller
             // 'kategori' =>'required|unique:categories',
 
         ],[
-            'nama_kandang.required' => 'kode Harus di Isi',
-            //'nama_kandang.unique' => 'Kode sudah ada',
-
-            // 'kategori.required' => 'Lokasi Harus di Isi',
-            // 'kategori.unique' => 'Lokasi telah ada',
+            'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+            'kategori.required' => 'Kategori Kandang Harus di Isi',
         ]);
         Kandang::create($validatekandang);
 
-        return redirect()->back()->with('create', 'Berhasil Menambahkan ');
+        // return redirect()->back()->with('create', 'Berhasil Menambahkan ');
+    }
+    public function UpdateKandang($id){
+        $validatekandang = Request()->validate([
+            'nama_kandang' =>'required',
+            'kategori' =>'required',
+            'penangkaran_id' =>'required'
+        ],[
+            'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+            'kategori.required' => 'Kategori Kandang Harus di Isi',
+        ]);
+        Kandang::find($id)->update($validatekandang);
     }
     //delete kandang
     public function DeleteKandang($id)
     {
         Kandang::find($id)->forceDelete();
 
-        return redirect()->back()->with('delete','Berhasil menghapus data kandang');
+        // return redirect()->back()->with('delete','Berhasil menghapus data kandang');
     }
 
     public function readreportproduksi(){
@@ -70,6 +109,6 @@ class KandangController extends Controller
         $data=([
             'kandangs' =>Kandang::find($id),
         ]);
-        return view('kandang.kandang',$data);
+        return view('kandang.riwayatkandang',$data);
     }
 }

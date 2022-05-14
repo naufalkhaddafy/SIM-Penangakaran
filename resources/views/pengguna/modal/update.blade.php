@@ -94,7 +94,7 @@
 <script>
     function update() {
         $.ajax({
-            url: 'pengguna/update/{{ $data->id }}',
+            url: '{{ route('update.pengguna', $data->id) }}',
             type: 'PATCH',
             data: {
                 "_token": "{{ csrf_token() }}",
