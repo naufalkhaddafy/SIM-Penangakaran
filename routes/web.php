@@ -30,6 +30,7 @@ Route::get('/dashboard', [AdminController::class, 'ReadDashboard'])->name('dashb
 // Pengguna
 Route::get('/modal-read/{id}', [UserController::class, 'ModalRead']);
 Route::get('/modal-create', [UserController::class, 'ModalCreate']);
+Route::get('/modal-update/{id}', [UserController::class, 'ModalUpdate']);
 Route::get('/table', [UserController::class, 'ReadTable']);
 Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('pengguna');
 Route::get('/pengguna-pemilik', [UserController::class, 'ReadUserPemilik'])->name('pengguna.pemilik');

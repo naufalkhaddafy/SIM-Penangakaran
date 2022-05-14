@@ -25,8 +25,13 @@ class UserController extends Controller
     public function ModalCreate()
     {
         $penangkaran= Penangkaran::all();
-
         return view('pengguna.modal.create',compact('penangkaran'));
+    }
+    public function ModalUpdate($id)
+    {
+        $data = User::find($id);
+        $penangkarans= Penangkaran::all();
+        return view('pengguna.modal.update', compact('data','penangkarans'));
     }
     public function ReadTable()
     {
@@ -60,7 +65,6 @@ class UserController extends Controller
     // nambah user
     public function CreateUser(Request $request)
     {
-       
         $validateuser= $request->validate([
             'nama_lengkap' =>'required',
             'username' =>'required|unique:users',
@@ -99,16 +103,15 @@ class UserController extends Controller
 
         $validateuser= Request()->validate([
             'nama_lengkap' =>'required',
-            'username' =>'required',
             'role' =>'required',
-            'penangkaran_id' =>'nullable',
+            'penangkaran_id' => 'nullable',
             'nohp'=>'nullable',
         ],[
             'nama_lengkap.required' => 'Nama Harus di Isi',
-            'username.required' => 'Username Harus di Isi',
+            // 'username.required' => 'Username Harus di Isi',
             //'penangkaran_id.required' =>'Harus diisi',
         ]);
         User::find($id)->update($validateuser);
-        return redirect()->back()->with('update','Data Berhasil di update');
+        // return redirect()->back()->with('update','Data Berhasil di update');
     }
 }

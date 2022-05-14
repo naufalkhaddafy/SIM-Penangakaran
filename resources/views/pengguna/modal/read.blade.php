@@ -42,5 +42,4 @@
         <input type="text" class="form-control" disabled
             value="{{ optional($data->penangkaran)->lokasi_penangkaran ?? 'Belum Tersedia' }}">
     </div>
-
 </div>

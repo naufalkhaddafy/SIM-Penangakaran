@@ -1,6 +1,7 @@
 <div class="input-group mb-3">
     <input type="text" id="nama_lengkap" name="nama_lengkap"
-        class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name" required>
+        class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
+        value="{{ $data->nama_lengkap }}" required>
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fas fa-user"></span>
@@ -14,7 +15,7 @@
 </div>
 <div class="input-group mb-3">
     <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror"
-        placeholder="Username" required>
+        placeholder="Username" value="{{ $data->username }}" readonly>
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fas fa-user"></span>
@@ -28,7 +29,7 @@
 </div>
 <div class="input-group mb-3">
     <input type="text" id="nohp" class="form-control @error('nohp') is-invalid @enderror" name="nohp"
-        placeholder="No.Hp +62">
+        placeholder="No.Hp +62" value="{{ $data->nohp }}">
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fas fa-phone"></span>
@@ -42,7 +43,7 @@
 </div>
 <div class="input-group mb-3">
     <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
-        placeholder="Password" required>
+        placeholder="Password">
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fas fa-lock"></span>
@@ -55,28 +56,31 @@
     @enderror
 </div>
 <div class="form-group mb-3">
-    <label for="role" class="col-sm-2 control-label">Role</label>
+    <label for="role" class="col-sm-2 control-label">role</label>
 
-    <select name="role" id="role" class="form-control" required>
-        <option value="" selected>Pilih Status Pengguna</option>
-        <option value="pemilk">Pemilik</option>
-        <option value="pekerja">Pekerja</option>
+    <select name="role" id="role" class="form-control @error('penangkaran_id') is-invalid @enderror" required>
+        <option value="{{ $data->role }}" selected>{{ $data->role }}</option>
+        <option value="pemilik">Pemilik</option>
+        <option value="pekerja">pekerja</option>
     </select>
     @error('role')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror
+
 </div>
 <div class="form-group mb-3">
     <label for="lokasikerja" class="col-sm-5 control-label">Lokasi
         Kerja</label>
     <select name="penangkaran_id" id="penangkaran_id"
         class="form-control @error('penangkaran_id') is-invalid @enderror">
-        <option value="" selected>Lokasi Kerja</option>
-        @foreach ($penangkaran as $data)
-            <option value="{{ $data->id }}">
-                {{ $data->lokasi_penangkaran }}
+        <option value="{{ optional($data->penangkaran)->id }}" selected>
+            {{ optional($data->penangkaran)->lokasi_penangkaran }}
+        </option>
+        @foreach ($penangkarans as $penangkaran)
+            <option value="{{ $penangkaran->id }}">
+                {{ $penangkaran->lokasi_penangkaran }}
             </option>
         @endforeach
     </select>
@@ -87,16 +91,15 @@
     @enderror
 </div>
 <script>
-    function tambah() {
+    function update() {
         $.ajax({
-            url: '/pengguna',
-            type: 'POST',
+            url: 'pengguna/update/{{ $data->id }}',
+            type: 'PATCH',
             data: {
                 "_token": "{{ csrf_token() }}",
+                id: {{ $data->id }},
                 nama_lengkap: $('#nama_lengkap').val(),
-                username: $('#username').val(),
                 nohp: $('#nohp').val(),
-                password: $('#password').val(),
                 role: $('#role').val(),
                 penangkaran_id: $('#penangkaran_id').val(),
             },
@@ -104,9 +107,6 @@
             success: function(data) {
                 $('.close').click();
                 readTable()
-            },
-            error: function(request, status, error) {
-                // $('[name="username"]').next('span').html(request.responseJSON.errors.username);
             }
         });
     }

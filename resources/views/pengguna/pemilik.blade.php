@@ -74,6 +74,7 @@
                 <div class="modal-body">
                     <form action="{{ route('pengguna') }}" method="post" id="form-create">
                         @csrf
+                        @method('PATCH')
                         <div class="input-group mb-3">
                             <input type="text" id="nama_lengkap" name="nama_lengkap"
                                 class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
@@ -424,7 +425,7 @@
         $(document).ready(function() {
             @if ($errors->any())
                 {
-                $('#modal-tambah').modal('show');
+                    $('#modal-tambah').modal('show');
                 }
             @endif
         });
