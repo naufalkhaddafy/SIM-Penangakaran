@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Panduan;
 use App\Models\Penangkaran;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\DB;
@@ -52,5 +53,9 @@ class User extends Authenticatable
     public function pakans()
     {
         return $this->hasMany(Pakan::class);
+    }
+    public function panduans()
+    {
+        return $this->hasMany(Panduan::class);
     }
 }

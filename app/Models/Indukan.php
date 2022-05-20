@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Produksi;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Jadwal extends Model
+class Indukan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function kandang()
+    {
+        return $this->belongsTo(Kandang::class);
+    }
     public function produksi()
     {
         return $this->belongsTo(Produksi::class);

@@ -22,17 +22,21 @@
                 <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
                     class="card-img-top" alt="...">
                 <div class="card-body" style="text-align:center">
-                    <div class="content">
-                        <h2>0{{ $no++ }}</h2>
-                        <h3>Penangkaran </h3>
-                        <p>
-                            <b>{{ $data->kode_penangkaran }}</b><br>
+                    <h5>
+                        <b>Penangkaran 0{{ $no++ }}</b>
+                    </h5>
+                    <h6 class="card-text">Kode Penangkaran<br>
+                        <b class="text-danger"><b>{{ $data->kode_penangkaran }}</b>
+                        </b>
+                    </h6>
+                    <h6 class="card-text"> Lokasi Penangkaran<br>
+                        <b class="text-success">
                             {{ $data->lokasi_penangkaran }}
-                        </p>
-                        <a href="{{ url('/penangkaran/' . $data->id . '/' . $data->lokasi_penangkaran) }}"
-                            class="btn btn-primary">Info
-                            Detail</a>
-                    </div>
+                        </b>
+                    </h6>
+                    <a href="{{ url('/penangkaran/' . $data->id . '/' . $data->lokasi_penangkaran) }}"
+                        class="btn btn-primary">Detail Penangkaran
+                    </a>
                 </div>
             </div>
         </div>

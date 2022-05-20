@@ -18,15 +18,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        <div style="text-align:center">
-                            <h2>Lokasi Penangkaran</h2>
-                            <a href="#">
-                                <h2><b>{{ $penangkarans->lokasi_penangkaran }}</b></h2>
-                            </a>
-                            <h2>Jumlah Kandang : {{ count($penangkarans->kandangs) }}</h2>
-                            <h2>Jumlah Pekerja : {{ count($penangkarans->users) }}</h2>
-                        </div>
-                        <br>
+                        
                         <div id="readData"></div>
                     </div>
                 </div>

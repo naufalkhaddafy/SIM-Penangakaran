@@ -32,7 +32,11 @@ class UserController extends Controller
     {
         $data = User::find($id);
         $penangkarans = Penangkaran::all();
-        return view('pengguna.modal.update', compact('data', 'penangkarans'));
+        $role = [
+            'Pemilik' => 'pemilik',
+            'Pekerja' => 'pekerja',
+        ];
+        return view('pengguna.modal.update', compact('data', 'penangkarans', 'role'));
     }
     public function ModalDelete($id)
     {
@@ -105,7 +109,6 @@ class UserController extends Controller
 
         $validateuser['password'] = Hash::make($validateuser['password']);
         User::create($validateuser);
-        return 'user created';
         // return redirect()->back()->with('create','Berhasil menambahkan pengguna');
     }
     // hapus pengguna

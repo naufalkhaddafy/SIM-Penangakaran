@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kebersihans', function (Blueprint $table) {
+        Schema::create('indukans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('kandang_id')->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('tgl_pembersihan');
-            $table->date('jadwal_pembersihan');
-            $table->enum('status', ['Belum', 'Sudah']);
+            $table->foreignId('produksi_id')->unique()->constrained('produksis')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->enum('status', ['Pertama', 'Kedua']);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kebersihans');
+        Schema::dropIfExists('indukans');
     }
 };

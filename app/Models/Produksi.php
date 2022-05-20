@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use App\Enums\ProduksiStatus;
+use App\Models\Jadwal;
+use App\Models\Indukan;
+use App\Models\Kandang;
 use App\Enums\TelurStatus;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Enums\ProduksiStatus;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produksi extends Model
 {
@@ -23,5 +26,9 @@ class Produksi extends Model
     public function jadwal()
     {
         return $this->hasOne(Jadwal::class);
+    }
+    public function indukans()
+    {
+        return $this->hasOne(Indukan::class);
     }
 }

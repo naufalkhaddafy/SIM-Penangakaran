@@ -127,16 +127,7 @@ class PenangkaranController extends Controller
         Penangkaran::find($id)->forceDelete();
         // return redirect()->route('penangkaran')->with('delete', 'Data Berhasil di hapus');
     }
-    public function DetailKandang($id)
-    {
-        if (!Penangkaran::find($id)) {
-            abort(404);
-        }
-        $data = [
-            'penangkarans' => Penangkaran::find($id),
-        ];
-        return view('readkandang', $data);
-    }
+
     // detail penangkaran
     public function DetailPenangkaran($id)
     {

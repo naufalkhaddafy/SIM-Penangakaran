@@ -46,7 +46,7 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>No</th>
+                                    <th>Penangkaran</th>
                                     <th>Kode Ring</th>
                                     <th>Asal Telur</th>
                                     <th>Tanggal Menetas</th>
@@ -56,11 +56,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $no = 1; ?>
 
                                 @foreach ($produksis->where('status_produksi', 'Hidup') as $data)
                                     <tr>
-                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
                                         <td>{{ $data->kode_ring ?? 'belum tersedia' }} </td>
                                         <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                                             {{ $data->status_telur }} </td>
@@ -94,18 +93,6 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    {{-- <script src="{{ asset('template') }}/plugins/jszip/jszip.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script> --}}
     <script>
         $(function() {
             $("#example1").DataTable({

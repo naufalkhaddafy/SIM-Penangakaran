@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Pakan;
 use App\Models\Kandang;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;

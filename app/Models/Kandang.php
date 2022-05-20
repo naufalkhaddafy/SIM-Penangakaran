@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Category;
+
+use App\Models\Indukan;
+use App\Models\Produksi;
+use App\Models\Kebersihan;
 use App\Models\Penangkaran;
 use App\Enums\KandangStatus;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +33,9 @@ class Kandang extends Model
     public function kebersihans()
     {
         return $this->hasMany(Kebersihan::class);
+    }
+    public function indukans()
+    {
+        return $this->hasMany(Indukan::class);
     }
 }

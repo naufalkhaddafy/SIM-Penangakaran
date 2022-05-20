@@ -12,7 +12,7 @@ use App\Http\Controllers\ProduksiController;
 use App\Http\Controllers\KebersihanController;
 
 
-Route::resource('users','UserController');
+Route::resource('users', 'UserController');
 
 Route::get('/', function () {
     return view('page');
@@ -40,7 +40,7 @@ Route::post('/pengguna', [UserController::class, 'CreateUser'])->name('create.pe
 Route::patch('/pengguna/update/{id}', [UserController::class, 'UpdateUser'])->name('update.pengguna');
 Route::delete('/pengguna/delete/{id}', [UserController::class, 'DeleteUser'])->name('delete.pengguna');
 
-// Penangkaran [X] Selanjutnya
+// Penangkaran [V]
 Route::get('/modal-read-penangkaran/{id}', [PenangkaranController::class, 'ModalRead']);
 Route::get('/modal-create-penangkaran', [PenangkaranController::class, 'ModalCreate']);
 Route::get('/modal-update-penangkaran/{id}', [PenangkaranController::class, 'ModalUpdate']);
@@ -59,15 +59,15 @@ Route::get('/modal-create-kandang/{id}', [KandangController::class, 'ModalCreate
 Route::get('/modal-update-kandang/{id}', [KandangController::class, 'ModalUpdate']);
 Route::get('/modal-delete-kandang/{id}', [KandangController::class, 'ModalDelete']);
 Route::get('/show-kandang/{id}', [KandangController::class, 'ShowKandang']);
-Route::post('/kandang',[KandangController::class,'CreateKandang'])->name('create.kandang');
+Route::post('/kandang', [KandangController::class, 'CreateKandang'])->name('create.kandang');
 Route::patch('/kandang/update/{id}', [KandangController::class, 'UpdateKandang'])->name('update.kandang');
-Route::delete('/kandang/delete/{id}',[KandangController::class,'DeleteKandang'])->name('delete.kandang');
+Route::delete('/kandang/delete/{id}', [KandangController::class, 'DeleteKandang'])->name('delete.kandang');
 
-Route::get('/readkandang/{id}', [PenangkaranController::class, 'DetailKandang'])->name('riwayat.kandang');
 
-Route::get('/kandang',[KandangController::class,'ReadKandang'])->name('kandang');
-Route::get('/kandang/{id}/{namakandang}',[KandangController::class,'DetailKandangs'])->name('detail.kandangs');
-Route::get('/detail-kandang',[KandangController::class,'DetailKandang'])->name('detail.kandang');
+Route::get('/kandang', [KandangController::class, 'ReadKandang'])->name('kandang');
+Route::get('/kandang/{id}/{namakandang}', [KandangController::class, 'RiwayatKandang'])->name('riwayat.kandang');
+// user
+Route::get('/detail-kandang', [KandangController::class, 'DetailKandang'])->name('detail.kandang');
 
 
 // Pakan [X]
@@ -76,22 +76,24 @@ Route::get('/modal-create-pakan/{id}', [PakanController::class, 'ModalCreate']);
 Route::get('/modal-update-pakan/{id}', [PakanController::class, 'ModalUpdate']);
 Route::get('/modal-delete-pakan/{id}', [PakanController::class, 'ModalDelete']);
 Route::get('/show-pakan/{id}', [PakanController::class, 'ShowPakan']);
-Route::post('/pakan',[PakanController::class,'CreatePakan'])->name('create.pakan');
+Route::post('/pakan', [PakanController::class, 'CreatePakan'])->name('create.pakan');
 Route::patch('/pakan/update/{id}', [PakanController::class, 'UpdateKandang'])->name('update.pakan');
 Route::delete('/pakan/delete/{id}', [PakanController::class, 'DeletePakan'])->name('delete.pakan');
 
-
-Route::get('/pakan',[AdminController::class,'ReadPakan'])->name('pakan');
+Route::get('/pakan', [AdminController::class, 'ReadPakan'])->name('pakan');
 //Kebersihan [X]
-Route::post('/kebersihan/create',[KebersihanController::class,'CreateKebersihan'])->name('create.kebersihan');
+Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
 // Produksi [X]
-Route::post('/produksi-telur/{id}',[ProduksiController::class,'CreateProduksiTelur'])->name('produksi.telur');
+Route::post('/produksi-telur/{id}', [ProduksiController::class, 'CreateProduksiTelur'])->name('produksi.telur');
 Route::post('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
 Route::post('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
-Route::get('/produksi-inkubator',[ProduksiController::class,'ProduksiInkubator'])->name('produksi.inkubator');
-Route::get('/produksi-hidup',[ProduksiController::class,'ProduksiHidup'])->name('produksi.hidup');
-Route::get('/produksi-mati',[ProduksiController::class,'ProduksiMati'])->name('produksi.mati');
+Route::get('/produksi-inkubator', [ProduksiController::class, 'ProduksiInkubator'])->name('produksi.inkubator');
+Route::get('/produksi-hidup', [ProduksiController::class, 'ProduksiHidup'])->name('produksi.hidup');
+Route::get('/produksi-mati', [ProduksiController::class, 'ProduksiMati'])->name('produksi.mati');
 
 // Report Produksi [X]
-Route::get('/report-inkubator',[HasilProduksiController::class,'ReportInkubator'])->name('report.inkubator');
-Route::get('/report-hidup',[HasilProduksiController::class,'ReportHidup'])->name('report.hidup');
+Route::get('/report-inkubator', [HasilProduksiController::class, 'ReportInkubator'])->name('report.inkubator');
+Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
+Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name('report.mati');
+Route::get('/report-indukan', [HasilProduksiController::class, 'ReportIndukan'])->name('report.indukan');
+Route::post('/create-indukan', [HasilProduksiController::class, 'CreateIndukan'])->name('create.indukan');

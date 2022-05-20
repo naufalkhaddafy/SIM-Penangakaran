@@ -1,3 +1,4 @@
+<div id="error"></div>
 <div class="input-group mb-3">
     <input type="text" id="kode_penangkaran" name="kode_penangkaran"
         class="form-control @error('kode_penangkaran') is-invalid @enderror" placeholder="Kode Penangkaran"

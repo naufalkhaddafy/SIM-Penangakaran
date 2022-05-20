@@ -35,8 +35,19 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item {{ request()->is('report-inkubator', 'report-hidup') ? 'menu-open' : '' }}">
-            <a href="#" class="nav-link {{ request()->is('report-inkubator', 'report-hidup') ? 'active' : '' }}">
+        <li class="nav-item">
+            <a href="{{ route('report.indukan') }}"
+                class="nav-link {{ request()->is('report-indukan') ? 'active' : '' }}">
+                <ion-icon name="finger-print-outline"></ion-icon>
+                <p>
+                    Indukan
+                </p>
+            </a>
+        </li>
+        <li
+            class="nav-item {{ request()->is('report-inkubator', 'report-hidup', 'report-mati') ? 'menu-open' : '' }}">
+            <a href="#"
+                class="nav-link {{ request()->is('report-inkubator', 'report-hidup', 'report-mati') ? 'active' : '' }}">
                 <ion-icon name="bar-chart"></ion-icon>
                 <p>
                     Hasil Produksi
@@ -63,7 +74,8 @@
             </ul>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <a href="{{ route('report.mati') }}"
+                        class=" nav-link {{ request()->is('report-mati') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Mati</p>
                     </a>
@@ -79,7 +91,8 @@
             </ul>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
+                    <a href="{{ route('report.indukan') }}"
+                        class=" nav-link {{ request()->is('report-indukan') ? 'active' : '' }}">
                         <i class="far fa-circle nav-icon"></i>
                         <p>Indukan</p>
                     </a>

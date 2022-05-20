@@ -34,28 +34,26 @@
                         <table id="example2" class="table table-bordered table-hover">
                             <thead align="center">
                                 <tr>
+                                    <th>Penangkaran</th>
                                     <th>Kode Inkubator</th>
                                     <th>Tanggal Masuk Inkubator</th>
                                     <th>Tanggal Akan Menetas</th>
                                     <th>Asal Telur</th>
-                                    <th>Update</th>
                                 </tr>
                             </thead>
                             <tbody align="center">
                                 @foreach ($produksis->where('status_produksi', 'Inkubator') as $data)
                                     <tr>
+                                        <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
                                         <td>{{ $data->jadwal->kode_tempat_inkubator }}</td>
                                         <td>{{ date('d F Y', strtotime($data->tgl_masuk_inkubator)) }}</td>
                                         <td class="text-danger">
-                                            {{ date('d', strtotime($data->jadwal->tgl_akan_menetas_start)) }}-{{ date('d F Y', strtotime($data->jadwal->tgl_akan_menetas_end)) }}
+                                            <b>
+                                                {{ date('d', strtotime($data->jadwal->tgl_akan_menetas_start)) }}-{{ date('d F Y', strtotime($data->jadwal->tgl_akan_menetas_end)) }}
+                                            </b>
                                         </td>
                                         <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                                             {{ $data->status_telur }} </td>
-                                        <td><button type="button" class="btn btn-default  btn-outline-success"
-                                                data-toggle="modal" data-target="{{ url('#modal-update' . $data->id) }}">
-                                                <ion-icon name="open-outline"></ion-icon>
-                                            </button>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -67,18 +65,6 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    {{-- <script src="{{ asset('template') }}/plugins/jszip/jszip.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="{{ asset('template') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script> --}}
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -89,7 +75,7 @@
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
-                "lengthChange": false,
+                "lengthChange": true,
                 "searching": true,
                 "ordering": true,
                 "info": true,

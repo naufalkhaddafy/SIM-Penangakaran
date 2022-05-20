@@ -60,27 +60,22 @@
     <label for="role" class="col-sm-2 control-label">role</label>
 
     <select name="role" id="role" class="form-control @error('penangkaran_id') is-invalid @enderror" required>
-        <option value="{{ $data->role }}" selected>{{ $data->role }}</option>
-        <option value="pemilik">Pemilik</option>
-        <option value="pekerja">pekerja</option>
+        @foreach ($role as $role)
+            <option value="{{ $role }}" {{ $role == $data->role ? 'selected' : '' }}>
+                {{ $role }}
+            </option>
+        @endforeach
     </select>
-    @error('role')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-
 </div>
 <div class="form-group mb-3">
     <label for="lokasikerja" class="col-sm-5 control-label">Lokasi
         Kerja</label>
     <select name="penangkaran_id" id="penangkaran_id"
         class="form-control @error('penangkaran_id') is-invalid @enderror">
-        <option value="{{ optional($data->penangkaran)->id }}" selected>
-            {{ optional($data->penangkaran)->lokasi_penangkaran }}
-        </option>
+
         @foreach ($penangkarans as $penangkaran)
-            <option value="{{ $penangkaran->id }}">
+            <option value="{{ $penangkaran->id }}"
+                {{ $penangkaran->id == $data->penangkaran_id ? 'selected' : '' }}>
                 {{ $penangkaran->lokasi_penangkaran }}
             </option>
         @endforeach

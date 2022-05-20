@@ -10,10 +10,11 @@
 </div>
 <div class="input-group mb-3">
     <select name="kategori" id="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
-        <option value="{{ $data->kategori }}" selected>{{ $data->kategori }}</option>
-        <option value="Produktif"> Produktif</option>
-        <option value="Tidak Produktif"> Tidak Produktif</option>
-        <option value="Ganti Bulu"> Ganti Bulu</option>
+        @foreach ($kategori as $kategori)
+            <option value="{{ $kategori }}" {{ $kategori == $data->kategori ? 'selected' : '' }}>
+                {{ $kategori }}
+            </option>
+        @endforeach
     </select>
 </div>
 <div class="input-group mb-3">

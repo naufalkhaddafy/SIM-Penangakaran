@@ -25,7 +25,7 @@
                                 <div class="icon">
                                     <i class="ion ion-location"></i>
                                 </div>
-                                <a href="{{ route('read.penangkaran') }}" class="small-box-footer">Info Detail<i
+                                <a href="{{ route('read.penangkaran') }}" class="small-box-footer">Info Detail <i
                                         class="fas fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -73,6 +73,12 @@
                         </div>
                     </div>
                 </div>
+                {{-- <div>
+                    {{ $indukan }}
+                    TES
+                    {{ $pro }}
+
+                </div> --}}
             @elseif(Auth::user()->role == 'pekerja')
                 <div class="container-fluid">
                     <div class="row">
@@ -125,184 +131,173 @@
                                             </table>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="card">
-                                                <div class="card-header border-0">
-                                                    <h5 style="text-align:center"><b>Informasi Kandang</b></h5>
-                                                </div>
-                                                {{-- produktif --}}
-                                                <div style="text-align:center" class="bg-lime p-md-2">
-                                                    <h6><b>Produktif</b></h6>
-                                                </div>
-                                                <div class="card-body table-responsive p-0">
-                                                    <table class="table table-striped table-valign-middle">
-                                                        <thead>
-                                                            <tr align="center">
-                                                                <th>Kandang</th>
-                                                                <th>Status Telur</th>
-                                                                <th>Akan Bertelur</th>
-
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody align="center">
-                                                            @foreach ($produktif ?? [] as $data)
-                                                                @if ($data->kategori == 'Produktif')
-                                                                    <tr>
-                                                                        <td>
-                                                                            {{ $data->nama_kandang }}
-                                                                        </td>
-                                                                        <td class="m-3 p-2 badge bg-success">
-                                                                            @if (optional($data->produksis->last())->status_telur == 'pertama')
-                                                                                Kedua
-                                                                            @elseif(optional($data->produksis->last())->status_telur == 'kedua')
-                                                                                Pertama
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @foreach ($data->produksis as $d)
-                                                                                @if ($loop->last)
-                                                                                    {{ date('d', strtotime($d->jadwal->tgl_akan_bertelur_start)) }}-
-                                                                                    {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur_end)) }}
-                                                                                @endif
-                                                                            @endforeach
-                                                                        </td>
-
-                                                                        <td>
-                                                                            <button type="button"
-                                                                                class="btn btn-default  btn-outline-success"
-                                                                                data-toggle="modal"
-                                                                                data-target="{{ url('#modal-create' . $data->id) }}">
-                                                                                <ion-icon name="add"></ion-icon>
-                                                                            </button>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                {{-- tidak produktif --}}
-                                                <div style="text-align:center" class="bg-warning p-md-2">
-                                                    <h6><b>Tidak Produktif</b></h6>
-                                                </div>
-                                                <div class="card-body table-responsive p-0">
-                                                    <table class="table table-striped table-valign-middle">
-
-                                                        <thead align="center">
-                                                            <tr>
-                                                                <th>Kandang</th>
-                                                                <th>Masuk Kandang</th>
-                                                                <th>Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody align="center">
-                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
-                                                                @if ($data->kategori == 'Tidak Produktif')
-                                                                    <tr>
-                                                                        <td>
-                                                                            {{ $data->nama_kandang }}
-                                                                        </td>
-                                                                        <td>
-                                                                            date
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="#" class="text-muted">
-                                                                                <i class="fas fa-search"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                {{-- ganti bulu --}}
-                                                <div style="text-align:center" class="bg-lightblue p-md-2">
-                                                    <h6><b>Ganti Bulu</b></h6>
-                                                </div>
-                                                <div class="card-body table-responsive p-0">
-                                                    <table class="table table-striped table-valign-middle">
-
-                                                        <thead align="center">
-                                                            <tr>
-                                                                <th>Kandang</th>
-                                                                <th>Terakhir Bertelur</th>
-                                                                <th>Status</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody align="center">
-                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
-                                                                @if ($data->kategori == 'Ganti Bulu')
-                                                                    <tr>
-                                                                        <td>
-                                                                            {{ $data->nama_kandang }}
-                                                                        </td>
-                                                                        <td>
-                                                                            @foreach ($data->kebersihans as $d)
-                                                                                {{ date('d F Y', strtotime($d->kebersihan->jadwal_pembersihan)) }}
-                                                                            @endforeach
-                                                                        </td>
-                                                                        <td>
-                                                                            <a href="#" class="text-muted">
-                                                                                <i class="fas fa-search"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endif
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                    <div class="card">
+                                        <div class="card-header border-0">
+                                            <h5 style="text-align:center"><b>Informasi Kandang</b></h5>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="card">
-                                                <div class="card-header border-0">
-                                                    <h5 style="text-align:center"><b>Kebersihan Kandang</b></h5>
-                                                </div>
-                                                <div class="card-body table-responsive p-0">
-                                                    <table class="table table-striped table-valign-middle">
-                                                        <thead align="center">
+                                        {{-- produktif --}}
+                                        <div style="text-align:center" class="bg-lime p-md-2">
+                                            <h6><b>Produktif</b></h6>
+                                        </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-striped table-valign-middle">
+                                                <thead>
+                                                    <tr align="center">
+                                                        <th>Kandang</th>
+                                                        <th>Status Telur</th>
+                                                        <th>Akan Bertelur</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody align="center">
+                                                    @foreach ($produktif ?? [] as $data)
+                                                        @if ($data->kategori == 'Produktif')
                                                             <tr>
-                                                                <th>Kandang</th>
-                                                                <th>Jadwal Pembersihan</th>
-                                                                <th>Status</th>
-                                                                <th>Action</th>
-                                                            </tr>
-
-                                                        </thead>
-                                                        <tbody align="center">
-                                                            @foreach (auth()->user()->penangkaran->kandangs ?? [] as $data)
-                                                                <tr>
-                                                                    <td>
-                                                                        {{ $data->nama_kandang }}
-                                                                    </td>
-
-                                                                    @if ($data->kebersihans->last() == null)
-                                                                        <td>Belum ada</td>
-                                                                    @elseif(!$data->kebersihans->last() == null)
-                                                                        <td class="text-danger">
-                                                                            {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
-                                                                        </td>
+                                                                <td>
+                                                                    {{ $data->nama_kandang }}
+                                                                </td>
+                                                                <td class="m-3 p-2 badge bg-success">
+                                                                    @if (optional($data->produksis->last())->status_telur == 'pertama')
+                                                                        Kedua
+                                                                    @elseif(optional($data->produksis->last())->status_telur == 'kedua')
+                                                                        Pertama
                                                                     @endif
+                                                                </td>
+                                                                <td class="text-danger"><b>
+                                                                        @foreach ($data->produksis as $d)
+                                                                            @if ($loop->last)
+                                                                                {{ date('d', strtotime($d->jadwal->tgl_akan_bertelur_start)) }}-
+                                                                                {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur_end)) }}
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </b>
+                                                                </td>
+                                                                <td>
+                                                                    <button type="button"
+                                                                        class="btn btn-default  btn-outline-success"
+                                                                        data-toggle="modal"
+                                                                        data-target="{{ url('#modal-create' . $data->id) }}">
+                                                                        <ion-icon name="add"></ion-icon>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{-- tidak produktif --}}
+                                        <div style="text-align:center" class="bg-warning p-md-2">
+                                            <h6><b>Tidak Produktif</b></h6>
+                                        </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-striped table-valign-middle">
+                                                <thead align="center">
+                                                    <tr>
+                                                        <th>Kandang</th>
+                                                        <th>Masuk Kandang</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody align="center">
+                                                    @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                        @if ($data->kategori == 'Tidak Produktif')
+                                                            <tr>
+                                                                <td>
+                                                                    {{ $data->nama_kandang }}
+                                                                </td>
+                                                                <td>
+                                                                    date
+                                                                </td>
+                                                                <td>
+                                                                    <a href="#" class="text-muted">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        {{-- ganti bulu --}}
+                                        <div style="text-align:center" class="bg-lightblue p-md-2">
+                                            <h6><b>Ganti Bulu</b></h6>
+                                        </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-striped table-valign-middle">
+                                                <thead align="center">
+                                                    <tr>
+                                                        <th>Kandang</th>
+                                                        <th>Terakhir Bertelur</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody align="center">
+                                                    @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                        @if ($data->kategori == 'Ganti Bulu')
+                                                            <tr>
+                                                                <td>
+                                                                    {{ $data->nama_kandang }}
+                                                                </td>
+                                                                <td>
+                                                                    @foreach ($data->kebersihans as $d)
+                                                                        {{ date('d F Y', strtotime($d->kebersihan->jadwal_pembersihan)) }}
+                                                                    @endforeach
+                                                                </td>
+                                                                <td>
+                                                                    <a href="#" class="text-muted">
+                                                                        <i class="fas fa-search"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header border-0">
+                                            <h5 style="text-align:center"><b>Kebersihan Kandang</b></h5>
+                                        </div>
+                                        <div class="card-body table-responsive p-0">
+                                            <table class="table table-striped table-valign-middle">
+                                                <thead align="center">
+                                                    <tr>
+                                                        <th>Kandang</th>
+                                                        <th>Jadwal Pembersihan</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody align="center">
+                                                    @foreach (auth()->user()->penangkaran->kandangs ?? [] as $data)
+                                                        <tr>
+                                                            <td>
+                                                                {{ $data->nama_kandang }}
+                                                            </td>
+                                                            @if ($data->kebersihans->last() == null)
+                                                                <td>Belum ada</td>
+                                                            @elseif(!$data->kebersihans->last() == null)
+                                                                <td class="text-danger">
+                                                                    {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
+                                                                </td>
+                                                            @endif
 
-                                                                    <td></td>
-                                                                    <td>
-                                                                        <button type="button"
-                                                                            class="btn btn-default  btn-outline-success"
-                                                                            data-toggle="modal"
-                                                                            data-target="{{ url('#modal-createkebersihan' . $data->id) }}">
-                                                                            <ion-icon name="add"></ion-icon>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
+                                                            <td></td>
+                                                            <td>
+                                                                <button type="button"
+                                                                    class="btn btn-default  btn-outline-success"
+                                                                    data-toggle="modal"
+                                                                    data-target="{{ url('#modal-createkebersihan' . $data->id) }}">
+                                                                    <ion-icon name="add"></ion-icon>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>

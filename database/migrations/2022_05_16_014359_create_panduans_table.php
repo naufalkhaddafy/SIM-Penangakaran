@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('kebersihans', function (Blueprint $table) {
+        Schema::create('panduans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kandang_id')->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->date('tgl_pembersihan');
-            $table->date('jadwal_pembersihan');
-            $table->enum('status', ['Belum', 'Sudah']);
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
+            $table->text('judul');
+            $table->text('isi');
+            $table->string('kategori');
+            $table->enum('status', ['publish', 'draft'])->default('draft');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kebersihans');
+        Schema::dropIfExists('panduans');
     }
 };
