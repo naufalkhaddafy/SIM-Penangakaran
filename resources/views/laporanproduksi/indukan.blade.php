@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
-                            <thead>
+                            <thead align="center">
                                 <tr>
                                     <th>Tempat Indukan</th>
                                     <th>Kode Ring</th>
@@ -33,7 +33,7 @@
                                     <tr>
                                         <td>{{ $data->indukans->kandang->penangkaran->lokasi_penangkaran ?? '' }}
                                             {{ $data->indukans->kandang->nama_kandang ?? 'Belum Tersedia' }} </td>
-                                        <td>{{ $data->kode_ring ?? 'belum tersedia' }} </td>
+                                        <td>{{ $data->kode_ring ?? 'Belum tersedia' }} </td>
                                         {{-- <td>Kandang <b>{{ $data->kandang->nama_kandang ?? 'Tidak Tersedia' }}</b> Telur
                                             {{ $data->status_telur }} </td>
                                         <td>{{ date('d F Y', strtotime($data->tgl_menetas ?? 'Tidak Tersedia')) }}</td> --}}

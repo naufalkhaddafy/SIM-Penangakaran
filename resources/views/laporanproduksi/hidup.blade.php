@@ -44,7 +44,7 @@
                     <div class="readData"></div>
                     <div class="card-body">
                         <table id="example2" class="table table-bordered table-hover">
-                            <thead>
+                            <thead align="center">
                                 <tr>
                                     <th>Penangkaran</th>
                                     <th>Kode Ring</th>
@@ -55,8 +55,7 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody align="center">
                                 @foreach ($produksis->where('status_produksi', 'Hidup') as $data)
                                     <tr>
                                         <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>

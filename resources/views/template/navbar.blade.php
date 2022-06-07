@@ -214,7 +214,7 @@
             <a href="#" class="nav-link {{ request()->is('#') ? 'active' : '' }}">
                 <ion-icon name="book"></ion-icon>
                 <p>
-                    Informasi Perawatan
+                    Panduan Perawatan
                 </p>
             </a>
         </li>
