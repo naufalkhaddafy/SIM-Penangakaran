@@ -13,6 +13,7 @@ use App\Http\Controllers\KebersihanController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\PemilikController;
+use App\Http\Controllers\PakanController;
 
 
 Route::resource('users', 'UserController');
@@ -70,10 +71,10 @@ Route::middleware(['pemilik'])->group(function () {
     Route::delete('/kandang/delete/{id}', [KandangController::class, 'DeleteKandang'])->name('delete.kandang');
     // Pakan [X]
     Route::get('/modal-read-pakan/{id}', [PakanController::class, 'ModalRead']);
-    Route::get('/modal-create-pakan/{id}', [PakanController::class, 'ModalCreate']);
+    Route::get('/modal-create-pakan', [PakanController::class, 'ModalCreate']);
     Route::get('/modal-update-pakan/{id}', [PakanController::class, 'ModalUpdate']);
     Route::get('/modal-delete-pakan/{id}', [PakanController::class, 'ModalDelete']);
-    Route::get('/show-pakan/{id}', [PakanController::class, 'ShowPakan']);
+    Route::get('/show-pakan', [PakanController::class, 'ShowPakan']);
     Route::post('/pakan', [PakanController::class, 'CreatePakan'])->name('create.pakan');
     Route::patch('/pakan/update/{id}', [PakanController::class, 'UpdateKandang'])->name('update.pakan');
     Route::delete('/pakan/delete/{id}', [PakanController::class, 'DeletePakan'])->name('delete.pakan');

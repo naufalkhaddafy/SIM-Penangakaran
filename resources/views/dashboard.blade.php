@@ -139,25 +139,28 @@
                                             <table class="table table-striped table-valign-middle">
                                                 <thead>
                                                     <tr>
-                                                        <th>Nama Pakan</th>
                                                         <th>Kode Tempat</th>
+                                                        <th>Nama Pakan</th>
                                                         <th>Kadaluwarsa</th>
                                                         <th>Status</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            Pakan
-                                                        </td>
-                                                        <td>$13 USD</td>
-                                                        <td> Tanggal</td>
-                                                        <td>
-                                                            <a href="#" class="text-muted">
-                                                                <i class="fas fa-search"></i>
-                                                            </a>
-                                                        </td>
-                                                    </tr>
+                                                    @foreach (Auth::user()->penangkaran->pakans as $data)
+                                                        <tr>
+                                                            <td>{{ $data->kode_tempat }}</td>
+                                                            <td>{{ $data->nama_pakan }}</td>
+                                                            <td>{{ $data->tgl_kadaluwarsa }}</td>
+                                                            <td>{{ $data->status }}</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-default bg-warning"
+                                                                    data-toggle="modal" data-target="{{ $data->id }}">
+                                                                    <ion-icon name="open-outline"></ion-icon>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 </tbody>
                                             </table>
                                         </div>
@@ -238,7 +241,7 @@
                                                                     {{ $data->nama_kandang }}
                                                                 </td>
                                                                 <td>
-                                                                    date
+                                                                    {{ date('d F Y', strtotime($data->tgl_masuk_kandang)) }}
                                                                 </td>
                                                                 <td>
                                                                     <a href="#" class="text-muted">
@@ -272,9 +275,9 @@
                                                                     {{ $data->nama_kandang }}
                                                                 </td>
                                                                 <td>
-                                                                    @foreach ($data->kebersihans as $d)
-                                                                        {{ date('d F Y', strtotime($d->kebersihan->jadwal_pembersihan)) }}
-                                                                    @endforeach
+                                                                    {{-- @foreach ($data->kebersihans as $d)
+                                                                    {{ date('d F Y', strtotime($d->kebersihan->jadwal_pembersihan)) }}
+                                                                    @endforeach --}}
                                                                 </td>
                                                                 <td>
                                                                     <a href="#" class="text-muted">
@@ -315,7 +318,6 @@
                                                                     {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
                                                                 </td>
                                                             @endif
-
                                                             <td></td>
                                                             <td>
                                                                 <button type="button"

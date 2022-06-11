@@ -230,7 +230,6 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- SweetAlert2 -->
     <script src="{{ asset('template') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-
     @stack('js')
     <script src="{{ asset('template') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('template') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

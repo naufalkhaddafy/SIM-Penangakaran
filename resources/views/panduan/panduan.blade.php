@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-
+    {{-- Dynamic Modal --}}
     <div class="modal fade " id="showModal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">

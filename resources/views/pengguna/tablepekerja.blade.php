@@ -58,12 +58,3 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function() {
-        @if ($errors->any())
-            {
-                $('#modal-tambah').modal('show');
-            }
-        @endif
-    });
-</script>

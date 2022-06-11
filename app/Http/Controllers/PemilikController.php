@@ -56,7 +56,7 @@ class PemilikController extends Controller
         $data = ([
             'pakans' => Pakan::all(),
         ]);
-        return view('pakan', $data);
+        return view('pakan.pakan', $data);
     }
     public function ReadPanduan()
     {

@@ -31,7 +31,6 @@
                                         data-parent="#accordionExample">
                                         <div class="card-body">
                                             <textarea class="form-control" rows="5" readonly>{{ $data->isi }}</textarea>
-
                                         </div>
                                     </div>
                                 </div>
