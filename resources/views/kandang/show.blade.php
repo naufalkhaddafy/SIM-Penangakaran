@@ -12,7 +12,7 @@
     @foreach ($penangkarans->kandangs as $data)
         <div class="col-md-4">
             <div class="card ">
-                <div class="btn-group bg-gradient-gray">
+                <div class="btn-group">
                     <div class="btn-group">
                         <button type="button" class="btn" data-toggle="dropdown">
                             <ion-icon name="ellipsis-vertical"></ion-icon>
@@ -28,6 +28,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="dropdown-divider"></div>
                 {{-- <img src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
                     class="card-img-top" alt="..."> --}}
                 <div class="card-body" style="text-align:center">

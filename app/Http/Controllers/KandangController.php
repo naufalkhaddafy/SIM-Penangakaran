@@ -57,17 +57,6 @@ class KandangController extends Controller
         ];
         return view('kandang.show', $data);
     }
-    //view kandang
-    public function ReadKandang()
-    {
-        $data = ([
-            'kandangs' => Kandang::all(),
-            'penangkarans' => Penangkaran::all(),
-            'users' => User::all(),
-        ]);
-        return view('kandang', $data);
-    }
-
     //create kandang
     public function CreateKandang()
     {
@@ -161,15 +150,6 @@ class KandangController extends Controller
         // return redirect()->back()->with('delete','Berhasil menghapus data kandang');
     }
 
-    public function DetailKandang()
-    {
-        $data = ([
-            'penangkarans' => Penangkaran::all(),
-            'kandangs' => Kandang::all(),
-            'users' => User::all(),
-        ]);
-        return view('u_kandang', $data);
-    }
     public function RiwayatKandang($id)
     {
         $data = ([

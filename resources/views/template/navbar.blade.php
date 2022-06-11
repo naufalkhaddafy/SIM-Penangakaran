@@ -127,10 +127,10 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link {{ request()->is('#') ? 'active' : '' }}">
+            <a href="{{ route('panduan') }}" class="nav-link {{ request()->is('panduan') ? 'active' : '' }}">
                 <ion-icon name="book"></ion-icon>
                 <p>
-                    Informasi Perawatan
+                    Panduan
                 </p>
             </a>
         </li>
@@ -211,10 +211,11 @@
             </ul>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link {{ request()->is('#') ? 'active' : '' }}">
+            <a href="{{ route('user.panduan') }}"
+                class="nav-link {{ request()->is('Panduan-Pekerja-Perawatan') ? 'active' : '' }}">
                 <ion-icon name="book"></ion-icon>
                 <p>
-                    Panduan Perawatan
+                    Panduan
                 </p>
             </a>
         </li>

@@ -62,25 +62,7 @@ class UserController extends Controller
         ];
         return view('pengguna.tablepekerja', $data);
     }
-    //
-    public function ReadUserPemilik()
-    {
-        $data = [
-            'users' => User::all(),
-            'penangkarans' => Penangkaran::all(),
-            'kandangs' => Kandang::all(),
-        ];
-        return view('pengguna.pemilik', $data);
-    }
-    public function ReadUserPekerja()
-    {
-        $data = [
-            'users' => User::all(),
-            'penangkarans' => Penangkaran::all(),
-            'kandangs' => Kandang::all(),
-        ];
-        return view('pengguna.pekerja', $data);
-    }
+
     // nambah user
     public function CreateUser(Request $request)
     {

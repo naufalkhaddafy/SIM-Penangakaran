@@ -19,6 +19,6 @@ class Pekerja
         if (auth()->user()->role == 'pekerja') {
             return $next($request);
         }
-        return $next($request);
+        return redirect('/dashboard');
     }
 }

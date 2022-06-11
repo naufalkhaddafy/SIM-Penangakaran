@@ -13,6 +13,10 @@ class KebersihanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
@@ -25,14 +29,14 @@ class KebersihanController extends Controller
      */
     public function CreateKebersihan()
     {
-        $datakebersihan=[
-            'kandang_id' =>Request()->kandang_id,
-            'tgl_pembersihan' =>Request()->tgl_pembersihan,
-            $jadwal_pembersihan=date('Y-m-d', strtotime('+2 days', strtotime(Request()->tgl_pembersihan))),
-            'jadwal_pembersihan' =>$jadwal_pembersihan,
+        $datakebersihan = [
+            'kandang_id' => Request()->kandang_id,
+            'tgl_pembersihan' => Request()->tgl_pembersihan,
+            $jadwal_pembersihan = date('Y-m-d', strtotime('+2 days', strtotime(Request()->tgl_pembersihan))),
+            'jadwal_pembersihan' => $jadwal_pembersihan,
         ];
         Kebersihan::Create($datakebersihan);
-        return redirect('dashboard')->with('create','Data Kandang Dibersihkan telah direkap');
+        return redirect('dashboard')->with('create', 'Data Kandang Dibersihkan telah direkap');
     }
 
     /**

@@ -47,16 +47,7 @@ class PenangkaranController extends Controller
 
         return view('penangkaran.modal.delete', compact('data'));
     }
-    // viewpenangkaran
-    public function ReadPenangkaran()
-    {
-        $data = [
-            'penangkarans' => Penangkaran::all(),
-        ];
 
-
-        return view('penangkaran.penangkaran', $data);
-    }
     public function ShowPenangkaran()
     {
         $data = [

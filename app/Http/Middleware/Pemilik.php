@@ -19,6 +19,6 @@ class Pemilik
         if (auth()->user()->role == 'pemilik') {
             return $next($request);
         }
-        return $next($request);
+        return redirect('/dashboard');
     }
 }

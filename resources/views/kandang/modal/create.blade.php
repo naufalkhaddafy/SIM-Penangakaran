@@ -8,22 +8,25 @@
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
-    <select name="indukan_pertama" id="indukan_pertama" class=" form-control " required>
-        <option value="" selected>Pilih Indukan Pertama</option>
-        @foreach ($produksis->where('status_produksi', 'Indukan') as $indukanpertama)
-            <option value="{{ $indukanpertama->id }}"> {{ $indukanpertama->kode_ring }}</option>
-        @endforeach
-    </select>
-</div>
-<div class="input-group mb-3">
-    <select name="indukan_kedua" id="indukan_kedua" class="form-control " required>
-        <option value="" selected>Pilih Indukan Kedua</option>
-        @foreach ($produksis->where('status_produksi', 'Indukan') as $indukankedua)
-            <option value="{{ $indukankedua->id }}" {{ $indukankedua->id }}> {{ $indukankedua->kode_ring }}
-            </option>
-        @endforeach
-    </select>
+<div class="row mb-3">
+    <div class="col-md-6">
+        <select name="indukan_pertama" id="indukan_pertama" class=" form-control " required>
+            <option value="" selected>Pilih Indukan Pertama</option>
+            @foreach ($produksis->where('status_produksi', 'Indukan') as $indukanpertama)
+                <option value="{{ $indukanpertama->id }}"> {{ $indukanpertama->kode_ring }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="col-md-6">
+        <select name="indukan_kedua" id="indukan_kedua" class="form-control " required>
+            <option value="" selected>Pilih Indukan Kedua</option>
+            @foreach ($produksis->where('status_produksi', 'Indukan') as $indukankedua)
+                <option value="{{ $indukankedua->id }}" {{ $indukankedua->id }}>
+                    {{ $indukankedua->kode_ring }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 </div>
 <div class="input-group mb-3">
     <input type="date" id="tgl_masuk_kandang" name="tgl_masuk_kandang" class="form-control" placeholder="Nama Kandang"

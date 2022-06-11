@@ -11,4 +11,30 @@ class PakanController extends Controller
     {
         $this->middleware('auth');
     }
+    //create pakan
+    public function CreatePakan()
+    {
+        $validatepakan = Request()->validate(
+            [
+                'kode_tempat' => 'required',
+                'nama_pakan' => 'required',
+                'expired' => 'required',
+                //'tgl_kadaluwarsa' =>'required',
+                // 'kategori' =>'required|unique:categories',
+
+            ],
+            [
+                'kode_tempat.required' => 'kode Harus di Isi',
+                'nama_pakan.required' => 'Harus diisi',
+                'expired.required' => 'Harus diisi',
+            ]
+        );
+        Pakan::insert($validatepakan);
+        return redirect()->back()->with('create', 'Berhasil Menambahkan');
+    }
+    public function DeletePakan($id)
+    {
+        Pakan::find($id)->delete();
+        return redirect()->back()->with('delete', 'Berhasil Menghapus Data Pakan');
+    }
 }
