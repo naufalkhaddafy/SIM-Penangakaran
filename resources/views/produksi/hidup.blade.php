@@ -6,15 +6,13 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-
                         <h3 class="card-title">
                             <div class="row">
-
                             </div>
                         </h3>
                     </div>
-                    <div class="readData"></div>
                     <div class="card-body">
+                        <div class="readData"></div>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -197,8 +195,8 @@
                                                                         class="form-control  @error('keterangan') is-invalid @enderror"
                                                                         id="keterangan" name="keterangan"
                                                                         value="{{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInMonths($tgl_today) }}
-                                                                Bulan
-                                                                {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari ">
+                                                                    Bulan
+                                                                    {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari ">
 
                                                                 </div>
                                                             </div>

@@ -12,8 +12,8 @@
                             </div>
                         </h3>
                     </div>
-                    <div class="readData"></div>
                     <div class="card-body">
+                        <div class="readData"></div>
                         <table id="example2" class="table table-bordered table-hover">
                             <thead align="center">
                                 <tr>

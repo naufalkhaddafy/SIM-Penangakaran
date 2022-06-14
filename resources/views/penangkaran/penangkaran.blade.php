@@ -9,7 +9,7 @@
                 <h3 class="card-title">
                     <td>
                         <button type="button" class="btn btn-block btn-outline-success" onclick="showCreate()">
-                            <ion-icon name="home"></ion-icon> <b>Tambah</b>
+                            <ion-icon name="location-sharp"></ion-icon> <b>Tambah</b>
                         </button>
                     </td>
                 </h3>

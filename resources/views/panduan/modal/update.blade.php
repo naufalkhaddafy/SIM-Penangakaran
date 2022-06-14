@@ -2,7 +2,8 @@
 <input type="hidden" id="user_id" name="user_id" class="form-control" value="{{ Auth::user()->id }}" required>
 
 <div class="input-group mb-3">
-    <input type="text" id="judul" name="judul" class="form-control" value="{{ $data->judul }}" required>
+    <input type="text" id="judul" name="judul" class="form-control" value="{{ $data->judul }}" placeholder="Judul"
+        required>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="text-outline"></ion-icon>
@@ -10,7 +11,7 @@
     </div>
 </div>
 <div class="input-group mb-3">
-    <textarea id="isi" name="isi" rows="5" class="form-control" required>{{ $data->isi }}</textarea>
+    <textarea id="isi" name="isi" rows="5" class="form-control" placeholder="Isi Panduan" required>{{ $data->isi }}</textarea>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="text-outline"></ion-icon>
@@ -18,12 +19,13 @@
     </div>
 </div>
 <div class="input-group mb-3">
-    <input type="text" id="kategori" name="kategori" class="form-control" value="{{ $data->kategori }}" required>
-    <div class="input-group-append">
-        <div class="input-group-text">
-            <ion-icon name="text-outline"></ion-icon>
-        </div>
-    </div>
+    <select name="kategori" id="kategori" class="form-control" required>
+        @foreach ($kategori as $kategori)
+            <option value="{{ $kategori }}" {{ $kategori == $data->kategori ? 'selected' : '' }}>
+                {{ $kategori }}
+            </option>
+        @endforeach
+    </select>
 </div>
 <div class="input-group mb-3">
     <select name="status" id="status" class="form-control" required>
@@ -59,7 +61,7 @@
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Merubah Data Kandang'
+                    title: 'Berhasil Merubah Data Panduan'
                 })
             },
             error: function(data) {

@@ -103,7 +103,16 @@ Route::get('/kandang/{id}/{namakandang}', [KandangController::class, 'RiwayatKan
 Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
 
 // Produksi [X]
-Route::post('/produksi-telur/{id}', [ProduksiController::class, 'CreateProduksiTelur'])->name('produksi.telur');
+Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
+Route::get('/modal-read-produksi/{id}', [ProduksiController::class, 'ModalRead']);
+Route::get('/modal-create-produksi/{id}', [ProduksiController::class, 'ModalCreate']);
+Route::get('/modal-update-produksi-inkubator/{id}', [ProduksiController::class, 'ModalUpdateInkubator']);
+Route::get('/modal-update-produksi-hidup/{id}', [ProduksiController::class, 'ModalUpdateHidup']);
+// Route::get('/modal-delete-produksi/{id}', [PanduanController::class, 'ModalDelete']);
+// Route::get('/show-produksi', [PanduanController::class, 'ShowPanduan']);
+
+
+Route::post('/produksi-telur', [ProduksiController::class, 'CreateProduksiTelur'])->name('create.produksi');
 Route::post('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
 Route::post('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
 Route::get('/produksi-inkubator', [ProduksiController::class, 'ProduksiInkubator'])->name('produksi.inkubator');

@@ -32,11 +32,17 @@ class PanduanController extends Controller
     public function ModalUpdate($id)
     {
         $data = Panduan::find($id);
+        $kategori = [
+            'Reproduksi' => 'Reproduksi',
+            'Perkandangan' => 'Perkandangan',
+            'Pakan' => 'Pakan',
+            'Perawatan' => 'Perawatan',
+        ];
         $status = [
             'publish' => 'publish',
             'draft' => 'draft',
         ];
-        return view('panduan.modal.update', compact('data', 'status'));
+        return view('panduan.modal.update', compact('data', 'status', 'kategori'));
     }
     public function ModalDelete($id)
     {

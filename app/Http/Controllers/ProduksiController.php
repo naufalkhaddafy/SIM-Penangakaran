@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jadwal;
+use App\Models\Kandang;
 use App\Models\Produksi;
 use App\Models\Penangkaran;
-use App\Models\Jadwal;
 use Illuminate\Http\Request;
 
 class ProduksiController extends Controller
@@ -13,14 +14,33 @@ class ProduksiController extends Controller
     {
         $this->middleware('auth');
     }
+    public function ShowProduksiInkubator()
+    {
+        $data = ([
+            'penangkarans' => Penangkaran::all(),
+            'produksis' => Produksi::all(),
+        ]);
+        return view('produksi.show_inkubator', $data);
+    }
+    public function ModalCreate($id)
+    {
+        $kandang = Kandang::find($id);
+        return view('produksi.modal.create', compact('kandang'));
+    }
+    public function ModalUpdateInkubator()
+    {
+        return view('produksi.modal.update_inkubator');
+    }
+    public function ModalUpdateHidup()
+    {
+        return view('produksi.modal.update_hidup');
+    }
     public function ProduksiInkubator()
     {
         $data = ([
             'penangkarans' => Penangkaran::all(),
             'produksis' => Produksi::all(),
         ]);
-
-
         return view('produksi.inkubator', $data);
     }
     public function ProduksiHidup()
@@ -42,7 +62,7 @@ class ProduksiController extends Controller
         ]);
         return view('produksi.mati', $data);
     }
-    public function CreateProduksiTelur($id)
+    public function CreateProduksiTelur()
     {
         $validateproduksi = Request()->validate([
             'kandang_id' => 'required',
@@ -55,9 +75,9 @@ class ProduksiController extends Controller
             'status_telur.required' => 'Harus di Isi',
             'tgl_masuk_inkubator.required' => 'Harus di Isi',
         ]);
+        $kandang_id = Request()->kandang_id;
         Produksi::create($validateproduksi);
-
-        $lastproduksi = Produksi::where('kandang_id', $id)->latest()->first();
+        $lastproduksi = Produksi::where('kandang_id', $kandang_id)->latest()->first();
         if ($lastproduksi->status_telur == 'pertama') {
             $tgl_akan_bertelur_start = date('Y-m-d', strtotime('+1 days', strtotime($lastproduksi->tgl_bertelur)));
             $tgl_akan_bertelur_end = date('Y-m-d', strtotime('+2 days', strtotime($lastproduksi->tgl_bertelur)));

@@ -1,5 +1,5 @@
 <table id="tableData" class="table table-bordered table-hover">
-    <thead>
+    <thead style="text-align:center">
         <tr>
             <th>Penangkaran</th>
             <th>Kode Tempat</th>
@@ -9,7 +9,7 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody style="text-align:center">
         <?php $no = 1; ?>
         @foreach ($pakans as $data)
             <tr>
@@ -18,9 +18,8 @@
                 <td>{{ $data->nama_pakan }}</td>
                 <td>{{ date('d F Y', strtotime($data->tgl_kadaluwarsa)) }}</td>
                 <td>{{ $data->status }}</td>
-                <td style="text-align:center">
-                    <button type="button" class="btn btn-default bg-danger" data-toggle="modal"
-                        data-target="{{ $data->id }}">
+                <td>
+                    <button type="button" class="btn btn-default bg-danger" onclick="showDelete({{ $data->id }})">
                         <ion-icon name="trash-outline"></ion-icon>
                     </button>
                 </td>

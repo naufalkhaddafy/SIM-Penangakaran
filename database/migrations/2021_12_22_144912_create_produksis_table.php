@@ -15,7 +15,7 @@ class CreateProduksisTable extends Migration
     {
         Schema::create('produksis', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('kandang_id')->nullable()->constrained('kandangs')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('kandang_id')->nullable()->constrained('kandangs')->nullOnDelete()->cascadeOnUpdate();
             $table->date('tgl_bertelur')->nullable();
             $table->string('indukan')->nullable();
             $table->enum('status_telur', ['pertama', 'kedua', 'ketiga'])->nullable();

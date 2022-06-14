@@ -26,6 +26,11 @@ class PakanController extends Controller
         $penangkarans =  Penangkaran::all();
         return view('pakan.modal.create', compact('penangkarans'));
     }
+    public function ModalDelete($id)
+    {
+        $data =  Pakan::find($id);
+        return view('pakan.modal.delete', compact('data'));
+    }
     //create pakan
     public function CreatePakan()
     {
@@ -52,6 +57,6 @@ class PakanController extends Controller
     public function DeletePakan($id)
     {
         Pakan::find($id)->delete();
-        return redirect()->back()->with('delete', 'Berhasil Menghapus Data Pakan');
+        // return redirect()->back()->with('delete', 'Berhasil Menghapus Data Pakan');
     }
 }

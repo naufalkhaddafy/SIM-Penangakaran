@@ -18,12 +18,13 @@
     </div>
 </div>
 <div class="input-group mb-3">
-    <input type="text" id="kategori" name="kategori" class="form-control" placeholder="Kategori Panduan" required>
-    <div class="input-group-append">
-        <div class="input-group-text">
-            <ion-icon name="text-outline"></ion-icon>
-        </div>
-    </div>
+    <select name="kategori" id="kategori" class="form-control" required>
+        <option value="" selected>Kategori Panduan</option>
+        <option value="Reproduksi">Reproduksi</option>
+        <option value="Perkandangan"> Perkandangan</option>
+        <option value="Pakan"> Pakan</option>
+        <option value="Perawatan"> Perawatan</option>
+    </select>
 </div>
 <div class="input-group mb-3">
     <select name="status" id="status" class="form-control" required>
@@ -57,7 +58,7 @@
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Menambahkan Data Kandang'
+                    title: 'Berhasil Menambahkan Data Panduan'
                 })
             },
             error: function(data) {

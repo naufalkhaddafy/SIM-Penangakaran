@@ -39,6 +39,7 @@
         <option value="Baru">Baru</option>
         <option value="Setengah">Setengah</option>
         <option value="Habis">Habis</option>
+        <option value="Kadaluwarsa">Kadaluwarsa</option>
     </select>
 </div>
 <script>
@@ -66,7 +67,7 @@
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Menambahkan Data Kandang'
+                    title: 'Berhasil Menambahkan Data Pakan'
                 })
             },
             error: function(data) {

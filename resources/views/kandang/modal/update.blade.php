@@ -1,7 +1,7 @@
 <div id="error"></div>
 <div class="input-group mb-3">
     <input type="text" id="nama_kandang" name="nama_kandang" class="form-control" value="{{ $data->nama_kandang }}"
-        required>
+        placeholder="Nama Kandang" required>
     <div class=" input-group-append">
         <div class="input-group-text">
             <ion-icon name="code-slash"></ion-icon>

@@ -167,7 +167,7 @@
                                     </div>
                                     <div class="card">
                                         <div class="card-header border-0">
-                                            <h5 style="text-align:center"><b>Informasi Kandang</b></h5>
+                                            <h5 style="text-align:center"><b>Informasi Produksi Kandang</b></h5>
                                         </div>
                                         {{-- produktif --}}
                                         <div style="text-align:center" class="bg-lime p-md-2">
@@ -209,8 +209,7 @@
                                                                 <td>
                                                                     <button type="button"
                                                                         class="btn btn-default  btn-outline-success"
-                                                                        data-toggle="modal"
-                                                                        data-target="{{ url('#modal-create' . $data->id) }}">
+                                                                        onclick="showCreate({{ $data->id }})">
                                                                         <ion-icon name="add"></ion-icon>
                                                                     </button>
                                                                 </td>
@@ -220,75 +219,79 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        {{-- tidak produktif --}}
-                                        <div style="text-align:center" class="bg-warning p-md-2">
-                                            <h6><b>Tidak Produktif</b></h6>
-                                        </div>
-                                        <div class="card-body table-responsive p-0">
-                                            <table class="table table-striped table-valign-middle">
-                                                <thead align="center">
-                                                    <tr>
-                                                        <th>Kandang</th>
-                                                        <th>Masuk Kandang</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody align="center">
-                                                    @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
-                                                        @if ($data->kategori == 'Tidak Produktif')
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                {{-- tidak produktif --}}
+                                                <div style="text-align:center" class="bg-warning p-md-2">
+                                                    <h6><b>Tidak Produktif</b></h6>
+                                                </div>
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-striped table-valign-middle">
+                                                        <thead align="center">
                                                             <tr>
-                                                                <td>
-                                                                    {{ $data->nama_kandang }}
-                                                                </td>
-                                                                <td>
-                                                                    {{ date('d F Y', strtotime($data->tgl_masuk_kandang)) }}
-                                                                </td>
-                                                                <td>
-                                                                    <a href="#" class="text-muted">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </td>
+                                                                <th>Kandang</th>
+                                                                <th>Masuk Kandang</th>
+                                                                <th>Status</th>
                                                             </tr>
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        {{-- ganti bulu --}}
-                                        <div style="text-align:center" class="bg-lightblue p-md-2">
-                                            <h6><b>Ganti Bulu</b></h6>
-                                        </div>
-                                        <div class="card-body table-responsive p-0">
-                                            <table class="table table-striped table-valign-middle">
-                                                <thead align="center">
-                                                    <tr>
-                                                        <th>Kandang</th>
-                                                        <th>Terakhir Bertelur</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody align="center">
-                                                    @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
-                                                        @if ($data->kategori == 'Ganti Bulu')
+                                                        </thead>
+                                                        <tbody align="center">
+                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                                @if ($data->kategori == 'Tidak Produktif')
+                                                                    <tr>
+                                                                        <td>
+                                                                            {{ $data->nama_kandang }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ date('d F Y', strtotime($data->tgl_masuk_kandang)) }}
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#" class="text-muted">
+                                                                                <i class="fas fa-search"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{-- ganti bulu --}}
+                                                <div style="text-align:center" class="bg-lightblue p-md-2">
+                                                    <h6><b>Ganti Bulu</b></h6>
+                                                </div>
+                                                <div class="card-body table-responsive p-0">
+                                                    <table class="table table-striped table-valign-middle">
+                                                        <thead align="center">
                                                             <tr>
-                                                                <td>
-                                                                    {{ $data->nama_kandang }}
-                                                                </td>
-                                                                <td>
-                                                                    {{-- @foreach ($data->kebersihans as $d)
-                                                                    {{ date('d F Y', strtotime($d->kebersihan->jadwal_pembersihan)) }}
-                                                                    @endforeach --}}
-                                                                </td>
-                                                                <td>
-                                                                    <a href="#" class="text-muted">
-                                                                        <i class="fas fa-search"></i>
-                                                                    </a>
-                                                                </td>
+                                                                <th>Kandang</th>
+                                                                <th>Terakhir Bertelur</th>
+                                                                <th>Status</th>
                                                             </tr>
-                                                        @endif
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                        </thead>
+                                                        <tbody align="center">
+                                                            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                                                                @if ($data->kategori == 'Ganti Bulu')
+                                                                    <tr>
+                                                                        <td>
+                                                                            {{ $data->nama_kandang }}
+                                                                        </td>
+                                                                        <td>{{ optional($data->produksis->last())->tgl_bertelur == !null ? date('d F Y', strtotime(optional($data->produksis->last())->tgl_bertelur)) : 'Belum Ada Produksi' }}
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="#" class="text-muted">
+                                                                                <i class="fas fa-search"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endif
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="card">
@@ -339,7 +342,7 @@
                     </div>
                 </div>
                 {{-- Modal create Produksi --}}
-                @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                {{-- @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
                     @if ($data->kategori == 'Produktif')
                         <div class="modal fade" id="modal-create{{ $data->id }}">
                             <div class="modal-dialog">
@@ -354,7 +357,6 @@
                                     <div class="modal-body">
                                         <form action="{{ url('/produksi-telur' . '/' . $data->id) }}" method="POST">
                                             @csrf
-
                                             <div class="card-body">
                                                 <div class="form-group">
                                                     <label for="TanggalBertelur">Tanggal Bertelur Hari ini
@@ -376,10 +378,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="StatusTelur">Status Telur</label>
-                                                    {{-- <input type="input"
-                                                        class="form-control  @error('status_telur') is-invalid @enderror"
-                                                        id="status_telur" name="status_telur"
-                                                        value="{{ $d->status_telur }}" required> --}}
+
                                                     <select name="status_telur" id="status_telur"
                                                         class="form-control @error('statur_telur') is-invalid @enderror"
                                                         required>
@@ -416,7 +415,27 @@
                             </div>
                         </div>
                     @endif
-                @endforeach
+                @endforeach --}}
+                <div class="modal fade " id="showModal">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modalLabel"></h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body" id="showModalBody">
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" id="btnClose" class="btn btn-default"
+                                    data-dismiss="modal">Close</button>
+                                <button type="submit" id="btnSubmit" class="btn btn-info"></button>
+                                <button type="submit" id="btnDelete" class="btn btn-danger"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{-- Modal Create Kebersihan --}}
                 @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
                     <div class="modal fade" id="modal-createkebersihan{{ $data->id }}">
@@ -459,3 +478,17 @@
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        function showCreate(id) {
+            $.get("{{ url('/modal-create-produksi') }}/" + id, function(data) {
+                $('#modalLabel').text('Tambah Data Telur Baru')
+                $('#showModalBody').html(data);
+                $('#showModal').modal('show');
+                $('#btnClose').show();
+                $('#btnSubmit').show().text('Tambah').attr('onclick', 'tambah()');
+                $('#btnDelete').hide();
+            });
+        }
+    </script>
+@endpush

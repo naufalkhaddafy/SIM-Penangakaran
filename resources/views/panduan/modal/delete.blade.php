@@ -19,7 +19,7 @@
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Menghapus Data Penangkaran'
+                    title: 'Berhasil Menghapus Data Panduan'
                 })
             }
         });
