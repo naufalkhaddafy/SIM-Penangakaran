@@ -9,7 +9,6 @@
         </tr>
     </thead>
     <tbody align="center">
-
         @foreach (auth()->user()->penangkaran->kandangs ?? [] as $auth)
             @foreach ($auth->produksis->where('status_produksi', 'Inkubator') as $data)
                 <tr>

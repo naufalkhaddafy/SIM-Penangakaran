@@ -8,22 +8,29 @@
         </div>
     </div>
 </div>
-<div class="row mb-3">
-    <div class="col-md-6">
+<div class="row">
+    <div class="col-md-6 mb-3">
         <select name="indukan_pertama" id="indukan_pertama" class=" form-control " required>
             <option value="" selected>Pilih Indukan Pertama</option>
-            @foreach ($produksis->where('status_produksi', 'Indukan') as $indukanpertama)
-                <option value="{{ $indukanpertama->id }}"> {{ $indukanpertama->kode_ring }}</option>
+            @foreach ($produksis as $indukanpertama)
+                @if ($indukanpertama->indukans == null)
+                    <option value="{{ $indukanpertama->id }}"> {{ $indukanpertama->kode_ring }}</option>
+                @endif
             @endforeach
         </select>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 mb-3">
         <select name="indukan_kedua" id="indukan_kedua" class="form-control " required>
             <option value="" selected>Pilih Indukan Kedua</option>
-            @foreach ($produksis->where('status_produksi', 'Indukan') as $indukankedua)
+            {{-- @foreach ($produksis->where('status_produksi', 'Indukan') as $indukankedua)
                 <option value="{{ $indukankedua->id }}" {{ $indukankedua->id }}>
                     {{ $indukankedua->kode_ring }}
                 </option>
+            @endforeach --}}
+            @foreach ($produksis as $indukankedua)
+                @if ($indukankedua->indukans == null)
+                    <option value="{{ $indukankedua->id }}"> {{ $indukankedua->kode_ring }}</option>
+                @endif
             @endforeach
         </select>
     </div>
@@ -51,6 +58,17 @@
 </div>
 <script>
     function tambah() {
+        // var indukan_pertama = $('#indukan_pertama').val();
+        // var indukan_kedua = $('#indukan_kedua').val();
+        // if (indukan_pertama == indukan_kedua) {
+        //     $('#error').html(
+        //         '<div class="alert alert-danger alert-dismissible">' +
+        //         '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' +
+        //         '<h5><i class="icon fas fa-ban"></i> Perhatian!</h5>' +
+        //         '<ul>' + 'Indukan Tidak Boleh Sama' + '</ul>' +
+        //         '</div>'
+        //     );
+        // } else {}
         $.ajax({
             url: '{{ route('create.kandang') }}',
             type: 'POST',
@@ -96,5 +114,7 @@
                 );
             }
         });
+
+
     }
 </script>

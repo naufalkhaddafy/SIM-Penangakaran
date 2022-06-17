@@ -52,7 +52,19 @@
                                                     <b class="text-success">{{ $data->kategori }}</b><br>
                                                     <b></b>
                                                 </h5>
-                                                <br>
+                                                <h6 class="card-text"> Indukan<br>
+                                                    <b class="text-success">
+                                                        {{-- <a href="#">{{ $data->indukan }}</a> --}}
+                                                        @foreach ($data->indukans as $indukan)
+                                                            <a href="#">{{ optional($indukan->produksi)->kode_ring }}
+                                                            </a>
+                                                        @endforeach
+
+                                                    </b>
+                                                </h6>
+                                                <h5 class="card-text">Masuk Kandang<br>
+                                                    <b class="text-danger">{{ $data->tgl_masuk_kandang }}</b><br>
+                                                </h5>
                                                 <a href="{{ url('kandang' . '/' . $data->id . '/' . $data->nama_kandang) }}"
                                                     class="btn btn-primary">Detail Kandang</a>
                                             </div>

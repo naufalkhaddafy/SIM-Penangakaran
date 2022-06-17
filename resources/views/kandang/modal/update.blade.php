@@ -8,6 +8,45 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <select name="indukan_pertama" id="indukan_pertama" class=" form-control " required>
+            {{-- @foreach ($produksis->where('status_produksi', 'Indukan') as $produksi)
+                <option value="{{ $produksi->id }}"
+                    {{ $produksi->id == $indukanPertama->produksi_id ? ' selected' : '' }}>
+                    {{ $produksi->kode_ring }} </option>
+            @endforeach --}}
+            {{-- <option value="{{ $indukanPertama->id }}" selected> {{ $indukanPertama->kode_ring }} </option> --}}
+            <option value="{{ $indukanPertama->produksi_id }}" selected>{{ $indukanPertama->produksi->kode_ring }}
+            </option>
+            @foreach ($produksis as $indukanpertama)
+                @if ($indukanpertama->indukans == null)
+                    <option value="{{ $indukanpertama->id }}"> {{ $indukanpertama->kode_ring }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+    <div class="col-md-6 mb-3">
+        <select name="indukan_kedua" id="indukan_kedua" class="form-control " required>
+            <option value="{{ $indukanKedua->produksi_id }}" selected>{{ $indukanKedua->produksi->kode_ring }}
+            </option>
+            @foreach ($produksis as $indukankedua)
+                @if ($indukankedua->indukans == null)
+                    <option value="{{ $indukankedua->id }}"> {{ $indukankedua->kode_ring }}</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+</div>
+<div class="input-group mb-3">
+    <input type="date" id="tgl_masuk_kandang" name="tgl_masuk_kandang" value="{{ $data->tgl_masuk_kandang }}"
+        class="form-control" placeholder="Nama Kandang" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="calendar"></ion-icon>
+        </div>
+    </div>
+</div>
 <div class="input-group mb-3">
     <select name="kategori" id="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
         @foreach ($kategori as $kategori)
@@ -30,6 +69,9 @@
                 "_token": "{{ csrf_token() }}",
                 nama_kandang: $('#nama_kandang').val(),
                 kategori: $('#kategori').val(),
+                indukan_pertama: $('#indukan_pertama').val(),
+                indukan_kedua: $('#indukan_kedua').val(),
+                tgl_masuk_kandang: $('#tgl_masuk_kandang').val(),
                 penangkaran_id: $('#penangkaran_id').val(),
             },
             // dataType: 'json',

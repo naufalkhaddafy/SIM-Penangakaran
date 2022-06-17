@@ -25,20 +25,37 @@ class KandangController extends Controller
     public function ModalCreate($id)
     {
         $penangkarans = Penangkaran::find($id);
-        $produksis = Produksi::all();
+        // $produksis = Produksi::all();
+        $produksis = Produksi::with('indukans')->where('status_produksi', 'Indukan')->get();
+        // $tes = [];
+        // foreach ($allProduksi as $produksi) {
+        //     if ($produksi->indukans == null) {
+        //         $tes[] = $produksi;
+        //     }
+        // }
+        // return response()->json($tes);
 
         return view('kandang.modal.create', compact('penangkarans', 'produksis'));
     }
     public function ModalUpdate($id)
     {
-        $data = Kandang::find($id);
+        $data = Kandang::with('penangkaran', 'indukans')->find($id);
+        $produksis = Produksi::with('indukans')->where('status_produksi', 'Indukan')->get();
+        $indukan = $data->indukans;
+        foreach ($indukan->where('status', 'Pertama') as $indukanPertama) {
+            $indukanPertama = $indukanPertama;
+        }
+        foreach ($indukan->where('status', 'Kedua') as $indukanKedua) {
+            $indukanKedua = $indukanKedua;
+        }
+
         $penangkarans = Penangkaran::all();
         $kategori = [
             'Produktif' => 'Produktif',
             'Tidak Produktif' => 'Tidak Produktif',
             'Ganti Bulu' => 'Ganti Bulu',
         ];
-        return view('kandang.modal.update', compact('data', 'penangkarans', 'kategori'));
+        return view('kandang.modal.update', compact('data', 'penangkarans', 'kategori', 'indukanPertama', 'indukanKedua', 'produksis'));
     }
     public function ModalDelete($id)
     {
@@ -58,89 +75,143 @@ class KandangController extends Controller
         return view('kandang.show', $data);
     }
     //create kandang
-    public function CreateKandang()
+    // public function CreateKandang()
+    // {
+    //     // $validatekandang = Request()->validate([
+    //     //     'nama_kandang' => 'required',
+    //     //     'tgl_masuk_kandang' => 'required',
+    //     //     'kategori' => 'required',
+    //     //     'penangkaran_id' => 'required',
+    //     // ], [
+    //     //     'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+    //     //     'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
+    //     //     'kategori.required' => 'Kategori Kandang Harus di Isi',
+    //     //     'penangkaran_id.required' => 'Kategori Kandang Harus di Isi',
+    //     // ]);
+    //     $rules = [
+    //         'nama_kandang' => 'required',
+    //         'tgl_masuk_kandang' => 'required',
+    //         'kategori' => 'required',
+    //         'penangkaran_id' => 'required',
+    //         'produksi_id' => 'required|unique:indukans',
+    //     ];
+    //     $input1 = [
+    //         'nama_kandang' => Request()->nama_kandang,
+    //         'tgl_masuk_kandang' => Request()->tgl_masuk_kandang,
+    //         'kategori' => Request()->kategori,
+    //         'penangkaran_id' => Request()->penangkaran_id,
+    //         'produksi_id' => Request()->indukan_pertama,
+    //         'produksi_id' => Request()->indukan_kedua,
+    //     ];
+    //     $pesan1 = [
+    //         'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+    //         'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
+    //         'kategori.required' => 'Kategori Kandang Harus di Isi',
+    //         'penangkaran_id.required' => 'Penangkaran Tidak Terdeteksi',
+    //         'produksi_id.required' => 'Indukan Pertama dan Kedua Harus di isi',
+    //         'produksi_id.unique' => 'Indukan Sudah Ada',
+    //     ];
+    //     // $input2 = [
+    //     //     'produksi_id' => Request()->indukan_kedua,
+    //     // ];
+    //     // $pesan2 = [
+    //     //     'required' => 'Indukan Kedua Harus di isi',
+    //     //     'unique' => 'Indukan Kedua Sudah Ada',
+    //     // ];
+    //     $validatekandang = Validator::make($input1, $rules, $pesan1)->validate();
+    //     // Validator::make($input2, $rules, $pesan2)->validate();
+    //     if (Request()->indukan_pertama == Request()->indukan_kedua) {
+    //         return response()->json(array('error' => 'salah'));
+    //         exit;
+    //     } else {
+    //     }
+    //     Kandang::create($validatekandang);
+    //     $lastkandang = Kandang::get()->last();
+    //     $indukan = [
+    //         [
+    //             'kandang_id' => $lastkandang->id,
+    //             'produksi_id' => Request()->indukan_pertama,
+    //             'status' => 'Pertama',
+    //         ],
+    //         [
+    //             'kandang_id' => $lastkandang->id,
+    //             'produksi_id' => Request()->indukan_kedua,
+    //             'status' => 'Kedua',
+    //         ]
+    //     ];
+    //     foreach ($indukan as $data) {
+    //         Indukan::create($data);
+    //     }
+    // }
+    public function CreateKandang(Request $request)
     {
-        $validatekandang = Request()->validate([
+        $validatekandang = $request->validate([
             'nama_kandang' => 'required',
             'tgl_masuk_kandang' => 'required',
             'kategori' => 'required',
             'penangkaran_id' => 'required',
+            'indukan_pertama' => 'required',
+            'indukan_kedua' => 'required|different:indukan_pertama',
         ], [
             'nama_kandang.required' => 'Nama Kandang Harus di Isi',
             'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
             'kategori.required' => 'Kategori Kandang Harus di Isi',
             'penangkaran_id.required' => 'Kategori Kandang Harus di Isi',
+            'indukan_pertama.required' => 'Indukan Pertama Harus di Isi',
+            'indukan_kedua.required' => 'Indukan Kedua Harus di Isi',
+            'indukan_kedua.different' => 'Indukan Pertama dan Kedua Harus Beda',
         ]);
-        $rules = [
-            'produksi_id' => 'required|unique:indukans,produksi_id',
-        ];
-        $input1 = [
-            'produksi_id' => Request()->indukan_pertama,
-        ];
-        $pesan1 = [
-            'required' => 'Indukan Pertama Harus di isi',
-            'unique' => 'Indukan Pertama Sudah Ada',
-        ];
-        $input2 = [
-            'produksi_id' => Request()->indukan_kedua,
-        ];
-        $pesan2 = [
-            'required' => 'Indukan Kedua Harus di isi',
-            'unique' => 'Indukan Kedua Sudah Ada',
-        ];
-        Validator::make($input1, $rules, $pesan1)->validate();
-        Validator::make($input2, $rules, $pesan2)->validate();
-        Kandang::create($validatekandang);
-        $lastkandang = Kandang::get()->last();
+
+        $kandang = Kandang::create([
+            'nama_kandang' => $request->nama_kandang,
+            'tgl_masuk_kandang' => $request->tgl_masuk_kandang,
+            'kategori' => $request->kategori,
+            'penangkaran_id' => $request->penangkaran_id,
+        ]);
+
+        Indukan::create([
+            'kandang_id' => $kandang->id,
+            'produksi_id' => $request->indukan_pertama,
+            'status' => 'Pertama',
+        ]);
+        Indukan::create([
+            'kandang_id' => $kandang->id,
+            'produksi_id' => $request->indukan_kedua,
+            'status' => 'Kedua',
+        ]);
+    }
+    public function UpdateKandang(Request $request, $id)
+    {
+        $validatekandang = $request->validate([
+            'nama_kandang' => 'required',
+            'tgl_masuk_kandang' => 'required',
+            'kategori' => 'required',
+            'penangkaran_id' => 'required',
+            'indukan_pertama' => 'required',
+            'indukan_kedua' => 'required|different:indukan_pertama',
+        ], [
+            'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+            'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
+            'kategori.required' => 'Kategori Kandang Harus di Isi',
+            'penangkaran_id.required' => 'Penangkara Tidak Terdeteksi',
+            'indukan_pertama.required' => 'Indukan Pertama Harus di Isi',
+            'indukan_kedua.required' => 'Indukan Kedua Harus di Isi',
+            'indukan_kedua.different' => 'Indukan Pertama dan Kedua Harus Beda',
+        ]);
+        Kandang::find($id)->update($validatekandang);
         $indukan = [
             [
-                'kandang_id' => $lastkandang->id,
                 'produksi_id' => Request()->indukan_pertama,
                 'status' => 'Pertama',
             ],
             [
-                'kandang_id' => $lastkandang->id,
                 'produksi_id' => Request()->indukan_kedua,
                 'status' => 'Kedua',
             ]
         ];
-        foreach ($indukan as $data) {
-            Indukan::create($data);
-        }
-        // Indukan::create();
-        // Validator::make([
-        //     'nama_kandang' => Request()->nama_kandang,
-        //     'tgl_masuk_kandang' => Request()->tgl_masuk_kandang,
-        //     'kategori' => Request()->kategori,
-        //     'penangkaran_id' => Request()->penangkaran_id,
-        //     'produksi_id' => Request()->indukan_pertama,
-        // ], [
-        //     'nama_kandang' => 'required',
-        //     'tgl_masuk_kandang' => 'required',
-        //     'kategori' => 'required',
-        //     'penangkaran_id' => 'required',
-        //     'produksi_id' => 'required|unique:indukans',
-        //     'produksi_id' => 'required|unique:indukans',
-        // ], [
-        //     'nama_kandang.required' => 'Nama Kandang Harus di Isi',
-        //     'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
-        //     'kategori.required' => 'Kategori Kandang Harus di Isi',
-        //     'penangkaran_id.required' => 'Penangkaran tidak terdeteksi',
-        //     'produksi_id.required' => 'Indukan Harus di Isi',
-        //     'produksi_id.unique' => 'Indukan Sudah Ada',
-        // ])->validate();
-    }
-    public function UpdateKandang($id)
-    {
-        $validatekandang = Request()->validate([
-            'nama_kandang' => 'required',
-            'kategori' => 'required',
-            'penangkaran_id' => 'required'
-        ], [
-            'nama_kandang.required' => 'Nama Kandang Harus di Isi',
-            'kategori.required' => 'Kategori Kandang Harus di Isi',
-        ]);
-        Kandang::find($id)->update($validatekandang);
+
+        Indukan::where('kandang_id', $id)->where('status', 'Pertama')->update($indukan[0]);
+        Indukan::where('kandang_id', $id)->where('status', 'Kedua')->update($indukan[1]);
     }
     //delete kandang
     public function DeleteKandang($id)
