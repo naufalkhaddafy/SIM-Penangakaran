@@ -417,7 +417,7 @@
                     @endif
                 @endforeach --}}
                 <div class="modal fade " id="showModal">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog modal-default">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="modalLabel"></h4>

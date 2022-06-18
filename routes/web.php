@@ -1,22 +1,58 @@
 <?php
 
+use App\Models\Jadwal;
+use App\Models\Kandang;
+use App\Models\Produksi;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PenangkaranController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PakanController;
 use App\Http\Controllers\KandangController;
-use App\Http\Controllers\HasilProduksiController;
-use App\Http\Controllers\ProduksiController;
-use App\Http\Controllers\KebersihanController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\PekerjaController;
 use App\Http\Controllers\PemilikController;
-use App\Http\Controllers\PakanController;
+use App\Http\Controllers\ProduksiController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KebersihanController;
+use App\Http\Controllers\PenangkaranController;
+use App\Http\Controllers\HasilProduksiController;
 
 
 Route::resource('users', 'UserController');
+Route::get('/tes', function () {
+    //get relation produksis table
+    $allProduksi = Produksi::all()->load('kandang', 'jadwal');
+    //get all produksi not null by kandang data
+    $NotNullProduksi = [];
+    foreach ($allProduksi as $produksi) {
+        if ($produksi->kandang !== null) {
+            $NotNullProduksi[] = $produksi;
+        }
+    }
+    //collect data last produksi based on kandang
+    $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+        return $item->last();
+    });
+    //get value jadwal from
+    $JadwalProduksi = $LastProduksiByKandang->map(function ($item) {
+        return $item->jadwal;
+    });
+    //Update kategori kandang berdasarkan tanggal
+    $UpdateKandang = $JadwalProduksi->map(function ($item) {
+        if ($item->tgl_akan_bertelur_end < date('Y-m-d')) {
+            //get id kandang from $item
+            $item->produksi->kandang->kategori = 'Ganti Bulu';
+            $item->produksi->kandang->save();
+            // return 'Success Get Function';
+        } else {
+            // must give a notifikasi
+            // return 'Tidak Update';
+        }
+        return $item;
+    });
+    // return response()->json($UpdateKandang);
+});
 
 Route::get('/', function () {
     return view('page');
@@ -104,6 +140,7 @@ Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersiha
 
 // Produksi [X]
 Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
+Route::get('/show-produksi-hidup', [ProduksiController::class, 'ShowProduksiHidup']);
 Route::get('/modal-read-produksi/{id}', [ProduksiController::class, 'ModalRead']);
 Route::get('/modal-create-produksi/{id}', [ProduksiController::class, 'ModalCreate']);
 Route::get('/modal-update-produksi-inkubator/{id}', [ProduksiController::class, 'ModalUpdateInkubator']);
@@ -113,7 +150,7 @@ Route::get('/modal-update-produksi-hidup/{id}', [ProduksiController::class, 'Mod
 
 
 Route::post('/produksi-telur', [ProduksiController::class, 'CreateProduksiTelur'])->name('create.produksi');
-Route::post('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
+Route::patch('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
 Route::post('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
 Route::get('/produksi-inkubator', [ProduksiController::class, 'ProduksiInkubator'])->name('produksi.inkubator');
 Route::get('/produksi-hidup', [ProduksiController::class, 'ProduksiHidup'])->name('produksi.hidup');

@@ -19,8 +19,8 @@
                     </td>
                     <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                         {{ $data->status_telur }} </td>
-                    <td><button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                            data-target="{{ url('#modal-update' . $data->id) }}">
+                    <td><button type="button" class="btn btn-default  btn-outline-success"
+                            onclick="showUpdate({{ $data->id }})">
                             <ion-icon name="open-outline"></ion-icon>
                         </button>
                     </td>

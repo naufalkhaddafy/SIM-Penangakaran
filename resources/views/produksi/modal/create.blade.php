@@ -1,3 +1,4 @@
+<div id="error"></div>
 <div class="card-body">
     <div class="form-group">
         <label for="TanggalBertelur">Tanggal Bertelur Hari ini
@@ -48,6 +49,7 @@
                     icon: 'success',
                     title: 'Berhasil Menambahkan Data Produksi'
                 })
+
             },
             error: function(data) {
                 var response = data.responseJSON;

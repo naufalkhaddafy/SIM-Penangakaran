@@ -22,18 +22,30 @@ class ProduksiController extends Controller
         ]);
         return view('produksi.show_inkubator', $data);
     }
+    public function ShowProduksiHidup()
+    {
+        $data = ([
+            'penangkarans' => Penangkaran::all(),
+            'produksis' => Produksi::all(),
+        ]);
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('produksi.show_hidup', $data, compact('tgl_today'));
+    }
     public function ModalCreate($id)
     {
         $kandang = Kandang::find($id);
         return view('produksi.modal.create', compact('kandang'));
     }
-    public function ModalUpdateInkubator()
+    public function ModalUpdateInkubator($id)
     {
-        return view('produksi.modal.update_inkubator');
+        $data = Produksi::find($id);
+        return view('produksi.modal.update_inkubator', compact('data'));
     }
-    public function ModalUpdateHidup()
+    public function ModalUpdateHidup($id)
     {
-        return view('produksi.modal.update_hidup');
+        $data = Produksi::find($id);
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('produksi.modal.update_hidup', compact('data', 'tgl_today'));
     }
     public function ProduksiInkubator()
     {
@@ -69,11 +81,13 @@ class ProduksiController extends Controller
             'tgl_bertelur' => 'required',
             'status_telur' => 'required',
             'tgl_masuk_inkubator' => 'required',
+            'kode_tempat_inkubator' => 'required',
         ], [
             'kandang_id.required' => 'Harus di Isi',
             'tgl_bertelur.required' => 'Harus di Isi',
-            'status_telur.required' => 'Harus di Isi',
+            'status_telur.required' => 'Status Telur Harus di Isi',
             'tgl_masuk_inkubator.required' => 'Harus di Isi',
+            'kode_tempat_inkubator.required' => 'Kode Tempat Harus di Isi',
         ]);
         $kandang_id = Request()->kandang_id;
         Produksi::create($validateproduksi);
@@ -104,12 +118,35 @@ class ProduksiController extends Controller
     }
     public function UpdateProduksiInkubator($id)
     {
-        $dataproduksiinkubator = [
-            'tgl_menetas' => Request()->tgl_menetas,
-            'status_produksi' => 'Hidup',
-        ];
+        $validate = Request()->validate(
+            [
+                'status_produksi' => 'required',
+            ],
+            [
+                'status_produksi.required' => 'Pilih Status Telur',
+            ]
+        );
+        if (Request()->status_produksi == 'Hidup') {
+            $dataproduksiinkubator = [
+                'tgl_menetas' => Request()->tgl_menetas,
+                'status_produksi' => 'Hidup',
+            ];
+        } elseif (Request()->status_produksi == 'Mati') {
+            $data = Request()->validate([
+                'keterangan' => 'required',
+            ], [
+                'keterangan.required' => 'Keterangan Harus di Isi',
+            ]);
+            $dataproduksiinkubator = [
+                'tgl_menetas' => Request()->tgl_menetas,
+                'status_produksi' => 'Mati',
+                'keterangan' => Request()->keterangan,
+            ];
+        } else {
+            abort(404);
+        }
         Produksi::find($id)->update($dataproduksiinkubator);
-        return redirect('produksi-hidup')->with('update', 'Data Telur Hidup Berhasil di update');
+        // return redirect('produksi-hidup')->with('update', 'Data Telur Hidup Berhasil di update');
     }
     public function UpdateProduksiHidup($id)
     {

@@ -15,7 +15,7 @@
         value="{{ old('lokasi_penangkaran') }}" required>
     <div class="input-group-append">
         <div class="input-group-text">
-            <ion-icon name="home"></ion-icon>
+            <ion-icon name="location-sharp"></ion-icon>
         </div>
     </div>
 </div>

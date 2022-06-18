@@ -30,8 +30,8 @@
                             data-target="{{ url('#modal-read' . $data->id) }}">
                             <ion-icon name="search"></ion-icon>
                         </button>
-                        <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                            data-target="{{ url('#modal-update' . $data->id) }}">
+                        <button type="button" class="btn btn-default  btn-outline-success"
+                            onclick="showUpdate({{ $data->id }})">
                             <ion-icon name="open-outline"></ion-icon>
                         </button>
                     </td>

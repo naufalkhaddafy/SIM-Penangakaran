@@ -153,20 +153,17 @@
             <section class="content">
                 @if (session('create'))
                     <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
                     </div>
                 @elseif(session('delete'))
                     <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h6><i class="icon fas fa-check"></i>{{ session('delete') }}</h6>
                     </div>
                 @elseif(session('update'))
                     <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button>
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
                     </div>
                 @endif
@@ -203,7 +200,8 @@
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong> Made With <ion-icon name="heart-outline"></ion-icon> by <a href="#"></a>we never know</strong>
+            <strong> Made With <ion-icon name="heart-outline"></ion-icon> by <a href="#"></a>we never
+                know</strong>
             <div class="float-right d-none d-sm-inline-block">
                 <b>SGT Bird Farm</b>
             </div>
@@ -216,6 +214,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+    {{-- Sweet Alert --}}
     @include('sweetalert::alert')
     <!-- jQuery -->
     <script src="{{ asset('template') }}/plugins/jquery/jquery.min.js"></script>
