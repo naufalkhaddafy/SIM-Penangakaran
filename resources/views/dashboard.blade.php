@@ -245,9 +245,11 @@
                                                                             {{ date('d F Y', strtotime($data->tgl_masuk_kandang)) }}
                                                                         </td>
                                                                         <td>
-                                                                            <a href="#" class="text-muted">
-                                                                                <i class="fas fa-search"></i>
-                                                                            </a>
+                                                                            <button type="button"
+                                                                                class="btn btn-default  btn-outline-success"
+                                                                                onclick="showCreate({{ $data->id }})">
+                                                                                <ion-icon name="add"></ion-icon>
+                                                                            </button>
                                                                         </td>
                                                                     </tr>
                                                                 @endif
@@ -281,9 +283,11 @@
 
                                                                         </td>
                                                                         <td>
-                                                                            <a href="#" class="text-muted">
-                                                                                <i class="fas fa-search"></i>
-                                                                            </a>
+                                                                            <button type="button"
+                                                                                class="btn btn-default  btn-outline-success"
+                                                                                onclick="showCreate({{ $data->id }})">
+                                                                                <ion-icon name="add"></ion-icon>
+                                                                            </button>
                                                                         </td>
                                                                     </tr>
                                                                 @endif

@@ -114,6 +114,7 @@ class ProduksiController extends Controller
             'kode_tempat_inkubator' => Request()->kode_tempat_inkubator,
         ];
         Jadwal::create($tambahjadwal);
+        Kandang::find($kandang_id)->update(['kategori' => 'Produktif']);
         return redirect('produksi-inkubator')->with('create', 'Berhasil Menambahkan Produksi Telur');
     }
     public function UpdateProduksiInkubator($id)

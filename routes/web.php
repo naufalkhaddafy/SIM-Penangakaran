@@ -25,32 +25,32 @@ Route::get('/tes', function () {
     $allProduksi = Produksi::all()->load('kandang', 'jadwal');
     //get all produksi not null by kandang data
     $NotNullProduksi = [];
-    foreach ($allProduksi as $produksi) {
+    foreach ($allProduksi->where('status_produksi', 'Inkubator') as $produksi) {
         if ($produksi->kandang !== null) {
             $NotNullProduksi[] = $produksi;
         }
     }
     //collect data last produksi based on kandang
-    $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
-        return $item->last();
-    });
+    // $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+    //     return $item->all();
+    // });
     //get value jadwal from
-    $JadwalProduksi = $LastProduksiByKandang->map(function ($item) {
+    $JadwalProduksi = collect($NotNullProduksi)->map(function ($item) {
         return $item->jadwal;
     });
     //Update kategori kandang berdasarkan tanggal
-    $UpdateKandang = $JadwalProduksi->map(function ($item) {
-        if ($item->tgl_akan_bertelur_end < date('Y-m-d')) {
-            //get id kandang from $item
-            $item->produksi->kandang->kategori = 'Ganti Bulu';
-            $item->produksi->kandang->save();
-            // return 'Success Get Function';
-        } else {
-            // must give a notifikasi
-            // return 'Tidak Update';
-        }
-        return $item;
-    });
+    // $UpdateKandang = $JadwalProduksi->map(function ($item) {
+    //     if ($item->tgl_akan_menetas_end < date('Y-m-d')) {
+    //         //get id kandang from $item
+    //         $item->produksi->status_produksi = 'Mati';
+    //         $item->produksi->save();
+    //         // return 'Success Get Function';
+    //     } else {
+    //         // must give a notifikasi
+    //         // return 'Tidak Update';
+    //     }
+    //     return $item;
+    // });
     // return response()->json($UpdateKandang);
 });
 
