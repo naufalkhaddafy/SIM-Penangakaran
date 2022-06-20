@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('template.admin-lte')
 @section('title', 'Hasil Produksi Hidup')
 @section('content')
     <div class="container-fluid">
@@ -8,8 +8,7 @@
                     <div class="card-header">
                         @if (session('create'))
                             <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
                             </div>
                         @elseif(session('delete'))

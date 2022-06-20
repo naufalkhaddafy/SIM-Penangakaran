@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-arfa.template')
 @section('title', 'Produksi Inkubator')
 @section('content')
     <div class="container-fluid">

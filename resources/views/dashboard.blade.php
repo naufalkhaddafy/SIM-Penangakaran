@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-arfa.template')
 @section('title', 'Dashboard')
 
 @section('content')
@@ -155,7 +155,7 @@
                                                             <td>{{ $data->status }}</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-default bg-warning"
-                                                                    data-toggle="modal" data-target="{{ $data->id }}">
+                                                                    onclick="showUpdate({{ $data->id }})">
                                                                     <ion-icon name="open-outline"></ion-icon>
                                                                 </button>
                                                             </td>
@@ -491,6 +491,17 @@
                 $('#showModal').modal('show');
                 $('#btnClose').show();
                 $('#btnSubmit').show().text('Tambah').attr('onclick', 'tambah()');
+                $('#btnDelete').hide();
+            });
+        }
+
+        function showUpdate(id) {
+            $.get("{{ url('/modal-update-pakan') }}/" + id, function(data) {
+                $('#modalLabel').text('Update Data Pakan')
+                $('#showModalBody').html(data);
+                $('#showModal').modal('show');
+                $('#btnClose').show();
+                $('#btnSubmit').show().text('Update').attr('onclick', 'update()');
                 $('#btnDelete').hide();
             });
         }

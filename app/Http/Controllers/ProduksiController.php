@@ -162,7 +162,7 @@ class ProduksiController extends Controller
                 'status_produksi' => 'Hidup',
             ];
             Produksi::find($id)->update($dataproduksihidup);
-            return redirect('produksi-hidup')->with('update', 'Data Produksi Berhasil di update');
+            // return redirect('produksi-hidup')->with('update', 'Data Produksi Berhasil di update');
         } elseif ($statusproduksi['status_produksi'] == 'Mati') {
 
             $dataproduksimati = [
@@ -172,7 +172,7 @@ class ProduksiController extends Controller
                 'keterangan' => Request()->keterangan,
             ];
             Produksi::find($id)->update($dataproduksimati);
-            return redirect('produksi-mati')->with('update', 'Data Produksi Mati Berhasil ditambahkan');
+            // return redirect('produksi-mati')->with('update', 'Data Produksi Mati Berhasil ditambahkan');
         }
     }
 }

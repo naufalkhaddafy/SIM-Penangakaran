@@ -26,6 +26,17 @@ class PakanController extends Controller
         $penangkarans =  Penangkaran::all();
         return view('pakan.modal.create', compact('penangkarans'));
     }
+    public function ModalUpdate($id)
+    {
+        $pakans =  Pakan::find($id);
+        $status = [
+            'Baru' => 'Baru',
+            'Setengah' => 'Setengah',
+            'Habis' => 'Habis',
+            'Kadaluwarsa' => 'Kadaluwarsa',
+        ];
+        return view('pakan.modal.update', compact('pakans', 'status'));
+    }
     public function ModalDelete($id)
     {
         $data =  Pakan::find($id);
@@ -53,6 +64,21 @@ class PakanController extends Controller
         );
         Pakan::create($validatepakan);
         // return redirect()->back()->with('create', 'Berhasil Menambahkan');
+    }
+    //update pakan
+    public function UpdatePakan($id)
+    {
+        $validate = Request()->validate(
+            [
+                'status' => 'required',
+            ],
+            [
+                'status.required' => 'Status Harus diisi',
+            ]
+        );
+        Pakan::find($id)->update([
+            'status' => $validate['status'],
+        ]);
     }
     public function DeletePakan($id)
     {

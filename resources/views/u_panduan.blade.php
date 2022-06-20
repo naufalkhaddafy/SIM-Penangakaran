@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-lte.template')
 @section('title', 'Panduan')
 
 @section('content')

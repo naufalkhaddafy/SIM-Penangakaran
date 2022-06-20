@@ -39,6 +39,7 @@
             // dataType: 'json',
             success: function(data) {
                 $('.close').click();
+                readJadwal()
                 var Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',

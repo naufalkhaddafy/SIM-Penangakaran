@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-lte.template')
 @section('title')
     Detail Penangkaran {{ $penangkarans->lokasi_penangkaran }}
 @endsection
@@ -18,7 +18,7 @@
                         </h3>
                     </div>
                     <div class="card-body">
-                        
+
                         <div id="readData"></div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-lte.template')
 @section('title')
     Kandang {{ $kandangs->nama_kandang }}
 @endsection

@@ -51,8 +51,20 @@ Route::get('/tes', function () {
     //     }
     //     return $item;
     // });
-    // return response()->json($UpdateKandang);
+    return response()->json([
+        'message' => 'Successfully create new progress',
+        'JadwalProduksi' => $JadwalProduksi,
+    ], 200);
 });
+
+Route::get('/', function () {
+    return view('page');
+});
+
+Route::get('/arfa', function () {
+    return view('admin-arfa.template');
+});
+
 
 Route::get('/', function () {
     return view('page');
@@ -66,6 +78,13 @@ Route::post('/register', [RegisterController::class, 'CreateUser'])->name('regis
 
 // dashboard
 Route::get('/dashboard', [DashboardController::class, 'ReadDashboard'])->name('dashboard');
+Route::get('/dashboard/jadwal', [DashboardController::class, 'ReadDashboardJadwal']);
+Route::get('/dashboard/pakan', [DashboardController::class, 'ReadDashboardPakan']);
+Route::get('/dashboard/kebersihan', [DashboardController::class, 'ReadDashboardKebersihan']);
+
+
+
+
 
 // middleware group
 Route::middleware(['pemilik'])->group(function () {
@@ -108,7 +127,6 @@ Route::middleware(['pemilik'])->group(function () {
     // Pakan [X]
     Route::get('/modal-read-pakan/{id}', [PakanController::class, 'ModalRead']);
     Route::get('/modal-create-pakan', [PakanController::class, 'ModalCreate']);
-    Route::get('/modal-update-pakan/{id}', [PakanController::class, 'ModalUpdate']);
     Route::get('/modal-delete-pakan/{id}', [PakanController::class, 'ModalDelete']);
     Route::get('/show-pakan', [PakanController::class, 'ShowPakan']);
     Route::post('/pakan', [PakanController::class, 'CreatePakan'])->name('create.pakan');
@@ -128,6 +146,9 @@ Route::middleware(['pekerja'])->group(function () {
     // User Pekerja
     Route::get('/detail-kandang', [PekerjaController::class, 'DetailKandang'])->name('detail.kandang');
     Route::get('/Panduan-Pekerja-Perawatan', [PekerjaController::class, 'ReadPanduan'])->name('user.panduan');
+    //pakan
+    Route::get('/modal-update-pakan/{id}', [PakanController::class, 'ModalUpdate']);
+    Route::post('/update-pakan/{id}', [PakanController::class, 'UpdatePakan'])->name('update.pakan');
 });
 
 
@@ -148,10 +169,9 @@ Route::get('/modal-update-produksi-hidup/{id}', [ProduksiController::class, 'Mod
 // Route::get('/modal-delete-produksi/{id}', [PanduanController::class, 'ModalDelete']);
 // Route::get('/show-produksi', [PanduanController::class, 'ShowPanduan']);
 
-
 Route::post('/produksi-telur', [ProduksiController::class, 'CreateProduksiTelur'])->name('create.produksi');
 Route::patch('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
-Route::post('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
+Route::patch('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
 Route::get('/produksi-inkubator', [ProduksiController::class, 'ProduksiInkubator'])->name('produksi.inkubator');
 Route::get('/produksi-hidup', [ProduksiController::class, 'ProduksiHidup'])->name('produksi.hidup');
 Route::get('/produksi-mati', [ProduksiController::class, 'ProduksiMati'])->name('produksi.mati');

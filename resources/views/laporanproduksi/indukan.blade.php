@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-lte.template')
 @section('title', 'Data Indukan')
 @section('content')
     <div class="container-fluid">
