@@ -2,9 +2,9 @@
     <div class="card-header border-0">
         <h5 style="text-align:center"><b>Pakan Tersedia</b></h5>
     </div>
-    <div class="card-body table-responsive p-0">
-        <table class="table table-striped table-valign-middle">
-            <thead>
+    <div class="table-responsive">
+        <table class="table table-valign-middle">
+            <thead align="center">
                 <tr>
                     <th>Kode Tempat</th>
                     <th>Nama Pakan</th>
@@ -13,7 +13,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody align="center">
                 @foreach (Auth::user()->penangkaran->pakans as $data)
                     <tr>
                         <td>{{ $data->kode_tempat }}</td>
@@ -23,7 +23,7 @@
                         <td>
                             <button type="button" class="btn btn-default bg-warning"
                                 onclick="showUpdate({{ $data->id }})">
-                                <ion-icon name="open-outline"></ion-icon>
+                                <i class="ti-pencil-alt"></i>
                             </button>
                         </td>
                     </tr>

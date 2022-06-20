@@ -3,7 +3,7 @@
         <h5 style="text-align:center"><b>Kebersihan Kandang</b></h5>
     </div>
     <div class="card-body table-responsive p-0">
-        <table class="table table-striped table-valign-middle">
+        <table class="table table-valign-middlee">
             <thead align="center">
                 <tr>
                     <th>Kandang</th>
@@ -27,9 +27,9 @@
                         @endif
                         <td></td>
                         <td>
-                            <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
+                            <button type="button" class="btn mb-2 btn-light" data-toggle="modal"
                                 data-target="{{ url('#modal-createkebersihan' . $data->id) }}">
-                                <ion-icon name="add"></ion-icon>
+                                <i class="ti-plus"></i>
                             </button>
                         </td>
                     </tr>

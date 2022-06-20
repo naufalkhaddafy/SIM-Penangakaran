@@ -1,4 +1,4 @@
-@extends('admin-lte.template')
+@extends('admin-arfa.template')
 @section('title', 'Panduan')
 
 @section('content')

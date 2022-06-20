@@ -40,7 +40,7 @@
         @endforeach
     </tbody>
 </table>
-<script>
+{{-- <script>
     $(function() {
         $("#example1").DataTable({
             "responsive": true,
@@ -58,4 +58,4 @@
             "responsive": true,
         });
     });
-</script>
+</script> --}}

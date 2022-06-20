@@ -2,8 +2,7 @@
 @section('title', 'Dashboard')
 
 @section('content')
-
-    <div class="container-fluid">
+    <div class="content-wrapper">
         @if (session('login'))
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -111,51 +110,49 @@
                 </div>
             </div>
         @elseif(Auth::user()->role == 'pekerja')
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            {{-- <div class="card-header">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        {{-- <div class="card-header">
                                 </div> --}}
-                            <div class="card-body">
-                                <br>
-                                <div style="text-align:center">
-                                    {{-- <h3><b>HALAMAN PEKERJA</b></h3> --}}
-                                    <h3><b>Selamat Datang</b></h3>
-                                    <h3> {{ Auth::user()->nama_lengkap }} </h3>
-                                    <h3> <b>Tanggal</b> </h3>
-                                    <h4>{{ date('l, d F Y') }} </h4>
-                                    <h3> <b>Lokasi Penangkaran</b>
-                                        <h4> {{ optional(Auth::user()->penangkaran)->lokasi_penangkaran ?? 'Lokasi Penangkaran Belum Tersedia' }}
-                                        </h4>
-                                        {{-- {{ Auth::user() }} --}}
-                                </div>
-                                <br>
-                                <div id="readPakan"></div>
-                                <div id="readJadwal"></div>
-                                <div id="readKebersihan"></div>
+                        <div class="card-body">
+                            <br>
+                            <div style="text-align:center">
+                                {{-- <h3><b>HALAMAN PEKERJA</b></h3> --}}
+                                <h3><b>Selamat Datang</b></h3>
+                                <h3> {{ Auth::user()->nama_lengkap }} </h3>
+                                <h3> <b>Tanggal</b> </h3>
+                                <h4>{{ date('l, d F Y') }} </h4>
+                                <h3> <b>Lokasi Penangkaran</b>
+                                    <h4> {{ optional(Auth::user()->penangkaran)->lokasi_penangkaran ?? 'Lokasi Penangkaran Belum Tersedia' }}
+                                    </h4>
+                                    {{-- {{ Auth::user() }} --}}
                             </div>
+                            <br>
+                            <div id="readPakan"></div>
+                            <div id="readJadwal"></div>
+                            <div id="readKebersihan"></div>
                         </div>
                     </div>
                 </div>
             </div>
             {{-- Dynamic Modal --}}
-            <div class="modal fade " id="showModal">
-                <div class="modal-dialog modal-default">
+            <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="showModal" aria-hidden="true">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="modalLabel"></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h5 class="modal-title" id="modalLabel"></h5>
+                            <button type="button" class="btn-close" id="close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
                         <div class="modal-body" id="showModalBody">
+
                         </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" id="btnClose" class="btn btn-default"
-                                data-dismiss="modal">Close</button>
-                            <button type="submit" id="btnSubmit" class="btn btn-info"></button>
-                            <button type="submit" id="btnDelete" class="btn btn-danger"></button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="btnClose"
+                                data-bs-dismiss="modal">Close</button>
+                            <button type="button" id="btnSubmit" class="btn btn-primary"></button>
+                            <button type="button" id="btnDelete" class="btn btn-primary"></button>
                         </div>
                     </div>
                 </div>
@@ -200,7 +197,6 @@
             @endforeach
         @endif
     </div>
-
 @endsection
 @push('js')
     <script>

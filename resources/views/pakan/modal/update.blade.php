@@ -1,6 +1,6 @@
 <div class="input-group mb-3">
     <label for="status"></label>
-    <select name="status" id="status" class="form-control" required>
+    <select name="status" id="status" class="form-control form-select mb-3" required>
         @foreach ($status as $data)
             <option value="{{ $data }}" {{ $data == $pakans->status ? 'selected' : '' }}>{{ $data }}
             </option>

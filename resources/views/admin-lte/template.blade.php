@@ -169,7 +169,6 @@
                         <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
                     </div>
                 @endif
-
                 @yield('content')
                 <div class="modal fade" id="modal-sm">
                     <div class="modal-dialog modal-sm">
