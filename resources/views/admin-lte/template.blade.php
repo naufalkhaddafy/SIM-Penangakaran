@@ -114,7 +114,7 @@
                         </div><!-- /.col -->
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
-            </div> a
+            </div>
             <!-- /.content-header -->
             {{-- <!-- Main content -->
             <section class="content">
