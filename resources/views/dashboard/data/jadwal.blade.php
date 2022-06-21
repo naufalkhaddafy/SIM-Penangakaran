@@ -3,7 +3,7 @@
         <h5 style="text-align:center"><b>Informasi Produksi Kandang</b></h5>
     </div>
     {{-- produktif --}}
-    <div style="text-align:center" class="bg-lime p-md-2">
+    <div style="text-align:center" class="bg-lime p-2">
         <h6><b>Produktif</b></h6>
     </div>
     <div class="card-body table-responsive p-0">
@@ -54,7 +54,7 @@
     <div class="row">
         <div class="col-md-6">
             {{-- tidak produktif --}}
-            <div style="text-align:center" class="bg-warning p-md-2">
+            <div style="text-align:center" class="bg-lightblue p-2">
                 <h6><b>Tidak Produktif</b></h6>
             </div>
             <div class="card-body table-responsive p-0">
@@ -91,8 +91,8 @@
         </div>
         <div class="col-md-6">
             {{-- ganti bulu --}}
-            <div style="text-align:center" class="bg-lightblue p-md-2">
-                <h6><b>Ganti Bulu</b></h6>
+            <div style="text-align:center" class="bg-warning p-2">
+                <h6 class="text-white"><b>Ganti Bulu</b></h6>
             </div>
             <div class="card-body table-responsive p-0">
                 <table class="table table-striped table-valign-middle">

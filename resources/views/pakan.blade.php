@@ -1,4 +1,4 @@
-@extends('template.template')
+@extends('admin-lte.template')
 @section('title', 'Supply Pakan')
 @section('content')
     <div class="container-fluid">
@@ -8,8 +8,7 @@
                     <div class="card-header">
                         @if (session('create'))
                             <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
                             </div>
                         @elseif(session('delete'))
@@ -153,7 +152,8 @@
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
-                        <a href='{{ url('/pakan/delete/' . $data->id) }}' type="button" class="btn btn-danger">Delete</a>
+                        <a href='{{ url('/pakan/delete/' . $data->id) }}' type="button"
+                            class="btn btn-danger">Delete</a>
                     </div>
                 </div>
 
