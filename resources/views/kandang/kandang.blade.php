@@ -18,7 +18,6 @@
                         </h3>
                     </div>
                     <div class="card-body">
-
                         <div id="readData"></div>
                     </div>
                 </div>

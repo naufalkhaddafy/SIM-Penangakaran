@@ -15,7 +15,9 @@
             <tr>
                 <td>{{ $no++ }}</td>
                 <td>{{ $data->judul }}</td>
-                <td><a type="button" onclick="showRead({{ $data->id }})">isi</a></td>
+                <td>
+                    <textarea rows="8" cols="50" readonly>{{ $data->isi }}</textarea>
+                </td>
                 <td>{{ $data->kategori }}</td>
                 <td>{{ $data->status }}</td>
                 <td style="text-align:center">

@@ -223,9 +223,10 @@ class KandangController extends Controller
 
     public function RiwayatKandang($id)
     {
-        $data = ([
-            'kandangs' => Kandang::find($id),
-        ]);
-        return view('kandang.riwayatkandang', $data);
+        $kandang = Kandang::with('produksis')->get();
+        $kandangs = $kandang->find($id);
+        $produksis = $kandangs->produksis;
+
+        return view('kandang.riwayatkandang', compact('kandangs', 'produksis'));
     }
 }

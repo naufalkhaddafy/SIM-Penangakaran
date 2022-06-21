@@ -1,4 +1,4 @@
-@extends('admin-arfa.template')
+@extends('admin-lte.template')
 @section('title', 'Dashboard')
 
 @section('content')

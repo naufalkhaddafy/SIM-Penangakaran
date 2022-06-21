@@ -3,11 +3,19 @@
         <h5 align="center"><b>Informasi Produksi Kandang</b></h5>
     </div>
     {{-- produktif --}}
+<<<<<<< HEAD
     <div style="text-align:center" class="bg-success p-2">
         <h6 class="text-white"><b>Produktif</b></h6>
     </div>
     {{-- <div class="card-body table-responsive p-0">
         <table class="table table-striped table-valign-middle">
+=======
+    <div style="text-align:center" class="bg-lime p-2">
+        <h6 class="text-white"><b>Produktif</b></h6>
+    </div>
+    <div class="card-body table-responsive p-0">
+        <table class="table table-valign-middle">
+>>>>>>> b1
             <thead>
                 <tr align="center">
                     <th>Kandang</th>
@@ -23,12 +31,13 @@
                             <td>
                                 {{ $data->nama_kandang }}
                             </td>
-                            <td class="m-3 p-2 badge bg-success">
-                                @if (optional($data->produksis->last())->status_telur == 'pertama')
-                                    Kedua
-                                @elseif(optional($data->produksis->last())->status_telur == 'kedua')
-                                    Pertama
-                                @endif
+                            <td> <span class="badge badge-success">
+                                    @if (optional($data->produksis->last())->status_telur == 'pertama')
+                                        Kedua
+                                    @elseif(optional($data->produksis->last())->status_telur == 'kedua')
+                                        Pertama
+                                    @endif
+                                </span>
                             </td>
                             <td class="text-danger"><b>
                                     @foreach ($data->produksis as $d)
@@ -102,8 +111,13 @@
     <div class="row">
         <div class="col-md-6">
             {{-- tidak produktif --}}
+<<<<<<< HEAD
             <div style="text-align:center" class="bg-info p-2">
                 <h6 class="text-white"><b>Tidak Produktif</b></h6>
+=======
+            <div style="text-align:center" class="bg-lightblue p-2">
+                <h6><b>Tidak Produktif</b></h6>
+>>>>>>> b1
             </div>
             <div class="card-body table-responsive p-0">
                 <table class="table table-valign-middle">
