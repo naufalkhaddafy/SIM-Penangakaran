@@ -5,7 +5,7 @@
     <div class="card-body table-responsive p-0">
         <table class="table table-striped table-valign-middle">
             <thead>
-                <tr>
+                <tr align="center">
                     <th>Kode Tempat</th>
                     <th>Nama Pakan</th>
                     <th>Kadaluwarsa</th>
@@ -13,16 +13,19 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach (Auth::user()->penangkaran->pakans as $data)
+            <tbody align="center">
+                @foreach (Auth::user()->penangkaran->pakans ?? [] as $data)
                     <tr>
                         <td>{{ $data->kode_tempat }}</td>
                         <td>{{ $data->nama_pakan }}</td>
                         <td>{{ $data->tgl_kadaluwarsa }}</td>
-                        <td>{{ $data->status }}</td>
                         <td>
-                            <button type="button" class="btn btn-default bg-warning"
-                                onclick="showUpdate({{ $data->id }})">
+                            <span class="badge badge-danger">
+                                {{ $data->status }}
+                            </span>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-default " onclick="showUpdate({{ $data->id }})">
                                 <ion-icon name="open-outline"></ion-icon>
                             </button>
                         </td>

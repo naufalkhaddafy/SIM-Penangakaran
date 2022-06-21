@@ -22,10 +22,11 @@ use App\Http\Controllers\HasilProduksiController;
 Route::resource('users', 'UserController');
 Route::get('/tes', function () {
     //get relation produksis table
-    $allProduksi = Produksi::all()->load('kandang', 'jadwal');
+    // $allProduksi = Produksi::all()->load('kandang');
+    $allProduksi = Produksi::with('kandang')->get();
     //get all produksi not null by kandang data
     $NotNullProduksi = [];
-    foreach ($allProduksi->where('status_produksi', 'Inkubator') as $produksi) {
+    foreach ($allProduksi as $produksi) {
         if ($produksi->kandang !== null) {
             $NotNullProduksi[] = $produksi;
         }
@@ -35,8 +36,8 @@ Route::get('/tes', function () {
     //     return $item->all();
     // });
     //get value jadwal from
-    $JadwalProduksi = collect($NotNullProduksi)->map(function ($item) {
-        return $item->jadwal;
+    $JadwalProduksi = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+        return $item;
     });
     //Update kategori kandang berdasarkan tanggal
     // $UpdateKandang = $JadwalProduksi->map(function ($item) {
@@ -51,10 +52,11 @@ Route::get('/tes', function () {
     //     }
     //     return $item;
     // });
-    return response()->json([
-        'message' => 'Successfully create new progress',
-        'JadwalProduksi' => $JadwalProduksi,
-    ], 200);
+    return response()->json($JadwalProduksi);
+    // return response()->json([
+    //     'message' => 'Successfully create new progress',
+    //     'JadwalProduksi' => $JadwalProduksi,
+    // ], 200);
 });
 
 Route::get('/', function () {

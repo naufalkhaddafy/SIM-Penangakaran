@@ -45,7 +45,11 @@ class ProduksiController extends Controller
     {
         $data = Produksi::find($id);
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
-        return view('produksi.modal.update_hidup', compact('data', 'tgl_today'));
+        $jk = [
+            'Jantan' => 'Jantan',
+            'Betina' => 'Betina',
+        ];
+        return view('produksi.modal.update_hidup', compact('data', 'tgl_today', 'jk'));
     }
     public function ProduksiInkubator()
     {
@@ -62,7 +66,6 @@ class ProduksiController extends Controller
             'produksis' => Produksi::all(),
 
         ]);
-
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
         return view('produksi.hidup', $data, compact('tgl_today'));
     }

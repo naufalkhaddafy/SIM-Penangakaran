@@ -4,10 +4,10 @@
     </div>
     {{-- produktif --}}
     <div style="text-align:center" class="bg-lime p-2">
-        <h6><b>Produktif</b></h6>
+        <h6 class="text-white"><b>Produktif</b></h6>
     </div>
     <div class="card-body table-responsive p-0">
-        <table class="table table-striped table-valign-middle">
+        <table class="table table-valign-middle">
             <thead>
                 <tr align="center">
                     <th>Kandang</th>
@@ -23,12 +23,13 @@
                             <td>
                                 {{ $data->nama_kandang }}
                             </td>
-                            <td class="m-3 p-2 badge bg-success">
-                                @if (optional($data->produksis->last())->status_telur == 'pertama')
-                                    Kedua
-                                @elseif(optional($data->produksis->last())->status_telur == 'kedua')
-                                    Pertama
-                                @endif
+                            <td> <span class="badge badge-success">
+                                    @if (optional($data->produksis->last())->status_telur == 'pertama')
+                                        Kedua
+                                    @elseif(optional($data->produksis->last())->status_telur == 'kedua')
+                                        Pertama
+                                    @endif
+                                </span>
                             </td>
                             <td class="text-danger"><b>
                                     @foreach ($data->produksis as $d)
@@ -58,7 +59,7 @@
                 <h6><b>Tidak Produktif</b></h6>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-valign-middle">
+                <table class="table table-valign-middle">
                     <thead align="center">
                         <tr>
                             <th>Kandang</th>
@@ -95,7 +96,7 @@
                 <h6 class="text-white"><b>Ganti Bulu</b></h6>
             </div>
             <div class="card-body table-responsive p-0">
-                <table class="table table-striped table-valign-middle">
+                <table class="table table-valign-middle">
                     <thead align="center">
                         <tr>
                             <th>Kandang</th>

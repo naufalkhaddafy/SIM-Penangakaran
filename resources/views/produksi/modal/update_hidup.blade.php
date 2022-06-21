@@ -3,39 +3,27 @@
         <label for="kode_ring">Kode Ring</label>
         <input type="input" class="form-control  @error('kode_ring') is-invalid @enderror" id="kode_ring" name="kode_ring"
             value="{{ $data->kode_ring }}" placeholder="Masukan Kode Ring">
-        @error('kode_ring')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
         <label for="jeniskelamin">Jenis Kelamin</label>
-        <select name="jenis_kelamin" id="jenis_kelamin"
-            class="form-control @error('jenis_kelamin') is-invalid @enderror">
+        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
             <option value="" selected>Jenis Kelamin</option>
-            <option value="Jantan">Jantan</option>
-            <option value="Betina">Betina</option>
+            @foreach ($jk as $jk)
+                <option value="{{ $jk }}" {{ $jk == $data->jenis_kelamin ? 'selected' : '' }}>
+                    {{ $jk }}
+                </option>
+            @endforeach
+            {{-- <option value="Jantan">Jantan</option>
+            <option value="Betina">Betina</option> --}}
         </select>
-        @error('jenis_kelamin')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
         <label for="status_produksi">Kondisi Burung</label>
-        <select name="status_produksi" id="status_produksi"
-            class="form-control @error('status_produksi') is-invalid @enderror" required>
+        <select name="status_produksi" id="status_produksi" class="form-control" required>
             <option value="{{ $data->status_produksi }}" selected>{{ $data->status_produksi }}
             </option>
             <option value="Mati">Mati</option>
         </select>
-        @error('status_produksi')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-        <input type="hidden" class="form-control  @error('keterangan') is-invalid @enderror" id="keterangan"
-            name="keterangan"
-            value="{{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInMonths($tgl_today) }}
-            Bulan {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari ">
+    </div>
+    <div id="keterangan-form" class="form-group">
+        <label for="Keterangan">Keterangan</label>
+        <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5"></textarea>
     </div>
 </div>
 <script>
@@ -58,8 +46,9 @@
             type: 'PATCH',
             data: {
                 "_token": "{{ csrf_token() }}",
-                tgl_menetas: $('#tgl_menetas').val(),
+                kode_ring: $('#kode_ring').val(),
                 status_produksi: $('#status_produksi').val(),
+                jenis_kelamin: $('#jenis_kelamin').val(),
                 keterangan: $('#keterangan').val(),
             },
             // dataType: 'json',

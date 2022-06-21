@@ -47,41 +47,7 @@
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
-                            class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
-                    </a>
-                </li>
-            </ul>
-
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item">
-                    {{-- <button type="button" class="btn btn-block btn-outline-success" data-toggle="modal"
-                        data-target="#logout">
-                        <ion-icon name="exit-outline"></ion-icon> Logout
-                    </button> --}}
-                    <button type="button" class="btn btn-block btn-outline-dark" data-toggle="modal"
-                        data-target="#modal-sm">
-                        <ion-icon name="exit-outline"></ion-icon> Logout
-                    </button>
-                </li>
-
-                {{-- <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#"
-                        role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li> --}}
-            </ul>
+            @include('admin-lte.navbar')
         </nav>
         <!-- /.navbar -->
 
@@ -121,7 +87,7 @@
                 </div>
                 <nav class="mt-2">
                     <!-- Sidebar Menu -->
-                    @include('admin-lte.navbar')
+                    @include('admin-lte.sidebar')
                     <!-- /.sidebar-menu -->
                 </nav>
             </div>
@@ -150,7 +116,7 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-            <!-- Main content -->
+            {{-- <!-- Main content -->
             <section class="content">
                 @if (session('create'))
                     <div class="alert alert-success alert-dismissible">
@@ -168,45 +134,40 @@
                             aria-hidden="true">&times;</button>
                         <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
                     </div>
-                @endif
-
-                @yield('content')
-                <div class="modal fade" id="modal-sm">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Logout</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p> Apakah anda ingin keluar ??</p>
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">
-                                        <ion-icon name="exit-outline"></ion-icon> Logout
-                                    </button>
-                                </form>
-                            </div>
+                @endif --}}
+            @yield('content')
+            <div class="modal fade" id="modal-sm">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Logout</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                        <!-- /.modal-content -->
+                        <div class="modal-body">
+                            <p> Apakah anda ingin keluar ??</p>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger">
+                                    <ion-icon name="exit-outline"></ion-icon> Logout
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                    <!-- /.modal-dialog -->
+                    <!-- /.modal-content -->
                 </div>
+                <!-- /.modal-dialog -->
+            </div>
             </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong> Made With <ion-icon name="heart-outline"></ion-icon> by <a href="#"></a>we never
-                know</strong>
-            <div class="float-right d-none d-sm-inline-block">
-                <b>SGT Bird Farm</b>
-            </div>
+            @include('admin-lte.footer')
         </footer>
 
         <!-- Control Sidebar -->
