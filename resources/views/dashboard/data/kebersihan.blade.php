@@ -21,14 +21,16 @@
                         @if ($data->kebersihans->last() == null)
                             <td>Belum ada</td>
                         @elseif(!$data->kebersihans->last() == null)
-                            <td class="text-danger">
-                                {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
+                            <td>
+                                <b class="text-danger">
+                                    {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
+                                </b>
                             </td>
                         @endif
-                        <td></td>
+                        <td>{{ $data->kebersihans->last()->status ?? 'Tidak ada' }}</td>
                         <td>
-                            <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                                data-target="{{ url('#modal-createkebersihan' . $data->id) }}">
+                            <button type="button" class="btn btn-default  btn-outline-success"
+                                onclick="showCreateKebersihan({{ $data->id }})">
                                 <ion-icon name="add"></ion-icon>
                             </button>
                         </td>

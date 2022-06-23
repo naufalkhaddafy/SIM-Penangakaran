@@ -25,7 +25,8 @@
                             </span>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-default " onclick="showUpdate({{ $data->id }})">
+                            <button type="button" class="btn btn-default "
+                                onclick="showUpdatePakan({{ $data->id }})">
                                 <ion-icon name="open-outline"></ion-icon>
                             </button>
                         </td>

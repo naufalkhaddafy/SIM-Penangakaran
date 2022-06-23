@@ -45,13 +45,18 @@ class JadwalProkdusi extends Command
         $JadwalProduksi = $LastProduksiByKandang->map(function ($item) {
             return $item->jadwal;
         });
+
         //Update kategori kandang berdasarkan tanggal
         $UpdateKandang = $JadwalProduksi->map(function ($item) {
-            if ($item->tgl_akan_bertelur_end < date('Y-m-d')) {
+            $today = date('Y-m-d');
+            if ($item->tgl_akan_bertelur_end < $today) {
                 //get id kandang from $item
                 $item->produksi->kandang->kategori = 'Ganti Bulu';
                 $item->produksi->kandang->save();
                 // return 'Success Get Function';
+            } elseif ($item->tgl_akan_bertelur_start >= $today || $today <= $item->tgl_akan_bertelur_end) {
+                # must give a notifikasi
+
             } else {
                 // must give a notifikasi
                 // return 'Tidak Update';

@@ -2,15 +2,14 @@
 @section('title', 'Dashboard')
 
 @section('content')
-
     <div class="container-fluid">
-        @if (session('login'))
+        {{-- @if (session('login'))
             <div class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                 <h6><i class="icon fas fa-check"></i>{{ session('login') }}</h6>
                 <h5>Selamat Datang {{ Auth::user()->nama_lengkap }}</h5>
             </div>
-        @endif
+        @endif --}}
         @if (Auth::user()->role == 'pemilik')
             <div class="row">
                 <div class="col-lg-3 col-6">
@@ -139,68 +138,28 @@
                     </div>
                 </div>
             </div>
-            {{-- Dynamic Modal --}}
-            <div class="modal fade " id="showModal">
-                <div class="modal-dialog modal-default">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="modalLabel"></h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body" id="showModalBody">
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" id="btnClose" class="btn btn-default"
-                                data-dismiss="modal">Close</button>
-                            <button type="submit" id="btnSubmit" class="btn btn-info"></button>
-                            <button type="submit" id="btnDelete" class="btn btn-danger"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{-- Modal Create Kebersihan --}}
-            @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
-                <div class="modal fade" id="modal-createkebersihan{{ $data->id }}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Tambah Kandang Telah Dibersihkan</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="{{ url('/kebersihan/create') }}" method="POST">
-                                    @csrf
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <label for="TanggalBertelur"> Hari ini
-                                                {{ $data->nama_kandang }} Telah Dibersihkan </label>
-                                            <input type="input"
-                                                class="form-control  @error('tgl_pembersihan') is-invalid @enderror"
-                                                id="tgl_pembersihan" name="tgl_pembersihan"
-                                                value="{{ date('Y-m-d') }}" readonly>
-                                            <input type="hidden" class="form-control" id="kandang_id" name="kandang_id"
-                                                value="{{ $data->id }}" readonly>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-default"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Simpan</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
         @endif
     </div>
-
+    {{-- Dynamic Modal --}}
+    <div class="modal fade " id="showModal">
+        <div class="modal-dialog modal-default">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="showModalBody">
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" id="btnSubmit" class="btn btn-info"></button>
+                    <button type="submit" id="btnDelete" class="btn btn-danger"></button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @push('js')
     <script>
@@ -228,7 +187,7 @@
             });
         }
 
-        function showCreate(id) {
+        function showCreateProduksi(id) {
             $.get("{{ url('/modal-create-produksi') }}/" + id, function(data) {
                 $('#modalLabel').text('Tambah Data Telur Baru')
                 $('#showModalBody').html(data);
@@ -239,13 +198,24 @@
             });
         }
 
-        function showUpdate(id) {
+        function showUpdatePakan(id) {
             $.get("{{ url('/modal-update-pakan') }}/" + id, function(data) {
                 $('#modalLabel').text('Update Data Pakan')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
                 $('#btnSubmit').show().text('Update').attr('onclick', 'update()');
+                $('#btnDelete').hide();
+            });
+        }
+
+        function showCreateKebersihan(id) {
+            $.get("{{ url('/modal-create-kebersihan') }}/" + id, function(data) {
+                $('#modalLabel').text('Tambah Data Kebesihan Kandang')
+                $('#showModalBody').html(data);
+                $('#showModal').modal('show');
+                $('#btnClose').show();
+                $('#btnSubmit').show().text('Tambah').attr('onclick', 'tambah()');
                 $('#btnDelete').hide();
             });
         }

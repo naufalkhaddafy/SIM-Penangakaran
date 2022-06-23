@@ -58,7 +58,15 @@ Route::get('/tes', function () {
     //     'JadwalProduksi' => $JadwalProduksi,
     // ], 200);
 });
-
+Route::get('/kebersihan', function () {
+    // $allkandang = Kandang::with('kebersihans')->get();
+    // $kandangs = $allkandang->find(1);
+    // $kandang = $kandangs->kebersihans->last();
+    // $kandang->status = 'Sudah';
+    // $kandang->save();
+    // return response()->json($kandang);
+    abort(404);
+});
 Route::get('/', function () {
     return view('page');
 });
@@ -159,6 +167,7 @@ Route::middleware(['pekerja'])->group(function () {
 Route::get('/kandang/{id}/{namakandang}', [KandangController::class, 'RiwayatKandang'])->name('riwayat.kandang');
 
 //Kebersihan [X]
+Route::get('/modal-create-kebersihan/{id}', [KebersihanController::class, 'ModalCreate']);
 Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
 
 // Produksi [X]

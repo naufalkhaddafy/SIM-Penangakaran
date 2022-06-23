@@ -10,7 +10,7 @@ class Kebersihan extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
-    public function kadang()
+    public function kandang()
     {
         return $this->belongsTo(Kandang::class);
     }

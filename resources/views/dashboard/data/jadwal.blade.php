@@ -4,7 +4,7 @@
     </div>
     {{-- produktif --}}
     <div style="text-align:center" class="bg-lime p-2">
-        <h6 class="text-white"><b>Produktif</b></h6>
+        <h6><b>Produktif</b></h6>
     </div>
     <div class="card-body table-responsive p-0">
         <table class="table table-valign-middle">
@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 <button type="button" class="btn btn-default  btn-outline-success"
-                                    onclick="showCreate({{ $data->id }})">
+                                    onclick="showCreateProduksi({{ $data->id }})">
                                     <ion-icon name="add"></ion-icon>
                                 </button>
                             </td>
@@ -79,7 +79,7 @@
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-default  btn-outline-success"
-                                            onclick="showCreate({{ $data->id }})">
+                                            onclick="showCreateProduksi({{ $data->id }})">
                                             <ion-icon name="add"></ion-icon>
                                         </button>
                                     </td>
@@ -116,7 +116,7 @@
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-default  btn-outline-success"
-                                            onclick="showCreate({{ $data->id }})">
+                                            onclick="showCreateProduksi({{ $data->id }})">
                                             <ion-icon name="add"></ion-icon>
                                         </button>
                                     </td>

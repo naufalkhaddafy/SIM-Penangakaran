@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kebersihan;
+use App\Models\Kandang;
 use App\Models\Produksi;
+use App\Models\Kebersihan;
 use Illuminate\Http\Request;
 
 class KebersihanController extends Controller
@@ -17,9 +18,10 @@ class KebersihanController extends Controller
     {
         $this->middleware('auth');
     }
-    public function index()
+    public function ModalCreate($id)
     {
-        //
+        $data = Kandang::find($id);
+        return view('kebersihan.modal.create', compact('data'));
     }
 
     /**
@@ -29,11 +31,19 @@ class KebersihanController extends Controller
      */
     public function CreateKebersihan()
     {
+        $allkandang = Kandang::with('kebersihans')->get();
+        $kandangs = $allkandang->find(Request()->kandang_id);
+        $kebersihanLast = $kandangs->kebersihans->last();
+        if ($kebersihanLast == !null) {
+            $kebersihanLast->status = 'Sudah';
+            $kebersihanLast->save();
+        }
         $datakebersihan = [
             'kandang_id' => Request()->kandang_id,
             'tgl_pembersihan' => Request()->tgl_pembersihan,
             $jadwal_pembersihan = date('Y-m-d', strtotime('+2 days', strtotime(Request()->tgl_pembersihan))),
             'jadwal_pembersihan' => $jadwal_pembersihan,
+            'status' => 'Belum',
         ];
         Kebersihan::Create($datakebersihan);
         return redirect('dashboard')->with('create', 'Data Kandang Dibersihkan telah direkap');
