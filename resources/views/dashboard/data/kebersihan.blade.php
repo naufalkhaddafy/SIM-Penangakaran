@@ -7,8 +7,8 @@
             <thead align="center">
                 <tr>
                     <th>Kandang</th>
-                    <th>Jadwal Pembersihan</th>
                     <th>Status</th>
+                    <th>Jadwal Pembersihan</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -18,6 +18,7 @@
                         <td>
                             {{ $data->nama_kandang }}
                         </td>
+                        <td>{{ $data->kebersihans->last()->status ?? 'Belum ada Data' }} Dibersihkan</td>
                         @if ($data->kebersihans->last() == null)
                             <td>Belum ada</td>
                         @elseif(!$data->kebersihans->last() == null)
@@ -27,7 +28,6 @@
                                 </b>
                             </td>
                         @endif
-                        <td>{{ $data->kebersihans->last()->status ?? 'Tidak ada' }}</td>
                         <td>
                             <button type="button" class="btn btn-default  btn-outline-success"
                                 onclick="showCreateKebersihan({{ $data->id }})">

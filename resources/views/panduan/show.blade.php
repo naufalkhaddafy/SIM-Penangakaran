@@ -16,7 +16,7 @@
                 <td>{{ $no++ }}</td>
                 <td>{{ $data->judul }}</td>
                 <td>
-                    <textarea rows="8" cols="50" readonly>{{ $data->isi }}</textarea>
+                    <textarea rows="8" cols="50" style="border-color: white; width:100%;"readonly>{{ $data->isi }}</textarea>
                 </td>
                 <td>{{ $data->kategori }}</td>
                 <td>{{ $data->status }}</td>

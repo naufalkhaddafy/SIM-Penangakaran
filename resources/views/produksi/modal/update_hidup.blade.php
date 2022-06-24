@@ -1,3 +1,4 @@
+<div id="error"></div>
 <div class="card-body">
     <div class="form-group">
         <label for="kode_ring">Kode Ring</label>
@@ -11,8 +12,6 @@
                     {{ $jk }}
                 </option>
             @endforeach
-            {{-- <option value="Jantan">Jantan</option>
-            <option value="Betina">Betina</option> --}}
         </select>
         <label for="status_produksi">Kondisi Burung</label>
         <select name="status_produksi" id="status_produksi" class="form-control" required>
@@ -23,7 +22,12 @@
     </div>
     <div id="keterangan-form" class="form-group">
         <label for="Keterangan">Keterangan</label>
-        <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5"></textarea>
+        <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5">
+Kode Ring : {{ $data->kode_ring ?? 'Belum ada kode ring' }}
+Usia             : {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
+Catatan:
+
+</textarea>
     </div>
 </div>
 <script>

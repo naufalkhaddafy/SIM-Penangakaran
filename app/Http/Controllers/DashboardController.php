@@ -45,19 +45,14 @@ class DashboardController extends Controller
             'kebersihan' => Kebersihan::all(),
             date_default_timezone_set('Asia/Jakarta')
         ];
-        $produktif = auth()->user()->penangkaran->kandangs ?? [];
+        $kandangs = auth()->user()->penangkaran->kandangs ?? [];
 
-        return view('dashboard.data.jadwal', $data, compact('produktif'));
+        return view('dashboard.data.jadwal', $data, compact('kandangs'));
     }
     public function ReadDashboardPakan()
     {
-        $data = [
-            'jadwals' => Jadwal::all(),
-            'produksis' => Produksi::all(),
-            'kebersihan' => Kebersihan::all(),
-            date_default_timezone_set('Asia/Jakarta')
-        ];
-        return view('dashboard.data.pakan', $data);
+        $pakans = auth()->user()->penangkaran->pakans;
+        return view('dashboard.data.pakan', compact('pakans'));
     }
     public function ReadDashboardKebersihan()
     {
@@ -67,6 +62,7 @@ class DashboardController extends Controller
             'kebersihan' => Kebersihan::all(),
             date_default_timezone_set('Asia/Jakarta')
         ];
+
         return view('dashboard.data.kebersihan', $data);
     }
 }

@@ -31,10 +31,25 @@ class ProduksiController extends Controller
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
         return view('produksi.show_hidup', $data, compact('tgl_today'));
     }
+    public function ShowProduksiMati()
+    {
+        $data = ([
+            'penangkarans' => Penangkaran::all(),
+            'produksis' => Produksi::all(),
+        ]);
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('produksi.show_mati', $data, compact('tgl_today'));
+    }
     public function ModalCreate($id)
     {
         $kandang = Kandang::find($id);
-        return view('produksi.modal.create', compact('kandang'));
+        $allIndukan = $kandang->indukans;
+        $indukan = [];
+        foreach ($allIndukan as $data) {
+            $indukan[] = $data->produksi->kode_ring;
+        }
+        $formatIndukan = $indukan[0] . ' & ' . $indukan[1];
+        return view('produksi.modal.create', compact('kandang', 'formatIndukan'));
     }
     public function ModalUpdateInkubator($id)
     {
@@ -82,13 +97,15 @@ class ProduksiController extends Controller
         $validateproduksi = Request()->validate([
             'kandang_id' => 'required',
             'tgl_bertelur' => 'required',
+            'indukan' => 'required',
             'status_telur' => 'required',
             'tgl_masuk_inkubator' => 'required',
             'kode_tempat_inkubator' => 'required',
         ], [
-            'kandang_id.required' => 'Harus di Isi',
+            'kandang_id.required' => 'Kandang Tidak Terdeteksi',
             'tgl_bertelur.required' => 'Harus di Isi',
-            'status_telur.required' => 'Status Telur Harus di Isi',
+            'indukan.required' => 'Indukan Tidak Terdeteksi',
+            'status_telur.required' => 'Status <Te></Te>lur Harus di Isi',
             'tgl_masuk_inkubator.required' => 'Harus di Isi',
             'kode_tempat_inkubator.required' => 'Kode Tempat Harus di Isi',
         ]);
@@ -167,9 +184,13 @@ class ProduksiController extends Controller
             Produksi::find($id)->update($dataproduksihidup);
             // return redirect('produksi-hidup')->with('update', 'Data Produksi Berhasil di update');
         } elseif ($statusproduksi['status_produksi'] == 'Mati') {
-
+            $validate = Request()->validate([
+                'keterangan' => 'required',
+            ], [
+                'keterangan.required' => 'Keterangan Harus di Isi',
+            ]);
             $dataproduksimati = [
-                'kode_ring' => Request()->kode_ring,
+                'kode_ring' => null,
                 'jenis_kelamin' => Request()->jenis_kelamin,
                 'status_produksi' => 'Mati',
                 'keterangan' => Request()->keterangan,

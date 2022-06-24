@@ -4,11 +4,12 @@
         <label for="TanggalBertelur">Tanggal Bertelur Hari ini
             Kandang
             {{ $kandang->nama_kandang }}</label>
-        <input type="input" class="form-control  @error('tgl_bertelur') is-invalid @enderror" id="tgl_bertelur"
-            name="tgl_bertelur" value="{{ date('Y-m-d') }}" readonly>
+        <input type="input" class="form-control" id="tgl_bertelur" name="tgl_bertelur" value="{{ date('Y-m-d') }}"
+            readonly>
         <input type="hidden" class="form-control" id="tgl_masuk_inkubator" name="tgl_masuk_inkubator"
             value="{{ date('Y-m-d') }}">
         <input type="hidden" class="form-control" id="kandang_id" name="kandang_id" value="{{ $kandang->id }}">
+        <input type="hidden" class="form-control" id="indukan" name="indukan" value="{{ $formatIndukan }}">
     </div>
     <div class="form-group">
         <label for="StatusTelur">Status Telur</label>
@@ -17,6 +18,7 @@
             <option value="" selected>Status Telur</option>
             <option value="pertama">Pertama</option>
             <option value="kedua">Kedua</option>
+            <option value="ketiga">Ketiga</option>
         </select>
     </div>
     <label for="TempatInkubator">Kode Tempat Inkubator</label>
@@ -32,6 +34,7 @@
                 "_token": "{{ csrf_token() }}",
                 kandang_id: $('#kandang_id').val(),
                 tgl_bertelur: $('#tgl_bertelur').val(),
+                indukan: $('#indukan').val(),
                 tgl_masuk_inkubator: $('#tgl_masuk_inkubator').val(),
                 status_telur: $('#status_telur').val(),
                 kode_tempat_inkubator: $('#kode_tempat_inkubator').val(),

@@ -1,13 +1,14 @@
 <table id="tableData" class="table table-bordered table-hover">
-    <thead>
+    <thead align="center">
         <tr>
             <th>Asal Produksi</th>
             <th>Tanggal Bertelur</th>
+            <th>Status</th>
             <th>Keterangan</th>
-            <th>Action</th>
+
         </tr>
     </thead>
-    <tbody>
+    <tbody align="center">
         <?php $no = 1; ?>
         @foreach (auth()->user()->penangkaran->kandangs ?? [] as $auth)
             @foreach ($auth->produksis->where('status_produksi', 'Mati') as $data)
@@ -15,8 +16,11 @@
                     <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                         {{ $data->status_telur }}</td>
                     <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
-                    <td>{{ $data->keterangan }}</td>
-                    <td></td>
+                    <td><span class="badge badge-danger">{{ $data->status_produksi }} </span></td>
+                    <td>
+                        <textarea rows="4" cols="30" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>
+                    </td>
+
                 </tr>
             @endforeach
         @endforeach

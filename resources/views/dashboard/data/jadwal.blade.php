@@ -17,7 +17,7 @@
                 </tr>
             </thead>
             <tbody align="center">
-                @foreach ($produktif ?? [] as $data)
+                @foreach ($kandangs ?? [] as $data)
                     @if ($data->kategori == 'Produktif')
                         <tr>
                             <td>
@@ -68,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody align="center">
-                        @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                        @foreach ($kandangs ?? [] as $data)
                             @if ($data->kategori == 'Tidak Produktif')
                                 <tr>
                                     <td>
@@ -105,7 +105,7 @@
                         </tr>
                     </thead>
                     <tbody align="center">
-                        @foreach (Auth::user()->penangkaran->kandangs ?? [] as $data)
+                        @foreach ($kandangs ?? [] as $data)
                             @if ($data->kategori == 'Ganti Bulu')
                                 <tr>
                                     <td>

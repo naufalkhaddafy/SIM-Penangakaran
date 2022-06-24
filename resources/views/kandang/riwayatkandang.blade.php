@@ -52,7 +52,7 @@
                                 <thead align="center">
                                     <tr>
                                         <th>No</th>
-                                        <th>Tanggal Pembersihan</th>
+                                        <th>Tanggal di Bersihkan</th>
                                         <th>Jadwal Pembersihan</th>
                                         <th>Status </th>
                                     </tr>

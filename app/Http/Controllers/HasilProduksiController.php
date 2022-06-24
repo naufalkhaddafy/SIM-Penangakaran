@@ -14,13 +14,50 @@ class HasilProduksiController extends Controller
     {
         $this->middleware('auth');
     }
+    public function ShowLaporanProduksiIndukan()
+    {
+        $produksis = Produksi::all();
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('laporan_produksi.data.indukan', compact('produksis', 'tgl_today'));
+    }
+    public function ShowLaporanProduksiHidup()
+    {
+        $produksis = Produksi::all();
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('laporan_produksi.data.hidup', compact('produksis', 'tgl_today'));
+    }
+    public function ShowLaporanProduksiMati()
+    {
+        return view('laporan_produksi.data.mati');
+    }
+    public function ShowLaporanProduksiInkubator()
+    {
+        $produksis = Produksi::all();
+        return view('laporan_produksi.data.inkubator', compact('produksis'));
+    }
+    public function ShowLaporanProduksiTerjual()
+    {
+        return view('laporan_produksi.data.terjual');
+    }
+    public function ModalCreateIndukan()
+    {
+        return view('laporan_produksi.modal.create_indukan');
+    }
+    public function ModalUpdateReportIndukan()
+    {
+        return view('laporan_produksi.modal.update_indukan');
+    }
+    public function ModalUpdateReportHidup()
+    {
+        return view('laporan_produksi.modal.update_hidup');
+    }
     public function ReportInkubator()
     {
         $data = ([
             'penangkarans' => Penangkaran::all(),
             'produksis' => Produksi::all(),
         ]);
-        return view('laporanproduksi.inkubator', $data);
+        return view('laporan_produksi.inkubator', $data);
     }
     public function ReportHidup()
     {
@@ -29,7 +66,7 @@ class HasilProduksiController extends Controller
             'produksis' => Produksi::all(),
         ]);
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
-        return view('laporanproduksi.hidup', $data, compact('tgl_today'));
+        return view('laporan_produksi.hidup', $data, compact('tgl_today'));
     }
     public function ReportMati()
     {
@@ -37,7 +74,7 @@ class HasilProduksiController extends Controller
             'penangkarans' => Penangkaran::all(),
             'produksis' => Produksi::all(),
         ]);
-        return view('laporanproduksi.mati', $data);
+        return view('laporan_produksi.mati', $data);
     }
     public function ReportIndukan()
     {
@@ -47,7 +84,7 @@ class HasilProduksiController extends Controller
             'indukans' => Indukan::all(),
         ]);
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
-        return view('laporanproduksi.indukan', $data, compact('tgl_today'));
+        return view('laporan_produksi.indukan', $data, compact('tgl_today'));
     }
     public function CreateIndukan()
     {
@@ -63,6 +100,6 @@ class HasilProduksiController extends Controller
             'status_produksi.required' => 'Role Harus di isi',
         ]);
         Produksi::create($validateindukan);
-        return redirect()->back();
+        // return redirect()->back();
     }
 }

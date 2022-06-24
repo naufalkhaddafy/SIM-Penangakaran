@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody align="center">
-                @foreach (Auth::user()->penangkaran->pakans ?? [] as $data)
+                @foreach ($pakans ?? [] as $data)
                     <tr>
                         <td>{{ $data->kode_tempat }}</td>
                         <td>{{ $data->nama_pakan }}</td>

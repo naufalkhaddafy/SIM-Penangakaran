@@ -211,7 +211,7 @@
 
         function showCreateKebersihan(id) {
             $.get("{{ url('/modal-create-kebersihan') }}/" + id, function(data) {
-                $('#modalLabel').text('Tambah Data Kebesihan Kandang')
+                $('#modalLabel').text('Tambah Data Pembersihan Kandang')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();

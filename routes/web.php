@@ -173,6 +173,7 @@ Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersiha
 // Produksi [X]
 Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
 Route::get('/show-produksi-hidup', [ProduksiController::class, 'ShowProduksiHidup']);
+Route::get('/show-produksi-mati', [ProduksiController::class, 'ShowProduksiMati']);
 Route::get('/modal-read-produksi/{id}', [ProduksiController::class, 'ModalRead']);
 Route::get('/modal-create-produksi/{id}', [ProduksiController::class, 'ModalCreate']);
 Route::get('/modal-update-produksi-inkubator/{id}', [ProduksiController::class, 'ModalUpdateInkubator']);
@@ -188,6 +189,16 @@ Route::get('/produksi-hidup', [ProduksiController::class, 'ProduksiHidup'])->nam
 Route::get('/produksi-mati', [ProduksiController::class, 'ProduksiMati'])->name('produksi.mati');
 
 // Hasil Produksi [X]
+Route::get('/show-laporan-produksi-indukan', [HasilProduksiController::class, 'ShowLaporanProduksiIndukan']);
+Route::get('/show-laporan-produksi-inkubator', [HasilProduksiController::class, 'ShowLaporanProduksiInkubator']);
+Route::get('/show-laporan-produksi-mati', [HasilProduksiController::class, 'ShowLaporanProduksiMati']);
+Route::get('/show-laporan-produksi-hidup', [HasilProduksiController::class, 'ShowLaporanProduksiHidup']);
+Route::get('/show-laporan-produksi-terjual', [HasilProduksiController::class, 'ShowLaporanProduksiTerjual']);
+
+Route::get('/modal-create-indukan', [HasilProduksiController::class, 'ModalCreateIndukan']);
+Route::get('/modal-update-report-indukan/{id}', [HasilProduksiController::class, 'ModalUpdateReportIndukan']);
+Route::get('/modal-update-report-hidup/{id}', [HasilProduksiController::class, 'ModalUpdateReportHidup']);
+
 Route::get('/report-inkubator', [HasilProduksiController::class, 'ReportInkubator'])->name('report.inkubator');
 Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
 Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name('report.mati');
