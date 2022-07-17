@@ -58,19 +58,34 @@ Route::get('/tes', function () {
     //     'JadwalProduksi' => $JadwalProduksi,
     // ], 200);
 });
-Route::get('/kebersihan', function () {
+Route::get('/tesi', function () {
     // $allkandang = Kandang::with('kebersihans')->get();
     // $kandangs = $allkandang->find(1);
     // $kandang = $kandangs->kebersihans->last();
     // $kandang->status = 'Sudah';
     // $kandang->save();
     // return response()->json($kandang);
-    abort(404);
+    // abort(404);
+    $produksi = Produksi::all();
+    $value = 'DLGBF-124';
+    $value2 = '';
+    // $tes = [];
+    // foreach ($produksi as $e) {
+    //     $tes[] = $e->kode_ring;
+    // }
+    // if (in_array($value, $tes)) {
+    //     return 'true';
+    // } else {
+    //     return 'false';
+    // }
+    $produksis = Produksi::where([['kode_ring', '=', $value2]])->first();
+    if ($produksis != null) {
+        return 'Betull';
+    } else {
+        return 'salah';
+    }
+    // return response()->json($produksis);
 });
-Route::get('/', function () {
-    return view('page');
-});
-
 Route::get('/arfa', function () {
     return view('admin-arfa.template');
 });
@@ -125,7 +140,7 @@ Route::middleware(['pemilik'])->group(function () {
     Route::patch('/penangkaran/update/{id}', [PenangkaranController::class, 'UpdatePenangkaran'])->name('update.penangkaran');
     Route::delete('/penangkaran/delete/{id}', [PenangkaranController::class, 'DeletePenangkaran'])->name('delete.penangkaran');
     // Kandang [X]
-    Route::get('/penangkaran/{id}/{lokasi_penangkaran}', [PenangkaranController::class, 'DetailPenangkaran'])->name('detail.penangkaran');
+    Route::get('/penangkaran/{id}/lokasi/{lokasi_penangkaran}', [PenangkaranController::class, 'DetailPenangkaran'])->name('detail.penangkaran');
     Route::get('/modal-read-kandang/{id}', [KandangController::class, 'ModalRead']);
     Route::get('/modal-create-kandang/{id}', [KandangController::class, 'ModalCreate']);
     Route::get('/modal-update-kandang/{id}', [KandangController::class, 'ModalUpdate']);
@@ -198,9 +213,11 @@ Route::get('/show-laporan-produksi-terjual', [HasilProduksiController::class, 'S
 Route::get('/modal-create-indukan', [HasilProduksiController::class, 'ModalCreateIndukan']);
 Route::get('/modal-update-report-indukan/{id}', [HasilProduksiController::class, 'ModalUpdateReportIndukan']);
 Route::get('/modal-update-report-hidup/{id}', [HasilProduksiController::class, 'ModalUpdateReportHidup']);
+Route::get('/modal-print-mati', [HasilProduksiController::class, 'ModalPrintMati']);
 
 Route::get('/report-inkubator', [HasilProduksiController::class, 'ReportInkubator'])->name('report.inkubator');
 Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
 Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name('report.mati');
 Route::get('/report-indukan', [HasilProduksiController::class, 'ReportIndukan'])->name('report.indukan');
 Route::post('/create-indukan', [HasilProduksiController::class, 'CreateIndukan'])->name('create.indukan');
+Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateIndukan'])->name('update.indukan');

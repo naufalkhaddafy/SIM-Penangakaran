@@ -6,14 +6,26 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">
-                            <td>
+                        {{-- <h3 class="card-title">
+                            <div class="d-flex justify-content-between">
                                 <button type="button" class="btn btn-block btn-outline-success" onclick="showCreate()">
                                     <ion-icon name="finger-print-outline"></ion-icon> <b>Tambah</b>
                                 </button>
-                            </td>
+                            </div>
+                        </h3> --}}
+                        <h3 class="card-header border-0 p-0">
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-outline-success" onclick="showCreate()">
+                                    <ion-icon name="finger-print-outline"></ion-icon> <b>Tambah</b>
+                                </button>
+                                <h3 class="card-title">Total Indukan :
+                                    <b
+                                        class="text-danger">{{ count($produksis->where('status_produksi', 'Indukan')) }}</b>
+                                </h3>
+                            </div>
                         </h3>
                     </div>
+
                     <div class="card-body">
                         <div id="readData"></div>
                     </div>
@@ -66,8 +78,8 @@
         }
 
         function showUpdate(id) {
-            $.get("{{ url('modal-update-produksi-hidup') }}/" + id, function(data) {
-                $('#modalLabel').text('Update Data Produksi Hidup')
+            $.get("{{ url('/modal-update-report-indukan/') }}/" + id, function(data) {
+                $('#modalLabel').text('Update Data Indukan')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();

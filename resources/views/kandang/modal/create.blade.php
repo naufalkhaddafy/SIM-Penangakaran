@@ -1,7 +1,7 @@
 <div id="error"></div>
 <div class="input-group mb-3">
     <input type="text" id="nama_kandang" name="nama_kandang" class="form-control" placeholder="Nama Kandang"
-        value="CR-{{ old('nama_kandang') }}" required>
+        value="{{ old('nama_kandang') }}" required>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="code-slash"></ion-icon>
@@ -36,8 +36,8 @@
     </div>
 </div>
 <div class="input-group mb-3">
-    <input type="date" id="tgl_masuk_kandang" name="tgl_masuk_kandang" class="form-control" placeholder="Nama Kandang"
-        required>
+    <input type="date" id="tgl_masuk_kandang" name="tgl_masuk_kandang" class="form-control"
+        placeholder="Nama Kandang" required>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="calendar"></ion-icon>

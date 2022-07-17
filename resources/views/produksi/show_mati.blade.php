@@ -5,7 +5,7 @@
             <th>Tanggal Bertelur</th>
             <th>Status</th>
             <th>Keterangan</th>
-
+            <th>Tanggal Mati</th>
         </tr>
     </thead>
     <tbody align="center">
@@ -20,7 +20,7 @@
                     <td>
                         <textarea rows="4" cols="30" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>
                     </td>
-
+                    <td>{{ $data->updated_at }}</td>
                 </tr>
             @endforeach
         @endforeach

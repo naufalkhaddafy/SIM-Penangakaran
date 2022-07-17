@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">Sales</h3>
@@ -108,7 +108,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         @elseif(Auth::user()->role == 'pekerja')
             <div class="container-fluid">
                 <div class="row">

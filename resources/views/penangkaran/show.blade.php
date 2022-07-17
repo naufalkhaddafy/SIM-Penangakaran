@@ -34,7 +34,7 @@
                             {{ $data->lokasi_penangkaran }}
                         </b>
                     </h6>
-                    <a href="{{ url('/penangkaran/' . $data->id . '/' . $data->lokasi_penangkaran) }}"
+                    <a href="{{ url('/penangkaran/' . $data->id . '/lokasi/' . $data->lokasi_penangkaran) }}"
                         class="btn btn-primary">Detail Penangkaran
                     </a>
                 </div>

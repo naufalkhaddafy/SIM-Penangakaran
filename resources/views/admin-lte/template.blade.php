@@ -116,9 +116,9 @@
                 </div><!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-            {{-- <!-- Main content -->
+            <!-- Main content -->
             <section class="content">
-                @if (session('create'))
+                {{-- @if (session('create'))
                     <div class="alert alert-success alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
@@ -135,33 +135,33 @@
                         <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
                     </div>
                 @endif --}}
-            @yield('content')
-            <div class="modal fade" id="modal-sm">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Logout</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p> Apakah anda ingin keluar ??</p>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-danger">
-                                    <ion-icon name="exit-outline"></ion-icon> Logout
+                @yield('content')
+                <div class="modal fade" id="modal-sm">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Logout</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
-                            </form>
+                            </div>
+                            <div class="modal-body">
+                                <p> Apakah anda ingin keluar ??</p>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">
+                                        <ion-icon name="exit-outline"></ion-icon> Logout
+                                    </button>
+                                </form>
+                            </div>
                         </div>
+                        <!-- /.modal-content -->
                     </div>
-                    <!-- /.modal-content -->
+                    <!-- /.modal-dialog -->
                 </div>
-                <!-- /.modal-dialog -->
-            </div>
             </section>
             <!-- /.content -->
         </div>
@@ -193,6 +193,7 @@
     <!-- SweetAlert2 -->
     <script src="{{ asset('admin-lte') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
     @stack('js')
+    {{-- data Tables --}}
     <script src="{{ asset('admin-lte') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
@@ -205,6 +206,12 @@
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script> --}}
+    {{-- <script>
+        $(window).on('load', function) {
+            $('.preloader').fadeOut('slow');
+            $('.content').fadeIn('slow');
+        }
+    </script> --}}
 </body>
 
 </html>

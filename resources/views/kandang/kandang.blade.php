@@ -12,7 +12,7 @@
                             <td>
                                 <button type="button" class="btn btn-block btn-outline-success"
                                     onclick="showCreate({{ $penangkarans->id }})">
-                                    <ion-icon name="home"></ion-icon> <b>Tambah</b>
+                                    <ion-icon name="home"></ion-icon> <b>Tambah Kandang</b>
                                 </button>
                             </td>
                         </h3>

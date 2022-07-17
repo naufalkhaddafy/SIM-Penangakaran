@@ -105,7 +105,7 @@ class ProduksiController extends Controller
             'kandang_id.required' => 'Kandang Tidak Terdeteksi',
             'tgl_bertelur.required' => 'Harus di Isi',
             'indukan.required' => 'Indukan Tidak Terdeteksi',
-            'status_telur.required' => 'Status <Te></Te>lur Harus di Isi',
+            'status_telur.required' => 'Status Telur Harus di Isi',
             'tgl_masuk_inkubator.required' => 'Harus di Isi',
             'kode_tempat_inkubator.required' => 'Kode Tempat Harus di Isi',
         ]);
@@ -171,19 +171,26 @@ class ProduksiController extends Controller
     }
     public function UpdateProduksiHidup($id)
     {
-        $statusproduksi = [
-            'status_produksi' => Request()->status_produksi,
-        ];
-
-        if ($statusproduksi['status_produksi'] == 'Hidup') {
+        $input = Request()->kode_ring;
+        // status Produksi
+        if (Request()->status_produksi == 'Hidup') {
+            // $produksis = Produksi::where([['kode_ring', '=', $input]])->first();
+            // if ($input !== null) {
+            //     if ($produksis !== null) {
+            //         // $validate = Request()->validate([
+            //         //     'kode_ring' => 'unique:produksis',
+            //         // ], [
+            //         //     'kode_ring.unique' => 'Kode Ring telah ada Periksa Kembali!!',
+            //         // ]);
+            //     }
+            // }
             $dataproduksihidup = [
                 'kode_ring' => Request()->kode_ring,
                 'jenis_kelamin' => Request()->jenis_kelamin,
                 'status_produksi' => 'Hidup',
             ];
             Produksi::find($id)->update($dataproduksihidup);
-            // return redirect('produksi-hidup')->with('update', 'Data Produksi Berhasil di update');
-        } elseif ($statusproduksi['status_produksi'] == 'Mati') {
+        } elseif (Request()->status_produksi == 'Mati') {
             $validate = Request()->validate([
                 'keterangan' => 'required',
             ], [

@@ -5,7 +5,6 @@
             <th>Asal Produksi</th>
             <th>Tanggal Bertelur</th>
             <th>Keterangan</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -16,8 +15,9 @@
                 <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                     {{ $data->status_telur }}</td>
                 <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
-                <td>{{ $data->keterangan }}</td>
-                <td></td>
+                <td>
+                    <textarea rows="4" cols="30" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>
+                </td>
             </tr>
         @endforeach
     </tbody>

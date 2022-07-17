@@ -6,19 +6,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        @if (session('create'))
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
-                            </div>
-                        @elseif(session('delete'))
-                            <div class="alert alert-success alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"
-                                    aria-hidden="true">&times;</button>
-                                <h6><i class="icon fas fa-check"></i>{{ session('delete') }}</h6>
-                            </div>
-                        @endif
-                        <h3>
+                        {{-- <h3>
                             <div class="row">
                                 <div class="col-md-6" style="margin:1px;">
                                     <select name="penangkaran_id" id="penangkaran"
@@ -38,6 +26,9 @@
                                     </button>
                                 </div>
                             </div>
+                        </h3> --}}
+                        <h3 class="card-title"> Total Produksi Hidup :
+                            <b class="text-danger">{{ count($produksis->where('status_produksi', 'Hidup')) }}</b>
                         </h3>
                     </div>
                     <div class="card-body">

@@ -10,7 +10,7 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tbody align="center">
+    <tbody>
         @foreach ($produksis->where('status_produksi', 'Hidup') as $data)
             <tr>
                 <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
@@ -23,14 +23,16 @@
                     Bulan
                     {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari
                 </td>
-                <td>
-                    <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                        data-target="{{ url('#modal-read' . $data->id) }}">
+                <td align="center" valign="center" width="16%">
+                    <button type="button" class="btn btn-default  btn-outline-success" onclick="">
                         <ion-icon name="search"></ion-icon>
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline-success" onclick="">
+                        <ion-icon name="open-outline"></ion-icon>
                     </button>
                     <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
                         data-target="{{ url('#modal-update' . $data->id) }}">
-                        <ion-icon name="open-outline"></ion-icon>
+                        <ion-icon name="print-outline"></ion-icon>
                     </button>
                 </td>
             </tr>
