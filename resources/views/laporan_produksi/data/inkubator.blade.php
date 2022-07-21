@@ -3,9 +3,10 @@
         <tr>
             <th>Penangkaran</th>
             <th>Kode Inkubator</th>
+            <th>Indukan</th>
             <th>Tanggal Masuk Inkubator</th>
             <th>Tanggal Akan Menetas</th>
-            <th>Asal Telur</th>
+            {{-- <th>Asal Telur</th> --}}
         </tr>
     </thead>
     <tbody align="center">
@@ -13,14 +14,15 @@
             <tr>
                 <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
                 <td>{{ $data->jadwal->kode_tempat_inkubator }}</td>
+                <td>{{ $data->indukan }}</td>
                 <td>{{ date('d F Y', strtotime($data->tgl_masuk_inkubator)) }}</td>
                 <td class="text-danger">
                     <b>
                         {{ date('d', strtotime($data->jadwal->tgl_akan_menetas_start)) }}-{{ date('d F Y', strtotime($data->jadwal->tgl_akan_menetas_end)) }}
                     </b>
                 </td>
-                <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
-                    {{ $data->status_telur }} </td>
+                {{-- <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
+                    {{ $data->status_telur }} </td> --}}
             </tr>
         @endforeach
     </tbody>

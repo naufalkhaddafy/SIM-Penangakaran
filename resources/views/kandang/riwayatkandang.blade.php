@@ -23,6 +23,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal Bertelur</th>
+                                        <th>Indukan</th>
                                         <th>Status Telur</th>
                                         <th>Status Hasil Produksi</th>
                                         <th>Keterangan</th>
@@ -34,6 +35,7 @@
                                         <tr>
                                             <td> {{ $no++ }}</td>
                                             <td>{{ $produksi->tgl_bertelur }}</td>
+                                            <td>{{ $produksi->indukan }}</td>
                                             <td>{{ $produksi->status_telur }}</td>
                                             <td>{{ $produksi->status_produksi }}</td>
                                             <td>{{ $produksi->keterangan }}</td>

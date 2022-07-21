@@ -1,6 +1,6 @@
 @extends('admin-lte.template')
 @section('title')
-    Detail Penangkaran {{ $penangkarans->lokasi_penangkaran }}
+    Penangkaran {{ $penangkarans->lokasi_penangkaran }}
 @endsection
 @section('content')
     <div class="container-fluid">

@@ -66,6 +66,17 @@
             });
         }
 
+        function showRead(id) {
+            $.get("{{ url('/modal-read-produksi') }}/" + id, function(data) {
+                $('#modalLabel').text('Data Indukan')
+                $('#showModalBody').html(data);
+                $('#showModal').modal('show');
+                $('#btnClose').show();
+                $('#btnSubmit').hide();
+                $('#btnDelete').hide();
+            });
+        }
+
         function showCreate() {
             $.get("{{ url('/modal-create-indukan') }}", function(data) {
                 $('#modalLabel').text('Tambah Data Indukan')

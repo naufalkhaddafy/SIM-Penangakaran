@@ -3,7 +3,7 @@
         <tr>
             <th>Asal Produksi</th>
             <th>Tanggal Bertelur</th>
-            <th>Status</th>
+            <th>Indukan</th>
             <th>Keterangan</th>
             <th>Tanggal Mati</th>
         </tr>
@@ -16,7 +16,7 @@
                     <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                         {{ $data->status_telur }}</td>
                     <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
-                    <td><span class="badge badge-danger">{{ $data->status_produksi }} </span></td>
+                    <td>{{ $data->indukan }}</td>
                     <td>
                         <textarea rows="4" cols="30" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>
                     </td>

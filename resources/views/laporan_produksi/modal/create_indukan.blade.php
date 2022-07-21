@@ -18,7 +18,7 @@
     <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Indukan">
     <div class="input-group-append">
         <div class="input-group-text">
-            <ion-icon name="code-slash"></ion-icon>
+            <ion-icon name="text"></ion-icon>
         </div>
     </div>
 </div>

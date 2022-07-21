@@ -20,77 +20,79 @@ use App\Http\Controllers\HasilProduksiController;
 
 
 Route::resource('users', 'UserController');
-Route::get('/tes', function () {
-    //get relation produksis table
-    // $allProduksi = Produksi::all()->load('kandang');
-    $allProduksi = Produksi::with('kandang')->get();
-    //get all produksi not null by kandang data
-    $NotNullProduksi = [];
-    foreach ($allProduksi as $produksi) {
-        if ($produksi->kandang !== null) {
-            $NotNullProduksi[] = $produksi;
-        }
-    }
-    //collect data last produksi based on kandang
-    // $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
-    //     return $item->all();
-    // });
-    //get value jadwal from
-    $JadwalProduksi = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
-        return $item;
-    });
-    //Update kategori kandang berdasarkan tanggal
-    // $UpdateKandang = $JadwalProduksi->map(function ($item) {
-    //     if ($item->tgl_akan_menetas_end < date('Y-m-d')) {
-    //         //get id kandang from $item
-    //         $item->produksi->status_produksi = 'Mati';
-    //         $item->produksi->save();
-    //         // return 'Success Get Function';
-    //     } else {
-    //         // must give a notifikasi
-    //         // return 'Tidak Update';
-    //     }
-    //     return $item;
-    // });
-    return response()->json($JadwalProduksi);
-    // return response()->json([
-    //     'message' => 'Successfully create new progress',
-    //     'JadwalProduksi' => $JadwalProduksi,
-    // ], 200);
-});
-Route::get('/tesi', function () {
-    // $allkandang = Kandang::with('kebersihans')->get();
-    // $kandangs = $allkandang->find(1);
-    // $kandang = $kandangs->kebersihans->last();
-    // $kandang->status = 'Sudah';
-    // $kandang->save();
-    // return response()->json($kandang);
-    // abort(404);
-    $produksi = Produksi::all();
-    $value = 'DLGBF-124';
-    $value2 = '';
-    // $tes = [];
-    // foreach ($produksi as $e) {
-    //     $tes[] = $e->kode_ring;
-    // }
-    // if (in_array($value, $tes)) {
-    //     return 'true';
-    // } else {
-    //     return 'false';
-    // }
-    $produksis = Produksi::where([['kode_ring', '=', $value2]])->first();
-    if ($produksis != null) {
-        return 'Betull';
-    } else {
-        return 'salah';
-    }
-    // return response()->json($produksis);
-});
+// Route::get('/tes', function () {
+//     //get relation produksis table
+//     // $allProduksi = Produksi::all()->load('kandang');
+//     $allProduksi = Produksi::with('kandang')->get();
+//     //get all produksi not null by kandang data
+//     $NotNullProduksi = [];
+//     foreach ($allProduksi as $produksi) {
+//         if ($produksi->kandang !== null) {
+//             $NotNullProduksi[] = $produksi;
+//         }
+//     }
+//     //collect data last produksi based on kandang
+//     // $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+//     //     return $item->all();
+//     // });
+//     //get value jadwal from
+//     $JadwalProduksi = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+//         return $item;
+//     });
+//     //Update kategori kandang berdasarkan tanggal
+//     // $UpdateKandang = $JadwalProduksi->map(function ($item) {
+//     //     if ($item->tgl_akan_menetas_end < date('Y-m-d')) {
+//     //         //get id kandang from $item
+//     //         $item->produksi->status_produksi = 'Mati';
+//     //         $item->produksi->save();
+//     //         // return 'Success Get Function';
+//     //     } else {
+//     //         // must give a notifikasi
+//     //         // return 'Tidak Update';
+//     //     }
+//     //     return $item;
+//     // });
+//     return response()->json($JadwalProduksi);
+//     // return response()->json([
+//     //     'message' => 'Successfully create new progress',
+//     //     'JadwalProduksi' => $JadwalProduksi,
+//     // ], 200);
+// });
+// Route::get('/tesi', function () {
+//     // $allkandang = Kandang::with('kebersihans')->get();
+//     // $kandangs = $allkandang->find(1);
+//     // $kandang = $kandangs->kebersihans->last();
+//     // $kandang->status = 'Sudah';
+//     // $kandang->save();
+//     // return response()->json($kandang);
+//     // abort(404);
+//     $produksi = Produksi::all();
+//     $value = 'DLGBF-124';
+//     $value2 = '';
+//     // $tes = [];
+//     // foreach ($produksi as $e) {
+//     //     $tes[] = $e->kode_ring;
+//     // }
+//     // if (in_array($value, $tes)) {
+//     //     return 'true';
+//     // } else {
+//     //     return 'false';
+//     // }
+//     $produksis = Produksi::where([['kode_ring', '=', $value2]])->first();
+//     if ($produksis != null) {
+//         return 'Betull';
+//     } else {
+//         return 'salah';
+//     }
+//     // return response()->json($produksis);
+// });
 Route::get('/arfa', function () {
     return view('admin-arfa.template');
 });
 
-
+Route::get('/print', function () {
+    return view('print.produksi');
+});
 Route::get('/', function () {
     return view('page');
 });
@@ -185,11 +187,13 @@ Route::get('/kandang/{id}/{namakandang}', [KandangController::class, 'RiwayatKan
 Route::get('/modal-create-kebersihan/{id}', [KebersihanController::class, 'ModalCreate']);
 Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
 
+
+// Read Produksi
+Route::get('/modal-read-produksi/{id}', [HasilProduksiController::class, 'ModalReadProduksi']);
 // Produksi [X]
 Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
 Route::get('/show-produksi-hidup', [ProduksiController::class, 'ShowProduksiHidup']);
 Route::get('/show-produksi-mati', [ProduksiController::class, 'ShowProduksiMati']);
-Route::get('/modal-read-produksi/{id}', [ProduksiController::class, 'ModalRead']);
 Route::get('/modal-create-produksi/{id}', [ProduksiController::class, 'ModalCreate']);
 Route::get('/modal-update-produksi-inkubator/{id}', [ProduksiController::class, 'ModalUpdateInkubator']);
 Route::get('/modal-update-produksi-hidup/{id}', [ProduksiController::class, 'ModalUpdateHidup']);

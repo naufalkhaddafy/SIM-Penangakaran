@@ -1,7 +1,7 @@
 <div id="error"></div>
 <div class="input-group mb-3">
-    <input type="text" id="kode_ring" name="kode_ring" class="form-control"
-        placeholder="Kode Ring"value="{{ $data->kode_ring }}"required>
+    <input type="text" id="kode_ring" name="kode_ring" class="form-control" placeholder="Kode Ring"
+        value="{{ $data->kode_ring }}"required>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="code-slash"></ion-icon>
@@ -12,8 +12,7 @@
     <select name="jenis_kelamin" id="jenis_kelamin" class="form-control " required>
         <option value="">Jenis Kelamin</option>
         @foreach ($jk as $jenis_kelamin)
-            <option
-                value="{{ $data->jenis_kelamin }} "{{ $data->jenis_kelamin == $jenis_kelamin ? 'selected' : '' }}>
+            <option value="{{ $jenis_kelamin }} "{{ $data->jenis_kelamin == $jenis_kelamin ? 'selected' : '' }}>
                 {{ $jenis_kelamin }}
             </option>
         @endforeach
@@ -32,11 +31,33 @@
     <select id="status_produksi" name="status_produksi" class="form-control">
         <option value="">Status Produksi</option>
         @foreach ($status as $status_produksi)
-            <option value="{{ $data->status_produksi }}"
+            <option value="{{ $status_produksi }}"
                 {{ $data->status_produksi == $status_produksi ? 'selected' : '' }}> {{ $status_produksi }}</option>
         @endforeach
 </div>
+{{-- <div id="keterangan-form" class="form-group">
+    <label for="Keterangan">Keterangan</label>
+    <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5">
+Kode Ring : {{ $data->kode_ring ?? 'Belum ada kode ring' }}
+Usia             : {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
+Catatan:
+
+</textarea>
+</div> --}}
 <script>
+    $(document).ready(function() {
+        $('#keterangan-form').hide();
+        $('#status_produksi').change(function() {
+            if ($(this).val() == 'Hidup') {
+                $('#keterangan-form').hide();
+            } else if ($(this).val() == 'Mati') {
+                $('#keterangan-form').show();
+            } else {
+                $('#keterangan-form').hide();
+            }
+        });
+    });
+
     function update() {
         $.ajax({
             url: '{{ route('update.indukan', $data->id) }}',

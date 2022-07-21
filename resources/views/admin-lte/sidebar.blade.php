@@ -89,7 +89,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="nav nav-treeview">
+            {{-- <ul class="nav nav-treeview">
                 <li class="nav-item">
                     <a href="{{ route('report.indukan') }}"
                         class=" nav-link {{ request()->is('report-indukan') ? 'active' : '' }}">
@@ -97,7 +97,7 @@
                         <p>Indukan</p>
                     </a>
                 </li>
-            </ul>
+            </ul> --}}
         </li>
         <li class="nav-item {{ request()->is('pengguna-pemilik', 'pengguna-pekerja') ? 'menu-open' : '' }}">
             <a href="#"

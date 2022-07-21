@@ -52,12 +52,22 @@
             });
         }
 
+        // function showRead(id) {
+        //     $.get("{{ url('/show-produksi-inkubator') }}/" + id, function(data) {
+        //         $('#modalLabel').text('Data Produksi Hidup')
+        //         $('#showModalBody').html(data);
+        //         $('#showModal').modal('show');
+        //         $('#btnClose').hide();
+        //         $('#btnSubmit').hide();
+        //         $('#btnDelete').hide();
+        //     });
+        // }
         function showRead(id) {
-            $.get("{{ url('/show-produksi-inkubator') }}/" + id, function(data) {
-                $('#modalLabel').text('Data Produksi Hidup')
+            $.get("{{ url('/modal-read-produksi') }}/" + id, function(data) {
+                $('#modalLabel').text('Data Burung')
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
-                $('#btnClose').hide();
+                $('#btnClose').show();
                 $('#btnSubmit').hide();
                 $('#btnDelete').hide();
             });

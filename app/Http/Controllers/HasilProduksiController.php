@@ -44,6 +44,11 @@ class HasilProduksiController extends Controller
     {
         return view('laporan_produksi.modal.create_indukan');
     }
+    public function ModalReadProduksi($id)
+    {
+        $data = Produksi::findOrFail($id);
+        return view('laporan_produksi.modal.read', compact('data'));
+    }
     public function ModalUpdateReportIndukan($id)
     {
         $data = Produksi::find($id);
@@ -57,7 +62,9 @@ class HasilProduksiController extends Controller
             'Indukan' => 'Indukan',
             'Terjual' => 'Terjual',
         ];
-        return view('laporan_produksi.modal.update_indukan', compact('data', 'jk', 'status'));
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+
+        return view('laporan_produksi.modal.update', compact('data', 'jk', 'status', 'tgl_today'));
     }
     public function ModalUpdateReportHidup()
     {
@@ -122,39 +129,20 @@ class HasilProduksiController extends Controller
     public function UpdateIndukan($id)
     {
         $produksi = Produksi::all();
-        $tes = [];
-        foreach ($produksi as $e) {
-            $tes[] = $e->kode_ring;
-        }
-        if (Request()->kode_ring == $tes) {
-            $validate = Request()->validate(
-                [
-                    'jenis_kelamin' => 'required',
-                    'keterangan' => 'nullable',
-                    'status_produksi' => 'required',
-                ],
-                [
-                    'kode_ring.unique' => 'Kode Ring Telah Ada',
-                    'jenis_kelamin.required' => 'Jenis Kelamin Harus di Isi',
-                    'status_produksi.required' => 'Role Harus di isi',
-                ],
-            );
-        } else {
-            $validate = Request()->validate(
-                [
-                    'kode_ring' => 'required|unique:produksis',
-                    'jenis_kelamin' => 'required',
-                    'keterangan' => 'nullable',
-                    'status_produksi' => 'required',
-                ],
-                [
-                    'kode_ring.required' => 'Kode Ring Harus di Isi',
-                    'kode_ring.unique' => 'Kode Ring Telah Ada',
-                    'jenis_kelamin.required' => 'Jenis Kelamin Harus di Isi',
-                    'status_produksi.required' => 'Role Harus di isi',
-                ],
-            );
-        }
+        $validate = Request()->validate(
+            [
+                'kode_ring' => 'required',
+                'jenis_kelamin' => 'required',
+                'keterangan' => 'nullable',
+                'status_produksi' => 'required',
+            ],
+            [
+                'kode_ring.required' => 'Kode Ring Harus di Isi',
+                // 'kode_ring.unique' => 'Kode Ring Telah Ada',
+                'jenis_kelamin.required' => 'Jenis Kelamin Harus di Isi',
+                'status_produksi.required' => 'Role Harus di isi',
+            ],
+        );
         Produksi::find($id)->update($validate);
     }
 }

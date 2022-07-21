@@ -61,8 +61,8 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{ count($produksis->where('status_produksi', 'Hidup')) }}</h3>
-                            <p>Hasil Produksi Hidup</p>
+                            <h3>{{ count($produksis->where('kandang_id', '!==', null)) }}</h3>
+                            <p>Hasil Produksi</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-pie-graph"></i>

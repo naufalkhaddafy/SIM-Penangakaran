@@ -21,13 +21,12 @@
                         {{ $data->status_telur }} </td>
                     <td>{{ date('d F Y', strtotime($data->tgl_menetas)) }}</td>
                     <td>{{ $data->jenis_kelamin }}</td>
-                    <td> {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInMonths($tgl_today) }}
-                        Bulan
-                        {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari
+                    <td>
+                        {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
                     </td>
                     <td>
-                        <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                            data-target="{{ url('#modal-read' . $data->id) }}">
+                        <button type="button" class="btn btn-default  btn-outline-success"
+                            onclick="showRead({{ $data->id }})">
                             <ion-icon name="search"></ion-icon>
                         </button>
                         <button type="button" class="btn btn-default  btn-outline-success"

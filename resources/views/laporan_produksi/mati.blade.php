@@ -8,7 +8,9 @@
                     <div class="card-header">
                         <h3 class="card-header border-0 p-0">
                             <div class="d-flex justify-content-between">
-                                <h3 class="card-title">Hasil Produksi Mati</h3>
+                                <h3 class="card-title">Total Produksi Mati :
+                                    <b class="text-danger">{{ count($produksis->where('status_produksi', 'Mati')) }}</b>
+                                </h3>
                                 <button type="button" class="btn btn-outline-success" onclick="showPrintMati()">
                                     <ion-icon name="print-outline"></ion-icon> Print
                                 </button>
@@ -61,7 +63,7 @@
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
-                $('#btnSubmit').show().text('Print').attr('onclick', 'tambah()');
+                $('#btnSubmit').show().text('Print').attr('onclick', 'window.print()');
                 $('#btnDelete').hide();
             });
         }

@@ -3,7 +3,7 @@
         <tr>
             <th>Penangkaran</th>
             <th>Kode Ring</th>
-            <th>Asal Telur</th>
+            <th>Indukan</th>
             <th>Tanggal Menetas</th>
             <th>Jenis Kelamin</th>
             <th>Usia</th>
@@ -13,25 +13,27 @@
     <tbody>
         @foreach ($produksis->where('status_produksi', 'Hidup') as $data)
             <tr>
-                <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
+                <td>{{ $data->kandang->penangkaran->lokasi_penangkaran ?? '' }}</td>
                 <td>{{ $data->kode_ring ?? 'belum tersedia' }} </td>
-                <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
-                    {{ $data->status_telur }} </td>
+                <td>{{ $data->indukan }}</td>
+                {{-- <td>Kandang <b>{{ $data->kandang->nama_kandang ?? '' }}</b> Telur
+                    {{ $data->status_telur }} </td> --}}
                 <td>{{ date('d F Y', strtotime($data->tgl_menetas)) }}</td>
                 <td>{{ $data->jenis_kelamin }}</td>
-                <td> {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInMonths($tgl_today) }}
-                    Bulan
-                    {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }}Hari
+                <td>
+                    {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
                 </td>
                 <td align="center" valign="center" width="16%">
-                    <button type="button" class="btn btn-default  btn-outline-success" onclick="">
+                    <button type="button" class="btn btn-default  btn-outline-success"
+                        onclick="showRead({{ $data->id }})">
                         <ion-icon name="search"></ion-icon>
                     </button>
-                    <button type="button" class="btn btn-default  btn-outline-success" onclick="">
+                    <button type="button" class="btn btn-default  btn-outline-success"
+                        onclick="showUpdate({{ $data->id }})">
                         <ion-icon name="open-outline"></ion-icon>
                     </button>
-                    <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                        data-target="{{ url('#modal-update' . $data->id) }}">
+                    <button type="button" class="btn btn-default  btn-outline-success"
+                        onclick="showUpdate({{ $data->id }})">
                         <ion-icon name="print-outline"></ion-icon>
                     </button>
                 </td>

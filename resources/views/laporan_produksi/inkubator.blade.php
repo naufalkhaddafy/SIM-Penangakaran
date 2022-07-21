@@ -37,9 +37,7 @@
                                     <b
                                         class="text-danger">{{ count($produksis->where('status_produksi', 'Inkubator')) }}</b>
                                 </h3>
-                                <button type="button" class="btn btn-outline-success" onclick="showPrintMati()">
-                                    <ion-icon name="print-outline"></ion-icon> Print
-                                </button>
+
                             </div>
                         </h3>
                     </div>

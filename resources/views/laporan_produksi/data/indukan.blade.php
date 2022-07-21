@@ -18,13 +18,16 @@
                 <td>{{ $data->keterangan }}
                 </td>
                 <td align="center" valign="middle">
-                    <button type="button" class="btn btn-default  btn-outline-success" data-toggle="modal"
-                        data-target="{{ url('#modal-read' . $data->id) }}">
+                    <button type="button" class="btn btn-default  btn-outline-success"
+                        onclick="showRead({{ $data->id }})">
                         <ion-icon name="search"></ion-icon>
                     </button>
-                    <button type="button" class="btn btn-default  btn-outline-success"
+                    <button type="button" class="btn btn-default  btn-outline-warning"
                         onclick="showUpdate({{ $data->id }})">
                         <ion-icon name="open-outline"></ion-icon>
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline-info" onclick="">
+                        <ion-icon name="print-outline"></ion-icon>
                     </button>
                 </td>
             </tr>
