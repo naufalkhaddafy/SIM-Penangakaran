@@ -50,7 +50,7 @@ class JadwalInkubator extends Command
             if ($item->tgl_akan_menetas_end < date('Y-m-d')) {
                 //get id kandang from $item
                 $item->produksi->status_produksi = 'Mati';
-                $item->produksi->keterangan = 'Update Mati Inkubator Otomatis';
+                $item->produksi->keterangan = 'Update Otomatis Tidak Menetas';
                 $item->produksi->save();
                 // return 'Success Get Function';
             } else {

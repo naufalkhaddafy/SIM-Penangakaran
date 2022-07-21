@@ -63,7 +63,7 @@
                 $('#showModalBody').html(data);
                 $('#showModal').modal('show');
                 $('#btnClose').show();
-                $('#btnSubmit').show().text('Print').attr('onclick', 'window.print()');
+                $('#btnSubmit').show().text('Print').attr('onclick', 'printProduksiMati()');
                 $('#btnDelete').hide();
             });
         }

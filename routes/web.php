@@ -3,6 +3,7 @@
 use App\Models\Jadwal;
 use App\Models\Kandang;
 use App\Models\Produksi;
+use App\Models\Penangkaran;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -91,7 +92,10 @@ Route::get('/arfa', function () {
 });
 
 Route::get('/print', function () {
-    return view('print.produksi');
+
+    $data = Kandang::pluck('id', 'nama_kandang', 'kategori');
+    return response()->json($data);
+    // return view('print.produksi');
 });
 Route::get('/', function () {
     return view('page');
@@ -217,7 +221,9 @@ Route::get('/show-laporan-produksi-terjual', [HasilProduksiController::class, 'S
 Route::get('/modal-create-indukan', [HasilProduksiController::class, 'ModalCreateIndukan']);
 Route::get('/modal-update-report-indukan/{id}', [HasilProduksiController::class, 'ModalUpdateReportIndukan']);
 Route::get('/modal-update-report-hidup/{id}', [HasilProduksiController::class, 'ModalUpdateReportHidup']);
+Route::get('/modal-print-hidup', [HasilProduksiController::class, 'ModalPrintHidup']);
 Route::get('/modal-print-mati', [HasilProduksiController::class, 'ModalPrintMati']);
+
 
 Route::get('/report-inkubator', [HasilProduksiController::class, 'ReportInkubator'])->name('report.inkubator');
 Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
@@ -225,3 +231,7 @@ Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name
 Route::get('/report-indukan', [HasilProduksiController::class, 'ReportIndukan'])->name('report.indukan');
 Route::post('/create-indukan', [HasilProduksiController::class, 'CreateIndukan'])->name('create.indukan');
 Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateIndukan'])->name('update.indukan');
+
+//print laporan produksi
+Route::get('/print-laporan-produksi-mati/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiMati'])->name('print.laporan.produksi.mati');
+Route::get('/print-laporan-produksi-hidup/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiHidup'])->name('print.laporan.produksi.hidup');

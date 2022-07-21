@@ -81,7 +81,7 @@ Catatan:
                 });
                 Toast.fire({
                     icon: 'success',
-                    title: 'Berhasil Merubah Data Indukan'
+                    title: 'Berhasil Merubah Data Burung'
                 })
 
             },

@@ -99,5 +99,16 @@
                 $('#btnDelete').hide();
             });
         }
+
+        function showPrintMati() {
+            $.get("{{ url('/modal-print-hidup') }}", function(data) {
+                $('#modalLabel').text('Print Data Laporan Produksi Hidup')
+                $('#showModalBody').html(data);
+                $('#showModal').modal('show');
+                $('#btnClose').show();
+                $('#btnSubmit').show().text('Print').attr('onclick', 'printProduksiMati()');
+                $('#btnDelete').hide();
+            });
+        }
     </script>
 @endpush

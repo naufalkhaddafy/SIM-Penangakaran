@@ -52,7 +52,7 @@
                 '</div>');
         } else {
             $('#error').html('');
-            window.open("{{ url('/print-laporan-produksi-mati/') }}/" + penangkaran + "/" +
+            window.open("{{ url('/print-laporan-produksi-hidup/') }}/" + penangkaran + "/" +
                 startDate + "/" + endDate);
         }
 

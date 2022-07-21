@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Indukan;
+use App\Models\Kandang;
 use App\Models\Produksi;
 use App\Models\Penangkaran;
 use Illuminate\Http\Request;
@@ -78,10 +79,15 @@ class HasilProduksiController extends Controller
         ]);
         return view('laporan_produksi.inkubator', $data);
     }
+    public function ModalPrintHidup()
+    {
+        $penangkarans =  Penangkaran::all();
+        return view('laporan_produksi.modal.print_hidup', compact('penangkarans'));
+    }
     public function ModalPrintMati()
     {
-
-        return view('laporan_produksi.modal.print_mati');
+        $penangkarans =  Penangkaran::all();
+        return view('laporan_produksi.modal.print_mati', compact('penangkarans'));
     }
     public function ReportHidup()
     {
@@ -144,5 +150,39 @@ class HasilProduksiController extends Controller
             ],
         );
         Produksi::find($id)->update($validate);
+    }
+
+    public function PrintLaporanProduksiMati($penangkaran, $startDate, $endDate)
+    {
+        $penangkarans = Penangkaran::find($penangkaran);
+
+        if ($penangkaran == 'Penangkarans') {
+            $data = Produksi::whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Mati')->get();
+        } else {
+            $kandang = Kandang::where('penangkaran_id', $penangkaran)->get();
+            //get produksis based on kandang
+            $data = Produksi::whereIn('kandang_id', $kandang->pluck('id'))->whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Mati')->get();
+        }
+        $startDate = $startDate;
+        $endDate = $endDate;
+        return view('print.produksi_mati', compact('data', 'startDate', 'endDate', 'penangkarans'));
+        // $data = Produksi::whereBetween('tgl_bertelur', [$dateStart, $dateEnd])->get();
+    }
+    public function PrintLaporanProduksiHidup($penangkaran, $startDate, $endDate)
+    {
+        $penangkarans = Penangkaran::find($penangkaran);
+        if ($penangkaran == 'Penangkarans') {
+            $data = Produksi::whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Hidup')->get();
+        } else {
+            $kandang = Kandang::where('penangkaran_id', $penangkaran)->get();
+            //get produksis based on kandang
+            $data = Produksi::whereIn('kandang_id', $kandang->pluck('id'))->whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Hidup')->get();
+        }
+
+        $startDate = $startDate;
+        $endDate = $endDate;
+        $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
+        return view('print.produksi_hidup', compact('data', 'startDate', 'endDate', 'penangkarans', 'tgl_today'));
+        // $data = Produksi::whereBetween('tgl_bertelur', [$dateStart, $dateEnd])->get();
     }
 }
