@@ -120,6 +120,8 @@ class HasilProduksiController extends Controller
     {
         $validateindukan = Request()->validate([
             'kode_ring' => 'required|unique:produksis',
+            'indukan' => 'nullable',
+            'tgl_menetas' => 'nullable',
             'jenis_kelamin' => 'required',
             'keterangan' => 'nullable',
             'status_produksi' => 'required',
@@ -138,17 +140,33 @@ class HasilProduksiController extends Controller
         $validate = Request()->validate(
             [
                 'kode_ring' => 'required',
+                'indukan' => 'nullable',
+                'tgl_menetas' => 'nullable',
                 'jenis_kelamin' => 'required',
                 'keterangan' => 'nullable',
                 'status_produksi' => 'required',
             ],
             [
                 'kode_ring.required' => 'Kode Ring Harus di Isi',
-                // 'kode_ring.unique' => 'Kode Ring Telah Ada',
                 'jenis_kelamin.required' => 'Jenis Kelamin Harus di Isi',
                 'status_produksi.required' => 'Role Harus di isi',
             ],
         );
+        if (Request()->status_produksi == 'Mati') {
+            $validate = Request()->validate([
+                'kode_ring' => 'required',
+                'indukan' => 'nullable',
+                'tgl_menetas' => 'nullable',
+                'jenis_kelamin' => 'required',
+                'keterangan' => 'required',
+                'status_produksi' => 'required',
+            ], [
+                'keterangan.required' => 'Keterangan harus di isi !!!',
+                'kode_ring.required' => 'Kode Ring Harus di Isi',
+                'jenis_kelamin.required' => 'Jenis Kelamin Harus di Isi',
+                'status_produksi.required' => 'Status Harus di isi',
+            ]);
+        }
         Produksi::find($id)->update($validate);
     }
 
@@ -172,11 +190,11 @@ class HasilProduksiController extends Controller
     {
         $penangkarans = Penangkaran::find($penangkaran);
         if ($penangkaran == 'Penangkarans') {
-            $data = Produksi::whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Hidup')->get();
+            $data = Produksi::whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Hidup')->orWhere('status_produksi', 'Inkubator')->get();
         } else {
             $kandang = Kandang::where('penangkaran_id', $penangkaran)->get();
-            //get produksis based on kandang
-            $data = Produksi::whereIn('kandang_id', $kandang->pluck('id'))->whereBetween('tgl_bertelur', [$startDate, $endDate])->where('status_produksi', 'Hidup')->get();
+            //get produksis and get value status_produksi == hidup or inkubator based on kandang id
+            $data = Produksi::whereIn('kandang_id', $kandang->pluck('id'))->whereBetween('tgl_bertelur', [$startDate, $endDate])->where([['status_produksi', '!=', 'Mati'], ['status_produksi', '!=', 'Indukan'], ['status_produksi', '!=', 'Terjual']])->get();
         }
 
         $startDate = $startDate;
@@ -184,5 +202,10 @@ class HasilProduksiController extends Controller
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
         return view('print.produksi_hidup', compact('data', 'startDate', 'endDate', 'penangkarans', 'tgl_today'));
         // $data = Produksi::whereBetween('tgl_bertelur', [$dateStart, $dateEnd])->get();
+    }
+    public function PrintSertifikat($id)
+    {
+        $data = Produksi::find($id);
+        return view('print.sertifikat', compact('data'));
     }
 }

@@ -12,7 +12,7 @@
     <tbody align="center">
         @foreach ($produksis->where('status_produksi', 'Inkubator') as $data)
             <tr>
-                <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
+                <td>{{ $data->kandang->penangkaran->kode_penangkaran }} {{ $data->kandang->nama_kandang }} </td>
                 <td>{{ $data->jadwal->kode_tempat_inkubator }}</td>
                 <td>{{ $data->indukan }}</td>
                 <td>{{ date('d F Y', strtotime($data->tgl_masuk_inkubator)) }}</td>

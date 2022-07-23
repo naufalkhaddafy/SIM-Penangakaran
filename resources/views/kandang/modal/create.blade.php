@@ -1,4 +1,5 @@
 <div id="error"></div>
+<label>Nama Kandang<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="text" id="nama_kandang" name="nama_kandang" class="form-control" placeholder="Nama Kandang"
         value="{{ old('nama_kandang') }}" required>
@@ -10,6 +11,7 @@
 </div>
 <div class="row">
     <div class="col-md-6 mb-3">
+        <label>Indukan Pertama<span class="text-danger">*</span></label>
         <select name="indukan_pertama" id="indukan_pertama" class=" form-control " required>
             <option value="" selected>Pilih Indukan Pertama</option>
             @foreach ($produksis as $indukanpertama)
@@ -20,13 +22,9 @@
         </select>
     </div>
     <div class="col-md-6 mb-3">
+        <label>Indukan Kedua<span class="text-danger">*</span></label>
         <select name="indukan_kedua" id="indukan_kedua" class="form-control " required>
             <option value="" selected>Pilih Indukan Kedua</option>
-            {{-- @foreach ($produksis->where('status_produksi', 'Indukan') as $indukankedua)
-                <option value="{{ $indukankedua->id }}" {{ $indukankedua->id }}>
-                    {{ $indukankedua->kode_ring }}
-                </option>
-            @endforeach --}}
             @foreach ($produksis as $indukankedua)
                 @if ($indukankedua->indukans == null)
                     <option value="{{ $indukankedua->id }}"> {{ $indukankedua->kode_ring }}</option>
@@ -35,6 +33,7 @@
         </select>
     </div>
 </div>
+<label>Tanggal Masuk Kandang<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="date" id="tgl_masuk_kandang" name="tgl_masuk_kandang" class="form-control"
         placeholder="Nama Kandang" required>
@@ -44,6 +43,7 @@
         </div>
     </div>
 </div>
+<label>Kondisi Kandang<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <select name="kategori" id="kategori" class="form-control" required>
         <option value="" selected>Kondisi Kandang</option>

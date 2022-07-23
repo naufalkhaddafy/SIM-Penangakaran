@@ -42,7 +42,8 @@
             // dataType: 'json',
             success: function(data) {
                 $('.close').click();
-                readJadwal()
+                // readJadwal();
+                window.location.href = "{{ url('/produksi-inkubator') }}";
                 var Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -53,7 +54,6 @@
                     icon: 'success',
                     title: 'Berhasil Menambahkan Data Produksi'
                 })
-
             },
             error: function(data) {
                 var response = data.responseJSON;

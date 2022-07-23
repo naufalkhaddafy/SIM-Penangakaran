@@ -11,7 +11,7 @@
         <?php $no = 1; ?>
         @foreach ($produksis->where('status_produksi', 'Mati') as $data)
             <tr>
-                <td>{{ $data->kandang->penangkaran->lokasi_penangkaran }}</td>
+                <td>{{ $data->kandang->penangkaran->kode_penangkaran }}</td>
                 <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                     {{ $data->status_telur }}</td>
                 <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>

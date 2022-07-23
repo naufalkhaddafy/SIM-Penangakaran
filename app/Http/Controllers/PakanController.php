@@ -56,7 +56,7 @@ class PakanController extends Controller
             ],
             [
                 'penangkaran_id.required' => 'Penangkaran tidak boleh kosong',
-                'kode_tempat.required' => 'kode Harus di Isi',
+                'kode_tempat.required' => 'Kode Harus di Isi',
                 'nama_pakan.required' => 'Nama Pakan Harus diisi',
                 'tgl_kadaluwarsa.required' => 'Tanggal Kadaluwarsa Harus diisi',
                 'status.required' => 'Status Harus diisi',

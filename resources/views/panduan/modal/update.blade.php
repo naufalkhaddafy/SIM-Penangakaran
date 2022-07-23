@@ -1,16 +1,17 @@
 <div id="error"></div>
 <input type="hidden" id="user_id" name="user_id" class="form-control" value="{{ Auth::user()->id }}" required>
-
-<div class="input-group mb-3">
-    <input type="text" id="judul" name="judul" class="form-control" value="{{ $data->judul }}" placeholder="Judul"
-        required>
+<label>Judul<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
+    <input type="text" id="judul" name="judul" class="form-control" value="{{ $data->judul }}"
+        placeholder="Judul" required>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="text-outline"></ion-icon>
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
+<label>Isi Panduan<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <textarea id="isi" name="isi" rows="5" class="form-control" placeholder="Isi Panduan" required>{{ $data->isi }}</textarea>
     <div class="input-group-append">
         <div class="input-group-text">
@@ -18,7 +19,8 @@
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
+<label>Kategori Panduan<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select name="kategori" id="kategori" class="form-control" required>
         @foreach ($kategori as $kategori)
             <option value="{{ $kategori }}" {{ $kategori == $data->kategori ? 'selected' : '' }}>
@@ -27,7 +29,8 @@
         @endforeach
     </select>
 </div>
-<div class="input-group mb-3">
+<label>Status<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select name="status" id="status" class="form-control" required>
         @foreach ($status as $status)
             <option value="{{ $status }}" {{ $status == $data->status ? 'selected' : '' }}>

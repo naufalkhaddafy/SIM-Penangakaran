@@ -13,9 +13,9 @@
             @foreach ($auth->produksis->where('status_produksi', 'Inkubator') as $data)
                 <tr>
                     <td>{{ $data->jadwal->kode_tempat_inkubator }}</td>
-                    <td>{{ date('d F Y', strtotime($data->tgl_masuk_inkubator)) }}</td>
+                    <td>{{ date('d M Y', strtotime($data->tgl_masuk_inkubator)) }}</td>
                     <td class="text-danger"><b>
-                            {{ date('d', strtotime($data->jadwal->tgl_akan_menetas_start)) }}-{{ date('d F Y', strtotime($data->jadwal->tgl_akan_menetas_end)) }}</b>
+                            {{ date('d', strtotime($data->jadwal->tgl_akan_menetas_start)) }}-{{ date('d M Y', strtotime($data->jadwal->tgl_akan_menetas_end)) }}</b>
                     </td>
                     <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
                         {{ $data->status_telur }} </td>

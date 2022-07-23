@@ -18,7 +18,7 @@
                     <tr>
                         <td>{{ $data->kode_tempat }}</td>
                         <td>{{ $data->nama_pakan }}</td>
-                        <td>{{ $data->tgl_kadaluwarsa }}</td>
+                        <td>{{ date('d M Y', strtotime($data->tgl_kadaluwarsa)) }}</td>
                         <td>
                             <span class="badge badge-danger">
                                 {{ $data->status }}

@@ -29,8 +29,7 @@
 <div class="form-group row">
     <label for="keterangan" class="col-sm-4 col-form-label">Keterangan</label>
     <div class="col-sm-8">
-        <input type="text" class="form-control" id="keterangan" value="{{ $data->keterangan ?? 'Tidak Tersedia' }}"
-            readonly>
+        <textarea type="text" class="form-control" id="keterangan" readonly>{{ $data->keterangan ?? 'Tidak Tersedia' }}</textarea>
     </div>
 </div>
 {{-- <div class="form-group row">

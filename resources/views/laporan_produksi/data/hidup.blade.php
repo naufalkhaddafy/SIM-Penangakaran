@@ -6,14 +6,14 @@
             <th>Indukan</th>
             <th>Tanggal Menetas</th>
             <th>Jenis Kelamin</th>
-            <th>Usia</th>
+            <th>Keterangan</th>
             <th>Action</th>
         </tr>
     </thead>
     <tbody>
         @foreach ($produksis->where('status_produksi', 'Hidup') as $data)
             <tr>
-                <td>{{ $data->kandang->penangkaran->lokasi_penangkaran ?? '' }}</td>
+                <td>{{ $data->kandang->penangkaran->kode_penangkaran ?? '' }}</td>
                 <td>{{ $data->kode_ring ?? 'belum tersedia' }} </td>
                 <td>{{ $data->indukan }}</td>
                 {{-- <td>Kandang <b>{{ $data->kandang->nama_kandang ?? '' }}</b> Telur
@@ -21,7 +21,8 @@
                 <td>{{ date('d F Y', strtotime($data->tgl_menetas)) }}</td>
                 <td>{{ $data->jenis_kelamin }}</td>
                 <td>
-                    {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
+                    Usia {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
+                    <textarea style="border-color: white; width:100%;">{{ $data->keterangan }}</textarea>
                 </td>
                 <td align="center" valign="center" width="16%">
                     <button type="button" class="btn btn-default  btn-outline-success"
@@ -33,7 +34,7 @@
                         <ion-icon name="open-outline"></ion-icon>
                     </button>
                     <button type="button" class="btn btn-default  btn-outline-success"
-                        onclick="showUpdate({{ $data->id }})">
+                        onclick="printSertifikat({{ $data->id }})">
                         <ion-icon name="print-outline"></ion-icon>
                     </button>
                 </td>
@@ -59,4 +60,8 @@
             "responsive": true,
         });
     });
+
+    function printSertifikat(id) {
+        window.open("{{ url('/print-sertifikat') }}/" + id);
+    }
 </script>

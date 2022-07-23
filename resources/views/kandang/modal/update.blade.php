@@ -1,4 +1,5 @@
 <div id="error"></div>
+<label>Nama Kandang<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="text" id="nama_kandang" name="nama_kandang" class="form-control" value="{{ $data->nama_kandang }}"
         placeholder="Nama Kandang" required>
@@ -10,13 +11,8 @@
 </div>
 <div class="row">
     <div class="col-md-6 mb-3">
+        <label>Indukan Pertama<span class="text-danger">*</span></label>
         <select name="indukan_pertama" id="indukan_pertama" class=" form-control " required>
-            {{-- @foreach ($produksis->where('status_produksi', 'Indukan') as $produksi)
-                <option value="{{ $produksi->id }}"
-                    {{ $produksi->id == $indukanPertama->produksi_id ? ' selected' : '' }}>
-                    {{ $produksi->kode_ring }} </option>
-            @endforeach --}}
-            {{-- <option value="{{ $indukanPertama->id }}" selected> {{ $indukanPertama->kode_ring }} </option> --}}
             <option value="{{ $indukanPertama->produksi_id }}" selected>{{ $indukanPertama->produksi->kode_ring }}
             </option>
             @foreach ($produksis as $indukanpertama)
@@ -27,6 +23,7 @@
         </select>
     </div>
     <div class="col-md-6 mb-3">
+        <label>Indukan Kedua<span class="text-danger">*</span></label>
         <select name="indukan_kedua" id="indukan_kedua" class="form-control " required>
             <option value="{{ $indukanKedua->produksi_id }}" selected>{{ $indukanKedua->produksi->kode_ring }}
             </option>
@@ -38,6 +35,7 @@
         </select>
     </div>
 </div>
+<label>Tanggal Masuk Kandang<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="date" id="tgl_masuk_kandang" name="tgl_masuk_kandang" value="{{ $data->tgl_masuk_kandang }}"
         class="form-control" placeholder="Nama Kandang" required>
@@ -47,6 +45,7 @@
         </div>
     </div>
 </div>
+<label>Kondisi Kandang<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <select name="kategori" id="kategori" class="form-control @error('kategori') is-invalid @enderror" required>
         @foreach ($kategori as $kategori)

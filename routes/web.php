@@ -93,9 +93,9 @@ Route::get('/arfa', function () {
 
 Route::get('/print', function () {
 
-    $data = Kandang::pluck('id', 'nama_kandang', 'kategori');
-    return response()->json($data);
-    // return view('print.produksi');
+    // $data = Kandang::pluck('id', 'nama_kandang', 'kategori');
+    // return response()->json($data);
+    // return view('print.sertifikat');
 });
 Route::get('/', function () {
     return view('page');
@@ -235,3 +235,4 @@ Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateInd
 //print laporan produksi
 Route::get('/print-laporan-produksi-mati/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiMati'])->name('print.laporan.produksi.mati');
 Route::get('/print-laporan-produksi-hidup/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiHidup'])->name('print.laporan.produksi.hidup');
+Route::get('/print-sertifikat/{id}', [HasilProduksiController::class, 'PrintSertifikat']);

@@ -1,5 +1,6 @@
 <div id="error"></div>
-<div class="input-group mb-3">
+<label>Kode Ring<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <input type="text" id="kode_ring" name="kode_ring" class="form-control" placeholder="Kode Ring" required>
     <div class="input-group-append">
         <div class="input-group-text">
@@ -7,22 +8,37 @@
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
+<label>Indukan</label>
+<div class="input-group mb-1">
+    <input type="text" id="indukan" name="indukan" class="form-control" placeholder="Indukan" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="code-slash"></ion-icon>
+        </div>
+    </div>
+</div>
+<label>Tanggal Menetas</label>
+<div class="input-group mb-1">
+    <input type="date" id="tgl_menetas" name="tgl_menetas"placeholder="Indukan" class="form-control" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="calendar"></ion-icon>
+        </div>
+    </div>
+</div>
+<label>Jenis Kelamin<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select name="jenis_kelamin" id="jenis_kelamin" class="form-control " required>
         <option value="" selected>Jenis Kelamin</option>
         <option value="Jantan">Jantan</option>
         <option value="Betina">Betina</option>
     </select>
 </div>
-<div class="input-group mb-3">
-    <input type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Indukan">
-    <div class="input-group-append">
-        <div class="input-group-text">
-            <ion-icon name="text"></ion-icon>
-        </div>
-    </div>
+<label>Keterangan </label>
+<div class="input-group mb-1">
+    <textarea type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Indukan"></textarea>
 </div>
-<div class="input-group mb-3">
+<div class="input-group mb-1">
     <input type="hidden" id="status_produksi" name="status_produksi" class="form-control" value="Indukan">
 </div>
 <script>
@@ -33,6 +49,8 @@
             data: {
                 "_token": "{{ csrf_token() }}",
                 kode_ring: $('#kode_ring').val(),
+                indukan: $('#indukan').val(),
+                tgl_menetas: $('#tgl_menetas').val(),
                 jenis_kelamin: $('#jenis_kelamin').val(),
                 keterangan: $('#keterangan').val(),
                 status_produksi: $('#status_produksi').val(),

@@ -1,7 +1,7 @@
 <div id="error"></div>
 <div class="card-body">
     <div class="form-group">
-        <label for="TanggalBertelur">Telur
+        <label for="TanggalBertelur">Hari ini telur
             {{ $data->status_telur }} Kandang
             {{ $data->kandang->nama_kandang }}
             Kode Tempat
@@ -12,7 +12,7 @@
     <div class="form-group">
         <select name="status_produksi" id="status_produksi" class="form-control" required>
             <option value="" selected>Pilih Status Telur</option>
-            <option value="Hidup">Hidup</option>
+            <option value="Hidup">Hidup/Menetas</option>
             <option value="Mati">Mati</option>
         </select>
     </div>
@@ -48,7 +48,8 @@
             // dataType: 'json',
             success: function(data) {
                 $('.close').click();
-                readData()
+                // readData()
+                window.location.href = "{{ url('/produksi-hidup') }}";
                 var Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',

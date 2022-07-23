@@ -78,8 +78,8 @@
             <th>Tanggal Bertelur</th>
             <th>Tanggal Menetas</th>
             <th>Status Telur</th>
-            <th>Status</th>
             <th>Keterangan</th>
+            <th>Status</th>
         </tr>
         <?php $no = 1; ?>
         @foreach ($data as $produksi)
@@ -90,8 +90,8 @@
                 <td>{{ $produksi->tgl_bertelur }}</td>
                 <td>{{ $produksi->tgl_menetas ?? '-' }}</td>
                 <td>{{ $produksi->status_telur }}</td>
-                <td>{{ $produksi->status_produksi }}</td>
                 <td>{{ $produksi->keterangan }}</td>
+                <td>{{ $produksi->status_produksi }}</td>
             </tr>
         @endforeach
     </table>

@@ -35,7 +35,7 @@
                                     @foreach ($data->produksis as $d)
                                         @if ($loop->last)
                                             {{ date('d', strtotime($d->jadwal->tgl_akan_bertelur_start)) }}-
-                                            {{ date('d F Y', strtotime($d->jadwal->tgl_akan_bertelur_end)) }}
+                                            {{ date('d M Y', strtotime($d->jadwal->tgl_akan_bertelur_end)) }}
                                         @endif
                                     @endforeach
                                 </b>
@@ -75,7 +75,7 @@
                                         {{ $data->nama_kandang }}
                                     </td>
                                     <td>
-                                        {{ date('d F Y', strtotime($data->tgl_masuk_kandang)) }}
+                                        {{ date('d M Y', strtotime($data->tgl_masuk_kandang)) }}
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-default  btn-outline-success"
@@ -111,7 +111,7 @@
                                     <td>
                                         {{ $data->nama_kandang }}
                                     </td>
-                                    <td>{{ optional($data->produksis->last())->tgl_bertelur == !null ? date('d F Y', strtotime(optional($data->produksis->last())->tgl_bertelur)) : 'Belum Ada Produksi' }}
+                                    <td>{{ optional($data->produksis->last())->tgl_bertelur == !null ? date('d M Y', strtotime(optional($data->produksis->last())->tgl_bertelur)) : 'Belum Ada Produksi' }}
 
                                     </td>
                                     <td>

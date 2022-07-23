@@ -1,4 +1,5 @@
 <div id="error"></div>
+<label>Kode Penangkaran</label>
 <div class="input-group mb-3">
     <input type="text" id="kode_penangkaran" name="kode_penangkaran"
         class="form-control @error('kode_penangkaran') is-invalid @enderror" placeholder="Kode Penangkaran"
@@ -9,6 +10,7 @@
         </div>
     </div>
 </div>
+<label>Lokasi Penangkaran</label>
 <div class="input-group mb-3">
     <input type="text" id="lokasi_penangkaran" name="lokasi_penangkaran"
         class="form-control @error('lokasi_penangkaran') is-invalid @enderror" placeholder="Lokasi Penangkaran"

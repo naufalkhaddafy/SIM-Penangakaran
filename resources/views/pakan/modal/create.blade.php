@@ -1,4 +1,5 @@
 <div id="error"></div>
+<label>Penangkaran<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <select name="penangkaran_id" id="penangkaran_id" class="form-control" required>
         <option value="" selected>Pilih Penangakaran</option>
@@ -7,6 +8,7 @@
         @endforeach
     </select>
 </div>
+<label>Kode Tempat<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="text" id="kode_tempat" name="kode_tempat" class="form-control " placeholder="Kode Tempat"
         value="{{ old('kode_tempat') }}">
@@ -16,6 +18,7 @@
         </div>
     </div>
 </div>
+<label>Nama Pakan<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="text" id="nama_pakan" name="nama_pakan" class="form-control " placeholder="Nama Pakan "
         value="{{ old('nama_pakan') }}">
@@ -25,6 +28,7 @@
         </div>
     </div>
 </div>
+<label>Tanggal Kadaluwarsa<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <input type="date" id="tgl_kadaluwarsa" name="tgl_kadaluwarsa" class="form-control" placeholder="Expired">
     <div class="input-group-append">
@@ -33,6 +37,7 @@
         </div>
     </div>
 </div>
+<label>Status Pakan<span class="text-danger">*</span></label>
 <div class="input-group mb-3">
     <select name="status" id="status" class="form-control" required>
         <option value="" selected>Pilih Status Pakan</option>

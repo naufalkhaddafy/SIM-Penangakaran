@@ -3,13 +3,6 @@
 
 @section('content')
     <div class="container-fluid">
-        {{-- @if (session('login'))
-            <div class="alert alert-success alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <h6><i class="icon fas fa-check"></i>{{ session('login') }}</h6>
-                <h5>Selamat Datang {{ Auth::user()->nama_lengkap }}</h5>
-            </div>
-        @endif --}}
         @if (Auth::user()->role == 'pemilik')
             <div class="row">
                 <div class="col-lg-3 col-6">
@@ -126,6 +119,7 @@
                                     <h4>{{ date('l, d F Y') }} </h4>
                                     <h3> <b>Lokasi Penangkaran</b>
                                         <h4> {{ optional(Auth::user()->penangkaran)->lokasi_penangkaran ?? 'Lokasi Penangkaran Belum Tersedia' }}
+                                            ({{ optional(Auth::user()->penangkaran)->kode_penangkaran ?? '' }})
                                         </h4>
                                         {{-- {{ Auth::user() }} --}}
                                 </div>

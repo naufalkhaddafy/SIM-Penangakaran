@@ -1,35 +1,63 @@
 <div id="error"></div>
-<div class="card-body">
-    <div class="form-group">
-        <label for="kode_ring">Kode Ring</label>
-        <input type="input" class="form-control  @error('kode_ring') is-invalid @enderror" id="kode_ring" name="kode_ring"
-            value="{{ $data->kode_ring }}" placeholder="Masukan Kode Ring">
-        <label for="jeniskelamin">Jenis Kelamin</label>
-        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
-            <option value="" selected>Jenis Kelamin</option>
-            @foreach ($jk as $jk)
-                <option value="{{ $jk }}" {{ $jk == $data->jenis_kelamin ? 'selected' : '' }}>
-                    {{ $jk }}
-                </option>
-            @endforeach
-        </select>
-        <label for="status_produksi">Kondisi Burung</label>
-        <select name="status_produksi" id="status_produksi" class="form-control" required>
-            <option value="{{ $data->status_produksi }}" selected>{{ $data->status_produksi }}
-            </option>
-            <option value="Mati">Mati</option>
-        </select>
+<label>Kode Ring<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
+    <input type="text" id="kode_ring" name="kode_ring" class="form-control" placeholder="Kode Ring"
+        value="{{ $data->kode_ring }}" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="code-slash"></ion-icon>
+        </div>
     </div>
-    <div id="keterangan-form" class="form-group">
-        <label for="Keterangan">Keterangan</label>
-        <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5">
+</div>
+<label>Indukan</label>
+<div class="input-group mb-1">
+    <input type="text" id="indukan" name="indukan" class="form-control" placeholder="Indukan"
+        value="{{ $data->indukan ?? 'Tidak tersedia' }}" readonly>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="code-slash"></ion-icon>
+        </div>
+    </div>
+</div>
+<label>Tanggal Menetas</label>
+<div class="input-group mb-1">
+    <input type="date" id="tgl_meneteas" name="tgl_meneteas"placeholder="Indukan"value="{{ $data->tgl_menetas }}"
+        class="form-control" readonly>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="calendar"></ion-icon>
+        </div>
+    </div>
+</div>
+<label>Jenis Kelamin<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
+    <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+        <option value="" selected>Jenis Kelamin</option>
+        @foreach ($jk as $jk)
+            <option value="{{ $jk }}" {{ $jk == $data->jenis_kelamin ? 'selected' : '' }}>
+                {{ $jk }}
+            </option>
+        @endforeach
+    </select>
+</div>
+<label>Status Burung<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
+    <select name="status_produksi" id="status_produksi" class="form-control" required>
+        <option value="{{ $data->status_produksi }}" selected>{{ $data->status_produksi }}
+        </option>
+        <option value="Mati">Mati</option>
+    </select>
+</div>
+<div id="keterangan-form" class="form-group">
+    <label for="Keterangan">Keterangan<span class="text-danger">*</span></label>
+    <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5">
 Kode Ring : {{ $data->kode_ring ?? 'Belum ada kode ring' }}
 Usia             : {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
 Catatan:
 
 </textarea>
-    </div>
 </div>
+
 <script>
     $(document).ready(function() {
         $('#keterangan-form').hide();

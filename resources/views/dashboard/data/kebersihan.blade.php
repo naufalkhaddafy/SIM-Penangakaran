@@ -24,7 +24,7 @@
                         @elseif(!$data->kebersihans->last() == null)
                             <td>
                                 <b class="text-danger">
-                                    {{ date('d F Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
+                                    {{ date('d M Y', strtotime($data->kebersihans->last()->jadwal_pembersihan)) }}
                                 </b>
                             </td>
                         @endif

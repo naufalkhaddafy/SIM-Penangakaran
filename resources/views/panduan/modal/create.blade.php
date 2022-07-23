@@ -1,7 +1,7 @@
 <div id="error"></div>
 <input type="hidden" id="user_id" name="user_id" class="form-control" value="{{ Auth::user()->id }}" required>
-
-<div class="input-group mb-3">
+<label>Judul<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <input type="text" id="judul" name="judul" class="form-control" placeholder="Judul" required>
     <div class="input-group-append">
         <div class="input-group-text">
@@ -9,7 +9,8 @@
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
+<label>Isi Panduan<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <textarea id="isi" name="isi" class="form-control" rows="5" placeholder="Isi Panduan" required></textarea>
     <div class="input-group-append">
         <div class="input-group-text">
@@ -17,7 +18,8 @@
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
+<label>Kategori Kategori<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select name="kategori" id="kategori" class="form-control" required>
         <option value="" selected>Kategori Panduan</option>
         <option value="Reproduksi">Reproduksi</option>
@@ -26,7 +28,8 @@
         <option value="Perawatan"> Perawatan</option>
     </select>
 </div>
-<div class="input-group mb-3">
+<label>Status<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select name="status" id="status" class="form-control" required>
         <option value="" selected>Status Panduan</option>
         <option value="publish"> Publish</option>

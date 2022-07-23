@@ -184,19 +184,19 @@ class KandangController extends Controller
     {
         $validatekandang = $request->validate([
             'nama_kandang' => 'required',
+            'indukan_pertama' => 'required',
+            'indukan_kedua' => 'required|different:indukan_pertama',
             'tgl_masuk_kandang' => 'required',
             'kategori' => 'required',
             'penangkaran_id' => 'required',
-            'indukan_pertama' => 'required',
-            'indukan_kedua' => 'required|different:indukan_pertama',
         ], [
             'nama_kandang.required' => 'Nama Kandang Harus di Isi',
-            'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
-            'kategori.required' => 'Kategori Kandang Harus di Isi',
-            'penangkaran_id.required' => 'Penangkara Tidak Terdeteksi',
             'indukan_pertama.required' => 'Indukan Pertama Harus di Isi',
             'indukan_kedua.required' => 'Indukan Kedua Harus di Isi',
             'indukan_kedua.different' => 'Indukan Pertama dan Kedua Harus Beda',
+            'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
+            'kategori.required' => 'Kategori Kandang Harus di Isi',
+            'penangkaran_id.required' => 'Penangkara Tidak Terdeteksi',
         ]);
         Kandang::find($id)->update($validatekandang);
         $indukan = [

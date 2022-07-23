@@ -26,7 +26,8 @@
                         onclick="showUpdate({{ $data->id }})">
                         <ion-icon name="open-outline"></ion-icon>
                     </button>
-                    <button type="button" class="btn btn-default  btn-outline-info" onclick="">
+                    <button type="button" class="btn btn-default  btn-outline-info"
+                        onclick="printSertifikat({{ $data->id }})">
                         <ion-icon name="print-outline"></ion-icon>
                     </button>
                 </td>
@@ -52,4 +53,8 @@
             "responsive": true,
         });
     });
+
+    function printSertifikat(id) {
+        window.open("{{ url('/print-sertifikat') }}/" + id);
+    }
 </script>

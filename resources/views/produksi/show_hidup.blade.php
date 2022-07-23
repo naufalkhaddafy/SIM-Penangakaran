@@ -17,14 +17,14 @@
                 <tr>
                     <td>{{ $no++ }}</td>
                     <td>{{ $data->kode_ring ?? 'belum tersedia' }} </td>
-                    <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
+                    <td><b>{{ $data->kandang->nama_kandang }}</b> Telur
                         {{ $data->status_telur }} </td>
-                    <td>{{ date('d F Y', strtotime($data->tgl_menetas)) }}</td>
+                    <td>{{ date('d M Y', strtotime($data->tgl_menetas)) }}</td>
                     <td>{{ $data->jenis_kelamin }}</td>
                     <td>
                         {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
                     </td>
-                    <td>
+                    <td align="center">
                         <button type="button" class="btn btn-default  btn-outline-success"
                             onclick="showRead({{ $data->id }})">
                             <ion-icon name="search"></ion-icon>

@@ -1,6 +1,7 @@
 <table id="tableData" class="table table-bordered table-hover">
     <thead align="center">
         <tr>
+            <th>No.</th>
             <th>Asal Produksi</th>
             <th>Tanggal Bertelur</th>
             <th>Indukan</th>
@@ -8,14 +9,15 @@
             <th>Tanggal Mati</th>
         </tr>
     </thead>
-    <tbody align="center">
+    <tbody>
         <?php $no = 1; ?>
         @foreach (auth()->user()->penangkaran->kandangs ?? [] as $auth)
             @foreach ($auth->produksis->where('status_produksi', 'Mati') as $data)
                 <tr>
-                    <td>Kandang <b>{{ $data->kandang->nama_kandang }}</b> Telur
+                    <td>{{ $no++ }}</td>
+                    <td><b>{{ $data->kandang->nama_kandang }}</b> Telur
                         {{ $data->status_telur }}</td>
-                    <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
+                    <td>{{ date('d M Y', strtotime($data->tgl_bertelur)) }}</td>
                     <td>{{ $data->indukan }}</td>
                     <td>
                         <textarea rows="4" cols="30" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>

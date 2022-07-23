@@ -1,14 +1,36 @@
 <div id="error"></div>
-<div class="input-group mb-3">
+<label>Kode Ring<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <input type="text" id="kode_ring" name="kode_ring" class="form-control" placeholder="Kode Ring"
-        value="{{ $data->kode_ring }}"required>
+        value="{{ $data->kode_ring }}" required>
     <div class="input-group-append">
         <div class="input-group-text">
             <ion-icon name="code-slash"></ion-icon>
         </div>
     </div>
 </div>
-<div class="input-group mb-3">
+<label>Indukan</label>
+<div class="input-group mb-1">
+    <input type="text" id="indukan" name="indukan" class="form-control" placeholder="Indukan"
+        value="{{ $data->indukan }}" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="code-slash"></ion-icon>
+        </div>
+    </div>
+</div>
+<label>Tanggal Menetas</label>
+<div class="input-group mb-1">
+    <input type="date" id="tgl_meneteas" name="tgl_meneteas"placeholder="Indukan"value="{{ $data->tgl_menetas }}"
+        class="form-control" required>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <ion-icon name="calendar"></ion-icon>
+        </div>
+    </div>
+</div>
+<label>Jenis Kelamin<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select name="jenis_kelamin" id="jenis_kelamin" class="form-control " required>
         <option value="">Jenis Kelamin</option>
         @foreach ($jk as $jenis_kelamin)
@@ -18,46 +40,21 @@
         @endforeach
     </select>
 </div>
-<div class="input-group mb-3">
-    <input type="text" id="keterangan" name="keterangan" class="form-control" value="{{ $data->keterangan }}"
-        placeholder="Keterangan Indukan">
-    <div class="input-group-append">
-        <div class="input-group-text">
-            <ion-icon name="text"></ion-icon>
-        </div>
-    </div>
-</div>
-<div class="input-group mb-3">
+<label>Status Burung<span class="text-danger">*</span></label>
+<div class="input-group mb-1">
     <select id="status_produksi" name="status_produksi" class="form-control">
-        <option value="">Status Produksi</option>
         @foreach ($status as $status_produksi)
             <option value="{{ $status_produksi }}"
                 {{ $data->status_produksi == $status_produksi ? 'selected' : '' }}> {{ $status_produksi }}</option>
         @endforeach
+    </select>
 </div>
-{{-- <div id="keterangan-form" class="form-group">
-    <label for="Keterangan">Keterangan</label>
-    <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="5">
-Kode Ring : {{ $data->kode_ring ?? 'Belum ada kode ring' }}
-Usia             : {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari
-Catatan:
+<label>Keterangan</label>
+<div class="input-group mb-1">
+    <textarea type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Indukan">{{ $data->keterangan }}</textarea>
+</div>
 
-</textarea>
-</div> --}}
 <script>
-    $(document).ready(function() {
-        $('#keterangan-form').hide();
-        $('#status_produksi').change(function() {
-            if ($(this).val() == 'Hidup') {
-                $('#keterangan-form').hide();
-            } else if ($(this).val() == 'Mati') {
-                $('#keterangan-form').show();
-            } else {
-                $('#keterangan-form').hide();
-            }
-        });
-    });
-
     function update() {
         $.ajax({
             url: '{{ route('update.indukan', $data->id) }}',
@@ -65,6 +62,8 @@ Catatan:
             data: {
                 "_token": "{{ csrf_token() }}",
                 kode_ring: $('#kode_ring').val(),
+                indukan: $('#indukan').val(),
+                tgl_menetas: $('#tgl_menetas').val(),
                 jenis_kelamin: $('#jenis_kelamin').val(),
                 keterangan: $('#keterangan').val(),
                 status_produksi: $('#status_produksi').val(),
