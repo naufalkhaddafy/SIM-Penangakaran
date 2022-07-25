@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\Models\Jadwal;
 use App\Models\Kandang;
 use App\Models\Produksi;
@@ -87,15 +88,12 @@ Route::resource('users', 'UserController');
 //     }
 //     // return response()->json($produksis);
 // });
-Route::get('/arfa', function () {
-    return view('admin-arfa.template');
-});
 
-Route::get('/print', function () {
+Route::get('/tes', function () {
 
-    // $data = Kandang::pluck('id', 'nama_kandang', 'kategori');
-    // return response()->json($data);
-    // return view('print.sertifikat');
+    $user = User::first()->pluck('nama_lengkap');
+    // dd($user);
+    return response()->json($user);
 });
 Route::get('/', function () {
     return view('page');
