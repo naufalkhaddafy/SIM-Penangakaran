@@ -3,7 +3,7 @@
         <tr>
             <th>No</th>
             <th>Kode Ring</th>
-            <th>Asal Telur</th>
+            <th>Asal Burung</th>
             <th>Tanggal Menetas</th>
             <th>Jenis Kelamin</th>
             <th>Usia</th>

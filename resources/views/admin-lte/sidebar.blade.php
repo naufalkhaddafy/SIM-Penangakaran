@@ -9,7 +9,7 @@
         </a>
     </li>
     @if (Auth::user()->role == 'pemilik')
-        <li class="nav-header">ADMIN</li>
+        {{-- <li class="nav-header">ADMIN</li> --}}
         <li class="nav-item">
             <a href="{{ route('read.penangkaran') }}"
                 class="nav-link {{ request()->is('penangkaran') ? 'active' : '' }}">
@@ -44,8 +44,7 @@
                 </p>
             </a>
         </li>
-        <li
-            class="nav-item {{ request()->is('report-inkubator', 'report-hidup', 'report-mati') ? 'menu-open' : '' }}">
+        <li class="nav-item {{ request()->is('report-inkubator', 'report-hidup', 'report-mati') ? 'menu-open' : '' }}">
             <a href="#"
                 class="nav-link {{ request()->is('report-inkubator', 'report-hidup', 'report-mati') ? 'active' : '' }}">
                 <ion-icon name="bar-chart"></ion-icon>
@@ -89,15 +88,6 @@
                     </a>
                 </li>
             </ul>
-            {{-- <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="{{ route('report.indukan') }}"
-                        class=" nav-link {{ request()->is('report-indukan') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Indukan</p>
-                    </a>
-                </li>
-            </ul> --}}
         </li>
         <li class="nav-item {{ request()->is('pengguna-pemilik', 'pengguna-pekerja') ? 'menu-open' : '' }}">
             <a href="#"
@@ -135,35 +125,8 @@
                 </p>
             </a>
         </li>
-        {{-- <li class="nav-item {{ request()->is('kategori', 'kategoriproduksi') ? 'menu-open' : '' }}">
-        <a href="#" class="nav-link {{ request()->is('kategori', 'kategoriproduksi') ? 'active' : '' }}">
-            <ion-icon name="attach-sharp"></ion-icon>
-            <p>
-                Kategori
-                <i class="right fas fa-angle-left"></i>
-            </p>
-        </a>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{ route('kategori') }}"
-                    class=" nav-link {{ request()->is('kategori') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Kategori Kandang</p>
-                </a>
-            </li>
-        </ul>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="{{ route('kategoriproduksi') }}"
-                    class=" nav-link {{ request()->is('kategoriproduksi') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Kategori Produksi</p>
-                </a>
-            </li>
-        </ul>
-    </li> --}}
     @elseif (Auth::user()->role == 'pekerja')
-        <li class="nav-header">Pekerja</li>
+        {{-- <li class="nav-header">Pekerja</li> --}}
         <li class="nav-item">
             <a href="{{ route('detail.kandang') }}"
                 class="nav-link {{ request()->is('detail-kandang') ? 'active' : '' }}">
