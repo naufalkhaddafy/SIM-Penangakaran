@@ -51,7 +51,7 @@ class DashboardController extends Controller
     }
     public function ReadDashboardPakan()
     {
-        $pakans = auth()->user()->penangkaran->pakans;
+        $pakans = auth()->user()->penangkaran->pakans ?? [];
         return view('dashboard.data.pakan', compact('pakans'));
     }
     public function ReadDashboardKebersihan()

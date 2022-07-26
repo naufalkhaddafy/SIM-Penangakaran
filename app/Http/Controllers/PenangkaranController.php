@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Kandang;
+use App\Events\NotifUser;
 use App\Models\Penangkaran;
+use App\Models\Notification;
 use Illuminate\Http\Request;
+
 
 class PenangkaranController extends Controller
 {
@@ -80,6 +83,13 @@ class PenangkaranController extends Controller
         ]);
         Penangkaran::create($validatelokasi);
         // return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
+
+        $notif = Notification::create([
+            'user_id' => 1,
+            'type' => 'Nambah Penangkaran',
+            'message' => 'TEsss',
+        ]);
+        event(new NotifUser($notif));
     }
 
     public function UpdatePenangkaran($id)

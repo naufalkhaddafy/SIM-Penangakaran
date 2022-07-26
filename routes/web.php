@@ -21,7 +21,7 @@ use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\HasilProduksiController;
 
 
-Route::resource('users', 'UserController');
+
 // Route::get('/tes', function () {
 //     //get relation produksis table
 //     // $allProduksi = Produksi::all()->load('kandang');
@@ -95,6 +95,17 @@ Route::get('/tes', function () {
     // dd($user);
     return response()->json($user);
 });
+
+Route::get('/pusher', function () {
+
+    $data = [
+        'user_id' => 1,
+        'message' => 'TEsss'
+    ];
+    event(new \App\Events\NotifUser($data));
+});
+
+
 Route::get('/', function () {
     return view('page');
 });
@@ -110,9 +121,6 @@ Route::get('/dashboard', [DashboardController::class, 'ReadDashboard'])->name('d
 Route::get('/dashboard/jadwal', [DashboardController::class, 'ReadDashboardJadwal']);
 Route::get('/dashboard/pakan', [DashboardController::class, 'ReadDashboardPakan']);
 Route::get('/dashboard/kebersihan', [DashboardController::class, 'ReadDashboardKebersihan']);
-
-
-
 
 
 // middleware group

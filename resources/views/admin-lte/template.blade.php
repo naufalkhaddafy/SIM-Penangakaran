@@ -212,6 +212,27 @@
             $('.content').fadeIn('slow');
         }
     </script> --}}
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('4dc966f2b3a43db8ed26', {
+            cluster: 'ap1',
+            channelAuthorization: {
+                endpoint: '/broadcasting/auth',
+                headers: {
+                    "X-CSRF-Token": "{{ csrf_token() }}",
+                },
+            },
+        });
+        // var channel = pusher.subscribe('notif-user');
+
+        var channel = pusher.subscribe('private-notif-user.' + {{ Auth::user()->id }});
+        channel.bind('notif-user', function(data) {
+            alert(JSON.stringify(data));
+        });
+    </script>
 </body>
 
 </html>
