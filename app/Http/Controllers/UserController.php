@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Kandang;
 use App\Models\Penangkaran;
+use App\Models\Notification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 
 class UserController extends Controller
@@ -140,5 +141,12 @@ class UserController extends Controller
     {
         $notif = auth()->user()->notifications;
         return view('admin-lte.notif.notif', compact('notif'));
+    }
+    public function readNotification($id)
+    {
+        $notifcek = Notification::find($id);
+        $notifcek->read_at = now();
+        $notifcek->save();
+        return view('admin-lte.notif.read', compact('notifcek'));
     }
 }

@@ -244,3 +244,4 @@ Route::get('/print-sertifikat/{id}', [HasilProduksiController::class, 'PrintSert
 
 //get notification user
 Route::get('/get-notifications', [UserController::class, 'getNotification']);
+Route::get('/notification-read/{id}', [UserController::class, 'readNotification']);

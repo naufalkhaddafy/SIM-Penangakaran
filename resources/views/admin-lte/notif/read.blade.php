@@ -1,0 +1,3 @@
+<div>
+    {{ $notifcek->message }}
+</div>

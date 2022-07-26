@@ -164,6 +164,21 @@
                 </div>
             </section>
             <!-- /.content -->
+            {{-- Dynamic Modal --}}
+            <div class="modal fade " id="showModal">
+                <div class="modal-dialog modal-default">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalLabel"></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body" id="showModalBody">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
