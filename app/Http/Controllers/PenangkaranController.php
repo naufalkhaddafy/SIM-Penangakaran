@@ -81,21 +81,25 @@ class PenangkaranController extends Controller
             'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
             'lokasi_penangkaran.unique' => 'Lokasi telah ada',
         ]);
-        Penangkaran::create($validatelokasi);
+        $penangkaran = Penangkaran::create($validatelokasi);
         // return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
 
-        $notif = Notification::create([
-            'user_id' => 1,
-            'type' => 'Nambah Penangkaran',
-            'message' => 'TEsss',
-        ]);
-        event(new NotifUser($notif));
+        $pemiliks = User::where('role', 'pemilik')->get();
+
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Menambahkan Penangkaran',
+                'message' => auth()->user()->nama_lengkap . ' Menambahkan Penangkaran Baru Lokasi ' . $penangkaran->lokasi_penangkaran,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
 
     public function UpdatePenangkaran($id)
     {
-        $kode_penangkaran = Penangkaran::find($id)->kode_penangkaran;
-        if ($kode_penangkaran == Request()->kode_penangkaran) {
+        $penangkaran = Penangkaran::find($id);
+        if ($penangkaran->kode_penangkaran == Request()->kode_penangkaran) {
             $validatepenangkaran = Request()->validate([
                 'kode_penangkaran' => 'required',
                 'lokasi_penangkaran' => 'required|unique:penangkarans',
@@ -117,16 +121,36 @@ class PenangkaranController extends Controller
             ]);
         }
         Penangkaran::find($id)->update($validatepenangkaran);
+
+        $pemiliks = User::where('role', 'pemilik')->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Mengubah Penangkaran',
+                'message' => auth()->user()->nama_lengkap . ' Mengubah Penangkaran ' . $penangkaran->lokasi_penangkaran,
+            ]);
+            event(new NotifUser($notif));
+        }
         // return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
     }
     // delete penangkaran
     public function DeletePenangkaran($id)
     {
-        if (!Penangkaran::find($id)) {
+        $penangkaran = Penangkaran::find($id);
+        if (!$penangkaran) {
             abort(404);
         }
         Penangkaran::find($id)->forceDelete();
         // return redirect()->route('penangkaran')->with('delete', 'Data Berhasil di hapus');
+        $pemiliks = User::where('role', 'pemilik')->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Menghapus Penangkaran',
+                'message' => auth()->user()->nama_lengkap . ' Menghapus Penangkaran ' . $penangkaran->lokasi_penangkaran,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
 
     // detail penangkaran
