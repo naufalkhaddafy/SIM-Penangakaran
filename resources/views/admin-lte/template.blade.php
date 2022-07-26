@@ -177,6 +177,7 @@
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
+
     {{-- Sweet Alert --}}
     @include('sweetalert::alert')
     <!-- jQuery -->
@@ -200,20 +201,18 @@
     <script src="{{ asset('admin-lte') }}/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    {{-- <script src="{{ asset('admin-lte') }}/plugins/jszip/jszip.min.js"></script>
-    <script src="{{ asset('admin-lte') }}/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="{{ asset('admin-lte') }}/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.colVis.min.js"></script> --}}
-    {{-- <script>
-        $(window).on('load', function) {
-            $('.preloader').fadeOut('slow');
-            $('.content').fadeIn('slow');
-        }
-    </script> --}}
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
     <script>
+        $(document).ready(function() {
+            getNotifikasi();
+        });
+
+        function getNotifikasi() {
+            $.get("{{ url('/get-notifications') }}", function(data) {
+                $('#notifikasi').html(data);
+            });
+        }
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
@@ -227,12 +226,13 @@
             },
         });
         // var channel = pusher.subscribe('notif-user');
-
         var channel = pusher.subscribe('private-notif-user.' + {{ Auth::user()->id }});
         channel.bind('notif-user', function(data) {
-            alert(JSON.stringify(data));
+            // alert(JSON.stringify(data));
+            getNotifikasi();
         });
     </script>
+
 </body>
 
 </html>

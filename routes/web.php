@@ -91,9 +91,8 @@ use App\Http\Controllers\HasilProduksiController;
 
 Route::get('/tes', function () {
 
-    $user = User::first()->pluck('nama_lengkap');
-    // dd($user);
-    return response()->json($user);
+    $notif = User::find(auth()->user()->id)->notifications;
+    return response()->json($notif);
 });
 
 Route::get('/pusher', function () {
@@ -242,3 +241,6 @@ Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateInd
 Route::get('/print-laporan-produksi-mati/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiMati'])->name('print.laporan.produksi.mati');
 Route::get('/print-laporan-produksi-hidup/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiHidup'])->name('print.laporan.produksi.hidup');
 Route::get('/print-sertifikat/{id}', [HasilProduksiController::class, 'PrintSertifikat']);
+
+//get notification user
+Route::get('/get-notifications', [UserController::class, 'getNotification']);

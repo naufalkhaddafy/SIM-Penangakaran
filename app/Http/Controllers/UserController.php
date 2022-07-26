@@ -133,8 +133,12 @@ class UserController extends Controller
             ]);
         }
         User::find($id)->update($validateuser);
-
-
         // return redirect()->back()->with('update','Data Berhasil di update');
+    }
+
+    public function getNotification()
+    {
+        $notif = auth()->user()->notifications;
+        return view('admin-lte.notif.notif', compact('notif'));
     }
 }
