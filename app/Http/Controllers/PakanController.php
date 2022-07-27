@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Pakan;
+use App\Events\NotifUser;
 use App\Models\Penangkaran;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class PakanController extends Controller
@@ -63,11 +66,22 @@ class PakanController extends Controller
             ]
         );
         Pakan::create($validatepakan);
+        //notif
+        $pemiliks = User::where('role', 'pemilik')->orWhere('penangkaran_id', Request()->penangkaran_id)->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Menambah Pakan',
+                'message' => auth()->user()->nama_lengkap . ' Menambahkan Pakan ' . Request()->nama_pakan,
+            ]);
+            event(new NotifUser($notif));
+        }
         // return redirect()->back()->with('create', 'Berhasil Menambahkan');
     }
     //update pakan
     public function UpdatePakan($id)
     {
+        $pakan = Pakan::find($id);
         $validate = Request()->validate(
             [
                 'status' => 'required',
@@ -79,10 +93,30 @@ class PakanController extends Controller
         Pakan::find($id)->update([
             'status' => $validate['status'],
         ]);
+        //notif
+        $users = User::where('role', 'pemilik')->orWhere('penangkaran_id', $pakan->penangkaran_id)->get();
+        foreach ($users as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Mengubah Pakan',
+                'message' => auth()->user()->nama_lengkap . ' Mengubah Status Pakan ' . $pakan->nama_pakan,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
     public function DeletePakan($id)
     {
+        $pakan = Pakan::find($id);
         Pakan::find($id)->delete();
+        $pemiliks = User::where('role', 'pemilik')->orWhere('penangkaran_id', $pakan->penangkaran_id)->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Menambah Pakan',
+                'message' => auth()->user()->nama_lengkap . ' Menghapus Pakan ' . $pakan->nama_pakan,
+            ]);
+            event(new NotifUser($notif));
+        }
         // return redirect()->back()->with('delete', 'Berhasil Menghapus Data Pakan');
     }
 }

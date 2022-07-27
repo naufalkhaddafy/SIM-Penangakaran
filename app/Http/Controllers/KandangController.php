@@ -118,7 +118,7 @@ class KandangController extends Controller
         foreach ($pemiliks as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Menambahkan Kandang',
+                'type' => 'Menambah Kandang',
                 'message' => auth()->user()->nama_lengkap . ' Menambahkan Kandang ' . $kandang->nama_kandang,
             ]);
             event(new NotifUser($notif));
