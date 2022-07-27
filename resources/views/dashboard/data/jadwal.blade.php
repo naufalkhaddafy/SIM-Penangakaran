@@ -26,7 +26,8 @@
                             <td> <span class="badge badge-success">
                                     @if (optional($data->produksis->last())->status_telur == 'pertama')
                                         Kedua
-                                    @elseif(optional($data->produksis->last())->status_telur == 'kedua')
+                                    @elseif(optional($data->produksis->last())->status_telur == 'kedua' ||
+                                        optional($data->produksis->last())->status_telur == 'ketiga')
                                         Pertama
                                     @endif
                                 </span>

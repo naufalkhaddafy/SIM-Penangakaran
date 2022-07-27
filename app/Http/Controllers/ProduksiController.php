@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Jadwal;
 use App\Models\Kandang;
 use App\Models\Produksi;
+use App\Events\NotifUser;
 use App\Models\Penangkaran;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class ProduksiController extends Controller
@@ -110,7 +113,7 @@ class ProduksiController extends Controller
             'kode_tempat_inkubator.required' => 'Kode Tempat Harus di Isi',
         ]);
         $kandang_id = Request()->kandang_id;
-        Produksi::create($validateproduksi);
+        $produksi = Produksi::create($validateproduksi);
         $lastproduksi = Produksi::where('kandang_id', $kandang_id)->latest()->first();
         if ($lastproduksi->status_telur == 'pertama') {
             $tgl_akan_bertelur_start = date('Y-m-d', strtotime('+1 days', strtotime($lastproduksi->tgl_bertelur)));
@@ -118,6 +121,11 @@ class ProduksiController extends Controller
             $tgl_akan_menetas_start = date('Y-m-d', strtotime('+13 days', strtotime($lastproduksi->tgl_bertelur)));
             $tgl_akan_menetas_end = date('Y-m-d', strtotime('+14 days', strtotime($lastproduksi->tgl_bertelur)));
         } elseif ($lastproduksi->status_telur == 'kedua') {
+            $tgl_akan_bertelur_start = date('Y-m-d', strtotime('+10 days', strtotime($lastproduksi->tgl_bertelur)));
+            $tgl_akan_bertelur_end = date('Y-m-d', strtotime('+14 days', strtotime($lastproduksi->tgl_bertelur)));
+            $tgl_akan_menetas_start = date('Y-m-d', strtotime('+13 days', strtotime($lastproduksi->tgl_bertelur)));
+            $tgl_akan_menetas_end = date('Y-m-d', strtotime('+14 days', strtotime($lastproduksi->tgl_bertelur)));
+        } elseif ($lastproduksi->status_telur == 'ketiga') {
             $tgl_akan_bertelur_start = date('Y-m-d', strtotime('+10 days', strtotime($lastproduksi->tgl_bertelur)));
             $tgl_akan_bertelur_end = date('Y-m-d', strtotime('+14 days', strtotime($lastproduksi->tgl_bertelur)));
             $tgl_akan_menetas_start = date('Y-m-d', strtotime('+13 days', strtotime($lastproduksi->tgl_bertelur)));
@@ -135,7 +143,17 @@ class ProduksiController extends Controller
         ];
         Jadwal::create($tambahjadwal);
         Kandang::find($kandang_id)->update(['kategori' => 'Produktif']);
-        return redirect('produksi-inkubator')->with('create', 'Berhasil Menambahkan Produksi Telur');
+        // return redirect('produksi-inkubator')->with('create', 'Berhasil Menambahkan Produksi Telur');
+
+        $pemiliks = User::where('role', 'pemilik')->orWhere('penangkaran_id', auth()->user()->penangkaran_id)->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Telur Baru',
+                'message' => auth()->user()->nama_lengkap . ' menambah telur di inkubator ' . Request()->kode_tempat_inkubator . ' pada penangkaran ' . auth()->user()->penangkaran->lokasi_penangkaran,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
     public function UpdateProduksiInkubator($id)
     {
@@ -168,6 +186,16 @@ class ProduksiController extends Controller
         }
         Produksi::find($id)->update($dataproduksiinkubator);
         // return redirect('produksi-hidup')->with('update', 'Data Telur Hidup Berhasil di update');
+        //notifications
+        $pemiliks = User::where('role', 'pemilik')->orWhere('penangkaran_id', auth()->user()->penangkaran_id)->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Telur diubah',
+                'message' => auth()->user()->nama_lengkap . ' mengubah data telur dari inkubator ' . Request()->kode_tempat_inkubator . ' pada penangkaran ' . auth()->user()->penangkaran->lokasi_penangkaran,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
     public function UpdateProduksiHidup($id)
     {
@@ -204,6 +232,17 @@ class ProduksiController extends Controller
             ];
             Produksi::find($id)->update($dataproduksimati);
             // return redirect('produksi-mati')->with('update', 'Data Produksi Mati Berhasil ditambahkan');
+        }
+
+        //notifications
+        $pemiliks = User::where('role', 'pemilik')->orWhere('penangkaran_id', auth()->user()->penangkaran_id)->get();
+        foreach ($pemiliks as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Data Burung diubah',
+                'message' => auth()->user()->nama_lengkap . ' mengubah data burung pada penangkaran ' . auth()->user()->penangkaran->lokasi_penangkaran,
+            ]);
+            event(new NotifUser($notif));
         }
     }
 }
