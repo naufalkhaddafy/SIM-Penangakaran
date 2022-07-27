@@ -113,7 +113,7 @@ class PakanController extends Controller
             $notif = Notification::create([
                 'user_id' => $user->id,
                 'type' => 'Pakan dihapus',
-                'message' => auth()->user()->nama_lengkap . ' Menghapus Pakan ' . $pakan->nama_pakan . ' Pada Penangkaran' . $pakan->penangkaran->lokasi_penangkaran,
+                'message' => auth()->user()->nama_lengkap . ' Menghapus Pakan ' . $pakan->nama_pakan . ' Pada Penangkaran ' . $pakan->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
