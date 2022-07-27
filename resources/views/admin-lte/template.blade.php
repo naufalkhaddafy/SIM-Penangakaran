@@ -118,23 +118,6 @@
             <!-- /.content-header -->
             <!-- Main content -->
             <section class="content">
-                {{-- @if (session('create'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h6><i class="icon fas fa-check"></i>{{ session('create') }} </h6>
-                    </div>
-                @elseif(session('delete'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h6><i class="icon fas fa-check"></i>{{ session('delete') }}</h6>
-                    </div>
-                @elseif(session('update'))
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">&times;</button>
-                        <h6><i class="icon fas fa-check"></i>{{ session('update') }}</h6>
-                    </div>
-                @endif --}}
                 @yield('content')
                 <div class="modal fade" id="modal-sm">
                     <div class="modal-dialog modal-sm">
@@ -198,6 +181,7 @@
     <!-- jQuery -->
     <script src="{{ asset('admin-lte') }}/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
+    @stack('js')
     <script src="{{ asset('admin-lte') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('admin-lte') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -208,7 +192,6 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <!-- SweetAlert2 -->
     <script src="{{ asset('admin-lte') }}/plugins/sweetalert2/sweetalert2.min.js"></script>
-    @stack('js')
     {{-- data Tables --}}
     <script src="{{ asset('admin-lte') }}/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

@@ -149,4 +149,14 @@ class UserController extends Controller
         $notifcek->save();
         return view('admin-lte.notif.read', compact('notifcek'));
     }
+    public function readAllNotification()
+    {
+        $allNotif = auth()->user()->notifications->sortByDesc('created_at');
+        foreach ($allNotif as $notif) {
+            $notif->read_at = now();
+            $notif->save();
+        }
+        // return response()->json($allNotif);
+        return view('admin-lte.notif.read_all', compact('allNotif'));
+    }
 }
