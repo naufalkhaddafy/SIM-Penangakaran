@@ -118,8 +118,8 @@ class KandangController extends Controller
         foreach ($pemiliks as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Menambah Kandang',
-                'message' => auth()->user()->nama_lengkap . ' Menambahkan Kandang ' . $kandang->nama_kandang,
+                'type' => 'Tambah Kandang',
+                'message' => auth()->user()->nama_lengkap . ' Menambahkan Kandang ' . $kandang->nama_kandang . ' Pada Penangkaran ' . $kandang->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
@@ -161,8 +161,8 @@ class KandangController extends Controller
         foreach ($pemiliks as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Mengubah Kandang',
-                'message' => auth()->user()->nama_lengkap . ' Mengubah Kandang ' . $kandang->nama_kandang,
+                'type' => 'Ubah Kandang',
+                'message' => auth()->user()->nama_lengkap . ' Mengubah Kandang ' . $kandang->nama_kandang . ' Pada Penangkaran ' . $kandang->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
@@ -176,8 +176,8 @@ class KandangController extends Controller
         foreach ($pemiliks as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Menghapus Kandang',
-                'message' => auth()->user()->nama_lengkap . ' Menghapus Kandang ' . $kandang->nama_kandang,
+                'type' => 'Hapus Kandang',
+                'message' => auth()->user()->nama_lengkap . ' Menghapus Kandang ' . $kandang->nama_kandang . ' Pada Penangkaran ' . $kandang->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
