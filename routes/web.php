@@ -95,14 +95,12 @@ Route::get('/tes', function () {
     return response()->json($notif);
 });
 
-Route::get('/pusher', function () {
+Route::get('/userget', function () {
 
-    $data = [
-        'user_id' => 1,
-        'message' => 'TEsss'
-    ];
-    event(new \App\Events\NotifUser($data));
+    $user = User::where('role', 'pemilik')->orWhere('penangkaran_id', 1)->get();
+    return response()->json($user);
 });
+
 
 
 Route::get('/', function () {

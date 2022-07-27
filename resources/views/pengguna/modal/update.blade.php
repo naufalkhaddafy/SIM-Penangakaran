@@ -72,13 +72,13 @@
         Kerja</label>
     <select name="penangkaran_id" id="penangkaran_id"
         class="form-control @error('penangkaran_id') is-invalid @enderror">
-
+        <option value="">Kosong</option>
         @foreach ($penangkarans as $penangkaran)
-            <option value="{{ $penangkaran->id }}"
-                {{ $penangkaran->id == $data->penangkaran_id ? 'selected' : '' }}>
+            <option value="{{ $penangkaran->id }}" {{ $penangkaran->id == $data->penangkaran_id ? 'selected' : '' }}>
                 {{ $penangkaran->lokasi_penangkaran }}
             </option>
         @endforeach
+
     </select>
     @error('penangkaran_id')
         <span class="invalid-feedback" role="alert">
