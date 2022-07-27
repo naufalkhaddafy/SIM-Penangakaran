@@ -75,7 +75,17 @@ class PanduanController extends Controller
                 $notif = Notification::create([
                     'user_id' => $user->id,
                     'type' => 'Paduan Baru',
-                    'message' => auth()->user()->nama_lengkap . ' Menambahkan Panduan ' . Request()->kategori,
+                    'message' => auth()->user()->nama_lengkap . ' menambahkan panduan ' . Request()->kategori,
+                ]);
+                event(new NotifUser($notif));
+            }
+        } else {
+            $users = User::where('role', 'pemilik')->get();
+            foreach ($users as $user) {
+                $notif = Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'Paduan Baru',
+                    'message' => auth()->user()->nama_lengkap . ' menambahkan panduan ' . Request()->kategori,
                 ]);
                 event(new NotifUser($notif));
             }
@@ -108,10 +118,30 @@ class PanduanController extends Controller
                 ]);
                 event(new NotifUser($notif));
             }
+        } else {
+            $users = User::where('role', 'pemilik')->get();
+            foreach ($users as $user) {
+                $notif = Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'Paduan Baru',
+                    'message' => auth()->user()->nama_lengkap . ' mengubah panduan ' . Request()->kategori,
+                ]);
+                event(new NotifUser($notif));
+            }
         }
     }
     public function DeletePanduan($id)
     {
+        $panduan = Panduan::find($id);
         Panduan::find($id)->delete();
+        $users = User::where('role', 'pemilik')->get();
+        foreach ($users as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Paduan dihapus',
+                'message' => auth()->user()->nama_lengkap . ' menghapus panduan ' . $panduan->judul,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
 }
