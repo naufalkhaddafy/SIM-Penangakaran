@@ -65,14 +65,14 @@ class PakanController extends Controller
                 'status.required' => 'Status Harus diisi',
             ]
         );
-        Pakan::create($validatepakan);
+        $pakan = Pakan::create($validatepakan);
         //notif
         $pemiliks = User::where('role', 'pemilik')->orWhere('penangkaran_id', Request()->penangkaran_id)->get();
         foreach ($pemiliks as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Menambah Pakan',
-                'message' => auth()->user()->nama_lengkap . ' Menambahkan Pakan ' . Request()->nama_pakan,
+                'type' => 'Pakan Baru',
+                'message' => auth()->user()->nama_lengkap . ' Menambahkan Pakan ' . Request()->nama_pakan . ' Pada Penangkaran ' . $pakan->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
@@ -98,8 +98,8 @@ class PakanController extends Controller
         foreach ($users as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Mengubah Pakan',
-                'message' => auth()->user()->nama_lengkap . ' Mengubah Status Pakan ' . $pakan->nama_pakan,
+                'type' => 'Pakan diubah',
+                'message' => auth()->user()->nama_lengkap . ' Mengubah Status Pakan ' . $pakan->nama_pakan . ' Pada Penangkaran ' . $pakan->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
@@ -112,8 +112,8 @@ class PakanController extends Controller
         foreach ($pemiliks as $user) {
             $notif = Notification::create([
                 'user_id' => $user->id,
-                'type' => 'Menambah Pakan',
-                'message' => auth()->user()->nama_lengkap . ' Menghapus Pakan ' . $pakan->nama_pakan,
+                'type' => 'Pakan dihapus',
+                'message' => auth()->user()->nama_lengkap . ' Menghapus Pakan ' . $pakan->nama_pakan . ' Pada Penangkaran' . $pakan->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
