@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Indukan;
 use App\Models\Kandang;
 use App\Models\Produksi;
+use App\Events\NotifUser;
 use App\Models\Penangkaran;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class HasilProduksiController extends Controller
@@ -136,10 +139,10 @@ class HasilProduksiController extends Controller
     }
     public function UpdateIndukan($id)
     {
-        $produksi = Produksi::all();
+        $produksi = Produksi::find($id);
         $validate = Request()->validate(
             [
-                'kode_ring' => 'required',
+                'kode_ring' => 'nullable',
                 'indukan' => 'nullable',
                 'tgl_menetas' => 'nullable',
                 'jenis_kelamin' => 'required',
@@ -147,7 +150,7 @@ class HasilProduksiController extends Controller
                 'status_produksi' => 'required',
             ],
             [
-                'kode_ring.required' => 'Kode Ring Harus di Isi',
+                // 'kode_ring.required' => 'Kode Ring Harus di Isi',
                 'jenis_kelamin.required' => 'Jenis Kelamin Harus di Isi',
                 'status_produksi.required' => 'Role Harus di isi',
             ],
@@ -168,6 +171,28 @@ class HasilProduksiController extends Controller
             ]);
         }
         Produksi::find($id)->update($validate);
+        //notifications
+        if ($produksi->kandang_id == null) {
+            $users = User::where('role', 'pemilik')->get();
+            foreach ($users as $user) {
+                $notif = Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'Data Burung diubah',
+                    'message' => auth()->user()->nama_lengkap . ' mengubah data indukan burung ' . $produksi->kode_ring ?? '',
+                ]);
+                event(new NotifUser($notif));
+            }
+        } else {
+            $users = User::where('role', 'pemilik')->orWhere('penangkaran_id', $produksi->kandang->penangkaran_id ?? null)->get();
+            foreach ($users as $user) {
+                $notif = Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'Data Burung diubah',
+                    'message' => auth()->user()->nama_lengkap . ' mengubah data burung ' . $produksi->kode_ring . ' pada penangkaran ' . $produksi->kandang->penangkaran->lokasi_penangkaran,
+                ]);
+                event(new NotifUser($notif));
+            }
+        }
     }
 
     public function PrintLaporanProduksiMati($penangkaran, $startDate, $endDate)
