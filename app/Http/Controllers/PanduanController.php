@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Panduan;
+use App\Events\NotifUser;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 
 class PanduanController extends Controller
@@ -65,7 +67,19 @@ class PanduanController extends Controller
             'kategori.required' => 'Kategori Harus di Isi',
             'status.required' => 'Status Harus di Isi',
         ]);
-        Panduan::create($validatepanduan);
+        $panduan = Panduan::create($validatepanduan);
+
+        if (Request()->status == 'publish') {
+            $users = User::all();
+            foreach ($users as $user) {
+                $notif = Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'Paduan Baru',
+                    'message' => auth()->user()->nama_lengkap . ' Menambahkan Panduan ' . Request()->kategori,
+                ]);
+                event(new NotifUser($notif));
+            }
+        }
     }
     public function UpdatePanduan($id)
     {
@@ -83,6 +97,18 @@ class PanduanController extends Controller
             'status.required' => 'Status Harus di Isi',
         ]);
         Panduan::find($id)->update($validatepanduan);
+
+        if (Request()->status == 'publish') {
+            $users = User::all();
+            foreach ($users as $user) {
+                $notif = Notification::create([
+                    'user_id' => $user->id,
+                    'type' => 'Paduan diubah',
+                    'message' => auth()->user()->nama_lengkap . ' Mengubah Panduan ' . Request()->kategori,
+                ]);
+                event(new NotifUser($notif));
+            }
+        }
     }
     public function DeletePanduan($id)
     {
