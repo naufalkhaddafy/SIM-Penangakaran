@@ -136,6 +136,15 @@ class HasilProduksiController extends Controller
         ]);
         Produksi::create($validateindukan);
         // return redirect()->back();
+        $users = User::where('role', 'pemilik')->get();
+        foreach ($users as $user) {
+            $notif = Notification::create([
+                'user_id' => $user->id,
+                'type' => 'Indukan Baru',
+                'message' => auth()->user()->nama_lengkap . ' menambahkan data indukan burung ' . Request()->kode_ring,
+            ]);
+            event(new NotifUser($notif));
+        }
     }
     public function UpdateIndukan($id)
     {
@@ -178,7 +187,7 @@ class HasilProduksiController extends Controller
                 $notif = Notification::create([
                     'user_id' => $user->id,
                     'type' => 'Data Burung diubah',
-                    'message' => auth()->user()->nama_lengkap . ' mengubah data indukan burung ' . $produksi->kode_ring ?? '',
+                    'message' => auth()->user()->nama_lengkap . ' mengubah data indukan burung ' . $produksi->kode_ring,
                 ]);
                 event(new NotifUser($notif));
             }
