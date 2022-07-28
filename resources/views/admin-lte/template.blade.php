@@ -204,7 +204,7 @@
             });
         }
         // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
 
         var pusher = new Pusher('4dc966f2b3a43db8ed26', {
             cluster: 'ap1',
