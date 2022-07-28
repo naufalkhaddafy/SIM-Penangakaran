@@ -22,8 +22,8 @@
             <ion-icon name="chevron-down-outline"></ion-icon>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item" class="btn btn-block btn-outline-dark" data-toggle="modal"
-                data-target="#modal-sm">
+            <a href="{{ route('read.profile', AUTH::user()->id) }}" class="dropdown-item"
+                class="btn btn-block btn-outline-dark">
                 <ion-icon name="person-outline"></ion-icon> Profile
             </a>
             <div class="dropdown-divider"></div>

@@ -12,14 +12,6 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('admin-lte') }}/plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet"
-        href="{{ asset('admin-lte') }}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('admin-lte') }}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin-lte') }}/dist/css/adminlte.min.css">
     {{-- tables --}}
@@ -181,7 +173,7 @@
     <!-- jQuery -->
     <script src="{{ asset('admin-lte') }}/plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
-    @stack('js')
+
     <script src="{{ asset('admin-lte') }}/plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="{{ asset('admin-lte') }}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -200,7 +192,7 @@
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-
+    @stack('js')
     <script>
         $(document).ready(function() {
             getNotifikasi();
