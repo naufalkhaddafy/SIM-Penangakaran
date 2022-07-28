@@ -63,7 +63,7 @@ class JadwalInkubator extends Command
                     $notif = Notification::create([
                         'user_id' => $user->id,
                         'type' => 'Update Telur Mati',
-                        'message' => 'Update, telur pada Inkubator ' . $item->kode_tempat_inkubator . ' pada penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' tidak menetas/mati ',
+                        'message' => 'Update, telur pada Inkubator ' . $item->kode_tempat_inkubator . ' di penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' tidak menetas/mati ',
                     ]);
                     event(new NotifUser($notif));
                 }
@@ -75,7 +75,7 @@ class JadwalInkubator extends Command
                     $notif = Notification::create([
                         'user_id' => $user->id,
                         'type' => 'Jadwal Menetas',
-                        'message' => 'Hari ini, telur pada tempat Inkubator ' . $item->kode_tempat_inkubator . ' pada penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' akan menetas ',
+                        'message' => 'Hari ini, telur pada tempat Inkubator ' . $item->kode_tempat_inkubator . ' di penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' akan menetas ',
                     ]);
                     event(new NotifUser($notif));
                 }
