@@ -2,8 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use App\Models\Produksi;
+use App\Events\NotifUser;
+use App\Models\Notification;
 use Illuminate\Console\Command;
+
 
 class JadwalInkubator extends Command
 {
@@ -53,9 +57,28 @@ class JadwalInkubator extends Command
                 $item->produksi->keterangan = 'Update Otomatis Tidak Menetas';
                 $item->produksi->save();
                 // return 'Success Get Function';
-            } else {
-                // must give a notifikasi
-                // return 'Tidak Update';
+                $penangkaran = $item->produksi->kandang->penangkaran->id;
+                $users = User::where('role', 'pemilik')->orWhere('penangkaran_id', $penangkaran)->get();
+                foreach ($users as $user) {
+                    $notif = Notification::create([
+                        'user_id' => $user->id,
+                        'type' => 'Update Telur Mati',
+                        'message' => 'Update, telur pada Inkubator ' . $item->kode_tempat_inkubator . ' pada penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' tidak menetas/mati ',
+                    ]);
+                    event(new NotifUser($notif));
+                }
+            } elseif (date('Y-m-d') >= $item->tgl_akan_menetas_start && date('Y-m-d') <= $item->tgl_akan_menetas_end) {
+                // give a notification masuk jadwal menetas
+                $penangkaran = $item->produksi->kandang->penangkaran->id;
+                $users = User::where('role', 'pemilik')->orWhere('penangkaran_id', $penangkaran)->get();
+                foreach ($users as $user) {
+                    $notif = Notification::create([
+                        'user_id' => $user->id,
+                        'type' => 'Jadwal Menetas',
+                        'message' => 'Hari ini, telur pada tempat Inkubator ' . $item->kode_tempat_inkubator . ' pada penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' akan menetas ',
+                    ]);
+                    event(new NotifUser($notif));
+                }
             }
             return $item;
         });
