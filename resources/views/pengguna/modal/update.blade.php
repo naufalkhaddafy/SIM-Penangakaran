@@ -1,5 +1,6 @@
 <div id="error"></div>
-<div class="input-group mb-3">
+<label> Nama Lengkap</label>
+<div class="input-group mb-1">
     <input type="text" id="nama_lengkap" name="nama_lengkap"
         class="form-control @error('nama_lengkap') is-invalid @enderror" placeholder="Full name"
         value="{{ $data->nama_lengkap }}" required>
@@ -14,7 +15,8 @@
         </span>
     @enderror
 </div>
-<div class="input-group mb-3">
+<label>Username</label>
+<div class="input-group mb-1">
     <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror"
         placeholder="Username" value="{{ $data->username }}" readonly>
     <div class="input-group-append">
@@ -28,7 +30,8 @@
         </span>
     @enderror
 </div>
-<div class="input-group mb-3">
+<label>No. HP</label>
+<div class="input-group mb-1">
     <input type="text" id="nohp" class="form-control @error('nohp') is-invalid @enderror" name="nohp"
         placeholder="No.Hp +62" value="{{ $data->nohp }}">
     <div class="input-group-append">
@@ -42,9 +45,9 @@
         </span>
     @enderror
 </div>
-<div class="input-group mb-3">
-    <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
-        placeholder="Password">
+<label>New Password</label>
+<div class="input-group mb-1">
+    <input type="password" name="password" id="password" class="form-control" Placeholder="New Password">
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fas fa-lock"></span>
@@ -56,9 +59,9 @@
         </span>
     @enderror
 </div>
-<div class="form-group mb-3">
-    <label for="role" class="col-sm-2 control-label">role</label>
-
+<span class="text-danger">Isi New Password jika ingin mengubah password pengguna</span>
+<div class="form-group mb-1">
+    <label>Role</label>
     <select name="role" id="role" class="form-control @error('penangkaran_id') is-invalid @enderror" required>
         @foreach ($role as $role)
             <option value="{{ $role }}" {{ $role == $data->role ? 'selected' : '' }}>
@@ -67,9 +70,8 @@
         @endforeach
     </select>
 </div>
-<div class="form-group mb-3">
-    <label for="lokasikerja" class="col-sm-5 control-label">Lokasi
-        Kerja</label>
+<label>Lokasi Kerja</label>
+<div class="form-group mb-1">
     <select name="penangkaran_id" id="penangkaran_id"
         class="form-control @error('penangkaran_id') is-invalid @enderror">
         <option value="">Kosong</option>
@@ -78,7 +80,6 @@
                 {{ $penangkaran->lokasi_penangkaran }}
             </option>
         @endforeach
-
     </select>
     @error('penangkaran_id')
         <span class="invalid-feedback" role="alert">
@@ -97,6 +98,7 @@
                 nama_lengkap: $('#nama_lengkap').val(),
                 nohp: $('#nohp').val(),
                 role: $('#role').val(),
+                password: $('#password').val(),
                 penangkaran_id: $('#penangkaran_id').val(),
             },
             // dataType: 'json',
