@@ -32,8 +32,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('jadwal:produksi')->daily();
-        $schedule->command('jadwal:inkubator')->daily();
+        $schedule->command('jadwal:produksi')->dailyAt('04:00');
+        $schedule->command('jadwal:inkubator')->dailyAt('04:00');
     }
 
     /**
