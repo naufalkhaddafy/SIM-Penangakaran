@@ -51,7 +51,7 @@ class PakanController extends Controller
         $validatepakan = Request()->validate(
             [
                 'penangkaran_id' => 'required',
-                'kode_tempat' => 'required',
+                'kode_tempat' => 'required|unique:pakans',
                 'nama_pakan' => 'required',
                 'tgl_kadaluwarsa' => 'required',
                 'status' => 'required',
@@ -59,10 +59,11 @@ class PakanController extends Controller
             ],
             [
                 'penangkaran_id.required' => 'Penangkaran tidak boleh kosong',
-                'kode_tempat.required' => 'Kode Harus di Isi',
-                'nama_pakan.required' => 'Nama Pakan Harus diisi',
-                'tgl_kadaluwarsa.required' => 'Tanggal Kadaluwarsa Harus diisi',
-                'status.required' => 'Status Harus diisi',
+                'kode_tempat.required' => 'Kode harus di Isi',
+                'kode_tempat.unique' => 'Kode harus berbeda',
+                'nama_pakan.required' => 'Nama Pakan harus diisi',
+                'tgl_kadaluwarsa.required' => 'Tanggal Kadaluwarsa harus diisi',
+                'status.required' => 'Status harus diisi',
             ]
         );
         $pakan = Pakan::create($validatepakan);
