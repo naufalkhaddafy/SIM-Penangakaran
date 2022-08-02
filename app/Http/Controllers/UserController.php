@@ -37,7 +37,8 @@ class UserController extends Controller
             'Pemilik' => 'pemilik',
             'Pekerja' => 'pekerja',
         ];
-        return view('pengguna.modal.update', compact('data', 'penangkarans', 'role'));
+        $pw = Hash::check($data->password, $data->password);
+        return view('pengguna.modal.update', compact('data', 'penangkarans', 'role', 'pw'));
     }
     public function ModalDelete($id)
     {
@@ -68,23 +69,25 @@ class UserController extends Controller
     public function CreateUser(Request $request)
     {
         $validateuser = $request->validate([
-            'nama_lengkap' => 'required',
-            'username' => 'required|unique:users',
-            //'nohp' =>'unique:users|min:12|max:14',
-            'nohp' => 'required|unique:users',
+            'nama_lengkap' => 'required|min:5|max:30',
+            'username' => 'required|unique:users|min:5|max:10',
+            'nohp' => 'required|unique:users|min:2|max:14',
             'password' => 'required|min:5',
             'role' => 'required',
             'penangkaran_id' => 'nullable',
         ], [
             'nama_lengkap.required' => 'Nama Harus di Isi',
+            'nama_lengkap.min' => 'Nama 5 digit',
+            'nama_lengkap.max' => 'Nama 30 digit',
             'username.required' => 'Username Harus di Isi',
             'username.unique' => 'Username telah terdaftar',
+            'username.min' => 'Username minimal 5 digit',
+            'username.max' => 'Username 10 digit',
             'role.required' => 'Role Harus di isi',
-
             'nohp.required' => 'No. Hp Harus di Isi',
             'nohp.unique' => 'No. Hp telah terdaftar',
-            //'nohp.min' => 'Masukan No. Hp yang sesuai',
-            //'nohp.max' => 'Masukan No. Hp yang sesuai',
+            'nohp.min' => 'Masukan No. Hp minimal 2 digit',
+            'nohp.max' => 'Masukan No. Hp maksimal 14 digit',
             'password.required' => 'Password harus di Isi',
             'password.min' => 'Password minimal 5 Digit',
             'penangkaran_id.required' => 'Harus diisi',
@@ -107,34 +110,43 @@ class UserController extends Controller
         $nohp = User::find($id)->nohp;
         if ($nohp == Request()->nohp) {
             $validateuser = Request()->validate([
-                'nama_lengkap' => 'required',
+                'nama_lengkap' => 'required|min:5|max:30',
                 'role' => 'required',
                 'penangkaran_id' => 'nullable',
-                //'nohp' =>'required|unique',
-
+                'password' => 'nullable|min:5',
             ], [
                 'nama_lengkap.required' => 'Nama Harus di Isi',
-                'nohp.required' => 'No. Hp Harus di Isi',
-                //'nohp.unique' => 'No. Hp telah terdaftar',
-                // 'username.required' => 'Username Harus di Isi',
-                //'penangkaran_id.required' =>'Harus diisi',
+                'nama_lengkap.min' => 'Nama min 5 digit',
+                'nama_lengkap.max' => 'Nama max 30 digit',
+                'password.min' => 'Passoword min 5 digit',
+                'role.required' => 'Role Harus di Isi',
             ]);
         } else {
             $validateuser = Request()->validate([
-                'nama_lengkap' => 'required',
+                'nama_lengkap' => 'required|min:5|max:30',
                 'role' => 'required',
                 'penangkaran_id' => 'nullable',
-                'nohp' => 'required|unique:users',
+                'nohp' => 'required|unique:users|min:2|max:14',
+                'password' => 'nullable|min:5',
             ], [
                 'nama_lengkap.required' => 'Nama Harus di Isi',
+                'nama_lengkap.min' => 'Nama min 5 digit',
+                'nama_lengkap.max' => 'Nama max 30 digit',
+                'role.required' => 'Role Harus di Isi',
                 'nohp.required' => 'No. Hp Harus di Isi',
                 'nohp.unique' => 'No. Hp telah terdaftar',
-                // 'username.required' => 'Username Harus di Isi',
-                //'penangkaran_id.required' =>'Harus diisi',
+                'nohp.min' => 'Masukan No. Hp minimal 2 digit',
+                'nohp.max' => 'Masukan No. Hp maksimal 14 digit',
+                'password.min' => 'Passoword min 5 digit',
             ]);
         }
+        if (Request()->password != null) {
+            $validateuser['password'] = Hash::make(Request()->password);
+        } else {
+            $validateuser['password'] = User::find($id)->password;
+        }
         User::find($id)->update($validateuser);
-        // return redirect()->back()->with('update','Data Berhasil di update');
+        // return redirect()->back()->with('toast_success', 'Login Berhasil');
     }
 
     public function getNotification()
@@ -158,5 +170,54 @@ class UserController extends Controller
         }
         // return response()->json($allNotif);
         return view('admin-lte.notif.read_all', compact('allNotif'));
+    }
+    // update pengguna pekerja
+    public function ReadProfile($id)
+    {
+        $data = User::find($id);
+        $pw = Hash::check($data->password, $data->password);
+        return view('u_profil', compact('data', 'pw'));
+    }
+    public function UpdateProfile($id)
+    {
+        $nohp = User::find($id)->nohp;
+        if ($nohp == Request()->nohp) {
+            $validate = Request()->validate([
+                'nama_lengkap' => 'required|min:5|max:30',
+                'password' => 'nullable|min:5|confirmed',
+            ], [
+                'nama_lengkap.required' => 'Nama Harus di Isi',
+                'nama_lengkap.min' => 'Nama 5 digit',
+                'nama_lengkap.max' => 'Nama 30 digit',
+                'password.min' => 'Passoword min 5 digit',
+                'password.confirmed' => 'Password dan Konfirmasi Password tidak sama',
+
+            ]);
+        } else {
+            $validate = Request()->validate([
+                'nama_lengkap' => 'required|min:5|max:30',
+                'nohp' => 'required|unique:users|min:2|max:14',
+            ], [
+                'nama_lengkap.required' => 'Nama Harus di Isi',
+                'nama_lengkap.min' => 'Nama 5 digit',
+                'nama_lengkap.max' => 'Nama 30 digit',
+                'nohp.required' => 'No. Hp Harus di Isi',
+                'nohp.unique' => 'No. Hp telah terdaftar',
+                'nohp.min' => 'Masukan No. Hp minimal 2 digit',
+                'nohp.max' => 'Masukan No. Hp maksimal 14 digit',
+            ]);
+        }
+        if (Request()->password != null) {
+            $validate['password'] = Hash::make(Request()->password);
+        } else {
+            $validate['password'] = User::find($id)->password;
+        }
+        User::find($id)->update($validate);
+        // $req = [
+        //     'nama_lengkap' => Request()->nama_lengkap,
+        //     'nohp' => Request()->nohp,
+        // ];
+        // dd($validate);
+        return redirect()->back()->with('toast_success', 'Berhasil Mengubah Data');
     }
 }
