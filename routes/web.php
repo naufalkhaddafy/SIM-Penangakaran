@@ -1,10 +1,6 @@
 <?php
 
-use App\Models\User;
-use App\Models\Jadwal;
-use App\Models\Kandang;
-use App\Models\Produksi;
-use App\Models\Penangkaran;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -21,85 +17,49 @@ use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\HasilProduksiController;
 
 
-
 // Route::get('/tes', function () {
 //     //get relation produksis table
-//     // $allProduksi = Produksi::all()->load('kandang');
-//     $allProduksi = Produksi::with('kandang')->get();
+//     $allProduksi = Produksi::with('kandang', 'jadwal')->get();
 //     //get all produksi not null by kandang data
 //     $NotNullProduksi = [];
 //     foreach ($allProduksi as $produksi) {
-//         if ($produksi->kandang !== null) {
+//         if ($produksi->kandang !== null && $produksi->kandang->kategori == 'Produktif') {
 //             $NotNullProduksi[] = $produksi;
 //         }
 //     }
-//     //collect data last produksi based on kandang
-//     // $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
-//     //     return $item->all();
-//     // });
+//     // collect data last produksi based on kandang
+//     $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+//         return $item->last();
+//     });
 //     //get value jadwal from
-//     $JadwalProduksi = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
+//     $JadwalProduksi = $LastProduksiByKandang->map(function ($item) {
+//         return $item->jadwal;
+//     });
+
+//     //Update kategori kandang berdasarkan tanggal
+//     $UpdateKandang = $JadwalProduksi->map(function ($item) {
+//         $today = date('Y-m-d');
+//         if ($item->tgl_akan_bertelur_end < $today) {
+//             // if ($item->produksi->kandang->kategori != 'Produktif') {
+//             //     $item->produksi->kandang->kategori = 'Ganti Bulu';
+//             //     $item->produksi->kandang->save();
+//             //     // return 'Success Get Function';
+//             // }
+//             return 'Update';
+//         } elseif ($today >= $item->tgl_akan_bertelur_start && $today <= $item->tgl_akan_bertelur_end) {
+//             return 'in jadwal';
+//         }
 //         return $item;
 //     });
-//     //Update kategori kandang berdasarkan tanggal
-//     // $UpdateKandang = $JadwalProduksi->map(function ($item) {
-//     //     if ($item->tgl_akan_menetas_end < date('Y-m-d')) {
-//     //         //get id kandang from $item
-//     //         $item->produksi->status_produksi = 'Mati';
-//     //         $item->produksi->save();
-//     //         // return 'Success Get Function';
-//     //     } else {
-//     //         // must give a notifikasi
-//     //         // return 'Tidak Update';
-//     //     }
-//     //     return $item;
-//     // });
-//     return response()->json($JadwalProduksi);
-//     // return response()->json([
-//     //     'message' => 'Successfully create new progress',
-//     //     'JadwalProduksi' => $JadwalProduksi,
-//     // ], 200);
-// });
-// Route::get('/tesi', function () {
-//     // $allkandang = Kandang::with('kebersihans')->get();
-//     // $kandangs = $allkandang->find(1);
-//     // $kandang = $kandangs->kebersihans->last();
-//     // $kandang->status = 'Sudah';
-//     // $kandang->save();
-//     // return response()->json($kandang);
-//     // abort(404);
-//     $produksi = Produksi::all();
-//     $value = 'DLGBF-124';
-//     $value2 = '';
-//     // $tes = [];
-//     // foreach ($produksi as $e) {
-//     //     $tes[] = $e->kode_ring;
-//     // }
-//     // if (in_array($value, $tes)) {
-//     //     return 'true';
-//     // } else {
-//     //     return 'false';
-//     // }
-//     $produksis = Produksi::where([['kode_ring', '=', $value2]])->first();
-//     if ($produksis != null) {
-//         return 'Betull';
-//     } else {
-//         return 'salah';
-//     }
-//     // return response()->json($produksis);
+//     return response()->json($LastProduksiByKandang);
 // });
 
-Route::get('/tes', function () {
-
-    $notif = User::find(auth()->user()->id)->notifications;
-    return response()->json($notif);
-});
-
-Route::get('/userget', function () {
-
-    $user = User::where('role', 'pemilik')->orWhere('penangkaran_id', 1)->get();
-    return response()->json($user);
-});
+// Route::get('/userget', function () {
+//     $produksi = Produksi::find(42);
+//     $a = $produksi->kandang->penangkaran->lokasi_penangkaran;
+//     $user = User::where('role', 'pemilik')->orWhere('penangkaran_id', $produksi->kandang->penangkaran->lokasi_penangkaran ?? null)->get();
+//     return response()->json($a);
+// });
 
 
 
@@ -244,3 +204,7 @@ Route::get('/print-sertifikat/{id}', [HasilProduksiController::class, 'PrintSert
 Route::get('/get-notifications', [UserController::class, 'getNotification']);
 Route::get('/notification-read/{id}', [UserController::class, 'readNotification']);
 Route::get('/notification-read-all', [UserController::class, 'readAllNotification'])->name('read.all.notification');
+
+//update profile
+Route::get('/read-profile/{id}', [UserController::class, 'ReadProfile'])->name('read.profile');
+Route::post('/update-profile/{id}', [UserController::class, 'UpdateProfile'])->name('update.profile');
