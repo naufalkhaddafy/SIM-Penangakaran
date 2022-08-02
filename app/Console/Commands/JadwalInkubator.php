@@ -33,7 +33,7 @@ class JadwalInkubator extends Command
     public function handle()
     {
         //get relation produksis table
-        $allProduksi = Produksi::all()->load('kandang', 'jadwal');
+        $allProduksi = Produksi::with('kandang', 'jadwal')->get();
         //get all produksi not null by kandang data
         $NotNullProduksi = [];
         foreach ($allProduksi->where('status_produksi', 'Inkubator') as $produksi) {
