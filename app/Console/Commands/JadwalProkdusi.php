@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use App\Models\Produksi;
+use App\Events\NotifUser;
+use App\Models\Notification;
 use Illuminate\Console\Command;
 
 class JadwalProkdusi extends Command
@@ -29,11 +32,11 @@ class JadwalProkdusi extends Command
     public function handle()
     {
         //get relation produksis table
-        $allProduksi = Produksi::all()->load('kandang', 'jadwal');
+        $allProduksi = Produksi::with('kandang', 'jadwal')->get();
         //get all produksi not null by kandang data
         $NotNullProduksi = [];
         foreach ($allProduksi as $produksi) {
-            if ($produksi->kandang !== null) {
+            if ($produksi->kandang !== null && $produksi->kandang->kategori == 'Produktif') {
                 $NotNullProduksi[] = $produksi;
             }
         }
@@ -48,18 +51,34 @@ class JadwalProkdusi extends Command
 
         //Update kategori kandang berdasarkan tanggal
         $UpdateKandang = $JadwalProduksi->map(function ($item) {
+
             $today = date('Y-m-d');
             if ($item->tgl_akan_bertelur_end < $today) {
-                //get id kandang from $item
                 $item->produksi->kandang->kategori = 'Ganti Bulu';
                 $item->produksi->kandang->save();
                 // return 'Success Get Function';
-            } elseif ($item->tgl_akan_bertelur_start >= $today || $today <= $item->tgl_akan_bertelur_end) {
+                $penangkaran = $item->produksi->kandang->penangkaran->id;
+                $users = User::where('role', 'pemilik')->orWhere('penangkaran_id', $penangkaran)->get();
+                foreach ($users as $user) {
+                    $notif = Notification::create([
+                        'user_id' => $user->id,
+                        'type' => 'Update Status Kandang',
+                        'message' => 'Hari ini, kandang ' . $item->produksi->kandang->nama_kandang . ' di penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' berubah status menjadi Ganti Bulu',
+                    ]);
+                    event(new NotifUser($notif));
+                }
+            } elseif ($today >= $item->tgl_akan_bertelur_start && $today <= $item->tgl_akan_bertelur_end) {
                 # must give a notifikasi
-
-            } else {
-                // must give a notifikasi
-                // return 'Tidak Update';
+                $penangkaran = $item->produksi->kandang->penangkaran->id;
+                $users = User::where('role', 'pemilik')->orWhere('penangkaran_id', $penangkaran)->get();
+                foreach ($users as $user) {
+                    $notif = Notification::create([
+                        'user_id' => $user->id,
+                        'type' => 'Jadwal Bertelur',
+                        'message' => 'Hari ini, kandang ' . $item->produksi->kandang->nama_kandang . ' di penangkaran ' . $item->produksi->kandang->penangkaran->lokasi_penangkaran . ' akan bertelur ',
+                    ]);
+                    event(new NotifUser($notif));
+                }
             }
             return $item;
         });

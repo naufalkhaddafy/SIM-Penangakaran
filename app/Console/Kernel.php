@@ -2,8 +2,6 @@
 
 namespace App\Console;
 
-use App\Models\Jadwal;
-use App\Models\Produksi;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
