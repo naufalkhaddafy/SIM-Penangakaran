@@ -15,7 +15,7 @@
                             <ul class="todo-list" data-widget="todo-list">
                                 @foreach ($allNotif as $data)
                                     <li>
-                                        <!-- drag handle -->
+                                        <b class="text-danger">{{ $data->created_at->format('d M Y') }}</b>
                                         <span class="handle">
                                             <i class="fas fa-ellipsis-v"></i>
                                             <i class="fas fa-ellipsis-v"></i>
