@@ -80,7 +80,7 @@ class KandangController extends Controller
     public function CreateKandang(Request $request)
     {
         $validatekandang = $request->validate([
-            'nama_kandang' => 'required',
+            'nama_kandang' => 'required|min:2|max:20',
             'tgl_masuk_kandang' => 'required',
             'kategori' => 'required',
             'penangkaran_id' => 'required',
@@ -88,6 +88,8 @@ class KandangController extends Controller
             'indukan_kedua' => 'required|different:indukan_pertama',
         ], [
             'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+            'nama_kandang.min' => 'Nama Kandang minimal 2 karakter',
+            'nama_kandang.max' => 'Nama Kandang maksimal 20 karakter',
             'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
             'kategori.required' => 'Kategori Kandang Harus di Isi',
             'penangkaran_id.required' => 'Kategori Kandang Harus di Isi',
@@ -128,7 +130,7 @@ class KandangController extends Controller
     {
         $kandang = Kandang::find($id);
         $validatekandang = $request->validate([
-            'nama_kandang' => 'required',
+            'nama_kandang' => 'required|min:2|max:20',
             'indukan_pertama' => 'required',
             'indukan_kedua' => 'required|different:indukan_pertama',
             'tgl_masuk_kandang' => 'required',
@@ -136,6 +138,8 @@ class KandangController extends Controller
             'penangkaran_id' => 'required',
         ], [
             'nama_kandang.required' => 'Nama Kandang Harus di Isi',
+            'nama_kandang.min' => 'Nama Kandang minimal 2 karakter',
+            'nama_kandang.max' => 'Nama Kandang maksimal 20 karakter',
             'indukan_pertama.required' => 'Indukan Pertama Harus di Isi',
             'indukan_kedua.required' => 'Indukan Kedua Harus di Isi',
             'indukan_kedua.different' => 'Indukan Pertama dan Kedua Harus Beda',
