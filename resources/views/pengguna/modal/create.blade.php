@@ -19,7 +19,7 @@
 </div>
 <div class="input-group mb-3">
     <input type="text" id="nohp" class="form-control @error('nohp') is-invalid @enderror" name="nohp"
-        placeholder="No.Hp +62">
+        placeholder="No.Hp">
     <div class="input-group-append">
         <div class="input-group-text">
             <span class="fas fa-phone"></span>
