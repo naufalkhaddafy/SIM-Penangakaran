@@ -73,13 +73,14 @@ class PenangkaranController extends Controller
     {
         $validatelokasi = Request()->validate([
             'kode_penangkaran' => 'required|unique:penangkarans',
-            'lokasi_penangkaran' => 'required|unique:penangkarans',
+            'lokasi_penangkaran' => 'required|unique:penangkarans|min:5',
 
         ], [
             'kode_penangkaran.required' => 'kode Harus di Isi',
             'kode_penangkaran.unique' => 'Kode sudah ada',
             'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
             'lokasi_penangkaran.unique' => 'Lokasi telah ada',
+            'lokasi_penangkaran.min' => 'Lokasi minimal 5 karakter',
         ]);
         $penangkaran = Penangkaran::create($validatelokasi);
         // return redirect()->route('penangkaran')->with('create', 'Berhasil Menambahkan Penangkaran');
@@ -102,22 +103,24 @@ class PenangkaranController extends Controller
         if ($penangkaran->kode_penangkaran == Request()->kode_penangkaran) {
             $validatepenangkaran = Request()->validate([
                 'kode_penangkaran' => 'required',
-                'lokasi_penangkaran' => 'required|unique:penangkarans',
+                'lokasi_penangkaran' => 'required|unique:penangkarans|min:5',
 
             ], [
                 'kode_penangkaran.required' => 'kode Harus di Isi',
                 'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
                 'lokasi_penangkaran.unique' => 'Lokasi telah ada',
+                'lokasi_penangkaran.min' => 'Lokasi minimal 5 karakter',
             ]);
         } else {
             $validatepenangkaran = Request()->validate([
                 'kode_penangkaran' => 'required|unique:penangkarans',
-                'lokasi_penangkaran' => 'required|unique:penangkarans',
+                'lokasi_penangkaran' => 'required|unique:penangkarans|min:5',
             ], [
                 'kode_penangkaran.required' => 'kode Harus di Isi',
                 'kode_penangkaran.unique' => 'Kode sudah ada',
                 'lokasi_penangkaran.required' => 'Lokasi Harus di Isi',
                 'lokasi_penangkaran.unique' => 'Lokasi telah ada',
+                'lokasi_penangkaran.min' => 'Lokasi minimal 5 karakter',
             ]);
         }
         Penangkaran::find($id)->update($validatepenangkaran);
