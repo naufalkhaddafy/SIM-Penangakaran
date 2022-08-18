@@ -56,7 +56,7 @@ class PanduanController extends Controller
     {
         $validatepanduan = Request()->validate([
             'user_id' => 'required',
-            'judul' => 'required',
+            'judul' => 'required|min:5|max:50',
             'isi' => 'required',
             'kategori' => 'required',
             'status' => 'required',
@@ -95,7 +95,7 @@ class PanduanController extends Controller
     {
         $validatepanduan = Request()->validate([
             'user_id' => 'required',
-            'judul' => 'required',
+            'judul' => 'required|min:5|max:50',
             'isi' => 'required',
             'kategori' => 'required',
             'status' => 'required',
