@@ -175,8 +175,8 @@ class UserController extends Controller
     public function ReadProfile($id)
     {
         $data = User::find($id);
-        $pw = Hash::check($data->password, $data->password);
-        return view('u_profil', compact('data', 'pw'));
+
+        return view('u_profil', compact('data'));
     }
     public function UpdateProfile($id)
     {
@@ -213,11 +213,6 @@ class UserController extends Controller
             $validate['password'] = User::find($id)->password;
         }
         User::find($id)->update($validate);
-        // $req = [
-        //     'nama_lengkap' => Request()->nama_lengkap,
-        //     'nohp' => Request()->nohp,
-        // ];
-        // dd($validate);
         return redirect()->back()->with('toast_success', 'Berhasil Mengubah Data');
     }
 }
