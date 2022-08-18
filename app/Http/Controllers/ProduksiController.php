@@ -240,7 +240,7 @@ class ProduksiController extends Controller
             $notif = Notification::create([
                 'user_id' => $user->id,
                 'type' => 'Data Burung diubah',
-                'message' => auth()->user()->nama_lengkap . ' mengubah data burung pada penangkaran ' . auth()->user()->penangkaran->lokasi_penangkaran,
+                'message' => auth()->user()->nama_lengkap . ' mengubah data burung ' . Request()->kode_ring . ' pada penangkaran ' . auth()->user()->penangkaran->lokasi_penangkaran,
             ]);
             event(new NotifUser($notif));
         }
