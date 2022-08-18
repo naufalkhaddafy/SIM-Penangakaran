@@ -135,6 +135,32 @@ Route::middleware(['pemilik'])->group(function () {
     Route::post('/panduan', [PanduanController::class, 'CreatePanduan'])->name('create.panduan');
     Route::patch('/panduan/update/{id}', [PanduanController::class, 'UpdatePanduan'])->name('update.panduan');
     Route::delete('/panduan/delete/{id}', [PanduanController::class, 'DeletePanduan'])->name('delete.panduan');
+
+    // Hasil Produksi [X]
+    Route::get('/show-laporan-produksi-indukan', [HasilProduksiController::class, 'ShowLaporanProduksiIndukan']);
+    Route::get('/show-laporan-produksi-inkubator', [HasilProduksiController::class, 'ShowLaporanProduksiInkubator']);
+    Route::get('/show-laporan-produksi-mati', [HasilProduksiController::class, 'ShowLaporanProduksiMati']);
+    Route::get('/show-laporan-produksi-hidup', [HasilProduksiController::class, 'ShowLaporanProduksiHidup']);
+    Route::get('/show-laporan-produksi-terjual', [HasilProduksiController::class, 'ShowLaporanProduksiTerjual']);
+
+    Route::get('/modal-create-indukan', [HasilProduksiController::class, 'ModalCreateIndukan']);
+    Route::get('/modal-update-report-indukan/{id}', [HasilProduksiController::class, 'ModalUpdateReportIndukan']);
+    Route::get('/modal-update-report-hidup/{id}', [HasilProduksiController::class, 'ModalUpdateReportHidup']);
+    Route::get('/modal-print-hidup', [HasilProduksiController::class, 'ModalPrintHidup']);
+    Route::get('/modal-print-mati', [HasilProduksiController::class, 'ModalPrintMati']);
+
+
+    Route::get('/report-inkubator', [HasilProduksiController::class, 'ReportInkubator'])->name('report.inkubator');
+    Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
+    Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name('report.mati');
+    Route::get('/report-indukan', [HasilProduksiController::class, 'ReportIndukan'])->name('report.indukan');
+    Route::post('/create-indukan', [HasilProduksiController::class, 'CreateIndukan'])->name('create.indukan');
+    Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateIndukan'])->name('update.indukan');
+
+    //print laporan produksi
+    Route::get('/print-laporan-produksi-mati/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiMati'])->name('print.laporan.produksi.mati');
+    Route::get('/print-laporan-produksi-hidup/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiHidup'])->name('print.laporan.produksi.hidup');
+    Route::get('/print-sertifikat/{id}', [HasilProduksiController::class, 'PrintSertifikat']);
 });
 Route::middleware(['pekerja'])->group(function () {
     // User Pekerja
@@ -143,62 +169,34 @@ Route::middleware(['pekerja'])->group(function () {
     //pakan
     Route::get('/modal-update-pakan/{id}', [PakanController::class, 'ModalUpdate']);
     Route::post('/update-pakan/{id}', [PakanController::class, 'UpdatePakan'])->name('update.pakan');
+
+    //Kebersihan [V]
+    Route::get('/modal-create-kebersihan/{id}', [KebersihanController::class, 'ModalCreate']);
+    Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
+
+
+    // Read Produksi
+    Route::get('/modal-read-produksi/{id}', [HasilProduksiController::class, 'ModalReadProduksi']);
+    // Produksi [X]
+    Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
+    Route::get('/show-produksi-hidup', [ProduksiController::class, 'ShowProduksiHidup']);
+    Route::get('/show-produksi-mati', [ProduksiController::class, 'ShowProduksiMati']);
+    Route::get('/modal-create-produksi/{id}', [ProduksiController::class, 'ModalCreate']);
+    Route::get('/modal-update-produksi-inkubator/{id}', [ProduksiController::class, 'ModalUpdateInkubator']);
+    Route::get('/modal-update-produksi-hidup/{id}', [ProduksiController::class, 'ModalUpdateHidup']);
+    // Route::get('/modal-delete-produksi/{id}', [PanduanController::class, 'ModalDelete']);
+    // Route::get('/show-produksi', [PanduanController::class, 'ShowPanduan']);
+
+    Route::post('/produksi-telur', [ProduksiController::class, 'CreateProduksiTelur'])->name('create.produksi');
+    Route::patch('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
+    Route::patch('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
+    Route::get('/produksi-inkubator', [ProduksiController::class, 'ProduksiInkubator'])->name('produksi.inkubator');
+    Route::get('/produksi-hidup', [ProduksiController::class, 'ProduksiHidup'])->name('produksi.hidup');
+    Route::get('/produksi-mati', [ProduksiController::class, 'ProduksiMati'])->name('produksi.mati');
 });
 
-
-
-// Kandang for all user [X]
+// Kandang for all user [V]
 Route::get('/kandang/{id}/{namakandang}', [KandangController::class, 'RiwayatKandang'])->name('riwayat.kandang');
-
-//Kebersihan [X]
-Route::get('/modal-create-kebersihan/{id}', [KebersihanController::class, 'ModalCreate']);
-Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
-
-
-// Read Produksi
-Route::get('/modal-read-produksi/{id}', [HasilProduksiController::class, 'ModalReadProduksi']);
-// Produksi [X]
-Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
-Route::get('/show-produksi-hidup', [ProduksiController::class, 'ShowProduksiHidup']);
-Route::get('/show-produksi-mati', [ProduksiController::class, 'ShowProduksiMati']);
-Route::get('/modal-create-produksi/{id}', [ProduksiController::class, 'ModalCreate']);
-Route::get('/modal-update-produksi-inkubator/{id}', [ProduksiController::class, 'ModalUpdateInkubator']);
-Route::get('/modal-update-produksi-hidup/{id}', [ProduksiController::class, 'ModalUpdateHidup']);
-// Route::get('/modal-delete-produksi/{id}', [PanduanController::class, 'ModalDelete']);
-// Route::get('/show-produksi', [PanduanController::class, 'ShowPanduan']);
-
-Route::post('/produksi-telur', [ProduksiController::class, 'CreateProduksiTelur'])->name('create.produksi');
-Route::patch('/produksi-inkubator/update/{id}', [ProduksiController::class, 'UpdateProduksiInkubator'])->name('update.produksi.inkubator');
-Route::patch('/produksi-hidup/update/{id}', [ProduksiController::class, 'UpdateProduksiHidup'])->name('update.produksi.hidup');
-Route::get('/produksi-inkubator', [ProduksiController::class, 'ProduksiInkubator'])->name('produksi.inkubator');
-Route::get('/produksi-hidup', [ProduksiController::class, 'ProduksiHidup'])->name('produksi.hidup');
-Route::get('/produksi-mati', [ProduksiController::class, 'ProduksiMati'])->name('produksi.mati');
-
-// Hasil Produksi [X]
-Route::get('/show-laporan-produksi-indukan', [HasilProduksiController::class, 'ShowLaporanProduksiIndukan']);
-Route::get('/show-laporan-produksi-inkubator', [HasilProduksiController::class, 'ShowLaporanProduksiInkubator']);
-Route::get('/show-laporan-produksi-mati', [HasilProduksiController::class, 'ShowLaporanProduksiMati']);
-Route::get('/show-laporan-produksi-hidup', [HasilProduksiController::class, 'ShowLaporanProduksiHidup']);
-Route::get('/show-laporan-produksi-terjual', [HasilProduksiController::class, 'ShowLaporanProduksiTerjual']);
-
-Route::get('/modal-create-indukan', [HasilProduksiController::class, 'ModalCreateIndukan']);
-Route::get('/modal-update-report-indukan/{id}', [HasilProduksiController::class, 'ModalUpdateReportIndukan']);
-Route::get('/modal-update-report-hidup/{id}', [HasilProduksiController::class, 'ModalUpdateReportHidup']);
-Route::get('/modal-print-hidup', [HasilProduksiController::class, 'ModalPrintHidup']);
-Route::get('/modal-print-mati', [HasilProduksiController::class, 'ModalPrintMati']);
-
-
-Route::get('/report-inkubator', [HasilProduksiController::class, 'ReportInkubator'])->name('report.inkubator');
-Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
-Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name('report.mati');
-Route::get('/report-indukan', [HasilProduksiController::class, 'ReportIndukan'])->name('report.indukan');
-Route::post('/create-indukan', [HasilProduksiController::class, 'CreateIndukan'])->name('create.indukan');
-Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateIndukan'])->name('update.indukan');
-
-//print laporan produksi
-Route::get('/print-laporan-produksi-mati/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiMati'])->name('print.laporan.produksi.mati');
-Route::get('/print-laporan-produksi-hidup/{penangkaran}/{startDate}/{endDate}', [HasilProduksiController::class, 'PrintLaporanProduksiHidup'])->name('print.laporan.produksi.hidup');
-Route::get('/print-sertifikat/{id}', [HasilProduksiController::class, 'PrintSertifikat']);
 
 //get notification user
 Route::get('/get-notifications', [UserController::class, 'getNotification']);
