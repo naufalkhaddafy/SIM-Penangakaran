@@ -145,7 +145,7 @@ class KandangController extends Controller
             'indukan_kedua.different' => 'Indukan Pertama dan Kedua Harus Beda',
             'tgl_masuk_kandang.required' => 'Tanggal Masuk Kandang Harus di Isi',
             'kategori.required' => 'Kategori Kandang Harus di Isi',
-            'penangkaran_id.required' => 'Penangkara Tidak Terdeteksi',
+            'penangkaran_id.required' => 'Penangkaran Tidak Terdeteksi',
         ]);
         Kandang::find($id)->update($validatekandang);
         $indukan = [
