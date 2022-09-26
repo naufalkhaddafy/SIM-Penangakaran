@@ -71,7 +71,7 @@ class UserController extends Controller
         $validateuser = $request->validate([
             'nama_lengkap' => 'required|min:5|max:30',
             'username' => 'required|unique:users|min:5|max:10',
-            'nohp' => 'required|unique:users|min:2|max:14',
+            'nohp' => 'nullable|unique:users|min:12|max:14',
             'password' => 'required|min:5',
             'role' => 'required',
             'penangkaran_id' => 'nullable',
@@ -126,7 +126,7 @@ class UserController extends Controller
                 'nama_lengkap' => 'required|min:5|max:30',
                 'role' => 'required',
                 'penangkaran_id' => 'nullable',
-                'nohp' => 'required|unique:users|min:2|max:14',
+                'nohp' => 'nullable|unique:users|min:12|max:14',
                 'password' => 'nullable|min:5',
             ], [
                 'nama_lengkap.required' => 'Nama Harus di Isi',
@@ -196,7 +196,7 @@ class UserController extends Controller
         } else {
             $validate = Request()->validate([
                 'nama_lengkap' => 'required|min:5|max:30',
-                'nohp' => 'required|unique:users|min:2|max:14',
+                'nohp' => 'nullable|unique:users|min:12|max:14',
             ], [
                 'nama_lengkap.required' => 'Nama Harus di Isi',
                 'nama_lengkap.min' => 'Nama 5 digit',
