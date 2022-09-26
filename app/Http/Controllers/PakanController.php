@@ -33,7 +33,6 @@ class PakanController extends Controller
     {
         $pakans =  Pakan::find($id);
         $status = [
-            'Baru' => 'Baru',
             'Setengah' => 'Setengah',
             'Habis' => 'Habis',
             'Kadaluwarsa' => 'Kadaluwarsa',
@@ -51,8 +50,8 @@ class PakanController extends Controller
         $validatepakan = Request()->validate(
             [
                 'penangkaran_id' => 'required',
-                'kode_tempat' => 'required|unique:pakans',
-                'nama_pakan' => 'required',
+                'kode_tempat' => 'required|unique:pakans|min:2|max:10',
+                'nama_pakan' => 'required|min:2|max:20',
                 'tgl_kadaluwarsa' => 'required',
                 'status' => 'required',
 
