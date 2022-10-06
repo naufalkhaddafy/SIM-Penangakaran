@@ -63,8 +63,11 @@ use App\Http\Controllers\HasilProduksiController;
 
 
 
+// Route::get('/', function () {
+//     return view('page');
+// });
 Route::get('/', function () {
-    return view('page');
+    return redirect()->route('login');
 });
 //auth
 Route::get('/login', [LoginController::class, 'ReadLogin'])->name('login');
