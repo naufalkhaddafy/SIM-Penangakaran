@@ -53,6 +53,11 @@ class HasilProduksiController extends Controller
         $tgl_today = \Carbon\Carbon::now(); // Tanggal sekarang
         return view('laporan_produksi.indukan', $data, compact('tgl_today'));
     }
+    public function ReportTerjual()
+    {
+        $produksis = Produksi::all();
+        return view('laporan_produksi.terjual', compact('produksis'));
+    }
     public function ShowLaporanProduksiIndukan()
     {
         $produksis = Produksi::all();

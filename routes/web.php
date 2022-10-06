@@ -121,7 +121,7 @@ Route::middleware(['pemilik'])->group(function () {
     Route::post('/kandang', [KandangController::class, 'CreateKandang'])->name('create.kandang');
     Route::patch('/kandang/update/{id}', [KandangController::class, 'UpdateKandang'])->name('update.kandang');
     Route::delete('/kandang/delete/{id}', [KandangController::class, 'DeleteKandang'])->name('delete.kandang');
-    // Pakan [X]
+    // Pakan [V]
     Route::get('/modal-read-pakan/{id}', [PakanController::class, 'ModalRead']);
     Route::get('/modal-create-pakan', [PakanController::class, 'ModalCreate']);
     Route::get('/modal-delete-pakan/{id}', [PakanController::class, 'ModalDelete']);
@@ -157,6 +157,7 @@ Route::middleware(['pemilik'])->group(function () {
     Route::get('/report-hidup', [HasilProduksiController::class, 'ReportHidup'])->name('report.hidup');
     Route::get('/report-mati', [HasilProduksiController::class, 'ReportMati'])->name('report.mati');
     Route::get('/report-indukan', [HasilProduksiController::class, 'ReportIndukan'])->name('report.indukan');
+    Route::get('/report-terjual', [HasilProduksiController::class, 'ReportTerjual'])->name('report.terjual');
     Route::post('/create-indukan', [HasilProduksiController::class, 'CreateIndukan'])->name('create.indukan');
     Route::patch('/update-indukan/{id}', [HasilProduksiController::class, 'UpdateIndukan'])->name('update.indukan');
 
