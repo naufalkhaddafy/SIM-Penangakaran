@@ -6,7 +6,7 @@
 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
     <span class="dropdown-item dropdown-header">{{ count($notif->where('read_at', null)) }} Notifications</span>
     <div class="dropdown-divider"></div>
-    @foreach ($notif->where('read_at', null) as $data)
+    @foreach ($notif->where('read_at', null)->sortByDesc('created_at') as $data)
         <a onclick="notifRead({{ $data->id }})" class="dropdown-item">
             <i class="fas fa-envelope mr-2"></i> {{ $data->type }}
             <span class="float-right text-muted text-sm">{{ $data->created_at->diffForHumans() }}</span>
