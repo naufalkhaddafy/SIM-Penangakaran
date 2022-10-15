@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Produksi;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -61,7 +62,29 @@ use App\Http\Controllers\HasilProduksiController;
 //     return response()->json($a);
 // });
 
+Route::get('/tes', function () {
+    $produksis = Produksi::with('jadwal')->where('status_produksi', 'Inkubator')->get();
+    $req = 'INK01-3';
+    $temp = [];
+    foreach ($produksis as $produ) {
+        if ($produ->jadwal != null) {
+            $temp[] = $produ;
+        }
+    }
+    $produksiss = collect($temp)->map(function ($item) {
+        return $item->jadwal;
+    });
+    $as = [];
+    foreach ($produksiss as $a) {
+        $as[] = $a->kode_tempat_inkubator;
+    }
 
+    foreach ($as as $b) {
+        if ($b == $req) {
+        }
+    }
+    // return response()->json($as);
+});
 
 // Route::get('/', function () {
 //     return view('page');

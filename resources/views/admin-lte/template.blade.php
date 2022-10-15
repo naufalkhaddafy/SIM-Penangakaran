@@ -192,6 +192,8 @@
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
     <script src="{{ asset('admin-lte') }}/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <!-- OPTIONAL SCRIPTS -->
+
     @stack('js')
     <script>
         $(document).ready(function() {
