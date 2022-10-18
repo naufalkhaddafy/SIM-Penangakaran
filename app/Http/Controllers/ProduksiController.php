@@ -112,6 +112,29 @@ class ProduksiController extends Controller
             'tgl_masuk_inkubator.required' => 'Harus di Isi',
             'kode_tempat_inkubator.required' => 'Kode Tempat Harus di Isi',
         ]);
+        $produksis = Produksi::with('jadwal')->where('status_produksi', 'Inkubator')->get();
+        $temp = [];
+        foreach ($produksis as $produ) {
+            if ($produ->jadwal != null) {
+                $temp[] = $produ;
+            }
+        }
+        $produksiss = collect($temp)->map(function ($item) {
+            return $item->jadwal;
+        });
+        $as = [];
+        foreach ($produksiss as $a) {
+            $as[] = $a->kode_tempat_inkubator;
+        }
+
+        foreach ($as as $key => $value) {
+            $req = Request()->kode_tempat_inkubator;
+            if ($value == $req) {
+                return response()->json([
+                    'errors' => ['message' => 'Kode Tempat telah digunakan'],
+                ], 422);
+            }
+        }
         $kandang_id = Request()->kandang_id;
         $produksi = Produksi::create($validateproduksi);
         $lastproduksi = Produksi::where('kandang_id', $kandang_id)->latest()->first();

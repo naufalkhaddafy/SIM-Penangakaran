@@ -64,7 +64,6 @@ use App\Http\Controllers\HasilProduksiController;
 
 Route::get('/tes', function () {
     $produksis = Produksi::with('jadwal')->where('status_produksi', 'Inkubator')->get();
-    $req = 'INK01-3';
     $temp = [];
     foreach ($produksis as $produ) {
         if ($produ->jadwal != null) {
@@ -79,11 +78,23 @@ Route::get('/tes', function () {
         $as[] = $a->kode_tempat_inkubator;
     }
 
-    foreach ($as as $b) {
-        if ($b == $req) {
+    foreach ($as as $key => $value) {
+        $req = 'INK01-1';
+        if ($value == $req) {
+            return back()->withErrors(['kode_tempat_inkubator' => ['Telah ada !!!']]);
         }
     }
     // return response()->json($as);
+
+    // return response()->json([
+    //     'status' => '2000',
+    //     'Data' => $as,
+    // ]);
+});
+
+Route::get('/count', function () {
+    $hs = Produksi::whereMonth('created_at', '6')->get()->count();
+    return response()->json($hs);
 });
 
 // Route::get('/', function () {
