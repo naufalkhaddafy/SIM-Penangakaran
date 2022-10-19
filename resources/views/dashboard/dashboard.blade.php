@@ -65,51 +65,41 @@
                     </div>
                 </div>
             </div>
+            {{-- CHART START --}}
             <div class="card">
-                <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Sales</h3>
-                        <a href="javascript:void(0);">View Report</a>
+                <div class="card-header">
+                    <h3 class="card-title">Sexing</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
+                <!-- /.card-header -->
                 <div class="card-body">
-                    <div class="d-flex">
-                        <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">$18,230.00</span>
-                            <span>Sales Over Time</span>
-                        </p>
-                        <p class="ml-auto d-flex flex-column text-right">
-                            <span class="text-success">
-                                <i class="fas fa-arrow-up"></i> 33.1%
-                            </span>
-                            <span class="text-muted">Since last month</span>
-                        </p>
-                    </div>
-                    <!-- /.d-flex -->
-
-                    <div class="position-relative mb-4">
-                        <div class="chartjs-size-monitor">
-                            <div class="chartjs-size-monitor-expand">
-                                <div class=""></div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="chart-responsive">
+                                <canvas id="pieChart" height="150"></canvas>
                             </div>
-                            <div class="chartjs-size-monitor-shrink">
-                                <div class=""></div>
-                            </div>
+                            <!-- ./chart-responsive -->
                         </div>
-                        <canvas id="sales-chart" height="200" class="chartjs-render-monitor"></canvas>
+                        <!-- /.col -->
+                        <div class="col-md-4">
+                            <ul class="chart-legend clearfix">
+                                <li><i class="far fa-circle text-danger"></i> Jantan</li>
+                                <li><i class="far fa-circle text-primary"></i> Betina</li>
+                                <li><i class="far fa-circle text-secondary"></i> Belum DNA</li>
+                            </ul>
+                        </div>
+                        <!-- /.col -->
                     </div>
-
-                    <div class="d-flex flex-row justify-content-end">
-                        <span class="mr-2">
-                            <i class="fas fa-square text-primary"></i> This year
-                        </span>
-
-                        <span>
-                            <i class="fas fa-square text-gray"></i> Last year
-                        </span>
-                    </div>
+                    <!-- /.row -->
                 </div>
+                <!-- /.card-body -->
             </div>
+            {{-- CHART END --}}
         @elseif(Auth::user()->role == 'pekerja')
             <div class="container-fluid">
                 <div class="row">
@@ -166,87 +156,34 @@
 @if (Auth::user()->role == 'pemilik')
     @push('js')
         <script src="{{ asset('admin-lte') }}/plugins/chart.js/Chart.min.js"></script>
-        {{-- <script>
-        var count = $.get("{{ url('/dashboard/pakan') }}");
-        console.log(count);
-    </script> --}}
         <script>
-            $(function() {
-                'use strict'
-
-                var ticksStyle = {
-                    fontColor: '#495057',
-                    fontStyle: 'bold'
+            $.get("{{ route('chart') }}", function(data) {
+                var Jantan = data.Jantan;
+                var Betina = data.Betina;
+                var None = data.None;
+                var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+                var pieData = {
+                    labels: [
+                        'Jantan',
+                        'Betina',
+                        'Belum DNA',
+                    ],
+                    datasets: [{
+                        data: [Jantan, Betina, None],
+                        backgroundColor: ['#f56954', '#3c8dbc', '#d2d6de']
+                    }]
                 }
-                var mode = 'index'
-                var intersect = true
-
-                var $salesChart = $('#sales-chart')
-                // eslint-disable-next-line no-unused-vars
-                var salesChart = new Chart($salesChart, {
-                    type: 'bar',
-                    data: {
-                        labels: ['JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
-                        datasets: [{
-                                backgroundColor: '#007bff',
-                                borderColor: '#007bff',
-                                data: [1000, 2000, 3000, 2500, 2700, 2500, 3000]
-                            },
-                            {
-                                backgroundColor: '#ced4da',
-                                borderColor: '#ced4da',
-                                data: [700, 1700, 2700, 2000, 1800, 1500, 2000]
-                            }
-                        ]
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        tooltips: {
-                            mode: mode,
-                            intersect: intersect
-                        },
-                        hover: {
-                            mode: mode,
-                            intersect: intersect
-                        },
-                        legend: {
-                            display: false
-                        },
-                        scales: {
-                            yAxes: [{
-                                // display: false,
-                                gridLines: {
-                                    display: true,
-                                    lineWidth: '4px',
-                                    color: 'rgba(0, 0, 0, .2)',
-                                    zeroLineColor: 'transparent'
-                                },
-                                ticks: $.extend({
-                                    beginAtZero: true,
-
-                                    // Include a dollar sign in the ticks
-                                    callback: function(value) {
-                                        if (value >= 1000) {
-                                            value /= 1000
-                                            value += 'k'
-                                        }
-
-                                        return '$' + value
-                                    }
-                                }, ticksStyle)
-                            }],
-                            xAxes: [{
-                                display: true,
-                                gridLines: {
-                                    display: false
-                                },
-                                ticks: ticksStyle
-                            }]
-                        }
+                var pieOptions = {
+                    legend: {
+                        display: false
                     }
+                }
+                var pieChart = new Chart(pieChartCanvas, {
+                    type: 'doughnut',
+                    data: pieData,
+                    options: pieOptions
                 })
-
-            })
+            });
         </script>
     @endpush
 @endif

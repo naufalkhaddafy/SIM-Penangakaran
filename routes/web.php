@@ -18,92 +18,18 @@ use App\Http\Controllers\PenangkaranController;
 use App\Http\Controllers\HasilProduksiController;
 
 
-// Route::get('/tes', function () {
-//     //get relation produksis table
-//     $allProduksi = Produksi::with('kandang', 'jadwal')->get();
-//     //get all produksi not null by kandang data
-//     $NotNullProduksi = [];
-//     foreach ($allProduksi as $produksi) {
-//         if ($produksi->kandang !== null && $produksi->kandang->kategori == 'Produktif') {
-//             $NotNullProduksi[] = $produksi;
-//         }
-//     }
-//     // collect data last produksi based on kandang
-//     $LastProduksiByKandang = collect($NotNullProduksi)->groupBy('kandang_id')->map(function ($item) {
-//         return $item->last();
-//     });
-//     //get value jadwal from
-//     $JadwalProduksi = $LastProduksiByKandang->map(function ($item) {
-//         return $item->jadwal;
-//     });
+Route::get('/chart', function () {
+    $jantan = Produksi::where('jenis_kelamin', 'Jantan')->get()->count();
+    $betina = Produksi::where('jenis_kelamin', 'Betina')->get()->count();
+    $none = Produksi::where('jenis_kelamin', null)->get()->count();
+    return response()->json([
+        'Jantan' => $jantan,
+        'Betina' => $betina,
+        'None' => $none,
+    ], 200);
+})->name('chart');
 
-//     //Update kategori kandang berdasarkan tanggal
-//     $UpdateKandang = $JadwalProduksi->map(function ($item) {
-//         $today = date('Y-m-d');
-//         if ($item->tgl_akan_bertelur_end < $today) {
-//             // if ($item->produksi->kandang->kategori != 'Produktif') {
-//             //     $item->produksi->kandang->kategori = 'Ganti Bulu';
-//             //     $item->produksi->kandang->save();
-//             //     // return 'Success Get Function';
-//             // }
-//             return 'Update';
-//         } elseif ($today >= $item->tgl_akan_bertelur_start && $today <= $item->tgl_akan_bertelur_end) {
-//             return 'in jadwal';
-//         }
-//         return $item;
-//     });
-//     return response()->json($LastProduksiByKandang);
-// });
 
-// Route::get('/userget', function () {
-//     $produksi = Produksi::find(42);
-//     $a = $produksi->kandang->penangkaran->lokasi_penangkaran;
-//     $user = User::where('role', 'pemilik')->orWhere('penangkaran_id', $produksi->kandang->penangkaran->lokasi_penangkaran ?? null)->get();
-//     return response()->json($a);
-// });
-
-Route::get('/tes', function () {
-    $produksis = Produksi::find(1);
-    $produksiss = $produksis->kode_ring;
-    // $temp = [];
-    // foreach ($produksis as $key => $value) {
-    //     $req = 'SGT BF-112';
-    //     if ($value == $req) {
-    //         return 'turu';
-    //     }
-    // }
-    return response()->json($produksiss);
-    // $temp = [];
-    // foreach ($produksis as $produ) {
-    //     if ($produ->jadwal != null) {
-    //         $temp[] = $produ;
-    //     }
-    // }
-    // $produksiss = collect($temp)->map(function ($item) {
-    //     return $item->jadwal;
-    // });
-    // $as = [];
-    // foreach ($produksiss as $a) {
-    //     $as[] = $a->kode_tempat_inkubator;
-    // }
-
-    // foreach ($as as $key => $value) {
-    //     $req = 'INK01-1';
-    //     if ($value == $req) {
-    //         return back()->withErrors(['kode_tempat_inkubator' => ['Telah ada !!!']]);
-    //     }
-    // }
-
-    // return response()->json([
-    //     'status' => '2000',
-    //     'Data' => $as,
-    // ]);
-});
-
-Route::get('/count', function () {
-    $hs = Produksi::whereMonth('created_at', '6')->get()->count();
-    return response()->json($hs);
-});
 
 // Route::get('/', function () {
 //     return view('page');
