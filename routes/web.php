@@ -63,28 +63,36 @@ use App\Http\Controllers\HasilProduksiController;
 // });
 
 Route::get('/tes', function () {
-    $produksis = Produksi::with('jadwal')->where('status_produksi', 'Inkubator')->get();
-    $temp = [];
-    foreach ($produksis as $produ) {
-        if ($produ->jadwal != null) {
-            $temp[] = $produ;
-        }
-    }
-    $produksiss = collect($temp)->map(function ($item) {
-        return $item->jadwal;
-    });
-    $as = [];
-    foreach ($produksiss as $a) {
-        $as[] = $a->kode_tempat_inkubator;
-    }
+    $produksis = Produksi::find(1);
+    $produksiss = $produksis->kode_ring;
+    // $temp = [];
+    // foreach ($produksis as $key => $value) {
+    //     $req = 'SGT BF-112';
+    //     if ($value == $req) {
+    //         return 'turu';
+    //     }
+    // }
+    return response()->json($produksiss);
+    // $temp = [];
+    // foreach ($produksis as $produ) {
+    //     if ($produ->jadwal != null) {
+    //         $temp[] = $produ;
+    //     }
+    // }
+    // $produksiss = collect($temp)->map(function ($item) {
+    //     return $item->jadwal;
+    // });
+    // $as = [];
+    // foreach ($produksiss as $a) {
+    //     $as[] = $a->kode_tempat_inkubator;
+    // }
 
-    foreach ($as as $key => $value) {
-        $req = 'INK01-1';
-        if ($value == $req) {
-            return back()->withErrors(['kode_tempat_inkubator' => ['Telah ada !!!']]);
-        }
-    }
-    // return response()->json($as);
+    // foreach ($as as $key => $value) {
+    //     $req = 'INK01-1';
+    //     if ($value == $req) {
+    //         return back()->withErrors(['kode_tempat_inkubator' => ['Telah ada !!!']]);
+    //     }
+    // }
 
     // return response()->json([
     //     'status' => '2000',

@@ -222,19 +222,19 @@ class ProduksiController extends Controller
     }
     public function UpdateProduksiHidup($id)
     {
-        $input = Request()->kode_ring;
         // status Produksi
         if (Request()->status_produksi == 'Hidup') {
-            // $produksis = Produksi::where([['kode_ring', '=', $input]])->first();
-            // if ($input !== null) {
-            //     if ($produksis !== null) {
-            //         // $validate = Request()->validate([
-            //         //     'kode_ring' => 'unique:produksis',
-            //         // ], [
-            //         //     'kode_ring.unique' => 'Kode Ring telah ada Periksa Kembali!!',
-            //         // ]);
-            //     }
-            // }
+            $produksis = Produksi::find($id);
+            $ring = $produksis->kode_ring;
+            $req = Request()->kode_ring;
+            if ($ring != $req) {
+                Request()->validate(
+                    [
+                        'kode_ring' => 'nullable|unique:produksis'
+                    ],
+                    ['kode_ring.unique' => 'Kode Ring telah ada'],
+                );
+            }
             $dataproduksihidup = [
                 'kode_ring' => Request()->kode_ring,
                 'jenis_kelamin' => Request()->jenis_kelamin,
@@ -254,7 +254,6 @@ class ProduksiController extends Controller
                 'keterangan' => Request()->keterangan,
             ];
             Produksi::find($id)->update($dataproduksimati);
-            // return redirect('produksi-mati')->with('update', 'Data Produksi Mati Berhasil ditambahkan');
         }
 
         //notifications

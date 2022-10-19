@@ -44,17 +44,32 @@
 <div class="input-group mb-1">
     <select id="status_produksi" name="status_produksi" class="form-control">
         @foreach ($status as $status_produksi)
-            <option value="{{ $status_produksi }}"
-                {{ $data->status_produksi == $status_produksi ? 'selected' : '' }}> {{ $status_produksi }}</option>
+            <option value="{{ $status_produksi }}" {{ $data->status_produksi == $status_produksi ? 'selected' : '' }}>
+                {{ $status_produksi }}</option>
         @endforeach
     </select>
 </div>
 <label>Keterangan</label>
 <div class="input-group mb-1">
-    <textarea type="text" id="keterangan" name="keterangan" class="form-control" placeholder="Keterangan Indukan">{{ $data->keterangan }}</textarea>
+    <textarea type="text" id="keterangan" name="keterangan" class="form-control" cols="30" rows="5"
+        placeholder="Keterangan Indukan">{{ $data->keterangan }}</textarea>
 </div>
 
 <script>
+    $(document).ready(function() {
+        $('#status_produksi').change(function() {
+            if ($(this).val() == 'Mati') {
+                $('#keterangan').val(
+                    '{{ $data->keterangan ?? '-' }}                                                                                                                                                              ' +
+                    'Kode Ring : {{ $data->kode_ring ?? 'Tidak Tersedia' }}                                                                                                                                                              ' +
+                    'Usia      : {{ \Carbon\Carbon::parse($data->tgl_menetas)->diffInDays($tgl_today) }} Hari                                                                                                                            ' +
+                    'Catatan :');
+            } else {
+                $('#keterangan').val('{{ $data->keterangan }}');
+            }
+        });
+    });
+
     function update() {
         $.ajax({
             url: '{{ route('update.indukan', $data->id) }}',

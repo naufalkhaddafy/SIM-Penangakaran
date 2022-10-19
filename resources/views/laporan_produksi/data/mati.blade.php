@@ -16,7 +16,7 @@
                     {{ $data->status_telur }}</td>
                 <td>{{ date('d F Y', strtotime($data->tgl_bertelur)) }}</td>
                 <td>
-                    <textarea rows="4" cols="30" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>
+                    <textarea rows="5" cols="40" style="border-color: white; width:100%;" readonly>{{ $data->keterangan }}</textarea>
                 </td>
             </tr>
         @endforeach
