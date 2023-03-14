@@ -50,6 +50,8 @@ Route::get('/dashboard/jadwal', [DashboardController::class, 'ReadDashboardJadwa
 Route::get('/dashboard/pakan', [DashboardController::class, 'ReadDashboardPakan']);
 Route::get('/dashboard/kebersihan', [DashboardController::class, 'ReadDashboardKebersihan']);
 
+// Read Produksi for all actor
+Route::get('/modal-read-produksi/{id}', [HasilProduksiController::class, 'ModalReadProduksi']);
 
 // middleware group
 Route::middleware(['pemilik'])->group(function () {
@@ -147,8 +149,7 @@ Route::middleware(['pekerja'])->group(function () {
     Route::post('/kebersihan/create', [KebersihanController::class, 'CreateKebersihan'])->name('create.kebersihan');
 
 
-    // Read Produksi
-    Route::get('/modal-read-produksi/{id}', [HasilProduksiController::class, 'ModalReadProduksi']);
+
     // Produksi [X]
     Route::get('/show-produksi-inkubator', [ProduksiController::class, 'ShowProduksiInkubator']);
     Route::get('/show-produksi-hidup', [ProduksiController::class, 'ShowProduksiHidup']);
